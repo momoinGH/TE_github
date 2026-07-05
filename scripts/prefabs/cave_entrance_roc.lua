@@ -31,8 +31,8 @@ local function initmaze(inst)
     inst.components.teleporter:Target(doors.entrance1)
     doors.entrance1.components.teleporter:Target(inst)
 
-    for _, v in ipairs(TheWorld.components.tro_tempentitytracker:GetEnts("cave_exit_roc")) do
-        if v:IsValid() and not v.components.teleporter:GetTarget() then
+    for _, v in ipairs(TroGetEntsByPrefab("cave_exit_roc")) do
+        if not v.components.teleporter:GetTarget() then
             doors.entrance2.components.teleporter:Target(v)
             v.components.teleporter:Target(doors.entrance2)
             break

@@ -487,4 +487,21 @@ configuration_options =
     --         world = { "forest" },
     --     }
     -- },
+
+    -- title(en_zh_zht("<Sea World>", "<仅海洋世界>", "<仅海洋世界>"), tro_modules.sea),
+    -- {
+    --     name = "sea",
+    --     label = en_zh_zht("Sea World", "仅海洋世界"),
+    --     hover = en_zh_zht(
+    --         "will generate a world without terain, time to survine in ocean.",
+    --         "将生成陆地稀少的海洋世界，在茫茫大海中探索生存吧（会覆盖其他模块）",
+    --         "將生成陸地稀少的海洋世界，在茫茫大海中探索生存吧（会覆盖其他模块）"),
+    --     options = options_enable(),
+    --     default = 0,
+    --     world_gen = {
+    --         category = { LEVELCATEGORY.WORLDGEN },
+    --         group = tro_modules.sea,
+    --         world = { "forest" },
+    --     }
+    -- },
 }

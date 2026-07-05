@@ -29,19 +29,17 @@ local function OnPlayerNear(inst)
 end
 
 local function Bind(inst)
-    for _, v in ipairs(TheWorld.components.tro_tempentitytracker:GetEnts(inst.prefab)) do
+    for _, v in ipairs(TroGetEntsByPrefab(inst.prefab)) do
         if v ~= inst and not v.components.teleporter:GetTarget() then
             v.components.teleporter:Target(inst)
             inst.components.teleporter:Target(v)
-            TheWorld.components.tro_tempentitytracker:RemoveEnt(inst) -- 传送门只匹配一次
-            TheWorld.components.tro_tempentitytracker:RemoveEnt(v)
             return
         end
     end
 end
 
 local function master_postinit(inst)
-    if TheWorld.components.tro_tempentitytracker:KeyExists("lavaarena_portal") then
+    if TroGetAnyEntByPrefab("lavaarena_portal") then
         inst:DoTaskInTime(0, Bind)
     end
 

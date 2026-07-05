@@ -137,12 +137,3 @@ for _, data in ipairs({
 end
 
 ----------------------------------------------------------------------------------------------------
-
-AddPrefabPostInit("world", function(inst)
-    if not TheWorld.ismastersim then return end
-
-    inst.components.tro_tempentitytracker:AddKey("kraken")      --海妖
-    inst.components.tro_tempentitytracker:AddKey("octopusking") --章鱼王
-end)
-
-----------------------------------------------------------------------------------------------------

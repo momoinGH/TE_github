@@ -4,21 +4,16 @@ local assets =
 	Asset("MINIMAP_IMAGE", "messageBottle"),
 }
 
-local function GiveEmpty(inst)
-
-end
-
 local function getrevealtargetpos(inst, doer)
 	local map = TheWorld.Map
 	local x, y, z
 	local inventory = inst.components.inventoryitem:GetContainer()
 	-- 返回这两个家伙的位置
 	for _, name in ipairs({ "kraken", "octopusking" }) do
-		for _, v in ipairs(TheWorld.components.tro_tempentitytracker:GetEnts(name)) do
+		for _, v in ipairs(TroGetEntsByPrefab(name)) do
 			if not v.revelado then
 				v.revelado = true
 				x, y, z = v.Transform:GetWorldPosition()
--- TODO
 				local empty_bottle = SpawnPrefab("messagebottleempty_sw")
 				empty_bottle.Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst:Remove()
@@ -112,11 +107,11 @@ local function emptybottlefn()
 	inst:AddComponent("waterproofer")
 	inst.components.waterproofer:SetEffectiveness(0)
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
+	inst:AddComponent("stackable")
+	inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
 
-    return inst
+	return inst
 end
 
 return Prefab("messagebottle_sw", messagebottlefn, assets),
-       Prefab("messagebottleempty_sw", emptybottlefn, assets)
+	Prefab("messagebottleempty_sw", emptybottlefn, assets)

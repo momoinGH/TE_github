@@ -4,6 +4,16 @@
 local trace_prefabs = {
     pigking = true,           --猪王
     sharkittenspawner = true, --虎鲨生成器
+    cave_exit_roc = true,     --洞穴出口
+    kraken = true,            --海妖
+    octopusking = true,       --章鱼王
+
+
+    lavaarena_portal = true,               --熔炉传送门
+    lavaarena_center = true,               --角斗容器
+    lavaarena_battlestandard_damager = true, --战旗
+    lavaarena_battlestandard_shield = true,
+    lavaarena_battlestandard_heal = true,
 }
 
 local trace_ents = {}
@@ -25,11 +35,10 @@ Hooks.FnDecorator(EntityScript, "Remove", function(inst)
 end)
 
 -- 获取所有指定预制体名的实体
-function TroGetEntsByPrefab(prefab)
+function _G.TroGetEntsByPrefab(prefab)
     if not trace_prefabs[prefab] then
         TroErrorHandle("查找的预制体必须是trace_prefabs表里定义过的" .. tostring(prefab))
     end
-
 
     local ents = {}
     local guids = trace_ents[prefab]
@@ -47,10 +56,8 @@ function TroGetEntsByPrefab(prefab)
     return ents
 end
 
-GLOBAL.TroGetEntsByPrefab = TroGetEntsByPrefab
-
 -- 获取任意一个
-function TroGetAnyEntByPrefab(prefab)
+function _G.TroGetAnyEntByPrefab(prefab)
     if not trace_prefabs[prefab] then
         TroErrorHandle("查找的预制体必须是trace_prefabs表里定义过的" .. tostring(prefab))
     end
@@ -69,5 +76,3 @@ function TroGetAnyEntByPrefab(prefab)
 
     return nil
 end
-
-GLOBAL.TroGetAnyEntByPrefab = TroGetAnyEntByPrefab

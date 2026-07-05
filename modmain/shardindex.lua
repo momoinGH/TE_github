@@ -5,8 +5,11 @@
 
 local skin_nature_defs = require("datadefs/skin_nature_defs")
 
-
 local function OnWorldEntsSpawned()
+    if TUNING.tropical.sea then
+        require("tro_seaworldinit")()
+    end
+
     print("所有实体创建完成，开始根据地形替换皮肤")
     --检查皮肤是否满足条件，满足就替换皮肤
     for guid, ent in pairs(Ents) do

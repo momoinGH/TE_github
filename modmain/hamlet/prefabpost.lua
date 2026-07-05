@@ -30,14 +30,6 @@ end
 modimport "modmain/hamlet/living_artifact.lua" --活性机甲
 
 ----------------------------------------------------------------------------------------------------
-
-
-AddPrefabPostInit("world", function(inst)
-    if not TheWorld.ismastersim then return end
-
-    TheWorld.components.tro_tempentitytracker:AddKey("cave_exit_roc") --洞穴出口
-end)
-
 local Unwrappable = require "components/unwrappable"
 Hooks.FnDecorator(Unwrappable, "_ctor", nil, function(rets, self, inst)
     if TheWorld.ismastersim and inst.components.tradable == nil then

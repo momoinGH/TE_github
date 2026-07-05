@@ -200,11 +200,7 @@ AddPrefabPostInit("world", function(inst)
 
     if not TheWorld.ismastersim then return end
 
-    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_portal")                 --熔炉传送门
-    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_center")                 --角斗容器
-    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_damager") --战旗
-    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_shield")
-    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_heal")
+
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -218,7 +214,7 @@ local function StartTrackingBefore(self, ent)
             "lavaarena_battlestandard_shield",
             "lavaarena_battlestandard_heal"
         }) do
-            local flag = TheWorld.components.tro_tempentitytracker:GetEnts(v)[1]
+            local flag = TroGetAnyEntByPrefab(v)
             if flag then
                 ent:AddDebuff(flag.debuffprefab, flag.debuffprefab)
             end

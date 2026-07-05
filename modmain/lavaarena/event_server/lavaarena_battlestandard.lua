@@ -14,7 +14,7 @@ local function Kill(inst)
 end
 
 local function OnFlagRemove(_, prefab, debuffprefab)
-    if #TheWorld.components.tro_tempentitytracker:GetEnts(prefab) <= 0 then --该类型的战旗一个也没有了
+    if not TroGetAnyEntByPrefab(prefab) then --该类型的战旗一个也没有了
         for _, v in ipairs(TheWorld.components.lavaarenamobtracker:GetAllMobs()) do
             v:RemoveDebuff(debuffprefab)
         end

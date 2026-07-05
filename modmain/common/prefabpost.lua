@@ -51,13 +51,3 @@ modimport "modmain/common/prefabs/koalefant.lua"
 modimport "modmain/common/prefabs/rock_ice.lua"
 modimport "modmain/common/prefabs/heatrock.lua"
 modimport "modmain/common/prefabs/grass.lua"
-
-
-
-AddPrefabPostInitAny(function(inst)
-    if not TheWorld.ismastersim then return end
-
-    if TheWorld.components.tro_tempentitytracker and TheWorld.components.tro_tempentitytracker:KeyExists(inst.prefab) then
-        TheWorld.components.tro_tempentitytracker:OnEntSpawned(inst)
-    end
-end)
