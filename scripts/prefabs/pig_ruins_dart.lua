@@ -188,22 +188,28 @@ local function makefn(build, bank, animframe, facing)
 end
 
 local function makefn2(build, bank, animframe, facing)
-    local function fn(Sim)
+    local function fn()
         local inst = CreateEntity()
-        local trans = inst.entity:AddTransform()
-        local anim = inst.entity:AddAnimState()
+
+        inst.entity:AddTransform()
+        inst.entity:AddSoundEmitter()
+        inst.entity:AddAnimState()
         inst.entity:AddNetwork()
 
-        anim:SetBank(bank)
-        anim:SetBuild(build)
-        anim:PlayAnimation(animframe)
+        inst.AnimState:SetBank(bank)
+        inst.AnimState:SetBuild(build)
+        inst.AnimState:PlayAnimation(animframe)
+        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+        inst.AnimState:SetSortOrder(1)
+        --        inst.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
 
+        inst.setbackground = 1
         inst.animframe = animframe
-        inst.Transform:SetTwoFaced()
 
+        inst.Transform:SetTwoFaced()
+        inst.Transform:SetRotation(180)
 
         inst:AddTag("dartthrower")
-
         if facing then
             if facing == "left" then
                 inst.Transform:SetScale(1, 1, -1)
@@ -214,15 +220,6 @@ local function makefn2(build, bank, animframe, facing)
             end
         end
 
-        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-        inst.AnimState:SetSortOrder(1)
-        inst.setbackground = 1
-        --        inst.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
-
-        inst.Transform:SetRotation(180)
-
-        inst.entity:AddSoundEmitter()
-
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
@@ -230,6 +227,7 @@ local function makefn2(build, bank, animframe, facing)
         end
 
         inst:AddComponent("inspectable")
+
         inst:AddComponent("disarmable")
         inst.components.disarmable.disarmfn = disarm
 
@@ -238,10 +236,9 @@ local function makefn2(build, bank, animframe, facing)
         --------------------
         inst.OnSave = onsave
         inst.OnLoad = onload
+
         inst.shoot = shoot
-
         inst.name = STRINGS.NAMES.PIG_RUINS_DART_TRAP
-
         updateart(inst)
 
         return inst

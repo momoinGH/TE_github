@@ -30,7 +30,7 @@ end
 
 local function makeemptyfn(inst)
 	if inst.components.pickable and inst.components.pickable.withered then
-		active.sg:GoToState("grow_spike")
+		inst.sg:GoToState("grow_spike")
 	end
 end
 
@@ -170,10 +170,12 @@ local function onsave_active(inst, data)
 	end
 end
 
-local function fn(Sim)
+local function fn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
+
+	inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
 	local minimap = inst.entity:AddMiniMapEntity()
@@ -188,6 +190,8 @@ local function fn(Sim)
 	inst:AddTag("elephantcactus")
 	inst:AddTag("scarytoprey")
 	inst:AddTag("plant")
+
+	MakeObstaclePhysics(inst, 1)
 
 	inst.entity:SetPristine()
 
@@ -217,9 +221,6 @@ local function fn(Sim)
 
 	inst:AddComponent("lootdropper")
 
-	inst.entity:AddSoundEmitter()
-	MakeObstaclePhysics(inst, 1)
-
 	inst:DoTaskInTime(ELEPHANTCACTUS_REGROW_NORMAL_ACTIVE, onactivechange)
 
 	return inst
@@ -241,13 +242,15 @@ local function OnBlocked(owner, data)
 	end
 end
 
-local function activefn(Sim)
+local function activefn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
+
+	inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
-	local minimap = inst.entity:AddMiniMapEntity()
+	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
+	local minimap = inst.entity:AddMiniMapEntity()
 	minimap:SetIcon("cactus_volcano.png")
 
 	anim:SetBuild("cactus_volcano")
@@ -259,21 +262,20 @@ local function activefn(Sim)
 	inst:AddTag("elephantcactus")
 	inst:AddTag("plant")
 
+	MakeObstaclePhysics(inst, 1)
+
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
 		return inst
 	end
 
-	inst:AddComponent("inspectable")
+	inst.has_spike = true
 
-	MakeLargeFreezableCharacter(inst)
+	inst:AddComponent("inspectable")
 
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:SetLoot({ "needlespear" })
-
-	inst.entity:AddSoundEmitter()
-	MakeObstaclePhysics(inst, 1)
 
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(ELEPHANTCACTUS_HEALTH)
@@ -289,12 +291,8 @@ local function activefn(Sim)
 	inst.components.combat:SetHurtSound("dontstarve_DLC002/creatures/volcano_cactus/hit")
 
 	inst:AddComponent("timer")
-	inst:ListenForEvent("timerdone", ontimerdone)
 
-	inst:ListenForEvent("blocked", OnBlocked)
-	inst:ListenForEvent("attacked", OnBlocked)
-
-	inst.has_spike = true
+	MakeLargeFreezableCharacter(inst)
 
 	inst:SetBrain(brain)
 	inst:SetStateGraph("SGelephantcactus")
@@ -303,13 +301,19 @@ local function activefn(Sim)
 	inst.OnLoad = onload_active
 	inst.OnSave = onsave_active
 
+	inst:ListenForEvent("timerdone", ontimerdone)
+	inst:ListenForEvent("blocked", OnBlocked)
+	inst:ListenForEvent("attacked", OnBlocked)
+
 	return inst
 end
 
-local function stumpfn(Sim)
+local function stumpfn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
+
+	inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
 	local minimap = inst.entity:AddMiniMapEntity()

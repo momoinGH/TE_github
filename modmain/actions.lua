@@ -325,15 +325,12 @@ TroAddAction({}, "SHEAR", STRINGS.ACTIONS.SHEAR, function(act)
         act.target.components.shearable:WorkedBy(act.doer)
         return true
     end
-
     if act.target.components.workable and act.target.components.workable:CanBeWorked() and act.target.components.workable.action == ACTIONS.SHEAR then
         act.target.components.workable:WorkedBy(act.doer)
         return true
     end
-
     return false
-end
-)
+end)
 
 -- 劈砍
 TroAddAction({ priority = 10, mount_valid = true }, "HACK", STRINGS.ACTIONS.HACK, function(act)

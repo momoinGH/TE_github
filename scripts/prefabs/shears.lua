@@ -54,6 +54,7 @@ local function fn()
     inst.components.finiteuses:SetMaxUses(SHEARS_USES)
     inst.components.finiteuses:SetUses(SHEARS_USES)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
+    inst.components.finiteuses:SetConsumption(ACTIONS.SHEAR, 1)
     ---------------------------------------------------------------
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)

@@ -13,8 +13,8 @@ local prefabs =
 }
 
 SetSharedLootTable('primeapebarrel', {
-    { 'poop', 1.0 },
-    { 'poop', 1.0 },
+    { 'poop',        1.0 },
+    { 'poop',        1.0 },
     { 'cave_banana', 1.0 },
     { 'cave_banana', 1.0 },
     --    {'trinket_4',   .01},
@@ -93,10 +93,10 @@ end
 
 local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
     inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
     MakeObstaclePhysics(inst, 1)
 
     local minimap = inst.entity:AddMiniMapEntity()

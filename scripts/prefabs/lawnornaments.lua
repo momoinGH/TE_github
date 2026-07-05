@@ -56,6 +56,7 @@ local function MakeLawnornament(n)
         local inst = CreateEntity()
         inst.entity:AddTransform()
         inst.entity:AddAnimState()
+        inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
 
         inst.entity:AddPhysics()
@@ -64,7 +65,6 @@ local function MakeLawnornament(n)
         local minimap = inst.entity:AddMiniMapEntity()
         minimap:SetIcon("lawnornament_" .. n .. ".png")
 
-        inst.entity:AddSoundEmitter()
         inst:AddTag("structure")
 
         inst.AnimState:SetBank("topiary0" .. n)

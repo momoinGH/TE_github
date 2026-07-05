@@ -203,7 +203,7 @@ Layouts["mangrove2"] = StaticLayout.Get("map/static_layouts/mangrove1", {
         notreearea = function()
             local variador = math.random()
             if variador > 0.6 then
-                return { "oceanbambootree" }
+                return { "bambootreebig" }
             else
                 local tipo = math.random(1, 10)
                 if tipo == 1 then
@@ -215,19 +215,19 @@ Layouts["mangrove2"] = StaticLayout.Get("map/static_layouts/mangrove1", {
                 elseif tipo == 4 then
                     return { "mussel_farm" }
                 elseif tipo == 5 then
-                    return { "oceanbush_vine" }
+                    return { "bush_vine" }
                 elseif tipo == 6 then
                     return { "driftwood_log" }
                 elseif tipo == 7 then
-                    return { "oceanbush_vine" }
+                    return { "bush_vine" }
                 elseif tipo == 8 then
-                    return { "oceanbush_vine" }
+                    return { "bush_vine" }
                 elseif tipo == 9 then
-                    return { "oceanbambootreebig" }
+                    return { "bambootreebig" }
                 elseif tipo == 10 then
-                    return { "oceanbambootreebig" }
+                    return { "bambootreebig" }
                 else
-                    return { "oceanbambootree" }
+                    return { "bambootreebig" }
                 end
             end
         end,

@@ -46,3 +46,89 @@ function CancelNoGrowInWinter(inst)
 end
 
 GLOBAL.CancelNoGrowInWinter = CancelNoGrowInWinter
+
+----------------------------------------------------------------------------------------------------
+local function OnPlantWorkFinished(inst, data)
+    if inst.components.hackable then
+        inst.components.hackable:SetWorkLeft(0)
+    end
+    if inst.components.shearable then
+        inst.components.shearable:SetWorkLeft(0)
+    end
+    if inst._tro_mhp_respawn_time and inst.components.timer then
+        inst.components.timer:StopTimer("_tro_mhp_respawn")
+        inst.components.timer:StartTimer("_tro_mhp_respawn", inst._tro_mhp_respawn_time)
+    end
+end
+
+local function OnPlantRespawnTimerDone(inst, data)
+    if data and data.name == "_tro_mhp_respawn" then
+        if inst.components.hackable and inst._tro_mhp_hack_count then
+            inst.components.hackable:SetWorkLeft(inst._tro_mhp_hack_count)
+        end
+        if inst.components.shearable and inst._tro_mhp_shear_count then
+            inst.components.shearable:SetWorkLeft(inst._tro_mhp_shear_count)
+        end
+        if inst._tro_mhp_on_respawn then
+            inst:_tro_mhp_on_respawn()
+        end
+    end
+end
+
+---制作可砍可剪可挖的植物
+---有一点需要注意，虽然砍了或者剪了会把两个组件SetWorkLeft设置为0，但是OnLoad时需要还需要外部记录是否采集过，采集过手动设置SetWorkLeft为0
+---@param inst ent
+---@param hack_count number
+---@param shear_count number
+---@param dig_count number
+---@param respawn_time number
+---@param onwork function
+---@param ondig function
+---@param on_respawn function
+function _G.MakeHackablePlant(inst,
+                              hack_count, shear_count, dig_count, respawn_time,
+                              onwork, ondig, on_respawn)
+    inst._tro_mhp_hack_count = hack_count
+    inst._tro_mhp_shear_count = shear_count
+    inst._tro_mhp_respawn_time = respawn_time
+    inst._tro_mhp_onwork = onwork
+    inst._tro_mhp_on_respawn = on_respawn
+
+    if hack_count then
+        inst:AddComponent("hackable")
+        inst.components.hackable:SetWorkLeft(hack_count)
+        inst:ListenForEvent("onhacked", function(inst, data)
+            data.is_hack = true --可以通过这个判断是剪刀剪的还是砍刀
+            if onwork then
+                onwork(inst, data)
+            end
+        end)
+        inst:ListenForEvent("onhackfinished", OnPlantWorkFinished)
+    end
+
+    if shear_count then
+        inst:AddComponent("shearable")
+        inst.components.shearable:SetWorkLeft(shear_count)
+        inst:ListenForEvent("onshear", function(inst, data)
+            data.is_shear = true
+            if onwork then
+                onwork(inst, data)
+            end
+        end)
+        inst:ListenForEvent("onshearfinished", OnPlantWorkFinished)
+    end
+
+    if dig_count then
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkAction(ACTIONS.DIG)
+        inst.components.workable:SetWorkLeft(dig_count)
+        inst.components.workable:SetOnFinishCallback(ondig)
+    end
+
+    if respawn_time then
+        if not inst.components.timer then
+            inst:AddComponent("timer")
+        end
+        inst:ListenForEvent("timerdone", OnPlantRespawnTimerDone)
+    end
+end

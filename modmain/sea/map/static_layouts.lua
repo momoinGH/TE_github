@@ -11,29 +11,29 @@ Layouts["oceanbamboforest"] = StaticLayout.Get("map/static_layouts/oceanbambofor
         objetoaleatorio = function()
             local variador = math.random()
             if variador > 0.3 then
-                return { "oceanbambootree" }
+                return { "bambootreebig" }
             else
                 local tipo = math.random(1, 20)
                 if tipo == 1 then return { "frogsplash" } end
                 if tipo == 2 then return { "frogsplash" } end
                 if tipo == 3 then return { "mangrovetree" } end
-                if tipo == 4 then return { "oceanbambootreebig" } end
+                if tipo == 4 then return { "bambootreebig" } end
                 if tipo == 5 then return { "spidercoralhole" } end
                 if tipo == 6 then return { "grass_water" } end
                 if tipo == 7 then return { "fishinhole" } end
                 if tipo == 8 then return { "waterygrave" } end
                 if tipo == 9 then return { "sapling" } end
-                if tipo == 10 then return { "oceanbush_vine" } end
-                if tipo == 11 then return { "oceanbambootreebig" } end
-                if tipo == 12 then return { "oceanbambootreebig" } end
+                if tipo == 10 then return { "bush_vine" } end
+                if tipo == 11 then return { "bambootreebig" } end
+                if tipo == 12 then return { "bambootreebig" } end
                 if tipo == 13 then return { "mussel_farm" } end
                 if tipo == 14 then return { "seaweed_planted" } end
-                if tipo == 15 then return { "oceanbush_vine" } end
+                if tipo == 15 then return { "bush_vine" } end
                 if tipo == 16 then return { "mangrovetree" } end
                 if tipo == 17 then return { "driftwood_log" } end
                 if tipo == 18 then return { "sapling" } end
-                if tipo == 19 then return { "oceanbush_vine" } end
-                if tipo == 20 then return { "oceanbush_vine" } end
+                if tipo == 19 then return { "bush_vine" } end
+                if tipo == 20 then return { "bush_vine" } end
             end
         end,
     },

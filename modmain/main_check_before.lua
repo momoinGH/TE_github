@@ -211,3 +211,39 @@ end
 --     end
 --     return OldDoTaskInTime(self, time, new_fn, ...)
 -- end
+
+----------------------------------------------------------------------------------------------------
+-- 检查部件是否主客机都有，如果SoundEmitter、Physics这些只在主机添加客机没有会出现声音听不见的奇怪问题
+AddPrefabPostInitAny(function(inst)
+    if not inst.Network then
+        return
+    end
+
+    inst.__tro_check_async_animstate = net_bool(inst.GUID, "inst.__tro_check_async_animstate")
+    inst.__tro_check_async_sound = net_bool(inst.GUID, "inst.__tro_check_async_sound")
+    inst.__tro_check_async_physics = net_bool(inst.GUID, "inst.__tro_check_async_physics")
+
+    if not TheWorld.ismastersim then
+        inst:DoTaskInTime(5, function()
+            if inst.__tro_check_async_animstate:value() ~= (inst.AnimState ~= nil) then
+                TroErrorHandle("错误，单位AnimState添加主客机不同步 " .. tostring(inst), false)
+            end
+            if inst.__tro_check_async_sound:value() ~= (inst.SoundEmitter ~= nil) then
+                TroErrorHandle("错误，单位SoundEmitter添加主客机不同步 " .. tostring(inst), false)
+            end
+            if inst.__tro_check_async_physics:value() ~= (inst.Physics ~= nil) then
+                TroErrorHandle("错误，单位Physics添加主客机不同步 " .. tostring(inst), false)
+            end
+        end)
+        return
+    end
+
+    inst:DoTaskInTime(1, function(inst)
+        inst.__tro_check_async_animstate:set_local(inst.AnimState ~= nil)
+        inst.__tro_check_async_animstate:set(inst.AnimState ~= nil)
+        inst.__tro_check_async_sound:set_local(inst.SoundEmitter ~= nil)
+        inst.__tro_check_async_sound:set(inst.SoundEmitter ~= nil)
+        inst.__tro_check_async_physics:set_local(inst.Physics ~= nil)
+        inst.__tro_check_async_physics:set(inst.Physics ~= nil)
+    end)
+end)

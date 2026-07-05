@@ -1,5 +1,4 @@
 require "behaviours/standandattack"
---require "behaviours/faceentity"
 
 local START_FACE_DIST = 10
 local KEEP_FACE_DIST = 15

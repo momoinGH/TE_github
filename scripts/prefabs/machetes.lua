@@ -161,7 +161,6 @@ local function normal(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-
     inst.components.inventoryitem:SetOnDroppedFn(ondropped)
 
     inst:DoTaskInTime(0, ondropped)

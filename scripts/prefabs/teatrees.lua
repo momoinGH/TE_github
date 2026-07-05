@@ -417,10 +417,10 @@ local function tree(name, stage, type)
         stage = stage ~= 0 and stage or math.random(1, 3)
 
         local inst = CreateEntity()
-        inst.entity:AddNetwork()
         inst.entity:AddTransform()
         inst.entity:AddSoundEmitter()
         inst.entity:AddMiniMapEntity()
+        inst.entity:AddNetwork()
 
         local anim = inst.entity:AddAnimState()
         inst.color = .7 + math.random() * .3
