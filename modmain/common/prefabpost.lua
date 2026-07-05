@@ -33,6 +33,7 @@ modimport "modmain/common/components/colourcube.lua"
 modimport "modmain/common/components/worldstate.lua"    --世界状态，比如新增的季节
 modimport "modmain/common/components/minionspawner.lua" --子单位生成
 modimport "modmain/common/components/ambientsound"      --走在不同地皮上播放的音乐
+modimport "modmain/common/components/dynamicmusic.lua"  --战斗时音乐
 
 ----------------------------------------------------------------------------------------------------
 

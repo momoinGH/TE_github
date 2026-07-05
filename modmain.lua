@@ -81,10 +81,6 @@ modimport "modmain/save_tag.lua"          --提供一个EntityScript:TroAddSaveT
 modimport "modmain/mainfunctions.lua"
 
 
--- TODO 整理
-modimport("postinit/components/dynamicmusic")
-
-
 -- 文本
 local language = string.lower(GetModConfigData("language"))
 trosafemodimport("modmain/languages/strings_en") --英文版本兜底，不使用的台词不应该添加
