@@ -50,7 +50,7 @@ PrefabFiles = {
     "snowspider",             --冰霜蜘蛛
     "snowspider2",            --冰霜蜘蛛
     "rock_ice_frost",         --冰石头
-    "rock_ice_frost_spawner", --冰石头生成器
+    "rock_ice_frost_spawner", --海上冰石头生成器
     "frostpillar_rock",       --坚冰支柱
     "snowgoat",               --冰霜山羊
     "snowgoatherd",           --冰霜山羊生成点

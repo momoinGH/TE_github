@@ -81,8 +81,9 @@ modimport "modmain/save_tag.lua"          --提供一个EntityScript:TroAddSaveT
 modimport "modmain/mainfunctions.lua"
 
 
+-- TODO 整理
+modimport("postinit/components/dynamicmusic")
 
-modimport "modmain/postinit" --TODO 拆分一下
 
 -- 文本
 local language = string.lower(GetModConfigData("language"))
@@ -92,6 +93,7 @@ trosafemodimport("modmain/languages/modwiki_zh") -- 其他语言的wiki先不管
 
 modimport("modmain/constants")                   --一些全局变量、全局函数
 modimport "modmain/ocean_util"                   --海洋相关的一些全局函数
+modimport "modmain/ocean_style"                  --修改海洋地皮风格
 modimport("modmain/actions")                     --action相关
 modimport("modmain/actions_post")                --修改原版action
 modimport("modmain/componentactions")            --componentactions相关

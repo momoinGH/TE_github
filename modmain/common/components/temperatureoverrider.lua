@@ -4,7 +4,7 @@ GLOBAL.GetTemperatureAtXZ = function(x, z, ...)
     if TheWorld.Map:TroIsWorldOut(x, 0, z) then
         return 20 --世界外恒温，这里也包括在虚空房子里
     end
-    if TheWorld.Map:TroIsWinterAtPoint(x, 0, z) then
+    if TheWorld.Map:TroHasWinterAtPoint(x, 0, z) then
         return -20 --冰岛
     end
 

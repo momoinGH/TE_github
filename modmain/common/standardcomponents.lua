@@ -132,3 +132,18 @@ function _G.MakeHackablePlant(inst,
         inst:ListenForEvent("timerdone", OnPlantRespawnTimerDone)
     end
 end
+
+----------------------------------------------------------------------------------------------------
+
+--清除积雪覆盖效果
+local Old_MakeSnowCovered = GLOBAL.MakeSnowCovered
+GLOBAL.MakeSnowCovered = function(inst, ...)
+    Old_MakeSnowCovered(inst, ...)
+    inst:DoTaskInTime(0, function()
+        if not inst:TroHasWinter() then --这些地方建筑没有积雪
+            inst.AnimState:ClearOverrideSymbol("snow", "snow", "snow")
+            inst:RemoveTag("SnowCovered")
+            inst.AnimState:Hide("snow")
+        end
+    end)
+end

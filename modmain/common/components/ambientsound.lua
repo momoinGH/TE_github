@@ -43,7 +43,6 @@ local ambient_sounds =
 
 
 AddComponentPostInit("ambientsound", function(self)
-    local inst = self.inst
     AMBIENT_SOUNDS = Hooks.GetUpValue(self.OnUpdate, "AMBIENT_SOUNDS")
     for name, v in pairs(ambient_sounds) do
         AMBIENT_SOUNDS[name] = v

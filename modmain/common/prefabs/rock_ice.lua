@@ -24,7 +24,7 @@ local function NewTryStageChange(inst)
     end
 
     local pct = TheWorld.state.seasonprogress
-    if inst:TroIsWinter() then --冬天
+    if inst:TroHasWinter() then --冬天
         SetStage(inst, "tall", "grow")
     elseif inst:TroIsSummer() then
         --if pct > .1 then

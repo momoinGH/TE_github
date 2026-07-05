@@ -1,0 +1,1 @@
+postinit/components/dynamicmusic.lua 需要控制播放时机，查看单机代码

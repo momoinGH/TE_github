@@ -31,7 +31,7 @@ local LILYPOND_SHORE_OCEAN_COLOR =
 }
 
 
-local tro_tiledefs = {
+tro_tiledefs = {
     -------------------以下为水体地皮---------------------
     MANGROVE = {
         tile_range       = TileRanges.TRO_OCEAN,

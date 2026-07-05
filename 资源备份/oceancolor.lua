@@ -1,6 +1,5 @@
 local tropical_color = { 0, 0.3, 0.3, 1 }
 
-
 local COLOURSETS = {
     shipwrecked =
     {
@@ -9,7 +8,6 @@ local COLOURSETS = {
         night = { color = tropical_color, blend_delay = 6, blend_speed = 0.1, ocean_texture_blend = 1 },
         no_ocean = { color = { 0.0, 0.0, 0.0, 1.0 }, blend_delay = 6, blend_speed = 0.1, ocean_texture_blend = 0 }
     },
-
 
     hamlet =
     {
@@ -20,23 +18,24 @@ local COLOURSETS = {
     }
 }
 
+-- 根据玩家所在地形修改海洋颜色
+-- 颜色看着有点儿怪，先不用
 AddComponentPostInit("oceancolor", function(self)
-    self.currentphase = "default"
-    ---保存当前phase
-    local _OnPhaseChanged = self.OnPhaseChanged
-    function self:OnPhaseChanged(phase)
-        _OnPhaseChanged(self, phase)
-        self.currentphase = phase
-    end
-
-    local _COLOURS = Hooks.GetUpValue(self.OnPhaseChanged, "COLORS")
-    COLOURSETS.forest = deepcopy(_COLOURS)
-
     local _activatedplayer
     local function OnRegionChanged(src, dat)
-        print("OnRegionChanged", dat and dat.region)
-        local regionname = REGION_NAMES[dat and dat.region or 1] ----region为什么是个表？
-        local colors = COLOURSETS[regionname] or COLOURSETS.forest
+        if not (dat and dat.tags) then
+            return
+        end
+
+        local colors = nil
+        for region, data in pairs(COLOURSETS) do
+            if table.contains(dat.tags, region) then
+                colors = data
+            end
+        end
+        if not colors then
+            return
+        end
 
         local target_color = colors.default
         if colors[self.phase] ~= nil then

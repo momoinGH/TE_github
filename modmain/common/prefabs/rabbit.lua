@@ -16,7 +16,7 @@ local function NewOnIsWinter(inst)
         inst.task = nil
     end
     if not IsForcedNightmare(inst) then
-        if inst:TroIsWinter() then
+        if inst:TroHasWinter() then
             if not IsWinterRabbit(inst) then
                 inst.task = inst:DoTaskInTime(math.random() * .5, BecomeWinterRabbit)
             end

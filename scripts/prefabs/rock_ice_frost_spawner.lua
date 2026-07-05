@@ -8,37 +8,35 @@ local prefabs =
     "rock_ice_frost",
 }
 
-local VALID_TILES = table.invert(
-    {
-        WORLD_TILES.SNOWLAND,
-    })
+local VALID_TILES = table.invert({
+    WORLD_TILES.SNOWLAND,
+})
 
-local VALID_TILES2 = table.invert(
-    {
-        WORLD_TILES.OCEAN_COASTAL_SHORE,
-    })
+local VALID_TILES2 = table.invert({
+    WORLD_TILES.OCEAN_COASTAL_SHORE,
+})
 
 
+-- 海里生成迷你冰川和冰面、鲸鱼
 local objetos =
 {
-    [1] = "rock_ice_frost",
-    [2] = "rock_ice_frost",
-    [3] = "rock_ice_frost",
-    [4] = "rock_ice_frost",
-    [5] = "rock_ice_frost",
-    [6] = "rock_ice_frost",
-    [7] = "rock_ice_frost",
-    [8] = "icedpad",
-    [9] = "icedpad",
-    [10] = "whale_bluefinal",
+    "rock_ice_frost",
+    "rock_ice_frost",
+    "rock_ice_frost",
+    "rock_ice_frost",
+    "rock_ice_frost",
+    "rock_ice_frost",
+    "rock_ice_frost",
+    "icedpad",
+    "icedpad",
+    "whale_bluefinal",
 }
 
 
 local function SpawnSeataro(spawn_point)
-    local plant = SpawnPrefab(objetos[math.random(1, 10)])
-    plant.Transform:SetPosition(spawn_point.x, spawn_point.y, spawn_point.z)
-    return plant
+    return SpawnAt(objetos[math.random(#objetos)], spawn_point)
 end
+
 local LAND_CHECK_RADIUS = 6
 local function FindLandNextToWater(playerpos, waterpos)
     --print("FindWalkableOffset:")
@@ -112,7 +110,7 @@ local function SpawnSeataroPre(inst)
     local pt = inst:GetPosition()
     local spawn_point = GetSpawnPoint(pt)
     if spawn_point ~= nil then
-        local plant = SpawnSeataro(spawn_point)
+        SpawnSeataro(spawn_point)
         inst:Remove()
     else
         inst.tentativas = inst.tentativas - 1
@@ -127,20 +125,15 @@ local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst:AddTag("CLASSIFIED")
-    inst.tentativas = 10
+    inst.tentativas = 5 --要生成多少个实体
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-    --inst:AddTag("CLASSIFIED")
 
     inst:DoTaskInTime(1, SpawnSeataroPre)
 

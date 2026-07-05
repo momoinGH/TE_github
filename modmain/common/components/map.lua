@@ -39,7 +39,7 @@ Map.IsWindyAreaAtPoint = function(self, x, y, z)
 end
 
 -- 判断这个位置是否是冬天
-Map.TroIsWinterAtPoint = function(self, x, y, z)
+Map.TroHasWinterAtPoint = function(self, x, y, z)
     if TheWorld.state.iswinter then
         return self:FindVisualNodeAtPoint(x, y, z, "No_Winter") == nil
     else

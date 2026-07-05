@@ -181,6 +181,25 @@ configuration_options =
         }
     },
     {
+        name = "ocean_style",
+        label = en_zh_zht("Ocean Style", "海洋风格"),
+        hover = en_zh_zht("Ocean Style", "海洋风格"),
+        options =
+        {
+            {
+                description = en_zh_zht("Default", "默认"),
+                hover = en_zh_zht("DST ocean", "联机海洋"),
+                data = "default"
+            },
+            {
+                description = en_zh_zht("Shipwrecked Style", "海难风格"),
+                hover = en_zh_zht("Shipwrecked stylized tropical ocean", "海难风格的热带海洋"),
+                data = "tropical"
+            },
+        },
+        default = "default",
+    },
+    {
         name = "bosslife",
         label = en_zh_zht("Bosses Life", "巨兽生命值", "巨獸生命值"),
         hover = en_zh_zht(

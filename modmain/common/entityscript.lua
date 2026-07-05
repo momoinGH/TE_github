@@ -109,7 +109,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 -- 判断实体所在位置是否是冬天
-function EntityScript:TroIsWinter()
+function EntityScript:TroHasWinter()
     if self.components.areaaware then
         if TheWorld.state.iswinter then
             return not self.components.areaaware:CurrentlyInTag("No_Winter")
@@ -117,7 +117,7 @@ function EntityScript:TroIsWinter()
             return self.components.areaaware:CurrentlyInTag("Always_Winter")
         end
     end
-    return TheWorld.Map:TroIsWinterAtPoint(self.Transform:GetWorldPosition())
+    return TheWorld.Map:TroHasWinterAtPoint(self.Transform:GetWorldPosition())
 end
 
 function EntityScript:TroIsSummer()
