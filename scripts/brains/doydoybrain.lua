@@ -105,7 +105,7 @@ local function StealFoodAction(inst) --Look for things to take food from (EatFoo
 end
 
 local function MateAction(inst)
-    local partner = inst.components.mateable:GetPartner()
+    local partner = inst.components.mateable and inst.components.mateable:GetPartner()
     if partner and not partner.sg:HasStateTag("sleeping") then --不能在睡觉
         return BufferedAction(inst, partner, ACTIONS.MATE, nil, nil, nil, TUNING.DOYDOY_MATING_DANCE_DIST)
     end
