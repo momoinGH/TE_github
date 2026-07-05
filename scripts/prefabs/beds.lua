@@ -128,12 +128,9 @@ local function common_fn(anim)
     inst:AddTag("bed")
     inst:AddTag("structure")
 
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetBank("beds")
     inst.AnimState:SetBuild("beds")
     inst.AnimState:PlayAnimation(anim)
-
-    --    MakeInventoryFloatable(inst, "small", 0.2, 0.95)
 
     inst.entity:SetPristine()
 
@@ -148,18 +145,16 @@ local function common_fn(anim)
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnFinishCallback(onhammered)
-    --   inst.components.workable:SetOnWorkCallback(onhit)	
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetOnFinished(onfinished)
-
-    MakeSmallBurnable(inst, TUNING.LONG_BURNABLE)
-    MakeSmallPropagator(inst)
 
     inst:AddComponent("sleepingbag")
     inst.components.sleepingbag.onsleep = onsleep
     inst.components.sleepingbag.onwake = onwake
 
+    MakeSmallBurnable(inst, TUNING.LONG_BURNABLE)
+    MakeSmallPropagator(inst)
     MakeHauntableLaunchAndIgnite(inst)
 
     return inst

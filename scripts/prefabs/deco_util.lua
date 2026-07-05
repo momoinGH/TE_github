@@ -234,10 +234,6 @@ local function smash(inst)
 end
 
 local function setPlayerUncraftable(inst)
-    if not inst.SoundEmitter then
-        inst.entity:AddSoundEmitter()
-    end
-
     if not inst.components.lootdropper then
         inst:AddComponent("lootdropper")
     end
@@ -345,6 +341,7 @@ local function decofn(build, bank, animframe, data, name)
         local inst = CreateEntity()
         inst.entity:AddTransform()
         inst.entity:AddAnimState()
+        inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
 
         inst.AnimState:SetBuild(build)

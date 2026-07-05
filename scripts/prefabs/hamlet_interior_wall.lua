@@ -10,11 +10,21 @@ local assets = {
 
 local function OnBuilt(inst)
     -- 删除之前的
-    if GetClosestInstWithTag("interior_wall", inst, RoomUtils.RADIUS) then
-        ReplacePrefab(inst, "collapse_small")
+    local old_wall = GetClosestInstWithTag("interior_wall", inst, RoomUtils.RADIUS)
+    if not old_wall then
+        TroErrorHandle("错误，没有找到房间内墙壁对象" .. tostring(inst), true)
+        inst:DoTaskInTime(0, inst.Remove)
+        return
     end
 
-    -- 自适应偏移，没有设置过缩放才设置
+    local x, y, z = old_wall.Transform:GetWorldPosition()
+    inst.Transform:SetPosition(x, y, z)
+    local old_data = old_wall.components.tro_saveanim
+    inst.components.tro_saveanim:Init(nil, nil, nil, old_data.scale, nil, nil, old_data.rotation)
+    ReplacePrefab(old_wall, "collapse_small")
+end
+
+local function OnInteriorSpawn(inst)
     local room = inst:TroGetRoomCenter()
     if room then
         local x, y, z = room.Transform:GetWorldPosition()
@@ -53,7 +63,7 @@ local function MakeWall(name, bank, build, anim, scale, x_offset)
         inst:AddComponent("tro_saveanim") --还是允许外部重新设置缩放的
 
         inst:ListenForEvent("onbuilt", OnBuilt)
-        inst:ListenForEvent("oninteriorspawn", OnBuilt)
+        inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
 
         return inst
     end

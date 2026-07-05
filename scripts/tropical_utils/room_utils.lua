@@ -283,7 +283,7 @@ function FN.CreateRoom(room, door_key_start)
     -- 生成中心点
     local center = SpawnPrefab("interior_center")
     center.Transform:SetPosition(x, 0, z)
-    center:SetRoomSize(width,depth)
+    center:SetRoomSize(width, depth)
 
     if room.night_room then
         center:AddTag("night_room")
@@ -350,6 +350,11 @@ function FN.CreateRoom(room, door_key_start)
                 p.sg:GoToState(data.startstate)
             end
 
+            if data.addtags then
+                for _, tag in ipairs(data.addtags) do
+                    p:AddTag(tag)
+                end
+            end
             if data.init then
                 data.init(p, center, data)
             end

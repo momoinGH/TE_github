@@ -152,6 +152,12 @@ local function MakeShelf(name, data, common_post_fn, master_post_fn)
         inst:ListenForEvent("itemget", OnItemGet)
         inst:ListenForEvent("itemlose", OnItemLose)
 
+        inst:DoTaskInTime(0, function(inst)
+            if inst:HasTag("playercrafted") then
+                setPlayerUncraftable(inst)
+            end
+        end)
+
         inst.OnSave = OnSave
         inst.OnLoad = OnLoad
 

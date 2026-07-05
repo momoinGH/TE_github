@@ -14,6 +14,8 @@ local function OnBuilt(inst)
     if oldFloor then
         local x, y, z = oldFloor.Transform:GetWorldPosition()
         inst.Transform:SetPosition(x, y, z)
+        local old_data = oldFloor.components.tro_saveanim
+        inst.components.tro_saveanim:Init(nil, nil, nil, old_data.scale, nil, nil, old_data.rotation)
         SpawnPrefab("collapse_small").Transform:SetPosition(x, y, z)
         oldFloor:Remove()
     end
