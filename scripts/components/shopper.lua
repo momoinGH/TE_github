@@ -48,7 +48,7 @@ function Shopper:PayFor(target)
         self:BoughtItem(target)
     elseif target:HasTag("cost_one_oinc") then
         --柜子
-
+        
         inventory:PayMoney(1)
     end
 end

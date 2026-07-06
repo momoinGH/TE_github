@@ -25,7 +25,7 @@ local function OnOnShelvesInteriorSpawn(inst, data)
     end
 end
 
-local function spawnshelfslots(inst)
+local function InitShelfSlots(inst)
     for i = 1, inst.size do
         local object = SpawnPrefab("shelf_slot")
         local slot = inst.swp_img_list[i]
@@ -33,13 +33,6 @@ local function spawnshelfslots(inst)
         object.components.shelfer:SetShelf(inst, i)
         table.insert(inst.shelves, object)
     end
-end
-
-local function RemoveShelves(inst)
-    for _, v in ipairs(inst.shelves) do
-        v:Remove()
-    end
-    inst.shelves = {}
 end
 
 local function onhammered(inst, worker)
@@ -67,8 +60,23 @@ local function setPlayerUncraftable(inst)
     end
 end
 
+local function RemoveShelves(inst)
+    for _, v in ipairs(inst.shelves) do
+        v:Remove()
+    end
+    inst.shelves = {}
+end
+
 local function OnSave(inst, data)
     data.playercrafted = inst:HasTag("playercrafted") or nil
+
+    --格子实体是不保存的，所以需要柜子这边保存和恢复
+    data.shelves_data = {}
+    for i, v in ipairs(inst.shelves) do
+        if v:IsValid() then
+            data.shelves_data[i] = v.components.shopped:OnSave()
+        end
+    end
 end
 
 local function OnLoad(inst, data)
@@ -76,6 +84,14 @@ local function OnLoad(inst, data)
 
     if data.playercrafted then
         setPlayerUncraftable(inst)
+    end
+
+    if data.shelves_data then
+        for i, d in pairs(data.shelves_data) do
+            if inst.shelves[i] and inst.shelves[i]:IsValid() then
+                inst.shelves[i].components.shopped:OnLoad(d)
+            end
+        end
     end
 end
 
@@ -156,7 +172,7 @@ local function MakeShelf(name, data, common_post_fn, master_post_fn)
         inst.components.container.canbeopened = false
 
         inst.shelves = {} --展柜槽
-        spawnshelfslots(inst)
+        InitShelfSlots(inst)
 
         inst:AddComponent("tro_saveanim")
 

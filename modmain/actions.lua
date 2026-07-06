@@ -349,13 +349,11 @@ TroAddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTIONS.TAKE_
         act.doer.components.shopper:Take(target)
         return true
     end
-
     local prefab_wanted = target.replica.shopped and target.replica.shopped:GetCostPrefab()
     if not prefab_wanted then
         TroErrorHandle(string.trofmt("错误，商品 {} 需要的货币不存在", target), false)
         return false --不应该发送，防止报错
     end
-
     local reason
     if TheWorld.state.isnight then                                --晚上不能买
         reason = "closed"
@@ -366,7 +364,6 @@ TroAddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTIONS.TAKE_
             reason = "goods"
         end
     end
-
     if not reason then
         act.doer.components.shopper:PayFor(target)
         if act.doer.SoundEmitter then

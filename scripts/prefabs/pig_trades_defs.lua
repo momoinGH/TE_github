@@ -110,7 +110,7 @@ local TRADER = {
         items = { "pigcrownhat", "pig_scepter", "relic_4", "relic_5" },
         reset = 0,
         desc = STRINGS.CITY_PIG_QUEEN_TRADE,
-        reward = "key_to_city",
+        reward = "pedestal_key",
         rewardqty = 1
     },
     pigman_usher = {

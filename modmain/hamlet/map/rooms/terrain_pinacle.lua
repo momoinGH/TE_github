@@ -3,7 +3,7 @@ AddRoom("BG_pinacle_base", {
     value = WORLD_TILES.ROCKY,
     tags = {},
     contents = {
-        distributepercent = .10,                             --.26
+        distributepercent = .10, --.26
         distributeprefabs =
         {
             rock1 = 0.1,
@@ -21,7 +21,7 @@ AddRoom("BG_pinacle_base", {
         {
             flint = 2,
             twigs = 2,
-            pig_scepter = 1,
+            pig_scepter = 1, --帝王权杖
         },
     }
 })

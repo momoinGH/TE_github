@@ -28,14 +28,13 @@ local function MakeHat(name)
     end]]
     local swap_data = { bank = symname, anim = "anim" }
 
-    local function onequip(inst, owner, symbol_override)
+    local function onequip(inst, owner)
         local skin_build = inst:GetSkinBuild()
         if skin_build ~= nil then
             owner:PushEvent("equipskinneditem", inst:GetSkinName())
-            owner.AnimState:OverrideItemSkinSymbol("swap_hat", skin_build, symbol_override or "swap_hat", inst.GUID,
-                fname)
+            owner.AnimState:OverrideItemSkinSymbol("swap_hat", skin_build, "swap_hat", inst.GUID, fname)
         else
-            owner.AnimState:OverrideSymbol("swap_hat", fname, symbol_override or "swap_hat")
+            owner.AnimState:OverrideSymbol("swap_hat", fname, "swap_hat")
         end
         owner.AnimState:Show("HAT")
         owner.AnimState:Show("HAIR_HAT")
@@ -47,25 +46,25 @@ local function MakeHat(name)
             owner.AnimState:Show("HEAD_HAT")
         end
 
-		if inst:HasTag("antmask") then
-			owner:AddTag("has_antmask")
-		end
+        if inst:HasTag("antmask") then
+            owner:AddTag("has_antmask")
+        end
 
-		if inst:HasTag("gasmask") then
-			owner:AddTag("has_gasmask")
-		end
+        if inst:HasTag("gasmask") then
+            owner:AddTag("has_gasmask")
+        end
 
-		if inst:HasTag("venting") then
-			owner:AddTag("venting")
-		end
+        if inst:HasTag("venting") then
+            owner:AddTag("venting")
+        end
 
-		if inst:HasTag("sneaky") then
-			if not owner:HasTag("monster") then
-				owner:AddTag("monster")
-			else
-				owner:AddTag("originaly_monster")
-			end
-			owner:AddTag("sneaky")
+        if inst:HasTag("sneaky") then
+            if not owner:HasTag("monster") then
+                owner:AddTag("monster")
+            else
+                owner:AddTag("originaly_monster")
+            end
+            owner:AddTag("sneaky")
         end
         if not owner:HasTag("equipmentmodel") then
             if inst.components.fueled ~= nil then
@@ -95,24 +94,24 @@ local function MakeHat(name)
             inst.components.fueled:StopConsuming()
         end
 
-		if inst:HasTag("antmask") then
-			owner:RemoveTag("has_antmask")
-		end
-		if inst:HasTag("gasmask") then
-			owner:RemoveTag("has_gasmask")
-		end
+        if inst:HasTag("antmask") then
+            owner:RemoveTag("has_antmask")
+        end
+        if inst:HasTag("gasmask") then
+            owner:RemoveTag("has_gasmask")
+        end
 
-		if inst:HasTag("venting") then
-			owner:RemoveTag("venting")
-		end
+        if inst:HasTag("venting") then
+            owner:RemoveTag("venting")
+        end
 
-		if inst:HasTag("sneaky") then
-			if not owner:HasTag("originaly_monster") then
-				owner:RemoveTag("monster")
-			else
-				owner:RemoveTag("originaly_monster")
-			end
-			owner:RemoveTag("sneaky")
+        if inst:HasTag("sneaky") then
+            if not owner:HasTag("originaly_monster") then
+                owner:RemoveTag("monster")
+            else
+                owner:RemoveTag("originaly_monster")
+            end
+            owner:RemoveTag("sneaky")
         end
     end
 
@@ -133,7 +132,7 @@ local function MakeHat(name)
         if owner:HasTag("player") then
             owner.AnimState:Show("HEAD")
             owner.AnimState:Hide("HEAD_HAT")
-       end
+        end
 
         if not owner:HasTag("equipmentmodel") then
             if inst.components.fueled ~= nil then
@@ -269,8 +268,8 @@ local function MakeHat(name)
         return inst
     end
 
-	local function disguise_onequip(inst, owner)
-		opentop_onequip(inst, owner)
+    local function disguise_onequip(inst, owner)
+        opentop_onequip(inst, owner)
         inst.monster = owner:HasTag("monster")
         owner:RemoveTag("monster")
 
@@ -281,13 +280,13 @@ local function MakeHat(name)
         owner:RemoveTag("merm")
 
         if owner.components.leader then
-             owner.components.leader:RemoveFollowersByTag("merm")
-             owner.components.leader:RemoveFollowersByTag("spider")
+            owner.components.leader:RemoveFollowersByTag("merm")
+            owner.components.leader:RemoveFollowersByTag("spider")
         end
-	end
+    end
 
-	local function disguise_unequip(inst, owner)
-		onunequip(inst, owner)
+    local function disguise_unequip(inst, owner)
+        onunequip(inst, owner)
         if inst.monster then owner:AddTag("monster") end
 
         if inst.spiderwhisperer then owner:AddTag("spiderwhisperer") end
@@ -295,13 +294,13 @@ local function MakeHat(name)
         if inst.merm then owner:AddTag("merm") end
 
         if owner.components.leader then
-             owner.components.leader:RemoveFollowersByTag("pig")
+            owner.components.leader:RemoveFollowersByTag("pig")
         end
-	end
+    end
 
     local function disguise()
-		local inst = simple()
-		inst:AddTag("disguise")
+        local inst = simple()
+        inst:AddTag("disguise")
         inst:AddTag("open_top_hat")
 
         if not TheWorld.ismastersim then
@@ -312,9 +311,9 @@ local function MakeHat(name)
         inst.components.floater:SetSize("med")
         inst.components.floater:SetScale(0.68)
 
-		inst.components.equippable:SetOnEquip( disguise_onequip )
-		inst.components.equippable:SetOnUnequip( disguise_unequip )
-		inst.opentop = true
+        inst.components.equippable:SetOnEquip(disguise_onequip)
+        inst.components.equippable:SetOnUnequip(disguise_unequip)
+        inst.opentop = true
 
         return inst
     end
@@ -664,7 +663,7 @@ local function MakeHat(name)
     local assets = { Asset("ANIM", "anim/" .. fname .. ".zip") }
     local prefabs = nil
 
-        if name == "peagawkfeather" then
+    if name == "peagawkfeather" then
         fn = peagawkfeather
     elseif name == "disguise" then
         fn = disguise
@@ -702,4 +701,3 @@ return MakeHat("peagawkfeather"),
     MakeHat("candle"),
     MakeHat("thunder"),
     MakeHat("metalplate")
-
