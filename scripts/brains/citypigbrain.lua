@@ -292,12 +292,12 @@ local function ReplaceStockCondition(inst)
 end
 
 local SHOP_CANT_TAGS = { "INTERIOR_LIMBO", "slot_one" }
-local SHOP_ONEOF_TAGS = { "shopped", "shop_shelf" }
+local SHOP_ONEOF_TAGS = { "shopped" }
 -- 补货
 local function ReplenishStockAction(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     for _, v in ipairs(TheSim:FindEntities(x, y, z, FAR_ENOUGH / 2, nil, SHOP_CANT_TAGS, SHOP_ONEOF_TAGS)) do
-        if (v.components.shopped and not v.components.shopped.justsellonce)
+        if (v.components.shopped)
             or (v.components.container and (v.components.container:IsEmpty() or (math.random() < 0.02 and not v.components.container:IsFull()))) --空了再补
         then
             return BufferedAction(inst, v, ACTIONS.GIVE_SHELF)

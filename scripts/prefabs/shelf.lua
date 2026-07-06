@@ -90,7 +90,7 @@ local function MakeShelf(name, data, common_post_fn, master_post_fn)
         inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
 
-        MakeObstaclePhysics(inst, .5)
+        -- MakeObstaclePhysics(inst, .2) --会卡住商人补货，就不加碰撞了
 
         inst.AnimState:SetBuild(data.build or "room_shelves")
         inst.AnimState:SetBank(data.bank or "bookcase")
@@ -98,7 +98,6 @@ local function MakeShelf(name, data, common_post_fn, master_post_fn)
         inst.Transform:SetRotation(-90)
 
         inst:AddTag("NOCLICK")
-        -- inst:AddTag("NOBLOCK")
         inst:AddTag("furniture")
         inst:AddTag("structure")
         inst:AddTag("shop_shelf")

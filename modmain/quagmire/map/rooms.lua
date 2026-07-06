@@ -162,7 +162,7 @@ AddRoom("quagmireswampcity", {
     value = WORLD_TILES.QUAGMIRE_PEATFOREST,
     required_prefabs = { "quagmire_swampigelder" },
     contents = {
-        distributepercent = .8,
+        distributepercent = .5,
         distributeprefabs =
         {
             fireflies = 0.1,
@@ -193,7 +193,7 @@ AddRoom("quagmireswamp", {
     colour = { r = 0, g = .9, b = 0, a = .50 },
     value = WORLD_TILES.QUAGMIRE_PEATFOREST,
     contents = {
-        distributepercent = .8,
+        distributepercent = .5,
         distributeprefabs =
         {
             fireflies = 0.1,

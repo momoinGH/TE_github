@@ -603,7 +603,7 @@ local rooms = {
             { name = "window_round_light_backwall", x_offset = -5, z_offset = 2 },
             { name = "window_mayorsoffice", x_offset = -depth / 2, rotation = 90 },
             { name = "wall_mirror", x_offset = -1, z_offset = -width / 2 },
-            { name = "shop_buyer", x_offset = 1.75, z_offset = width / 2 - 5, saleitem = { "deed", "oinc", 50 }, anim = "idle_globe_bar", justsellonce = true },
+            { name = "shop_buyer", x_offset = 1.75, z_offset = width / 2 - 5, saleitem = { "deed", "oinc", 50 }, anim = "idle_globe_bar" },
             { name = "shop_buyer", x_offset = 3.5, z_offset = width / 2 - 2, saleitem = { "construction_permit", "oinc", 50 }, anim = "idle_globe_bar" },
             { name = "shop_buyer", x_offset = 2, z_offset = -width / 2 + 3, saleitem = { "securitycontract", "oinc", 10 }, anim = "idle_marble_dome" },
         }

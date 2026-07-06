@@ -3,36 +3,6 @@ AddPrefabPostInit("inventoryitem_classified", function(inst)
     inst.altattackrange = net_float(inst.GUID, "weapon.altattackrange")
 end)
 
-AddPrefabPostInit("player_classified", function(inst)
-    inst.net_buffs = net_string(inst.GUID, "forge.net_buffs", "net_buffs_dirty")
-
-    if not TheNet:IsDedicated() then
-        inst:ListenForEvent("net_buffs_dirty", function(inst)
-            if not inst._parent
-                or not inst._parent.HUD
-                or #inst.net_buffs:value() < 1
-            then
-                return
-            end;
-
-            inst.net_buffs:set_local("")
-            inst.net_buffs:set("")
-        end)
-    end
-end)
-
-function EntityScript:GetDisplayName()
-    local name = self:GetAdjectivedName()
-    if self.prefab ~= nil then
-        local detail = STRINGS.NAME_DETAIL_EXTENTION
-            [string.upper(self.nameoverride ~= nil and self.nameoverride or self.prefab)]
-        if detail ~= nil then
-            return name .. "\n" .. detail
-        end
-    end;
-    return name
-end;
-
 DAMAGETYPE_IDS = {}
 GLOBAL.DAMAGETYPE_IDS = DAMAGETYPE_IDS
 for o, p in pairs(DAMAGETYPES) do
@@ -365,54 +335,12 @@ AddComponentPostInit("weapon", function(self)
         end
     end; _oldCanRangedAttack = self.CanRangedAttack;
     function self:CanRangedAttack() return self:CanAltAttack() and self.altprojectile or _oldCanRangedAttack(self) end;
-
-    function self:DoAltAttack(G, T, U, x, V)
-        self:SetIsAltAttacking(true, true)
-        if G and G.components.combat and self:CanAltAttack() then
-            if T and type(T) == "table" and not T.prefab then
-                for S, y in ipairs(T) do
-                    if y ~= G and y.entity:IsValid() and y.components.workable ~= nil and self.inst.IsWorkableAllowed ~= nil and type(self.inst.IsWorkableAllowed) == "function" and self.inst:IsWorkableAllowed(y.components.workable:GetWorkAction(), y) then
-                        local ac = self.inst.prefab:upper()
-                        if TUNING.FORGE_ITEM_PACK[ac] ~= nil and TUNING.FORGE_ITEM_PACK[ac].WORKABLE_DMG ~= nil then
-                            y.components.workable:WorkedBy(G, TUNING.FORGE_ITEM_PACK[ac].WORKABLE_DMG)
-                        end
-                    end; if y ~= G and G.components.combat:IsValidTarget(y) and y.components.health and not y.components.health:IsDead() then
-                        G.components.combat:DoAttack(y, self.inst, U, x, V)
-                    end
-                end
-            else
-                if G.components.combat:IsValidTarget(T) then
-                    G.components.combat:DoAttack(T, self.inst, U, x,
-                        V)
-                end
-            end
-        end; G:PushEvent("alt_attack_complete", { weapon = self.inst })
-        self:SetIsAltAttacking(false, true)
-    end
-end)
-
-AddComponentPostInit("health", function(self)
-    self.buffs = {}
-    function self:GetHealthBuff()
-        local ad = 0; for s, v in pairs(self.buffs) do ad = ad + v end; return ad
-    end;
-
-    function self:HasHealthBuff(s) return self.buffs[s] end;
-
-    function self:RemoveHealthBuff(s)
-        if self:HasHealthBuff(s) then
-            self.currenthealth = math.max(self.minhealth, self.currenthealth - self.buffs[s])
-            self.maxhealth = math.max(self.minhealth, self.maxhealth - self.buffs[s])
-            self.buffs[s] = nil
-        end
-    end
 end)
 
 AddComponentPostInit("equippable", function(self)
     self.uniquebuffs = {}
     self.damagebuffs = { dealt = { dmgtype = {}, stimuli = {}, generic = {} }, recieved = { dmgtype = {}, stimuli = {}, generic = {} } }
     self.healthbuffs = {}
-    function self:HasHealthBuff(s) return self.healthbuffs[s] ~= nil end;
 
     function self:HasDamageBuff(r, s, t)
         local u = self.damagebuffs[r and "recieved" or "dealt"]
@@ -580,24 +508,6 @@ AddStategraphPostInit("wilson_client", function(self)
     local aq = self.actionhandlers[ACTIONS.CASTAOE].deststate;
     self.actionhandlers[ACTIONS.CASTAOE].deststate = function(inst, ar)
         if ar.invobject:HasTag("parry") then return "parry_pre" end; return aq(inst, ar)
-    end
-end)
-
-AddComponentPostInit("debuffable", function(self)
-    local as = self.AddDebuff;
-    local at = self.RemoveDebuff;
-    function self:AddDebuff(m, ...)
-        if self.debuffs[m] == nil and self.inst.player_classified then
-            self.inst.player_classified.net_buffs:set(json.encode({ name = m, removed = false }))
-        end;
-        as(self, m, ...)
-    end;
-
-    function self:RemoveDebuff(m, ...)
-        if self.debuffs[m] ~= nil and self.inst.player_classified then
-            self.inst.player_classified.net_buffs:set(json.encode({ name = m, removed = true }))
-        end;
-        at(self, m, ...)
     end
 end)
 

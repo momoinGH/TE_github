@@ -1,131 +1,152 @@
 local pig_shop_defs = require("prefabs/pig_shop_defs")
 
-
-local function OnItemGet(inst, data)
-    inst:AddTag("slot_one") --有商品了
-    inst.components.shopped:SetImage(data.item)
+local function ongoods(self, goods)
+    self.inst.replica.shopped:SetGoods(goods)
 end
 
-local function OnItemLose(inst)
-    local self = inst.components.shopped
-    inst:RemoveTag("slot_one")
-    self:SetImage()
-    self:SetCost(self.robbed and "cost-nil" or nil)
+local function oncostprefab(self, costprefab)
+    self.inst.replica.shopped:SetCostPrefab(costprefab or "")
 end
 
--- 商品相关字段太琐碎，单独写个组件存储
+local function oncost(self, cost)
+    self.inst.replica.shopped:SetCost(cost)
+end
+
+-- 存储商品的一个格子
 local Shopped = Class(function(self, inst)
     self.inst = inst
 
     inst:AddTag("shopped")
 
-    self.costprefab = nil   --货币名
-    self.cost = nil         --如果是呼噜币，呼噜币数量
+    self.goods = nil         --商品预制件名
+    self.costprefab = "oinc" --货币名
+    self.cost = 1            --如果是呼噜币，呼噜币数量
 
-    self.saleitem = nil     --固定售卖的商品
-    self.shoptype = nil     --商店类型，这里是商店预制件名，从pig_shop_defs.lua中随机选择商品
-    self.robbed = nil       --被偷了
-    self.justsellonce = nil --只卖一次
+    self.robbed = nil        --被偷了
+    -- self.justsellonce = nil  --只卖一次
 
-    inst:ListenForEvent("itemget", OnItemGet)
-    inst:ListenForEvent("itemlose", OnItemLose)
-end)
+    self.getnewgoods = nil   --补货新商品
+    self.onsetgoods = nil    --设置商品时
+    self.onbought = nil      --被购买时
+    self.onsetcost = nil     --设置价格时
+end, nil, {
+    goods = ongoods,
+    costprefab = oncostprefab,
+    cost = oncost
+})
 
-function Shopped:SetImage(ent)
-    pig_shop_defs.SetImage(self.inst, ent, "SWAP_SIGN")
+function Shopped:OnItemGet(prefab)
+    self.inst:AddTag("slot_one") --有商品了
+    self.goods = prefab
+    self:SetImage(prefab)
+end
+
+function Shopped:OnItemLose()
+    self.inst:RemoveTag("slot_one")
+    self.goods = nil
+    self:SetImage()
+    self:SetCost(self.robbed and "cost-nil" or nil)
+end
+
+function Shopped:SetImage(prefab)
+    pig_shop_defs.SetImageFromName(self.inst, prefab, "SWAP_SIGN")
 end
 
 ---设置价格
 ---@param costprefab string 货币名
 ---@param cost number|nil 如果是呼噜币的话这里填呼噜币的个数，可取值见pig_shop_defs.lua
 function Shopped:SetCost(costprefab, cost)
-    local image = nil
+    self.costprefab = costprefab or "oinc"
+    self.cost = cost or 1
 
-    if costprefab == "oinc" and cost then
-        image = "cost-" .. cost
-    else
-        image = costprefab
+    if self.onsetcost then
+        self.onsetcost(self.inst, costprefab, cost)
     end
-
-    if image ~= nil then
-        local texname = image .. ".tex"
-        self.inst.AnimState:OverrideSymbol("SWAP_COST", GetInventoryItemAtlas(texname), texname)
-    else
-        self.inst.AnimState:ClearOverrideSymbol("SWAP_COST")
-    end
-
-    self.costprefab = costprefab
-    self.cost = cost
 end
 
 ---设置商品
 ---@param costprefab string 购买需要的货币
 ---@param cost number 货币数量
 function Shopped:SpawnInventory(goods, costprefab, cost)
-    for _, v in ipairs(self.inst.components.container:RemoveAllItems()) do
-        v:Remove()
+    goods = goods or self.goods
+    if self.onsetgoods then
+        self.onsetgoods(self.inst, goods, costprefab, cost)
     end
-
-    local item = SpawnPrefab(goods or self.goods)
-    if item then
-        self:SetImage(item)
-        self:SetCost(costprefab, cost)
-        self.inst.components.container:GiveItem(item)
-    else
-        TroErrorHandle("生成物品失败：" .. tostring(goods) .. "   " .. tostring(self.goods), false)
-    end
+    self:OnItemGet(goods)
+    self:SetCost(costprefab, cost)
 end
 
 --- 当商品被买后
 function Shopped:BuyGoods(buyer)
-    local item = self.inst.components.container:RemoveItemBySlot(1)
-    if item.OnBought then
-        item:OnBought(buyer, self.inst)
+    if not self.goods then
+        return
     end
-    return item
+
+    if self.onbought then
+        self.onbought(self.inst, self.goods, buyer)
+    else
+        -- 默认实现，生成实体并给购买者
+        if buyer and buyer.components.inventory then
+            local ent = SpawnPrefab(self.goods)
+            if ent then
+                buyer.components.inventory:GiveItem(ent)
+            end
+        else
+            TroSpawnDropItem(self.inst, self.goods, 1, buyer)
+        end
+    end
+    self:OnItemLose()
 end
 
 --- 补货
-function Shopped:Restock(force)
+function Shopped:Restock()
     if self.robbed then --被偷了
         local ent = FindEntity(self.inst, 20, nil, { "shopkeep" })
         if ent then
             ent.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_ROBBED[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_ROBBED)])
         end
-    elseif force or ((self.inst.components.container:IsEmpty() or math.random() < 0.16) and not self.justsellonce) then
-        local newproduct
-        if self.saleitem then
-            newproduct = self.saleitem
-        else
-            local tab = pig_shop_defs.SHOPTYPES[self.shoptype or "DEFAULT"]
-            if not tab or #tab <= 0 then return end
-            -- assert(tab, "shoptype应该在PigShopDefs.SHOPTYPES表中定义  " .. tostring(self.inst) .. "  " .. tostring(self.shoptype))
-            --如果shoptype存在但是没有在pig_shop_defs中定义会报错
-
-            newproduct = tab[math.random(#tab)]
+    else 
+        local goods, costprefab, cost = FunctionOrValue(self.getnewgoods, self.inst)
+        if goods then
+            costprefab = costprefab or "oinc"
+            cost = cost or 1
+            self:SpawnInventory(goods, costprefab, cost)
+            return true
         end
-        self:SpawnInventory(newproduct[1], newproduct[2], newproduct[3])
     end
+    return false
 end
 
 function Shopped:OnSave()
     return {
+        goods = self.goods,
         costprefab = self.costprefab,
         cost = self.cost,
-        saleitem = self.saleitem,
-        shoptype = self.shoptype,
         robbed = self.robbed,
-        justsellonce = self.justsellonce,
     }
 end
 
 function Shopped:OnLoad(data)
     if not data then return end
 
-    self.saleitem = data.saleitem
-    self.shoptype = data.shoptype
+    if data.goods then
+        self.goods = data.goods
+    end
+    if data.costprefab then
+        self.costprefab = data.costprefab
+    end
+    if data.cost then
+        self.cost = data.cost
+    end
     self.robbed = data.robbed
-    self.justsellonce = data.justsellonce
+
+    if data.goods then
+        self.inst:DoTaskInTime(0, function()
+            if self.goods then
+                self:SpawnInventory(self.goods, self.costprefab, self.cost)
+            end
+        end)
+    end
 end
 
 return Shopped

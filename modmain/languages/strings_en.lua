@@ -53,7 +53,7 @@ STRINGS.ACTIONS.TAKE_SHELF                             = {
     GENERIC = "Take",
     TAKE = "Take {item}",
     STEAL = "Steal {item}",
-    BUY = "Buy {item}",
+    BUY = "Buy {wantitem}\nfor {qty} {payitem}",
 }
 STRINGS.ACTIONS.GAS                                    = "Gas"
 STRINGS.ACTIONS.PAN                                    = "Pan"

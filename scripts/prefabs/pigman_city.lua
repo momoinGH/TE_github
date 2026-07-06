@@ -24,6 +24,8 @@ local assets =
     Asset("ANIM", "anim/townspig_actions.zip"),
     Asset("ANIM", "anim/pig_royalguard_2.zip"),
     Asset("ANIM", "anim/townspig_shop_wip.zip"),
+    Asset("ANIM", "anim/pig_royalguard_rich.zip"),
+    Asset("ANIM", "anim/pig_royalguard_rich_2.zip"),
 }
 
 local prefabs =
@@ -97,6 +99,10 @@ local function separatedesk(inst, separate)
         inst:AddTag("atdesk")
         inst.AnimState:Show("desk")
     end
+end
+
+local function sayline(inst, line, mood)
+    inst.components.talker:Say(line, 1.5, nil, true, mood)
 end
 
 local function ontalk(inst, script, mood)
@@ -740,6 +746,8 @@ local function common(name, build, fixer, tags, sex, econprefab)
     inst.components.talker.font = TALKINGFONT
     inst.components.talker.offset = Vector3(0, -600, 0)
     inst.talkertype = name
+
+    inst.sayline = sayline
 
     MakeCharacterPhysics(inst, 50, .5)
 

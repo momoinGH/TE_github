@@ -72,7 +72,9 @@ end
 
 local function OnHaunt(inst)
     inst.components.fueled:TakeFuelItem(SpawnPrefab("pigtorch_fuel"))
-    inst.components.spawner:ReleaseChild()
+    if inst.components.spawner ~= nil and inst.components.spawner:IsOccupied() then
+        inst.components.spawner:ReleaseChild()
+    end
     return true
 end
 

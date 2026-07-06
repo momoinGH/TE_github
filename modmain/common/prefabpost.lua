@@ -1,3 +1,6 @@
+AddReplicableComponent("shopped")
+
+
 modimport "modmain/common/tro_componentaction"          --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
 modimport "modmain/common/standardcomponents"
 modimport "scripts/prefabs/tropical_farm_plant_defs"    --定义新植物
@@ -53,3 +56,6 @@ modimport "modmain/common/prefabs/koalefant.lua"
 modimport "modmain/common/prefabs/rock_ice.lua"
 modimport "modmain/common/prefabs/heatrock.lua"
 modimport "modmain/common/prefabs/grass.lua"
+
+
+

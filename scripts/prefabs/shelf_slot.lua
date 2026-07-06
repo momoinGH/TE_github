@@ -12,13 +12,35 @@ local function displaynamefn(inst)
 end
 
 local function OnGetItem(inst, item)
-    inst:AddTag("slot_one")
+    inst.components.shopped:OnItemGet(item.prefab)
     inst.components.named:SetName(STRINGS.NAMES[string.upper(item.components.inspectable.nameoverride or item.prefab)])
 end
 
 local function OnLoseItem(inst)
-    inst:RemoveTag("slot_one")
+    inst.components.shopped:OnItemLose()
     inst.components.named:SetName(nil)
+end
+
+local function OnSetGoods(inst, goods, costprefab, cost)
+    local ent = SpawnPrefab(goods)
+    if inst.components.shelfer:AcceptGift(nil, ent) then
+        inst.components.named:SetName(STRINGS.NAMES[string.upper(ent.components.inspectable.nameoverride or ent.prefab)])
+    else
+        ent:Remove()
+    end
+end
+
+local function OnBought(inst, goods, buyer)
+    inst.components.named:SetName(nil)
+    local item = inst.components.shelfer:GiveGift()
+    if item then
+        buyer.components.inventory:GiveItem(item)
+    end
+end
+
+local PigShopDefs = require("prefabs/pig_shop_defs")
+local function GetNewGoods(inst)
+    return PigShopDefs.SHELFS.DEFAULT[math.random(#PigShopDefs.SHELFS.DEFAULT)] --先使用默认的
 end
 
 local function fn()
@@ -37,6 +59,7 @@ local function fn()
     inst:AddTag("cost_one_oinc")
     inst:AddTag("NOBLOCK")
     inst:AddTag("_named")
+    inst:AddTag("shopped")
 
     inst.entity:SetPristine()
 
@@ -50,6 +73,11 @@ local function fn()
     inst:AddComponent("named")
 
     inst:AddComponent("shelfer")
+
+    inst:AddComponent("shopped")
+    inst.components.shopped.onsetgoods = OnSetGoods
+    inst.components.shopped.onbought = OnBought
+    inst.components.shopped.getnewgoods = GetNewGoods
 
     inst.displaynamefn = displaynamefn
 

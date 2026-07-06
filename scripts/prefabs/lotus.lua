@@ -11,18 +11,6 @@ local prefabs =
 }
 
 local LOTUS_REGROW_TIME = 480 * 5
-
-local function IsWater(tile)
-    return tile == WORLD_TILES.OCEAN_COASTAL or
-        tile == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        tile == WORLD_TILES.OCEAN_SWELL or
-        tile == WORLD_TILES.OCEAN_ROUGH or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        tile == WORLD_TILES.OCEAN_WATERLOG or
-        tile == WORLD_TILES.OCEAN_HAZARDOUS
-end
-
 local BILL_SPAWN_CHANCE = 0.2
 
 local function onpickedfn(inst)
@@ -30,20 +18,15 @@ local function onpickedfn(inst)
     inst.AnimState:PlayAnimation("picking")
     inst.AnimState:PushAnimation("picked")
 
-    local target = FindEntity(inst, 50, function(item) return item:HasTag("platapine") end)
-    print("BILL_SPAWN_CHANCE", BILL_SPAWN_CHANCE)
-    if not target and math.random() < BILL_SPAWN_CHANCE then
+    -- 尝试生成一个豪猪
+    if math.random() < BILL_SPAWN_CHANCE and not GetRandomInstWithTag("platapine", inst, 50) then
         local x, y, z = inst.Transform:GetWorldPosition()
-        local bill = SpawnPrefab("bill")
-        bill.components.combat.target = nil
         local spawnDistFromLotus = 12
         local nearbyPositions = { { x, z + spawnDistFromLotus }, { x, z - spawnDistFromLotus }, { x + spawnDistFromLotus, z }, { x - spawnDistFromLotus, z } }
-
         for posIndex = 1, 4 do
             local nearbyPosition = nearbyPositions[posIndex]
-            local tile = TheWorld.Map:GetTileAtPoint(nearbyPosition[1], y, nearbyPosition[2])
-
-            if IsWater(tile) then
+            if TheWorld.Map:IsOceanAtPoint(nearbyPosition[1], y, nearbyPosition[2], false) then
+                local bill = SpawnPrefab("bill")
                 bill.Transform:SetPosition(nearbyPosition[1], y, nearbyPosition[2])
                 bill.sg:GoToState("surface")
                 break
@@ -70,12 +53,12 @@ local function ongustpick(inst)
     end
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
-    local minimap = inst.entity:AddMiniMapEntity()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, .25)

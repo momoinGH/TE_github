@@ -6944,7 +6944,7 @@ STRINGS.ACTIONS.TAKE_SHELF                           = {
     GENERIC = "拿取",
     TAKE = "拿取{item}",
     STEAL = "偷走{item}",
-    BUY = "购买{item}",
+    BUY = "花费{qty}{payitem}\n换取{wantitem}",
 }
 STRINGS.ACTIONS.GAS                                  = "喷"
 STRINGS.ACTIONS.PAN                                  = "淘金"

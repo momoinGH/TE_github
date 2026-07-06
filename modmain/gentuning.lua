@@ -4,10 +4,11 @@ local sea = GetModConfigData("sea") == 1
 
 TUNING.tropical = {
     common           = true,
-    bosslife         = GetModConfigData("bosslife"), --巨兽生命值
-    ocean_style      = GetModConfigData("ocean_style"), --海洋风格
+    bosslife         = GetModConfigData("bosslife"),              --巨兽生命值
+    ocean_style      = GetModConfigData("ocean_style"),           --海洋风格
+    startlocation    = GetModConfigData("startlocation"),         --出生地，就是绚丽之门在哪个地形上
 
-    hamlet           = hamlet and not sea, --哈姆雷特
+    hamlet           = hamlet and not sea,                        --哈姆雷特
     room             = hamlet and not sea,
     hayfever         = GetModConfigData("hayfever") == 1,         --花粉症
     fog              = GetModConfigData("fog") == 1,              --迷雾

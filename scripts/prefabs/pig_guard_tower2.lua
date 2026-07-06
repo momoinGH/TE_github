@@ -126,38 +126,24 @@ local function onvacate(inst, child)
 end
 
 local function onhammered(inst, worker)
-    local pt = inst:GetPosition()
-    local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    if tiletype == WORLD_TILES.SUBURB or tiletype == WORLD_TILES.FOUNDATION or tiletype == WORLD_TILES.COBBLEROAD or tiletype == WORLD_TILES.FIELDS or tiletype == WORLD_TILES.LAWN then
-        if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-            local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
-            for k, guardas in pairs(eles) do
-                if guardas.components.combat and guardas.components.combat.target == nil then
-                    guardas.components.combat
-                        :SetTarget(worker)
-                end
-            end
+    if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
+        local x, y, z = inst.Transform:GetWorldPosition()
+        for _, guard in ipairs(TheSim:FindEntities(x, y, z, 40, { "guard", "_combat" })) do
+            guard.components.combat:SuggestTarget(worker)
         end
     end
-
 
     if inst:HasTag("fire") and inst.components.burnable then
         inst.components.burnable:Extinguish()
     end
 
-    inst.reconstruction_project_spawn_state = {
-        bank = "pig_house",
-        build = "pig_house",
-        anim = "unbuilt",
-    }
-
     if inst.doortask then
         inst.doortask:Cancel()
         inst.doortask = nil
     end
-    if inst.components.spawner then inst.components.spawner:ReleaseChild() end
+    if inst.components.spawner ~= nil and inst.components.spawner:IsOccupied() then
+        inst.components.spawner:ReleaseChild()
+    end
     --inst.components.lootdropper:DropLoot()
     SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
@@ -324,7 +310,7 @@ local function fn(Sim)
         end
     end)
     inst:ListenForEvent("onignite", function(inst)
-        if inst.components.spawner then
+        if inst.components.spawner and inst.components.spawner:IsOccupied() then
             inst.components.spawner:ReleaseChild()
         end
     end)
@@ -418,7 +404,7 @@ local function palacefn(Sim)
         end
     end)
     inst:ListenForEvent("onignite", function(inst)
-        if inst.components.spawner then
+        if inst.components.spawner and inst.components.spawner:IsOccupied() then
             inst.components.spawner:ReleaseChild()
         end
     end)

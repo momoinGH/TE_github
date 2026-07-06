@@ -102,20 +102,20 @@ local function OnNear(inst)
     end
 end
 
-local function OnShearFinished(inst, data)
-    inst.components.pickable:Pick(data.worker)
-end
+local function OnWork(inst, data)
+    if data.workleft <= 0 then
+        inst.components.pickable.caninteractwith = true
+        inst.components.pickable:Pick(data.worker)
+        inst.components.pickable.caninteractwith = false
+    else
+        inst.AnimState:PlayAnimation("chop")
+        inst.AnimState:PushAnimation("idle", true)
+        inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/grabbing_vine/drop")
+    end
 
-local function OnHacked(inst, data)
     local fx = SpawnPrefab("hacking_tall_grass_fx")
     local x, y, z = inst.Transform:GetWorldPosition()
     fx.Transform:SetPosition(x, y + math.random() * 2, z)
-    if data.workleft <= 0 then
-        inst.components.pickable:Pick(data.worker)
-    else
-        inst.AnimState:PushAnimation("idle")
-        inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/grabbing_vine/drop")
-    end
 end
 
 local function OnPicked(inst, picker)
@@ -191,21 +191,13 @@ local function fn()
 
     inst:AddComponent("inspectable")
 
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.DIG)
-    inst.components.workable:SetOnFinishCallback(OnDig)
-    inst.components.workable:SetWorkLeft(1)
-
-    inst:AddComponent("shearable")
-    inst.components.shearable:SetWorkLeft(1)
-    inst:ListenForEvent("onshearfinished", OnShearFinished)
-
-    inst:AddComponent("hackable")
-    inst.components.hackable:SetWorkLeft(2.5)
-    inst:ListenForEvent("onhacked", OnHacked)
+    MakeHackablePlant(inst,
+        2.5, 1, 1, nil,
+        OnWork, OnDig
+    )
 
     inst:AddComponent("pickable")
-    inst.components.pickable:SetUp("cutgrass", 2)
+    inst.components.pickable:SetUp("cutgrass", TUNING.TOTAL_DAY_TIME * 4, 2)
     inst.components.pickable:SetOnPickedFn(OnPicked)
     inst.components.pickable:SetOnRegenFn(OnRegen)
     inst.components.pickable.caninteractwith = false --不能直接采集，得用工具

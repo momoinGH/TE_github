@@ -1,3 +1,4 @@
+-- 扣除身上的钱
 local function PayMoney(self, cost)
     local _, oincamount = self:Has("oinc", 0, true)
     local _, oinc10amount = self:Has("oinc10", 0, true)
@@ -38,9 +39,7 @@ local function PayMoney(self, cost)
     end
     if oincresult < 0 then
         for i = 1, math.abs(oincresult) do
-            --                inventory:ConsumeByName("oinc", 1 )
-            local item = next(self:GetItemByName("oinc", 1, true))
-            if item then self:RemoveItem(item, false, true) end
+            self:ConsumeByName("oinc", 1, true)
         end
     end
     local oinc10result = oinc10gained - oinc10used
@@ -52,17 +51,13 @@ local function PayMoney(self, cost)
     end
     if oinc10result < 0 then
         for i = 1, math.abs(oinc10result) do
-            --                inventory:ConsumeByName("oinc10", 1 )
-            local item = next(self:GetItemByName("oinc10", 1, true))
-            if item then self:RemoveItem(item, false, true) end
+            self:ConsumeByName("oinc10", 1)
         end
     end
     local oinc100result = 0 - oinc100used
     if oinc100result < 0 then
         for i = 1, math.abs(oinc100result) do
-            --                inventory:ConsumeByName("oinc100", 1)
-            local item = next(self:GetItemByName("oinc100", 1, true))
-            if item then self:RemoveItem(item, false, true) end
+            self:ConsumeByName("oinc100", 1)
         end
     end
 end

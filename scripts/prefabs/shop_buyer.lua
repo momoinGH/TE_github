@@ -1,3 +1,5 @@
+local pig_shop_defs = require("prefabs/pig_shop_defs")
+
 local assets =
 {
     Asset("ANIM", "anim/pedestal_crate.zip"),
@@ -21,8 +23,64 @@ local assets =
 }
 
 local function OnInteriorSpawn(inst, data)
-    inst.components.shopped.saleitem = data.saleitem
-    inst.components.shopped.shoptype = data.shoptype
+    inst.saleitem = data.saleitem
+    inst.shoptype = data.shoptype
+end
+
+local function OnSetGoods(inst, goods, costprefab, cost)
+    for _, v in ipairs(inst.components.container:RemoveAllItems()) do
+        v:Remove()
+    end
+    local item = SpawnPrefab(goods)
+    if item then
+        inst.components.container:GiveItem(item)
+    else
+        TroErrorHandle("生成物品失败：" .. tostring(goods) .. "   " .. tostring(goods), false)
+    end
+end
+
+local function OnBought(inst, goods, buyer)
+    local item = inst.components.container:RemoveItemBySlot(1)
+    if item then
+        buyer.components.inventory:GiveItem(item)
+    end
+end
+
+local function OnSetCost(inst, costprefab, cost)
+    local image = nil
+    if costprefab == "oinc" and cost then
+        image = "cost-" .. cost
+    else
+        image = costprefab
+    end
+    if image ~= nil then
+        local texname = image .. ".tex"
+        inst.AnimState:OverrideSymbol("SWAP_COST", GetInventoryItemAtlas(texname), texname)
+    else
+        inst.AnimState:ClearOverrideSymbol("SWAP_COST")
+    end
+end
+
+local function GetNewGoods(inst)
+    if inst.saleitem then
+        return inst.saleitem[1], inst.saleitem[2], inst.saleitem[3]
+    end
+
+    local tab = pig_shop_defs.SHOPTYPES[inst.shoptype or "DEFAULT"]
+    if not tab or #tab <= 0 then return end
+    local newproduct = tab[math.random(#tab)]
+    return newproduct[1], newproduct[2], newproduct[3]
+end
+
+local function OnSave(inst, data)
+    data.saleitem = inst.saleitem
+    data.shoptype = inst.shoptype
+end
+
+local function OnLoad(inst, data)
+    if not data then return end
+    inst.saleitem = data.saleitem or inst.saleitem
+    inst.shoptype = data.shoptype or inst.shoptype
 end
 
 local function fn()
@@ -44,6 +102,7 @@ local function fn()
     inst.AnimState:SetFinalOffset(1)
 
     inst:AddTag("shop_pedestal")
+    inst:AddTag("shopped")
 
     inst.entity:SetPristine()
 
@@ -57,6 +116,10 @@ local function fn()
     inst.components.container.canbeopened = false
 
     inst:AddComponent("shopped")
+    inst.components.shopped.onsetgoods = OnSetGoods
+    inst.components.shopped.onbought = OnBought
+    inst.components.shopped.onsetcost = OnSetCost
+    inst.components.shopped.getnewgoods = GetNewGoods
 
     inst:AddComponent("tro_saveanim")
 
@@ -64,6 +127,9 @@ local function fn()
     MakeSmallPropagator(inst)
 
     inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
+
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
 
     return inst
 end

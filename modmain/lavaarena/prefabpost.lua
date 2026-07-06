@@ -1,3 +1,7 @@
+modimport "modmain/lavaarena/modweab.lua"
+
+
+
 -- 对于熔炉、暴食里的一些预制件没有主机代码，但是有通用代码，其实只需要实现对应的主机代码就行了，没必要重新定义一个预制件
 -- 该方法不够的地方再用AddPrefabPostInit补齐
 local MyEventServerFiles = {}

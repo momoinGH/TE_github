@@ -237,12 +237,6 @@ end
         inst.components.burnable:Extinguish()
     end
 
-    inst.reconstruction_project_spawn_state = {
-        bank = "pig_house",
-        build = "pig_house",
-        anim = "unbuilt",
-    }
-
     if inst.doortask then
         inst.doortask:Cancel()
         inst.doortask = nil

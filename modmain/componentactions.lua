@@ -89,15 +89,15 @@ AddComponentAction("SCENE", "shipwreckedboat", function(inst, doer, actions, rig
     end
 end)
 
-AddComponentAction("SCENE", "shelfer", function(inst, doer, actions, right)
-    if inst:HasTag("cost_one_oinc") and inst:HasTag("slot_one") then
-        --从柜子中拿取
-        table.insert(actions, ACTIONS.TAKE_SHELF)
-    end
-end)
+-- AddComponentAction("SCENE", "shelfer", function(inst, doer, actions, right)
+--     if inst:HasTag("cost_one_oinc") and inst:HasTag("slot_one") then
+--         --从柜子中拿取
+--         table.insert(actions, ACTIONS.TAKE_SHELF)
+--     end
+-- end)
 
 AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
-    if inst:HasTag("slot_one") then
+    if inst:HasTag("slot_one") and inst.replica.shopped and inst.replica.shopped:GetGoods() ~= "" then
         --拿取货架物品
         table.insert(actions, ACTIONS.TAKE_SHELF)
     end

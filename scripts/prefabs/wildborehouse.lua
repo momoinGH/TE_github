@@ -133,7 +133,9 @@ local function onhammered(inst, worker)
         inst.doortask:Cancel()
         inst.doortask = nil
     end
-    if inst.components.spawner then inst.components.spawner:ReleaseChild() end
+    if inst.components.spawner ~= nil and inst.components.spawner:IsOccupied() then
+        inst.components.spawner:ReleaseChild()
+    end
     inst.components.lootdropper:DropLoot()
     SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
@@ -260,7 +262,7 @@ local function fn(Sim)
         end
     end)
     inst:ListenForEvent("onignite", function(inst)
-        if inst.components.spawner then
+        if inst.components.spawner and inst.components.spawner:IsOccupied() then
             inst.components.spawner:ReleaseChild()
         end
     end)
