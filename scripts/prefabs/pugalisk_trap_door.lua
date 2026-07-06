@@ -14,7 +14,7 @@ local STATES = {
     CLOSED = 1,
     OPENING = 2,
     OPEN = 3,
-    CLOSNG = 4,
+    CLOSING = 4,
 }
 
 local function setart(inst)
@@ -24,7 +24,7 @@ local function setart(inst)
         inst.AnimState:PlayAnimation("opening")
     elseif inst.state == STATES.OPEN then
         inst.AnimState:PlayAnimation("open", true)
-    elseif inst.state == STATES.CLOSNG then
+    elseif inst.state == STATES.CLOSING then
         inst.AnimState:PlayAnimation("closing")
     end
 end

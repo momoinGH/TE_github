@@ -172,6 +172,13 @@ local function onbuilt(inst)
     inst.AnimState:PushAnimation("idle")
 end
 
+-- 钥匙换宝物
+local function AddPedestalItem(inst,goods)
+    local slot = inst.shelves[1]
+    slot.components.shopped:SpawnInventory(goods, "pedestal_key", 1)
+    slot:AddTag("disable_rob")
+end
+
 local function onsave(inst, data)
     if inst:HasTag("burnt") or inst:HasTag("fire") then
         data.burnt = true
@@ -283,9 +290,9 @@ local rooms = { {
         { name = "deco_palace_beam_room_tall", x_offset = -12 / 6, z_offset = 18 / 6, },
         { name = "deco_palace_beam_room_tall", x_offset = 12 / 6, z_offset = -18 / 6, scale = { -1, 1 } },
         { name = "deco_palace_beam_room_tall", x_offset = 12 / 6, z_offset = 18 / 6, },
-        { name = "shelves_queen_display_1", x_offset = -12 / 4, z_offset = -18 / 3, shelfitems = { { 1, "key_to_city" } } },
-        { name = "shelves_queen_display_2", shelfitems = { { 1, "trinket_giftshop_4" } } },
-        { name = "shelves_queen_display_3", x_offset = -12 / 4, z_offset = 18 / 3, scale = { -1, 1 }, shelfitems = { { 1, "city_hammer" } } },
+        { name = "shelves_queen_display_1", x_offset = -12 / 4, z_offset = -18 / 3, init=function (inst) AddPedestalItem(inst,"key_to_city") end },
+        { name = "shelves_queen_display_2", init=function (inst) AddPedestalItem(inst,"trinket_giftshop_4") end  },
+        { name = "shelves_queen_display_3", x_offset = -12 / 4, z_offset = 18 / 3, scale = { -1, 1 }, init=function (inst) AddPedestalItem(inst,"city_hammer") end  },
         { name = "deco_palace_banner_small_sidewall", x_offset = -12 / 14 * 3, z_offset = -18 / 2, scale = { -1, 1 } },
         { name = "deco_palace_banner_small_sidewall", x_offset = -12 / 14 * 3, z_offset = 18 / 2, },
         { name = "deco_palace_banner_small_sidewall", x_offset = 12 / 14 * 3, z_offset = -18 / 2, scale = { -1, 1 } },

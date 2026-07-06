@@ -170,7 +170,7 @@ local function fn()
     inst.max_jump_attack_count = 3
     inst.sanity_attack_count = 0
     inst.max_sanity_attack_count = 2
-    inst.summon_count = 3
+    inst.summon_count = 3 --一次召唤的蚂蚁个数
     inst.current_summon_count = 0
     inst.min_combat_cooldown = 5
     inst.max_combat_cooldown = 7

@@ -345,7 +345,7 @@ TroAddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTIONS.TAKE_
     end
 
     -- 玩家购买、偷
-    if not HamletUtils.IsTraderWatchingItem(target) then --偷
+    if not HamletUtils.IsTraderWatchingItem(target) and not target:HasTag("disable_rob") then --偷
         act.doer.components.shopper:Take(target)
         return true
     end
@@ -418,7 +418,7 @@ ACTIONS.TAKE_SHELF.stroverridefn = function(act)
         return subfmt(STRINGS.ACTIONS.TAKE_SHELF.TAKE, { item = goods })
     end
 
-    if act.doer.components.shopper and not HamletUtils.IsTraderWatchingItem(target) then
+    if not HamletUtils.IsTraderWatchingItem(target) and not target:HasTag("disable_rob") then
         return subfmt(STRINGS.ACTIONS.TAKE_SHELF.STEAL, { item = goods })
     end
 

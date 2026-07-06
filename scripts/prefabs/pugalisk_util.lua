@@ -3,7 +3,7 @@ local function findMoveablePosition(position, start_angle, radius, attempts, che
         local run_point = position + offset
 
         local tile = TheWorld.Map:GetTileAtPoint(run_point.x, run_point.y, run_point.z)
-        if tile == WORLD_TILES.IMPASSABLE or tile >= GROUND.UNDERGROUND or TheWorld.Map:IsTileOcean(tile) then
+        if tile == WORLD_TILES.IMPASSABLE or TheWorld.Map:IsTileOcean(tile) then
             return false
         end
 
@@ -44,6 +44,9 @@ local function findsafelocation(pt, angle)
     while not offset do
         offset = findMoveablePosition(pt, angle * DEGREES, range, 24, true)
         range = range + 1
+        if range >= 32 then
+            offset = Vector3(0, 0, 0) --不能让游戏卡死了
+        end
     end
     if offset then
         pt = pt + offset

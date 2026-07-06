@@ -22,7 +22,8 @@ local Shopped = Class(function(self, inst)
     self.costprefab = "oinc" --货币名
     self.cost = 0            --如果是呼噜币，呼噜币数量
 
-    self.robbed = nil        --被偷了
+    -- inst:AddTag("disable_rob") --禁止偷窃标签，一般物品没人看着可以直接拿，但是有这个标签就必须有对应物品才能换取
+    self.robbed = nil --被偷了
     -- self.justsellonce = nil  --只卖一次
 
     self.getnewgoods = nil --补货新商品
@@ -121,6 +122,7 @@ end
 
 function Shopped:OnSave()
     return {
+        disable_rob = self.inst:HasTag("disable_rob"),
         goods = self.goods,
         costprefab = self.costprefab,
         cost = self.cost,
@@ -139,6 +141,9 @@ function Shopped:OnLoad(data)
     end
     if data.cost then
         self.cost = data.cost
+    end
+    if data.disable_rob then
+        self.inst:AddTag("disable_rob")
     end
     self.robbed = data.robbed
 

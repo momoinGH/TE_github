@@ -11,6 +11,20 @@ local prefabs =
     "shelf_slot",
 }
 
+local function OnOnShelvesInteriorSpawn(inst, data)
+    if not data.shelfitems then
+        return
+    end
+
+    for _, item_info in ipairs(data.shelfitems) do
+        local item = SpawnAt(item_info[2], inst)
+        if item_info[1] > 1 and item.components.stackable then
+            item.components.stackable.stacksize = item_info[1]
+        end
+        inst.components.container:GiveItem(item)
+    end
+end
+
 local function spawnshelfslots(inst)
     for i = 1, inst.size do
         local object = SpawnPrefab("shelf_slot")
@@ -150,6 +164,7 @@ local function MakeShelf(name, data, common_post_fn, master_post_fn)
         inst:ListenForEvent("onbuilt", setPlayerUncraftable)
         inst:ListenForEvent("itemget", OnItemGet)
         inst:ListenForEvent("itemlose", OnItemLose)
+        inst:ListenForEvent("oninteriorspawn", OnOnShelvesInteriorSpawn)
 
         inst:DoTaskInTime(0, function(inst)
             if inst:HasTag("playercrafted") then
@@ -176,20 +191,6 @@ end
 local function ShelvesQueenMasterPost(inst)
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "royal_gallery"
-end
-
-local function OnOnShelvesInteriorSpawn(inst, data)
-    if not data.shelfitems then
-        return
-    end
-
-    for _, item_info in ipairs(data.shelfitems) do
-        local item = SpawnAt(item_info[2], inst)
-        if item_info[1] > 1 and item.components.stackable then
-            item.components.stackable.stacksize = item_info[1]
-        end
-        inst.components.container:GiveItem(item)
-    end
 end
 
 return MakeShelf("shelves_wood", { anim = "wood" }),
@@ -219,6 +220,4 @@ return MakeShelf("shelves_wood", { anim = "wood" }),
     MakeShelf("shelves_queen_display_2", { size = 1, anim = "lock17_east", bank = "pedestal", build = "pedestal_crate", swp_img_list = { "SWAP_SIGN" } }, ShelvesQueenCommonPost, ShelvesQueenMasterPost),
     MakeShelf("shelves_queen_display_3", { size = 1, anim = "lock12_west", bank = "pedestal", build = "pedestal_crate", swp_img_list = { "SWAP_SIGN" } }, ShelvesQueenCommonPost, ShelvesQueenMasterPost),
     MakeShelf("shelves_queen_display_4", { size = 1, anim = "lock12_west", bank = "pedestal", build = "pedestal_crate", swp_img_list = { "SWAP_SIGN" } }, ShelvesQueenCommonPost, ShelvesQueenMasterPost),
-    MakeShelf("shelves_ruins", { size = 1, anim = "ruins" }, nil, function(inst)
-        inst:ListenForEvent("oninteriorspawn", OnOnShelvesInteriorSpawn)
-    end)
+    MakeShelf("shelves_ruins", { size = 1, anim = "ruins" })

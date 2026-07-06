@@ -75,14 +75,17 @@ end
 
 local function TrySummonWarriors(inst)
     local invader = GetClosestInstWithTag("antmanwarrior", inst, 12)
-    if InAvailableState(inst) and not inst.components.health:IsDead() then
+    if
+        InAvailableState(inst)
+        and not inst.components.health:IsDead()
+        and (inst.current_summon_count > 0 or not inst.last_summon_time or GetTime() - inst.last_summon_time > 12) --虽然我蚂蚁卵杀得快了但你也不能一直召唤啊
+    then
         if (not invader and not IsQuaking(inst)) or (inst.last_attack_time and GetTime() - inst.last_attack_time >= 60) then
             if inst.components.combat.blanktask then
                 inst.components.combat.blanktask:Cancel()
             end
             inst.components.combat.blanktask = nil
             inst.components.combat.canattack = true
-
             return true
         end
     end
@@ -94,6 +97,7 @@ local function SummonWarriors(inst)
     inst.jump_attack_count = 0
     inst.sanity_attack_count = 0
     inst.last_attack_time = GetTime()
+    inst.last_summon_time = GetTime()
 
     GoToState(inst, "summon_warriors")
     SetCoolDown(inst, inst.min_combat_cooldown / 2, inst.max_combat_cooldown / 2)

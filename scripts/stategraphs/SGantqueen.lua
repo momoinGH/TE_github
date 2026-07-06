@@ -125,16 +125,13 @@ local states =
         timeline =
         {
             TimeEvent(1 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/antqueen/atk_1_rumble")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/antqueen/atk_1_rumble")
             end),
             TimeEvent(18 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/antqueen/atk_1_pre")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/antqueen/atk_1_pre")
             end),
             TimeEvent(20 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/antqueen/atk_1")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/antqueen/atk_1")
             end),
             TimeEvent(20 * FRAMES, function(inst) inst.SpawnWarrior(inst) end),
         },

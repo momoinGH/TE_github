@@ -383,7 +383,6 @@ local function start_grounddetection(inst)
 	inst.updatetask = inst:DoPeriodicTask(0.1, grounddetection_update, 0.05)
 end
 
-
 function Quaker_Interior:MiniQuake(rad, num, duration, target)
 	self.inst.SoundEmitter:PlaySound("dontstarve/cave/earthquake", "miniearthquake")
 	self.inst.SoundEmitter:SetParameter("miniearthquake", "intensity", 1)

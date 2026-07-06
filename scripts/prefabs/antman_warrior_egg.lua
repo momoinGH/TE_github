@@ -15,35 +15,28 @@ local assets =
 
 local function dohatch(inst, hatch_time)
 	inst.updatetask = inst:DoTaskInTime(hatch_time, function()
-		if not inst.inlimbo then
-			inst.AnimState:PlayAnimation("hatch")
-			inst.components.health:SetInvincible(true)
-
-			inst.updatetask = inst:DoTaskInTime(11 * FRAMES, function()
-				if not inst.inlimbo then
-					ChangeToInventoryPhysics(inst)
-					local warrior = SpawnPrefab("antman_warrior")
-					warrior.Transform:SetPosition(inst.Transform:GetWorldPosition())
-					warrior.sg:GoToState("hatch")
-
-					if inst.queen then
-						warrior.queen = inst.queen
-					end
-					local invader = GetClosestInstWithTag("player", inst, 30)
-					if invader then
-						warrior.components.combat:SetTarget(invader)
-					end
-
-					--local queen = GetClosestInstWithTag("antqueen", inst, 30)
-					--						if queen and warrior.queen then						
-					--							warrior:ListenForEvent("death", function(warrior, data)
-					--								warrior.queen:WarriorKilled()
-					--							end)
-					--						end
-				end
-			end
-			)
+		if inst.inlimbo or IsEntityDead(inst) then
+			return --在背包里或者被打死了不再生成
 		end
+
+		inst.AnimState:PlayAnimation("hatch")
+		inst.components.health:SetInvincible(true)
+		inst.updatetask = inst:DoTaskInTime(11 * FRAMES, function()
+			if inst.inlimbo then return end
+
+			ChangeToInventoryPhysics(inst)
+			local warrior = SpawnPrefab("antman_warrior")
+			warrior.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			warrior.sg:GoToState("hatch")
+
+			if inst.queen then
+				warrior.queen = inst.queen
+			end
+			local invader = GetClosestInstWithTag("player", inst, 30)
+			if invader then
+				warrior.components.combat:SetTarget(invader)
+			end
+		end)
 	end)
 end
 
@@ -71,8 +64,6 @@ end
 local function OnHit(inst)
 	if inst.components.health:IsDead() then
 		inst.AnimState:PlayAnimation("break")
-		--		local queen = GetClosestInstWithTag("antqueen", inst, 30)			
-		--		if queen then inst.queen:WarriorKilled() end	
 	elseif not inst.components.health:IsInvincible() then
 		inst.AnimState:PlayAnimation("hit", false)
 	end

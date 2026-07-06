@@ -1,6 +1,6 @@
 --- 玩家购买商品，针对货架或柜子里的商品
 local Shopper = Class(function(self, inst)
-    self.inst = inst
+self.inst = inst
 end)
 
 --- 是否有足够的钱购买
