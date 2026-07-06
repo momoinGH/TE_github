@@ -176,12 +176,13 @@ local function finished(inst)
     inst:DoTaskInTime(1.5, inst.Remove)
 end
 
-local function commonfn(Sim)
+local function commonfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+
+    inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    local physics = inst.entity:AddPhysics()
-    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddPhysics()
+    inst.entity:AddSoundEmitter()
     inst.shadow = inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 
@@ -195,7 +196,6 @@ local function commonfn(Sim)
     else
         inst.AnimState:SetBuild("vine02_build")
     end
-
     inst.AnimState:PlayAnimation("idle_loop", true)
 
     inst.entity:SetPristine()

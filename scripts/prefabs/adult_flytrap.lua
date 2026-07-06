@@ -58,7 +58,7 @@ local ATTACK_ONEOF_TAGS = { "character", "monster", "animal" }
 local ATTACK_CANT_TAGS = { "flytrap", "plantkin", "playerghost", "INLIMBO" }
 local function retargetfn(inst)
     return FindEntity(inst, TUNING.ADULT_FLYTRAP_ATTACK_DIST, function(guy)
-        return not inst.components.combat:CanTarget(guy)
+        return inst.components.combat:CanTarget(guy)
     end, ATTACK_MUST_TAGS, ATTACK_CANT_TAGS, ATTACK_ONEOF_TAGS)
 end
 

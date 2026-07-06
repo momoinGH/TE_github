@@ -26,16 +26,7 @@ local function OnActivate(inst, player)
         ent.activate(ent, inst)
     end
 end
---[[
-local function makeactive(inst)
-    inst.AnimState:PlayAnimation("off", true)
-    inst.components.activatable.inactive = false
-end
 
-local function makeused(inst)
-    inst.AnimState:PlayAnimation("flow_loop", true)
-end
-]]
 local function reset(inst)
     local drop = nil
     local plant = nil
@@ -49,12 +40,8 @@ local function reset(inst)
             drop = true
         end
     end
-    --print(plant)
-    --print(drop)
-
     if plant == true or drop == true then return end
 
-    --print("RESET THE PUGALISK FOUNTAIN")
     inst.dry = nil
     inst.components.activatable.inactive = true
     inst.AnimState:PlayAnimation("flow_pre")

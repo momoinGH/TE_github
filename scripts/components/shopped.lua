@@ -20,15 +20,15 @@ local Shopped = Class(function(self, inst)
 
     self.goods = nil         --商品预制件名
     self.costprefab = "oinc" --货币名
-    self.cost = 1            --如果是呼噜币，呼噜币数量
+    self.cost = 0            --如果是呼噜币，呼噜币数量
 
     self.robbed = nil        --被偷了
     -- self.justsellonce = nil  --只卖一次
 
-    self.getnewgoods = nil   --补货新商品
-    self.onsetgoods = nil    --设置商品时
-    self.onbought = nil      --被购买时
-    self.onsetcost = nil     --设置价格时
+    self.getnewgoods = nil --补货新商品
+    self.onsetgoods = nil  --设置商品时
+    self.onbought = nil    --被购买时
+    self.onsetcost = nil   --设置价格时
 end, nil, {
     goods = ongoods,
     costprefab = oncostprefab,
@@ -57,7 +57,7 @@ end
 ---@param cost number|nil 如果是呼噜币的话这里填呼噜币的个数，可取值见pig_shop_defs.lua
 function Shopped:SetCost(costprefab, cost)
     self.costprefab = costprefab or "oinc"
-    self.cost = cost or 1
+    self.cost = cost or 0
 
     if self.onsetcost then
         self.onsetcost(self.inst, costprefab, cost)
@@ -69,6 +69,8 @@ end
 ---@param cost number 货币数量
 function Shopped:SpawnInventory(goods, costprefab, cost)
     goods = goods or self.goods
+    costprefab = costprefab or "oinc"
+    cost = cost or 1
     if self.onsetgoods then
         self.onsetgoods(self.inst, goods, costprefab, cost)
     end
@@ -105,16 +107,16 @@ function Shopped:Restock()
         if ent then
             ent.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_ROBBED[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_ROBBED)])
         end
-    else 
+    else
         local goods, costprefab, cost = FunctionOrValue(self.getnewgoods, self.inst)
-        if goods then
-            costprefab = costprefab or "oinc"
-            cost = cost or 1
-            self:SpawnInventory(goods, costprefab, cost)
-            return true
+        if not goods then
+            goods = "log" --随便给个东西，我不想商人一直卡在补货的状态
+            TroErrorHandle(string.trofmt("错误，商品补货失败 {}   {}", self.inst, self.getnewgoods))
         end
+        costprefab = costprefab or "oinc"
+        cost = cost or 1
+        self:SpawnInventory(goods, costprefab, cost)
     end
-    return false
 end
 
 function Shopped:OnSave()

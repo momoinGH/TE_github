@@ -303,8 +303,7 @@ local states =
                 --inst.components.groundpounder:GroundPound()
 
                 inst.components.groundpounder.numRings = 2
-                ---inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/pugalisk/taunt")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/volcano/volcano_erupt")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/pugalisk/taunt")
             end),
             TimeEvent(15 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound(

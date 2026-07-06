@@ -3,7 +3,7 @@ local Shopped = Class(function(self, inst)
 
     self.goods = net_string(inst.GUID, "shopped.goods")
     self.costprefab = net_string(inst.GUID, "shopped.costprefab")
-    self.cost = net_smallbyte(inst.GUID, "shopped.cost") --[0..63]
+    self.cost = net_ushortint(inst.GUID, "shopped.cost") -- [0..65535]
 end)
 
 function Shopped:SetGoods(goods)

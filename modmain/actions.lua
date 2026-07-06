@@ -413,16 +413,18 @@ ACTIONS.TAKE_SHELF.stroverridefn = function(act)
     end
     goods = STRINGS.NAMES[string.upper(goods)] or goods
 
-    if target:HasTag("playercrafted") then
+    local cost = target.replica.shopped:GetCost()
+    if cost <= 0 or target:HasTag("playercrafted") then --不要钱，遗迹里或者玩家自己的
         return subfmt(STRINGS.ACTIONS.TAKE_SHELF.TAKE, { item = goods })
-    elseif act.doer.components.shopper and not HamletUtils.IsTraderWatchingItem(target) then
-        return subfmt(STRINGS.ACTIONS.TAKE_SHELF.STEAL, { item = goods })
-    else
-        local wantitem = target.replica.shopped:SetCostPrefab() or ""
-        wantitem = STRINGS.NAMES[string.upper(wantitem)] or wantitem
-        local qty = target.replica.shopped:GetCost()
-        return subfmt(STRINGS.ACTIONS.TAKE_SHELF.BUY, { wantitem = wantitem, qty = qty, payitem = goods })
     end
+
+    if act.doer.components.shopper and not HamletUtils.IsTraderWatchingItem(target) then
+        return subfmt(STRINGS.ACTIONS.TAKE_SHELF.STEAL, { item = goods })
+    end
+
+    local wantitem = target.replica.shopped:GetCostPrefab() or ""
+    wantitem = STRINGS.NAMES[string.upper(wantitem)] or wantitem
+    return subfmt(STRINGS.ACTIONS.TAKE_SHELF.BUY, { payitem = wantitem, qty = cost, wantitem = goods })
 end
 
 -- 剪

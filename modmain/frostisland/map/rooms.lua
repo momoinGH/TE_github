@@ -546,7 +546,7 @@ AddRoom("rock_ice_frost_lake", {
     type = NODE_TYPE.SeparatedRoom,
     contents =
     {
-        distributepercent = 0.5,
+        distributepercent = 0.2,
         distributeprefabs =
         {
             rock_ice_frost_spawner = 1,

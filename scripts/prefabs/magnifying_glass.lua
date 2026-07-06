@@ -32,7 +32,7 @@ end
 
 local function OnUse(inst, doer, target)
 	if target:HasTag("secret_room") then
-		target.Investigate(doer)
+		target:Investigate(doer)
 		return true
 	end
 
@@ -60,7 +60,9 @@ local function fn(Sim)
 
 	inst:AddTag("magnifying_glass")
 
-    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheck, "investigate", "SPY", OnUse)
+    inst:AddComponent("tro_componentaction")
+	inst.components.tro_componentaction:InitUSEITEM(TargetCheck, "investigate", "SPY", OnUse)
+	inst.components.tro_componentaction:InitEQUIPPED(TargetCheck, "investigate", "SPY", OnUse)
 
 	inst.entity:SetPristine()
 

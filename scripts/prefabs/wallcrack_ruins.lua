@@ -11,7 +11,7 @@ local prefabs = {
 }
 
 local function IsFakeDoor(inst)
-    return inst.components.teleporter:GetTarget() == nil --有传送目标就是真的门，没有就是假门
+    return not inst.targetdoor:value() --有传送目标就是真的门，没有就是假门
 end
 
 
@@ -24,8 +24,8 @@ local function reveal(inst, worker)
         inst.components.teleporter:SetEnabled(true)
 
         local target = inst.components.teleporter:GetTarget()
-        if target.components.worker then
-            target.components.worker:Destroy(worker or inst)
+        if target.components.workable then
+            target.components.workable:Destroy(worker or inst)
         end
     end
 
@@ -54,7 +54,17 @@ local function OnLoadPostPass(inst)
     end
 end
 
+local function Investigate(inst, player)
+    if not IsFakeDoor(inst) then
+        player.components.talker:Say(GetString(player.prefab, "ANNOUNCE_MYSTERY_DOOR_FOUND"))
+    else
+        player.components.talker:Say(GetString(player.prefab, "ANNOUNCE_MYSTERY_DOOR_NOT_FOUND"))
+    end
+end
+
 local function MasterPost(inst)
+    inst.Investigate = Investigate
+
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.BLANK)
     inst.components.workable:SetWorkLeft(1)

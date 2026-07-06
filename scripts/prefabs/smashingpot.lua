@@ -72,11 +72,12 @@ local function OnTimerDone(inst, data)
     end
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    inst.entity:AddNetwork()
-    local trans = inst.entity:AddTransform()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 
     local minimap = inst.entity:AddMiniMapEntity()
     minimap:SetIcon("pig_ruins_pot.png")
@@ -84,10 +85,7 @@ local function fn(Sim)
     inst.entity:AddPhysics()
     MakeObstaclePhysics(inst, .25)
 
-    inst.entity:AddSoundEmitter()
-    --inst:AddTag("structure")
     inst.hammersound = "Hamlet/common/harvested/claypot/hit"
-
 
     anim:SetBank("pig_ruins_pot")
     anim:SetBuild("pig_ruins_pot")
@@ -109,7 +107,6 @@ local function fn(Sim)
     if not TheWorld.ismastersim then
         return inst
     end
-
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:AddRandomLoot("twigs", rarity.verylow)
@@ -140,8 +137,6 @@ local function fn(Sim)
     inst.components.lootdropper:AddRandomLoot("feather_robin", rarity.med)
     inst.components.lootdropper:AddRandomLoot("feather_robin_winter", rarity.med)
 
-
-
     inst.components.lootdropper.numrandomloot = 1
     if math.random() < 0.2 then
         if inst.components.lootdropper.randomloot then
@@ -152,8 +147,6 @@ local function fn(Sim)
         inst.components.lootdropper.numrandomloot = 2
     else
     end
-
-    --inst.components.lootdropper.numrandomloot = math.random(2)
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)

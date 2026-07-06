@@ -42,8 +42,8 @@ local function GoEatFood(inst)
         end
         if target and not target:IsInLimbo() then
             inst.foodtarget = target
-            if targetpos and inst:GetDistanceSqToInst(target) > EAT_DIST * EAT_DIST then
-                return BufferedAction(inst, nil, ACTIONS.WALKTO, nil, targetpos, nil, 0.2)
+            if inst:GetDistanceSqToInst(target) > EAT_DIST * EAT_DIST then
+                return BufferedAction(inst, nil, ACTIONS.WALKTO, nil, target:GetPosition(), nil, 0.2)
             else
                 return BufferedAction(inst, target, ACTIONS.EAT)
             end
