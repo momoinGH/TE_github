@@ -97,15 +97,6 @@ function AnimState:PlayExtendAnim(animname)
     end)
 end
 
-local function Addfilter(name, fn)
-    assert(name and type(name) == "string",
-        string.format("AnimState Extension: filter name '%s' is not a string!\n", name or "nil"))
-    assert(fn and type(fn) == "function",
-        string.format("AnimState Extension: filter '%s' is not a function!\n", fn or "nil"))
-    assert(filters_s[name] == nil, string.format("AnimState Extension: filter '%s' existed!\n", name))
-    filters_s[name] = function(animstate, ...) return pcall(fn, animstate, ...) end
-end
-
 local _SetOceanBlendParams = AnimState.SetOceanBlendParams
 function AnimState:SetOceanBlendParams(...)
     if TUNING.tropical.ocean_style == "tropical" then return end
@@ -184,6 +175,20 @@ function _G.TroRemapAnimation(prefab_name, anim, val)
     animation_maps[prefab_name][anim] = val
 end
 
-return {
-    Addfilter = Addfilter,
-}
+if troisdev then
+    -- 调用SetBuild时检查是否有同名动画文件，用来解决动画不显示又不知道哪里调用的问题
+    -- 并不是很准确，因为build不一定非得和压缩包名一样，所以可以偶尔检查一次
+    -- TUNING.TEST_CHECK_ANIM_HAS_BUILD = true
+    local memoizedFilePaths = Hooks.GetUpValue(resolvefilepath, "memoizedFilePaths")
+    local OldSetBuild = AnimState.SetBuild
+    function AnimState:SetBuild(build, ...)
+        local inst = _GetEntity(self)
+        if inst and
+            not memoizedFilePaths["anim/" .. build .. ".zip"]
+            and TUNING.TEST_CHECK_ANIM_HAS_BUILD --在控制台设置这个值为true就开始打印
+        then
+            TroErrorHandle(string.trofmt("{} 调用了SetBuild但是没有 {}.zip 动画文件，注意检查动画是否正常显示", inst, build), false, "warn")
+        end
+        return OldSetBuild(self, build, ...)
+    end
+end

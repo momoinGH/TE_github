@@ -1,6 +1,6 @@
-table.insert(Assets, Asset("ATLAS", "images/overlays/hayfever.xml"))   --对应单机文件fx4.xml
-table.insert(Assets, Asset("ANIM", "anim/player_sneeze.zip"))          --花粉打喷嚏，有动画lightsneeze、sneeze
-table.insert(Assets, Asset("ANIM", "anim/player_mount_sneeze.zip"))    --骑牛打喷嚏动画
+table.insert(Assets, Asset("ATLAS", "images/overlays/hayfever.xml")) --对应单机文件fx4.xml
+table.insert(Assets, Asset("ANIM", "anim/player_sneeze.zip"))        --花粉打喷嚏，有动画lightsneeze、sneeze
+table.insert(Assets, Asset("ANIM", "anim/player_mount_sneeze.zip"))  --骑牛打喷嚏动画
 
 
 ----------------------------------------------------------------------------------------------------
@@ -43,7 +43,10 @@ end)
 
 --花粉打喷嚏
 AddStategraphEvent("wilson", EventHandler("sneeze", function(inst, data)
-    if not inst.components.health:IsDead() and not inst.components.health.invincible and not inst.sg:HasStateTag("busy") then
+    if not inst.components.health:IsDead()
+        and not inst.components.health.invincible
+        and not inst.sg:HasStateTag("busy")
+    then
         inst.sg:GoToState("sneeze")
     end
 end))

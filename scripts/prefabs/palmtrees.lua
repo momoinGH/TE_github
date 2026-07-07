@@ -13,8 +13,8 @@ local day_time = seg_time * day_segs
 local PALMTREE_GROW_TIME =
 {
     { base = 1.5 * day_time, random = 0.5 * day_time }, --tall to short
-    { base = 5 * day_time, random = 2 * day_time },     --short to normal
-    { base = 5 * day_time, random = 2 * day_time },     --normal to tall
+    { base = 5 * day_time,   random = 2 * day_time },   --short to normal
+    { base = 5 * day_time,   random = 2 * day_time },   --normal to tall
 }
 
 local PALMTREE_CHOPS = "a"
@@ -47,7 +47,7 @@ SetSharedLootTable('palmtree_tall',
 local builds =
 {
     normal = {
-        file = "palmTree_build",
+        file = "palmtree_build",
         prefab_name = "palmtree",
         normal_loot = 'palmtree_normal',
         short_loot = 'palmtree_short',

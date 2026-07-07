@@ -4,15 +4,7 @@ local assets =
     Asset("INV_IMAGE", "cutnettle"),
 }
 
-local WRATH_SMALL = -8
-
-local function oneat(inst, eater)
-    if eater.components.temperature ~= nil and eater.components.temperature.hayfever then
-        eater.components.temperature.hayfever = -4000
-    end
-end
-
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -21,11 +13,10 @@ local function fn(Sim)
 
     inst.AnimState:SetBank("cutnettle")
     inst.AnimState:SetBuild("cutnettle")
-
     inst.AnimState:PlayAnimation("idle")
 
-
     inst:AddTag("cattoy")
+
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
@@ -39,7 +30,7 @@ local function fn(Sim)
 
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.VEGGIE
-    inst.components.edible:SetOnEatenFn(oneat)
+    inst.components.edible.antihistamine = 200
 
     inst:AddComponent("tradable")
     inst:AddComponent("inspectable")
@@ -49,7 +40,6 @@ local function fn(Sim)
     --inst.components.burnable:MakeDragonflyBait(3)
 
     inst:AddComponent("inventoryitem")
-
 
     return inst
 end

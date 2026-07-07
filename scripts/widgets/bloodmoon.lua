@@ -1,10 +1,10 @@
-local Badge = require "widgets/badge"
 local UIAnim = require "widgets/uianim"
 local Text = require "widgets/text"
 local Image = require "widgets/image"
+local Widget = require "widgets/widget"
 
-local BloodmoonBadge = Class(Badge, function(self, owner)
-    Badge._ctor(self, "bloodmoon", owner)
+local BloodmoonBadge = Class(Widget, function(self, owner)
+    Widget._ctor(self, "Clock")
 
     self._moonanim = self:AddChild(UIAnim())
     self._moonanim:GetAnimState():SetBank("moon_phases_clock")

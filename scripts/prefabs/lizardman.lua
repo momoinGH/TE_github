@@ -82,17 +82,6 @@ local function OnAttacked(inst, data)
     end
 end
 
-local function OnAttackOther(inst, data)
-    if not inst.isFrenzy then
-        inst.components.combat:ShareTarget(data.target,
-            20,
-            function(dude)
-                return dude:HasTag("lizardman")
-                    and not dude.components.health:IsDead()
-            end, 5)
-    end
-end
-
 --don't want to enrage lizardmans after wake instantly
 local function OnEntityWake(inst)
     if GetTime() - inst.lastFrenzyTime > 30 then
@@ -162,32 +151,9 @@ local function MakeWeapon(inst)
     end
 end
 
-local function ShouldAcceptItem(inst, item)
-    return false --item.components.equippable ~= nil
-end
-
-local function OnGetItemFromPlayer(inst, giver, item)
-    if item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD then
-        local current = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-        if current ~= nil then
-            inst.components.inventory:DropItem(current)
-        end
-        inst.components.inventory:Equip(item)
-        inst.AnimState:Show("swap_hat")
-    end
-end
-
 local function GetDebugString(inst)
     return string.format("is frenzy: %s, try frenzy in %i", tostring(inst.isFrenzy),
         math.max(0, 30 - (GetTime() - inst.lastFrenzyTime)))
-end
-
-local function OnSave(inst, data)
-
-end
-
-local function OnLoad(inst, data)
-
 end
 
 local function fn()

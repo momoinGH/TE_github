@@ -1,5 +1,5 @@
 local function Check(inst)
-    if TheWorld.state.issummer and inst:IsInHamletArea() then
+    if TheWorld.state.isspring and inst:IsInHamletArea() then
         inst.components.hayfever:Enable()
     else
         inst.components.hayfever:Disable()
@@ -26,7 +26,7 @@ local Hayfever = Class(function(self, inst)
 
     self.update_task   = nil
 
-    inst:WatchWorldState("issummer", Check)
+    inst:WatchWorldState("isspring", Check)
     inst:ListenForEvent("changearea", Check)
     inst:DoTaskInTime(0, Check)
 end, nil, {
@@ -48,6 +48,9 @@ function Hayfever:SetNextSneezeTime(newtime)
 end
 
 function Hayfever:CanSneeze()
+    if not self.inst:IsInHamletArea() then
+        return false
+    end
     if self.inst:HasTag("has_gasmask") then
         return false
     end
@@ -66,7 +69,7 @@ local function Update(inst, self, dt)
                     self.nextsneeze = self:GetNextSneezTime()
                 else
                     self.sneezed = true
-                    self.nextsneeze = 1
+                    self.nextsneeze = 2
                 end
 
                 self.wantstosneeze = true

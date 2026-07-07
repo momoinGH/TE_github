@@ -28,7 +28,6 @@ AddPlayerPostInit(function(inst)
 end)
 
 ----------------------------------------------------------------------------------------------------
-local GROGGINESS_DECAY_RATE = .01
 AddComponentPostInit("grogginess", function(self)
     local OldAddGrogginess = self.AddGrogginess
     --雾气开始减速
@@ -41,9 +40,34 @@ AddComponentPostInit("grogginess", function(self)
     end
 
     function self:ProStopFoggrog()
-        self:SetDecayRate(GROGGINESS_DECAY_RATE)
+        self:SetDecayRate(1)
     end
 end)
+
+----------------------------------------------------------------------------------------------------
+
+-- 装备一些装备时免疫减速，单机版用venting标签控制，这里换成联机版的写法，
+-- venting标签需要在equipable的回调里添加，也就是在事件推送之前
+
+local function OnVentingEquipped(inst, data)
+    if data and data.owner and data.owner:HasTag("venting") and data.owner.components.grogginess then
+        data.owner.components.grogginess:AddImmunitySource(inst)
+    end
+end
+
+local function OnVentingUnEquipped(inst, data)
+    if data and data.owner and data.owner.components.grogginess then
+        data.owner.components.grogginess:RemoveImmunitySource(inst)
+    end
+end
+
+AddComponentPostInit("equippable", function(self, inst)
+    inst:RemoveEventCallback("equipped", OnVentingEquipped)
+    inst:RemoveEventCallback("unequipped", OnVentingUnEquipped)
+    inst:ListenForEvent("equipped", OnVentingEquipped)
+    inst:ListenForEvent("unequipped", OnVentingUnEquipped)
+end)
+
 
 ----------------------------------------------------------------------------------------------------
 local FogOver = require("widgets/fogover")

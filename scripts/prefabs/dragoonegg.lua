@@ -1,6 +1,7 @@
-assets =
+local assets =
 {
     Asset("ANIM", "anim/dragoon_egg.zip"),
+    Asset("ANIM", "anim/seagull_shadow.zip"),
 }
 
 local ROCKS_MINE = 6

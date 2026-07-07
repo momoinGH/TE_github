@@ -9,7 +9,6 @@ function FN.FnDecorator(obj, key, beforeFn, afterFn, isUseBeforeReturn)
         TroErrorHandle(string.trofmt("FN.FnDecorator 参数不合法, obj:{}, beforeFn:{},afterFn:{}", obj, beforeFn, afterFn))
     end
 
-
     local oldVal = obj[key]
 
     obj[key] = function(...)

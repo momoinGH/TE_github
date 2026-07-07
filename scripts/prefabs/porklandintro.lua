@@ -1,6 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/balloon_wreckage.zip"),
+    Asset("ANIM", "anim/chameleon.zip"),
 }
 
 local prefabs = {
@@ -153,6 +154,7 @@ end
 
 local function introfn()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()

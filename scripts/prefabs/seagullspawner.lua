@@ -1,3 +1,10 @@
+local assets =
+{
+    Asset("ANIM", "anim/dragoon_egg.zip"),
+    Asset("ANIM", "anim/seagull_shadow.zip"),
+}
+
+
 local prefabs = {
     "seagull_water"
 }

@@ -92,8 +92,6 @@ function _G.AddComponentIfNot(inst, name)
     end
 end
 
-
-
 -- 关闭物理碰撞
 function _G.ToggleOffPhysics(inst)
     inst.sg.statemem.isphysicstoggle = true
@@ -140,7 +138,6 @@ function _G.TroCanResistHamletFog(player)
         return player.replica.inventory:EquipHasTag("clearfog")
     end
 end
-
 
 -- 伤害类型
 DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }
