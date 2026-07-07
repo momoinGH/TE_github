@@ -114,6 +114,7 @@ local function onsave(inst, data)
 end
 
 local function onload(inst, data)
+    if not data then return end
     if data.lighttype then
         inst.lighttype = data.lighttype
         inst.Light:SetIntensity(lighttypes[inst.lighttype].day.intensity)

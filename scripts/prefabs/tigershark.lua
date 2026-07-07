@@ -218,6 +218,7 @@ local function OnSave(inst, data)
 end
 
 local function OnLoad(inst, data)
+    if not data then return end
     if data.entrada then inst.entrada = data.entrada end
     if data then
         inst.CanRun = data.CanRun or true

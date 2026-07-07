@@ -126,7 +126,7 @@ local function iconfn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("key_to_city.tex")
+    inst.MiniMapEntity:SetIcon("key_to_city.png")
     inst.MiniMapEntity:SetPriority(11)
     inst.MiniMapEntity:SetCanUseCache(false)
     inst.MiniMapEntity:SetDrawOverFogOfWar(true)

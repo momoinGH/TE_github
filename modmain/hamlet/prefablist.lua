@@ -64,7 +64,7 @@ PrefabFiles = {
 
 
     "antchest",           --蜜箱
-    "antcombhome",    --蚁窝
+    "antcombhome",        --蚁窝
     "anthill_cavelamp",   --爪灯
     "anthill_lamp",       --蜜灯
     "anthill_stalactite", --蚁穴石笋
@@ -233,12 +233,12 @@ PrefabFiles = {
     "ro_bin_gizzard_stone",   --露比的砂囊石
     "ro_bin",                 --露比
 
-
-    "roc_head",      --友善的大鹏
-    "roc_leg",       --友善的大鹏
-    "roc_tail",      --友善的大鹏
-    "roc_nest",      --大鹏巢
-    "roc_robin_egg", --岩蛋
+    "roc",                    --大鹏
+    "roc_head",               --友善的大鹏
+    "roc_leg",                --友善的大鹏
+    "roc_tail",               --友善的大鹏
+    "roc_nest",               --大鹏巢
+    "roc_robin_egg",          --岩蛋
 
 
     "rock_basalt",        --喷发玄武岩
@@ -287,6 +287,6 @@ PrefabFiles = {
     "watercress",         --海豆瓣菜
     "roe_fish",           --鱼
     "giantgrubspawner",   --生物生成器
-    "hamlet_plantables", --可种植的植物，dug_
+    "hamlet_plantables",  --可种植的植物，dug_
 
 }

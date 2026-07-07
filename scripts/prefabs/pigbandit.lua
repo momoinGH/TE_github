@@ -29,22 +29,11 @@ local prefabs =
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
 local PIG_BANDIT_DAMAGE = 33
-local PIG_BANDIT_HEALTH = 250
 local PIG_BANDIT_ATTACK_PERIOD = 3
-local PIG_BANDIT_TARGET_DIST = 16
-local PIG_BANDIT_LOYALTY_MAXTIME = 2.5 * 480
-local PIG_BANDIT_LOYALTY_PER_HUNGER = 480 / 25
-local PIG_BANDIT_MIN_POOP_PERIOD = 30 * .5
 local PIG_BANDIT_TARGET_DIST = 16
 local PIG_BANDIT_RUN_SPEED = 7
 local PIG_BANDIT_WALK_SPEED = 3
-local PIG_DAMAGE = 33
-local PIG_HEALTH = 250
-local PIG_ATTACK_PERIOD = 3
-local PIG_TARGET_DIST = 16
 local PIG_LOYALTY_MAXTIME = 2.5 * 480
-local PIG_LOYALTY_PER_HUNGER = 480 / 25
-local PIG_MIN_POOP_PERIOD = 30 * .5
 
 local function OnTalk(inst, script)
     inst.SoundEmitter:PlaySound("dontstarve/pig/grunt")
@@ -52,7 +41,6 @@ end
 
 local function OnAttacked(inst, data)
     print("ON ATTACKED")
-    local attacker = data.attacker
     inst:ClearBufferedAction()
     inst.attacked = true
     local attacker = data and data.attacker
@@ -90,26 +78,6 @@ local function KeepTarget(inst, target)
     return inst.components.combat:CanTarget(target)
 end
 
-local function IsValidGround(pos)
-    local ground = TheWorld
-
-    if ground and pos then
-        local tile = ground.Map:GetTileAtPoint(pos.x, pos.y, pos.z)
-        return tile ~= WORLD_TILES.IMPASSABLE and tile < GROUND.UNDERGROUND
-    end
-
-    return false
-end
-
-local function Shuffle(tbl)
-    local size = #tbl
-    for i = size, 1, -1 do
-        local rand = math.random(size)
-        tbl[i], tbl[rand] = tbl[rand], tbl[i]
-    end
-    return tbl
-end
-
 local function onsave(inst, data)
     if inst.attacked then
         data.attacked = inst.attacked
@@ -124,29 +92,31 @@ end
 
 local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddSoundEmitter()
     local shadow = inst.entity:AddDynamicShadow()
+    inst.entity:AddLightWatcher()
     inst.entity:AddNetwork()
+
     shadow:SetSize(1.5, .75)
 
-    inst.entity:AddLightWatcher()
     anim:SetBank("townspig")
     anim:SetBuild("pig_bandit")
     anim:PlayAnimation("idle", true)
     anim:Hide("hat")
-
     anim:Hide("ARM_carry")
 
     MakeCharacterPhysics(inst, 50, .5)
-    --    MakePoisonableCharacter(inst)
 
     inst:AddComponent("talker")
     inst.components.talker.ontalk = OnTalk
     inst.components.talker.fontsize = 35
     inst.components.talker.font = TALKINGFONT
     inst.components.talker.offset = Vector3(0, -400, 0)
+
+    inst.Transform:SetFourFaced()
 
     inst:AddTag("character")
     inst:AddTag("pig")
@@ -172,10 +142,6 @@ local function fn()
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
 
-    --    inst:AddComponent("combat")
-    --    inst.components.combat.hiteffectsymbol = "pig_torso"
-    --    inst.components.combat:SetRange(4)
-
     MakeMediumBurnableCharacter(inst, "pig_torso")
 
     inst:AddComponent("homeseeker")
@@ -186,49 +152,42 @@ local function fn()
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(PIG_BANDIT_DAMAGE)
     inst.components.combat:SetAttackPeriod(PIG_BANDIT_ATTACK_PERIOD)
-    --inst.components.combat:SetRange(3)--0.7)
     inst.components.combat:SetRetargetFunction(3, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
     inst.components.combat.hiteffectsymbol = "chest"
 
-    inst.components.combat.onhitotherfn =
-        function(inst, other, damage)
-            local oincs = FindOincs(other)
-
-            while oincs and (#oincs > 0) do
-                for i, oinc in ipairs(oincs) do
-                    inst.components.thief:StealItem(other, oinc, nil, nil, 4)
-                end
-
-                oincs = FindOincs(other)
+    inst.components.combat.onhitotherfn = function(inst, other, damage)
+        local oincs = FindOincs(other)
+        while oincs and (#oincs > 0) do
+            for i, oinc in ipairs(oincs) do
+                inst.components.thief:StealItem(other, oinc, nil, nil, 4)
             end
+            oincs = FindOincs(other)
         end
+    end
 
     inst:AddComponent("thief")
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.PIG_HEALTH)
+
     inst:AddComponent("inventory")
+
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "bandithat", "banditmap" })
 
     inst:AddComponent("inspectable")
+
     MakeMediumFreezableCharacter(inst, "pig_torso")
 
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("newcombattarget", OnNewTarget)
 
-    inst.Transform:SetFourFaced()
     inst:SetBrain(brain)
     inst:SetStateGraph("SGpigbandit")
+
     inst.OnSave = onsave
     inst.OnLoad = onload
-
-    --    inst:DoTaskInTime(0,function()
-    --            if not inst.components.inventory:Has("banditmap",1) then
-    --                TheWorld.components.banditmanager:HandleManualSpawn(inst)
-    --            end
-    --        end)
 
     return inst
 end

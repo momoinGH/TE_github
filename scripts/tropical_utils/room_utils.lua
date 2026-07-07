@@ -336,7 +336,7 @@ function FN.CreateRoom(room, door_key_start)
 
             p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
             if troisdev and not IsInRoom(width, depth, x, z, x + (x_offset or 0), z + (data.z_offset or 0)) then
-                TroErrorHandle(string.trofmt("对象{}不在房间内生成，是不是坐标填错了？，x:{}, z:{}", p, x + (x_offset or 0), z + (data.z_offset or 0)), false)
+                TroErrorHandle(string.trofmt("对象{}不在房间内生成，是不是坐标填错了？，x:{}, z:{}", p, x + (x_offset or 0), z + (data.z_offset or 0)), false, "warn")
             end
 
             if p.components.tro_saveanim then

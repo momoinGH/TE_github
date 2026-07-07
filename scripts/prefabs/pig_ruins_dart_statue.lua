@@ -40,6 +40,7 @@ local function onsave(inst, data)
 end
 
 local function onload(inst, data)
+    if not data then return end
     if data.rotation then
         inst.setrotation(inst, data.rotation)
     end

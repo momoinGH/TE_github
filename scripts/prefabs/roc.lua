@@ -121,10 +121,10 @@ local function fn(Sim)
 	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor.runspeed = ROC_SPEED
 
-	-- inst:AddComponent("roccontroller")
-	-- inst.components.roccontroller:Setup(ROC_SPEED, 0.35, 3)
-	-- inst.components.roccontroller:Start()
-	-- inst.components.roccontroller.scalefn = scalefn
+	inst:AddComponent("roccontroller")
+	inst.components.roccontroller:Setup(ROC_SPEED, 0.35, 3)
+	inst.components.roccontroller:Start()
+	inst.components.roccontroller.scalefn = scalefn
 
 	inst:SetStateGraph("SGroc")
 

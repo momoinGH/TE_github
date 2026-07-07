@@ -81,6 +81,7 @@ local function onsave(inst, data)
 end
 
 local function onload(inst, data)
+    if not data then return end
     if data.animframe then
         inst.animframe = data.animframe
     end

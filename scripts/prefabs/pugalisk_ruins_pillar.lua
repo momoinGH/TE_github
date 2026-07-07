@@ -19,6 +19,7 @@ local function onsave(inst, data)
 end
 
 local function onload(inst, data)
+    if not data then return end
     if data.rotation then
         inst.Transform:SetRotation(data.rotation)
     end

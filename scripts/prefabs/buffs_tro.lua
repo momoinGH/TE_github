@@ -84,6 +84,7 @@ local function onsave(inst, data)
 end
 
 local function onload(inst, data)
+        if not data then return end
     if data._debuffkey_tro then
         inst._debuffkey_tro = data._debuffkey_tro
     end

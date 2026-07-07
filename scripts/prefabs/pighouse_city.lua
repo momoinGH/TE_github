@@ -385,8 +385,9 @@ local function OnLoadPostPass(inst)
 end
 
 local function makefn(animset, setbuild, spawnList, minimapicon)
-    local function fn(Sim)
+    local function fn()
         local inst = CreateEntity()
+        
         local trans = inst.entity:AddTransform()
         local anim = inst.entity:AddAnimState()
         local light = inst.entity:AddLight()
@@ -396,7 +397,7 @@ local function makefn(animset, setbuild, spawnList, minimapicon)
         local minimap = inst.entity:AddMiniMapEntity()
         --minimap:SetIcon( "pig_townhouse.png" )
         minimap:SetIcon(minimapicon or "pig_townhouse.png")
-        --{anim="level1", sound="dontstarve/common/campfire", radius=2, intensity=.75, falloff=.33, colour = {197/255,197/255,170/255}},
+
         light:SetFalloff(1)
         light:SetIntensity(.5)
         light:SetRadius(1)
@@ -442,16 +443,12 @@ local function makefn(animset, setbuild, spawnList, minimapicon)
             return inst
         end
 
-
-
-
         --inst:AddComponent("lootdropper")
         inst:AddComponent("workable")
         inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
         inst.components.workable:SetWorkLeft(4)
         inst.components.workable:SetOnFinishCallback(onhammered)
         inst.components.workable:SetOnWorkCallback(onhit)
-
 
         inst:AddComponent("spawner")
         WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 3, true)
@@ -496,8 +493,6 @@ local function makefn(animset, setbuild, spawnList, minimapicon)
         inst.components.fixable:AddRecinstructionStageData("rubble", "pig_townhouse", build, nil, getScale(inst, build))
         inst.components.fixable:AddRecinstructionStageData("unbuilt", "pig_townhouse", build, nil, getScale(inst, build))
 
-
-
         inst:ListenForEvent("burntup", function(inst)
             inst.components.fixable:AddRecinstructionStageData("burnt", "pig_townhouse", build, 1, getScale(inst, build))
             if inst.doortask then
@@ -535,8 +530,9 @@ local function makefn(animset, setbuild, spawnList, minimapicon)
 end
 
 local function makefn2(animset, setbuild, spawnList)
-    local function fn(Sim)
+    local function fn()
         local inst = CreateEntity()
+        
         local trans = inst.entity:AddTransform()
         local anim = inst.entity:AddAnimState()
         local light = inst.entity:AddLight()
@@ -545,7 +541,7 @@ local function makefn2(animset, setbuild, spawnList)
 
         local minimap = inst.entity:AddMiniMapEntity()
         minimap:SetIcon("pig_townhouse.png")
-        --{anim="level1", sound="dontstarve/common/campfire", radius=2, intensity=.75, falloff=.33, colour = {197/255,197/255,170/255}},
+
         light:SetFalloff(1)
         light:SetIntensity(.5)
         light:SetRadius(1)
@@ -590,9 +586,6 @@ local function makefn2(animset, setbuild, spawnList)
         if not TheWorld.ismastersim then
             return inst
         end
-
-
-
 
         --inst:AddComponent("lootdropper")
         inst:AddComponent("workable")

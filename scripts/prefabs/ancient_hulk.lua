@@ -412,9 +412,6 @@ local function OnSave(inst, data)
 end
 
 local function OnLoad(inst, data)
-    if data then
-
-    end
 end
 
 local function OnAttacked(inst, data)

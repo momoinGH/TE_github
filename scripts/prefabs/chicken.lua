@@ -102,14 +102,15 @@ local function OnDeath(inst)
 end
 
 local function OnSave(inst, data)
-    if inst.hadeaten > 0 then
-        data.hadeaten = inst.hadeaten
-    end
+	if inst.hadeaten > 0 then
+		data.hadeaten = inst.hadeaten
+	end
 end
 
 local function OnLoad(inst, data)
-    if data.hadeaten then
-        inst.hadeaten = data.hadeaten
+	if not data then return end
+	if data.hadeaten then
+		inst.hadeaten = data.hadeaten
 	end
 end
 
@@ -155,11 +156,11 @@ local function fn()
 
 	inst.data = {}
 
-    inst.hadeaten = 0
+	inst.hadeaten = 0
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.SEEDS }, { FOODTYPE.SEEDS })
 	inst.components.eater:SetCanEatRaw()
-    inst.components.eater:SetOnEatFn(function(inst) inst.hadeaten = inst.hadeaten + 1 end)
+	inst.components.eater:SetOnEatFn(function(inst) inst.hadeaten = inst.hadeaten + 1 end)
 
 	inst:AddComponent("knownlocations")
 
@@ -194,8 +195,8 @@ local function fn()
 
 	inst:DoPeriodicTask(10.0, function() inst.improvise = true end)
 
-    inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
+	inst.OnSave = OnSave
+	inst.OnLoad = OnLoad
 
 	return inst
 end

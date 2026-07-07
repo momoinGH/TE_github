@@ -77,21 +77,16 @@ function Rocmanager:ShouldSpawn()
 
     -- will only spawn before the first half of daylight.
     if not self.roc and TheWorld.state.isday then --clock:GetNormTime() < (clock.daysegs / 16) /2 then
-        -- do test stuff.
         if self.nexttime <= 0 then
             for i, v in ipairs(self._activeplayers) do
-                if v ~= nil then
-                    local px, py, pz = v.Transform:GetWorldPosition()
-                    local tile = TheWorld.Map:GetTileAtPoint(px, py, pz)
-                    if tile ~= WORLD_TILES.IMPASSABLE or tile ~= WORLD_TILES.INVALID then
-                        local pt = Vector3(v.Transform:GetWorldPosition())
-                        local angle = math.random() * TWOPI
-                        local offset = Vector3(SPAWNDIST * math.cos(angle), 0, -SPAWNDIST * math.sin(angle))
-                        local roc = SpawnPrefab("roc")
-                        roc.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
-                        self.roc = roc
-                        self.nexttime = self:GetNextSpawnTime()
-                    end
+                if v:IsInHamletArea() then
+                    local pt = v:GetPosition()
+                    local angle = math.random() * TWOPI
+                    local offset = Vector3(SPAWNDIST * math.cos(angle), 0, -SPAWNDIST * math.sin(angle))
+                    local roc = SpawnPrefab("roc")
+                    roc.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
+                    self.roc = roc
+                    self.nexttime = self:GetNextSpawnTime()
                 end
             end
         else
@@ -102,10 +97,6 @@ end
 
 function Rocmanager:LongUpdate(dt)
     self.nexttime = self.nexttime - dt
-end
-
-function Rocmanager:OnUpdate(dt)
-
 end
 
 return Rocmanager

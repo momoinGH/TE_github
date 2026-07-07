@@ -47,7 +47,7 @@ local Banditmanager = Class(function(self, inst)
 end)
 
 function Banditmanager:SpawnBandit(player)
-    local cover = FindEntity(self.inst, 40, nil, { "bandit_cover" })
+    local cover = FindEntity(player, 40, nil, { "bandit_cover" })
     if not cover then
         return --附近有猪人房才生成
     end

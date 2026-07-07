@@ -121,6 +121,7 @@ local function onsave(inst, data)
 end
 
 local function OnLoadPostPass(inst, ents, data)
+    if not data then return end
     if data.treasure and ents[data.treasure] then
         inst.treasure = ents[data.treasure].entity
     end
