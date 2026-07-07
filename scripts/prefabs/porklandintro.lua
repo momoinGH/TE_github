@@ -170,17 +170,21 @@ local function introfn()
     inst:AddTag("notarget")
     inst:AddTag("porklandintro")
 
-    inst:AddComponent("inspectable")
-
     inst:AddComponent("talker")
     inst.components.talker.fontsize = 40
     inst.components.talker.font = TALKINGFONT
     inst.components.talker.offset = Vector3(0, -550, 0)
 
-    inst:AddComponent("maxwelltalker")
-    inst.components.maxwelltalker.setdist = 6
-    inst.components.maxwelltalker.speeches = SPEECH
-    inst.components.maxwelltalker.cleartrees = true
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        inst:AddComponent("maxwelltalker")
+        inst.components.maxwelltalker.setdist = 6
+        inst.components.maxwelltalker.speeches = SPEECH
+        return inst
+    end
+
+    inst:AddComponent("inspectable")
 
     return inst
 end
@@ -191,7 +195,6 @@ local function fn(anim, loot, onground, minimapicon, talker, collision)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    --inst.Transform:SetTwoFaced()
     inst.entity:AddNetwork()
 
     if collision then
@@ -223,6 +226,11 @@ local function fn(anim, loot, onground, minimapicon, talker, collision)
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
+        if talker then
+            inst:AddComponent("maxwelltalker")
+            inst.components.maxwelltalker.speeches = SPEECH
+            inst.components.maxwelltalker.cleartrees = true
+        end
         return inst
     end
 
@@ -234,12 +242,6 @@ local function fn(anim, loot, onground, minimapicon, talker, collision)
 
         inst:AddComponent("lootdropper")
         inst.components.lootdropper:SetLoot(loot)
-    end
-
-    if talker then
-        inst:AddComponent("maxwelltalker")
-        inst.components.maxwelltalker.speeches = SPEECH
-        inst.components.maxwelltalker.cleartrees = true
     end
 
     return inst
