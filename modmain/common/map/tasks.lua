@@ -1,9 +1,3 @@
--- TODO
--- if TUNING.tropical.sea then
---     modimport "modmain/common/map/tasks/sea"
--- else
--- end
-
 -- 洞穴地形不想要在主大陆生成时，这个虚空地形就作为基础，其他模块的地形和这个地形相邻，用LAND_DIVIDE_3解锁
 AddTask("separavulcao", {
     locks = {

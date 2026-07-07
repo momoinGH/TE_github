@@ -82,41 +82,46 @@ local function GetHamletStaticLayout(name, data, path, custom_ground_types)
     data = data and deepcopy(data) or {} --data需要拷贝一份，会被修改的
     Layouts[name] = StaticLayout.Get(path, data)
     TroRemapLayoutTile(name, custom_ground_types or ground_types)
+    return Layouts[name]
 end
 
-local center_position = {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-}
+local function CenterPosition()
+    return {
+        layout_position = LAYOUT_POSITION.CENTER,
+        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    }
+end
 
-local random_position = {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-}
+local function RandomPosition()
+    return {
+        layout_position = LAYOUT_POSITION.RANDOM,
+        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    }
+end
 
 
 -- 不老泉
-GetHamletStaticLayout("pugalisk_fountain", center_position)
+GetHamletStaticLayout("pugalisk_fountain", CenterPosition())
 
 -- 农场
-GetHamletStaticLayout("farm_1", random_position)
-GetHamletStaticLayout("farm_2", random_position)
-GetHamletStaticLayout("farm_3", random_position)
-GetHamletStaticLayout("farm_4", random_position)
-GetHamletStaticLayout("farm_5", random_position)
+GetHamletStaticLayout("farm_1", RandomPosition())
+GetHamletStaticLayout("farm_2", RandomPosition())
+GetHamletStaticLayout("farm_3", RandomPosition())
+GetHamletStaticLayout("farm_4", RandomPosition())
+GetHamletStaticLayout("farm_5", RandomPosition())
 -- 瞭望塔
-GetHamletStaticLayout("farm_fill_1", random_position)
-GetHamletStaticLayout("farm_fill_2", random_position)
-GetHamletStaticLayout("farm_fill_3", random_position)
+GetHamletStaticLayout("farm_fill_1", RandomPosition())
+GetHamletStaticLayout("farm_fill_2", RandomPosition())
+GetHamletStaticLayout("farm_fill_3", RandomPosition())
 -- 城镇
-GetHamletStaticLayout("cidade1", center_position, nil, {
+GetHamletStaticLayout("cidade1", CenterPosition(), nil, {
     [2] = WORLD_TILES.COBBLEROAD,
     [4] = WORLD_TILES.FOUNDATION,
     [6] = WORLD_TILES.LAWN
 })
-GetHamletStaticLayout("cidade2", center_position, nil, {
+GetHamletStaticLayout("cidade2", CenterPosition(), nil, {
     [2] = WORLD_TILES.COBBLEROAD,
     [4] = WORLD_TILES.FOUNDATION,
     [6] = WORLD_TILES.LAWN
@@ -124,28 +129,29 @@ GetHamletStaticLayout("cidade2", center_position, nil, {
 
 
 -- 曼德拉丘
-GetHamletStaticLayout("mandraketown", center_position)
+GetHamletStaticLayout("mandraketown", CenterPosition())
 
 -- 出生点
-GetHamletStaticLayout("porkland_start", center_position)
+GetHamletStaticLayout("porkland_start", CenterPosition())
+GetHamletStaticLayout("start_ham", CenterPosition())
 
-GetHamletStaticLayout("nettlegrove", random_position)
+GetHamletStaticLayout("nettlegrove", RandomPosition())
 
-GetHamletStaticLayout("pig_ruins_entrance_1", center_position)
-GetHamletStaticLayout("pig_ruins_entrance_2", center_position)
-GetHamletStaticLayout("pig_ruins_entrance_3", center_position)
-GetHamletStaticLayout("pig_ruins_entrance_4", center_position)
-GetHamletStaticLayout("pig_ruins_entrance_5", center_position)
+GetHamletStaticLayout("pig_ruins_entrance_1", CenterPosition())
+GetHamletStaticLayout("pig_ruins_entrance_2", CenterPosition())
+GetHamletStaticLayout("pig_ruins_entrance_3", CenterPosition())
+GetHamletStaticLayout("pig_ruins_entrance_4", CenterPosition())
+GetHamletStaticLayout("pig_ruins_entrance_5", CenterPosition())
 
-GetHamletStaticLayout("pig_ruins_exit_1", center_position)
-GetHamletStaticLayout("pig_ruins_exit_2", center_position)
-GetHamletStaticLayout("pig_ruins_exit_4", center_position)
+GetHamletStaticLayout("pig_ruins_exit_1", CenterPosition())
+GetHamletStaticLayout("pig_ruins_exit_2", CenterPosition())
+GetHamletStaticLayout("pig_ruins_exit_4", CenterPosition())
 
 
 -- 睡莲使用静态布局，和单机的不是同一个布局
 GetHamletStaticLayout("lilypad")
 
-GetHamletStaticLayout("pig_ruins_artichoke", center_position)
+GetHamletStaticLayout("pig_ruins_artichoke", CenterPosition())
 
 GetHamletStaticLayout("pig_ruins_head", {
     areas = {
@@ -162,23 +168,23 @@ GetHamletStaticLayout("pig_ruins_head", {
     },
 })
 
-GetHamletStaticLayout("pig_ruins_nocanopy", center_position)
-GetHamletStaticLayout("pig_ruins_nocanopy_2", center_position)
-GetHamletStaticLayout("pig_ruins_nocanopy_3", center_position)
-GetHamletStaticLayout("pig_ruins_nocanopy_4", center_position)
+GetHamletStaticLayout("pig_ruins_nocanopy", CenterPosition())
+GetHamletStaticLayout("pig_ruins_nocanopy_2", CenterPosition())
+GetHamletStaticLayout("pig_ruins_nocanopy_3", CenterPosition())
+GetHamletStaticLayout("pig_ruins_nocanopy_4", CenterPosition())
 
-GetHamletStaticLayout("roc_cave", center_position)
-GetHamletStaticLayout("roc_nest", center_position)
+GetHamletStaticLayout("roc_cave", CenterPosition())
+GetHamletStaticLayout("roc_nest", CenterPosition())
 
-GetHamletStaticLayout("cave_entranceham1", center_position)
-GetHamletStaticLayout("cave_entranceham2", center_position)
-GetHamletStaticLayout("cave_entranceham3", center_position)
+GetHamletStaticLayout("cave_entranceham1", CenterPosition())
+GetHamletStaticLayout("cave_entranceham2", CenterPosition())
+GetHamletStaticLayout("cave_entranceham3", CenterPosition())
 
-GetHamletStaticLayout("ruins_exit", center_position)
+GetHamletStaticLayout("ruins_exit", CenterPosition())
 
-GetHamletStaticLayout("ruins_exit2", center_position)
+GetHamletStaticLayout("ruins_exit2", CenterPosition())
 
-GetHamletStaticLayout("antqueencave", center_position)
+GetHamletStaticLayout("antqueencave", CenterPosition())
 
 -- 天空之椅
 GetHamletStaticLayout("ligamundoham", {

@@ -37,6 +37,7 @@ if rawget(_G, "WORLDGEN_MAIN") then
     troimportmodulefile "map/static_layouts" --静态布局
     troimportmodulefile "map/rooms"
     troimportmodulefile "map/tasks"
-    troimportmodulefile "map/network" --地图数据后处理，替换字符串为实际预制体，这个只是改预制件名，还没有真正的实体
-    troimportmodulefile "map/mapadd"  --hook生成函数、真正把地图数据加入原有地形数据中
+    modimport "modmain/newstartlocation" --修改玩家出生点
+    troimportmodulefile "map/network"    --地图数据后处理，替换字符串为实际预制体，这个只是改预制件名，还没有真正的实体
+    troimportmodulefile "map/mapadd"     --hook生成函数、真正把地图数据加入原有地形数据中
 end

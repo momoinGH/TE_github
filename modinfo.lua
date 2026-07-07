@@ -223,20 +223,20 @@ configuration_options =
             world = { "forest" },
         }
     },
-    -- {
-    --     name = "startlocation",
-    --     label = en_zh_zht("Player Portal", "出生模式"),
-    --     hover = en_zh_zht(
-    --         "This is the start point, It represents the biome around the initial portal.",
-    --         "选择你的出生点位置\n推荐将对应群系的区域设置为主大陆",
-    --         "選擇你的出生點位置\n推薦將對應羣系的區域設置爲主大陸"),
-    --     default = "default",
-    --     options = {
-    --         { description = en_zh_zht("Together", "绚丽之门", "絢麗之門"), data = "default", hover = en_zh_zht("ROG Biomes", "巨人国生态群系", "巨人國生態羣系") },
-    --         { description = en_zh_zht("Shipwrecked", "沉船残骸", "沉船殘骸"), data = "shipwrecked", hover = en_zh_zht("SW Biomes", "海难生态群系", "船難生態羣系") },
-    --         { description = en_zh_zht("Hamlet", "坠毁的热气球", "墜毀的熱氣球"), data = "hamlet", hover = en_zh_zht("H Biomes", "哈姆雷特生态群系", "哈姆雷特生態羣系") },
-    --     },
-    -- },
+    {
+        name = "startlocation",
+        label = en_zh_zht("Player Portal", "出生模式"),
+        hover = en_zh_zht(
+            "This is the start point, It represents the biome around the initial portal.",
+            "选择你的出生点位置\n推荐将对应群系的区域设置为主大陆",
+            "選擇你的出生點位置\n推薦將對應羣系的區域設置爲主大陸"),
+        default = "default",
+        options = {
+            { description = en_zh_zht("Together", "绚丽之门", "絢麗之門"), data = "default", hover = en_zh_zht("ROG Biomes", "巨人国生态群系", "巨人國生態羣系") },
+            { description = en_zh_zht("Shipwrecked", "沉船残骸", "沉船殘骸"), data = "shipwrecked", hover = en_zh_zht("SW Biomes", "海难生态群系", "船難生態羣系") },
+            { description = en_zh_zht("Hamlet", "坠毁的热气球", "墜毀的熱氣球"), data = "hamlet", hover = en_zh_zht("H Biomes", "哈姆雷特生态群系", "哈姆雷特生態羣系") },
+        },
+    },
 
     title(en_zh_zht("<hamlet>", "<哈姆雷特>", "<哈姆雷特>"), tro_modules.hamlet),
 

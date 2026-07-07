@@ -1,12 +1,12 @@
+local assets =
+{
+    Asset("ANIM", "anim/trinkets_sw.zip"),
+}
+
 local function MakeTrinket(num)
     local name = "trinket_sw_" .. tostring(num)
 
-    local assets =
-    {
-        Asset("ANIM", "anim/trinkets_sw.zip"),
-    }
-
-    local function fn(Sim)
+    local function fn()
         local inst = CreateEntity()
         inst.entity:AddNetwork()
         inst.entity:AddTransform()

@@ -1419,8 +1419,10 @@ WorldSim = {}
 
 Graph = Class(function(self, id, args) end)
 
+---添加出生点
+---@param arg1 any
+---@param ... unknown
 AddStartLocation = function(arg1, ...) end
-
 
 AddCustomizeGroup = function(category, name, text, desc, atlas, order) end
 AddCustomizeItem = function(category, group, name, itemsettings) end

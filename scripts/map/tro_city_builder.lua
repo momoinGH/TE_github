@@ -218,7 +218,7 @@ local unrequired_prefabs = {
     "teatree",
     "chicken",
     "chickenhouse",
-    "sapling_ham",
+    "sapling",
     "grass_ham"
 }
 
