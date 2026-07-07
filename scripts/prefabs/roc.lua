@@ -14,29 +14,49 @@ local prefabs =
 
 local ROC_SPEED = 20
 local ROC_SHADOWRANGE = 8
-local ROC_LEGDSIT = 6
 
 local function setstage(inst, stage)
 	if stage == 1 then
 		inst.Transform:SetScale(0.35, 0.35, 0.35)
-		inst.components.locomotor.runspeed = 5
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor.runspeed = 5
+		end
 	elseif stage == 2 then
 		inst.Transform:SetScale(0.65, 0.65, 0.65)
-		inst.components.locomotor.runspeed = 7.5
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor.runspeed = 7.5
+		end
 	else
 		inst.Transform:SetScale(1, 1, 1)
-		inst.components.locomotor.runspeed = 10
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor.runspeed = 10
+		end
 	end
 end
 
 
 local function scalefn(inst, scale)
-	inst.components.locomotor.runspeed = ROC_SPEED * scale
-	inst.components.shadowcaster:setrange(ROC_SHADOWRANGE * scale)
+	if inst.components.locomotor ~= nil then
+		inst.components.locomotor.runspeed = ROC_SPEED * scale
+	end
+	if inst.components.shadowcaster ~= nil then
+		inst.components.shadowcaster:setrange(ROC_SHADOWRANGE * scale)
+	end
 end
 
 local function OnRemoved(inst)
-	--    TheWorld.components.rocmanager:RemoveRoc(inst)
+	if TheWorld.components.rocmanager ~= nil then
+		TheWorld.components.rocmanager:RemoveRoc(inst)
+	end
+
+	if inst.bodyparts ~= nil then
+		for _, part in ipairs(inst.bodyparts) do
+			if part:IsValid() then
+				part:Remove()
+			end
+		end
+		inst.bodyparts = nil
+	end
 end
 
 local function MakeNoPhysics(inst, mass, rad)
@@ -49,12 +69,12 @@ local function MakeNoPhysics(inst, mass, rad)
 	inst.Physics:ClearCollisionMask()
 end
 
-local function fn(Sim)
+local function fn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local physics = inst.entity:AddPhysics()
-	local sound = inst.entity:AddSoundEmitter()
+
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
 	MakeNoPhysics(inst, 10, 1.5)
@@ -68,15 +88,13 @@ local function fn(Sim)
 	inst:AddTag("noteleport")
 	inst:AddTag("NOCLICK")
 
-	anim:SetBank("roc")
-	anim:SetBuild("roc_shadow")
-	anim:PlayAnimation("ground_loop")
-
-	anim:SetOrientation(ANIM_ORIENTATION.OnGround)
-	anim:SetLayer(LAYER_BACKGROUND)
-	anim:SetSortOrder(1)
-
-	anim:SetMultColour(1, 1, 1, 0.5)
+	inst.AnimState:SetBank("roc")
+	inst.AnimState:SetBuild("roc_shadow")
+	inst.AnimState:PlayAnimation("ground_loop", true)
+	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+	inst.AnimState:SetLayer(LAYER_BACKGROUND)
+	inst.AnimState:SetSortOrder(1)
+	inst.AnimState:SetMultColour(1, 1, 1, 0.5)
 
 	inst.entity:SetPristine()
 
@@ -106,8 +124,19 @@ local function fn(Sim)
 
 	inst:AddComponent("area_aware")
 
-	inst:ListenForEvent("onremove", OnRemoved)
+	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+	inst.components.locomotor.runspeed = ROC_SPEED
 
+	inst:AddComponent("roccontroller")
+	inst.components.roccontroller.scalefn = scalefn
+	inst.components.roccontroller:Setup(ROC_SPEED, 0.35, 3)
+	inst.components.roccontroller:Start()
+
+	inst:SetStateGraph("SGroc")
+
+	inst.setstage = setstage
+
+	inst:ListenForEvent("onremove", OnRemoved)
 	inst:ListenForEvent("onchangecanopyzone", function()
 		if inst:HasTag("under_leaf_canopy") then
 			inst.components.colourtweener:StartTween({ 1, 1, 1, 0 }, 1)
@@ -117,24 +146,6 @@ local function fn(Sim)
 			end
 		end
 	end, TheWorld)
-
-	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-	inst.components.locomotor.runspeed = ROC_SPEED
-
-	inst:AddComponent("roccontroller")
-	inst.components.roccontroller:Setup(ROC_SPEED, 0.35, 3)
-	inst.components.roccontroller:Start()
-	inst.components.roccontroller.scalefn = scalefn
-
-	inst:SetStateGraph("SGroc")
-
-	--	inst:AddComponent("health")
-	--	inst.components.health:SetMaxHealth(TUNING.SNAKE_HEALTH)
-	--inst.components.health.poison_damage_scale = 0 -- immune to poison
-
-	--inst:ListenForEvent("attacked", OnAttacked)
-	--inst:ListenForEvent("onattackother", OnAttackOther)
-	inst.setstage = setstage
 
 	return inst
 end

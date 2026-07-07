@@ -1,5 +1,26 @@
 require("stategraphs/commonstates")
 
+local function SetSoundIntensity(inst, name)
+    inst.SoundEmitter:SetParameter(name, "intensity", inst.sounddistance or 0)
+end
+
+local function PlayFlapSound(inst)
+    inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/roc/flap", "flaps")
+    SetSoundIntensity(inst, "flaps")
+end
+
+local function RunForward(inst)
+    if inst.components.locomotor ~= nil then
+        inst.components.locomotor:RunForward()
+    end
+end
+
+local function SpawnBodyParts(inst)
+    if inst.components.roccontroller ~= nil and inst.bodyparts == nil then
+        inst.components.roccontroller:Spawnbodyparts()
+    end
+end
+
 local actionhandlers =
 {
 
@@ -8,9 +29,21 @@ local actionhandlers =
 
 local events =
 {
-    EventHandler("fly", function(inst) inst.sg:GoToState("fly") end),
-    EventHandler("land", function(inst) inst.sg:GoToState("land") end),
-    EventHandler("takeoff", function(inst) inst.sg:GoToState("takeoff") end),
+    EventHandler("fly", function(inst)
+        if not inst.sg:HasStateTag("moving") then
+            inst.sg:GoToState("fly")
+        end
+    end),
+    EventHandler("land", function(inst)
+        if not inst.sg:HasStateTag("busy") then
+            inst.sg:GoToState("land")
+        end
+    end),
+    EventHandler("takeoff", function(inst)
+        if not inst.sg:HasStateTag("busy") then
+            inst.sg:GoToState("takeoff")
+        end
+    end),
     --[[
     EventHandler("attacked", function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
     EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then inst.sg:GoToState("attack", data.target) end end),
@@ -45,7 +78,9 @@ local function DoStep(inst)
     --if player then
     --player:ShakeCamera(CAMERASHAKE.SIDE, 2, .06, .25)
     --end
-    inst.components.groundpounder:GroundPound()
+    if inst.components.groundpounder ~= nil then
+        inst.components.groundpounder:GroundPound()
+    end
     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/glommer/foot_ground")
     TheWorld:PushEvent("bigfootstep")
 end
@@ -62,8 +97,8 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst, data)
-                inst.sg:GoToState("idle")
+            EventHandler("animover", function(inst)
+                inst.AnimState:PlayAnimation("ground_loop")
             end),
         }
     },
@@ -80,20 +115,19 @@ local states =
 
         timeline =
         {
-            -- TimeEvent(30 * FRAMES, function(inst) inst.components.roccontroller:Spawnbodyparts() end),
             TimeEvent(5 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/roc/flap", "flaps")
-                inst.SoundEmitter:SetParameter("flaps", "intensity", inst.sounddistance)
+                PlayFlapSound(inst)
             end),
             TimeEvent(17 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/roc/flap", "flaps")
-                inst.SoundEmitter:SetParameter("flaps", "intensity", inst.sounddistance)
+                PlayFlapSound(inst)
             end),
+            TimeEvent(30 * FRAMES, SpawnBodyParts),
         },
 
         events =
         {
-            EventHandler("animover", function(inst, data)
+            EventHandler("animover", function(inst)
+                SpawnBodyParts(inst)
                 inst.sg:GoToState("idle")
             end),
         }
@@ -111,7 +145,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(15 * FRAMES, function(inst) inst.components.locomotor:RunForward() end),
+            TimeEvent(15 * FRAMES, RunForward),
         },
 
 
@@ -129,7 +163,7 @@ local states =
         tags = { "moving", "canrotate" },
 
         onenter = function(inst)
-            inst.components.locomotor:RunForward()
+            RunForward(inst)
             inst.sg:SetTimeout(1 + 2 * math.random())
             inst.AnimState:PlayAnimation("shadow")
         end,
@@ -148,22 +182,21 @@ local states =
         tags = { "moving", "canrotate" },
 
         onenter = function(inst)
-            inst.components.locomotor:RunForward()
+            RunForward(inst)
             inst.AnimState:PlayAnimation("shadow_flap_loop")
         end,
 
         timeline =
         {
             TimeEvent(16 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/roc/flap", "flaps")
-                inst.SoundEmitter:SetParameter("flaps", "intensity", inst.sounddistance)
+                PlayFlapSound(inst)
             end),
 
             TimeEvent(1 * FRAMES, function(inst)
                 if math.random() < 0.5 then
                     inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/roc/call", "calls")
                 end
-                inst.SoundEmitter:SetParameter("calls", "intensity", inst.sounddistance)
+                SetSoundIntensity(inst, "calls")
             end),
         },
         onupdate = function(inst)

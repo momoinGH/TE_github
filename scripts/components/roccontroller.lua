@@ -1,5 +1,3 @@
-local easing = require("easing")
-
 local SCREEN_DIST = 50
 local HEAD_ATTACK_DIST = 1.5
 local SCALERATE = 1 / (30 * 2) -- 2 seconds to go from 0 to 1
@@ -14,7 +12,26 @@ local ROC_LEGDSIT = 6
 local LEGDIST = ROC_LEGDSIT
 local LEG_WALKDIST = 4
 local LEG_WALKDIST_BIG = 6
-local LAND_PROX = 7
+local LAND_PROX = 15
+
+local function IsValidEnt(ent)
+    return ent ~= nil and ent:IsValid()
+end
+
+local function HasStateTag(ent, tag)
+    return ent ~= nil and ent.sg ~= nil and ent.sg:HasStateTag(tag)
+end
+
+local function PushEvent(ent, event)
+    if IsValidEnt(ent) then
+        ent:PushEvent(event)
+    end
+end
+
+local function GetSavedEntity(ents, guid)
+    local data = guid ~= nil and ents ~= nil and ents[guid] or nil
+    return data ~= nil and data.entity or nil
+end
 
 -- 大鹏鸟
 local RocController = Class(function(self, inst)
@@ -57,12 +74,22 @@ function RocController:Setup(speed, scale, stages)
     end
 
     self.inst:ListenForEvent("liftoff", function()
+        if self.busy or self.liftoff then
+            return
+        end
+
         self.busy = true
         local head = self.head
+        if not IsValidEnt(head) then
+            self.busy = false
+            self:doliftoff()
+            return
+        end
+
         head:PushEvent("taunt")
 
         head:ListenForEvent("animover", function()
-            if head.AnimState:IsCurrentAnimation("taunt") then
+            if IsValidEnt(head) and head.AnimState:IsCurrentAnimation("taunt") then
                 self.busy = false
                 self:doliftoff()
             end
@@ -92,7 +119,7 @@ end
 
 function RocController:CheckScale()
     --	print("CHECKING SCALE",self.inst.Transform:GetScale())
-    if self.inst.Transform:GetScale() ~= 1 then
+    if self.stages > 0 and self.inst.Transform:GetScale() ~= 1 then
         local delta = (1 - self.startscale) / self.stages
 
         self.scaleup = {
@@ -102,35 +129,43 @@ function RocController:CheckScale()
 end
 
 function RocController:setscale(scale)
+    scale = scale or self.startscale
     self.inst.Transform:SetScale(scale, scale, scale)
     if self.scalefn then
         self.scalefn(self.inst, scale)
     end
-    self.inst.sounddistance = Remap(scale, self.startscale, 1, 0, 1)
+    self.inst.sounddistance = self.startscale ~= 1 and Remap(scale, self.startscale, 1, 0, 1) or 1
 end
 
 function RocController:doliftoff()
-    if #self.inst.bodyparts > 0 then
-        for i, part in ipairs(self.inst.bodyparts) do
-            part:PushEvent("exit")
-        end
-        self.inst.bodyparts = nil
-        self.head = nil
-        self.tail = nil
-        self.leg1 = nil
-        self.leg2 = nil
-        self.liftoff = true
-        self.landed = nil
-        self.currentleg = nil
-
-        self.inst:PushEvent("takeoff")
+    if self.liftoff then
+        return
     end
+
+    if self.inst.bodyparts ~= nil then
+        for i, part in ipairs(self.inst.bodyparts) do
+            PushEvent(part, "exit")
+        end
+    end
+
+    self.inst.bodyparts = nil
+    self.head = nil
+    self.tail = nil
+    self.leg1 = nil
+    self.leg2 = nil
+    self.liftoff = true
+    self.landed = nil
+    self.currentleg = nil
+    self.busy = false
+
+    self.inst:PushEvent("takeoff")
 end
 
 function RocController:Spawnbodyparts()
-    if not self.inst.bodyparts then
-        self.inst.bodyparts = {}
+    if self.inst.bodyparts ~= nil then
+        return
     end
+    self.inst.bodyparts = {}
 
     local angle = self.inst.Transform:GetRotation() * DEGREES
     local pos = Vector3(self.inst.Transform:GetWorldPosition())
@@ -141,7 +176,9 @@ function RocController:Spawnbodyparts()
     local leg1 = SpawnPrefab("roc_leg")
     leg1.Transform:SetPosition(pos.x + offset.x, 0, pos.z + offset.z)
     leg1.Transform:SetRotation(self.inst.Transform:GetRotation())
-    leg1.sg:GoToState("enter")
+    if leg1.sg ~= nil then
+        leg1.sg:GoToState("enter")
+    end
     leg1.body = self.inst
     leg1.legoffsetdir = PI / 2
     table.insert(self.inst.bodyparts, leg1)
@@ -152,18 +189,26 @@ function RocController:Spawnbodyparts()
     local leg2 = SpawnPrefab("roc_leg")
     leg2.Transform:SetPosition(pos.x + offset.x, 0, pos.z + offset.z)
     leg2.Transform:SetRotation(self.inst.Transform:GetRotation())
-    leg2.sg:GoToState("enter")
+    if leg2.sg ~= nil then
+        leg2.sg:GoToState("enter")
+    end
     leg2.body = self.inst
     leg2.legoffsetdir = -PI / 2
     table.insert(self.inst.bodyparts, leg2)
     self.leg2 = leg2
 
     self.inst:DoTaskInTime(0.5, function()
+        if not IsValidEnt(self.inst) or self.inst.bodyparts == nil or IsValidEnt(self.head) then
+            return
+        end
+
         offset = Vector3(HEADDIST * math.cos(angle), 0, -HEADDIST * math.sin(angle))
         local head = SpawnPrefab("roc_head")
         head.Transform:SetPosition(pos.x + offset.x, 0, pos.z + offset.z)
         head.Transform:SetRotation(self.inst.Transform:GetRotation())
-        head.sg:GoToState("enter")
+        if head.sg ~= nil then
+            head.sg:GoToState("enter")
+        end
         head.body = self.inst
         table.insert(self.inst.bodyparts, head)
         self.head = head
@@ -174,18 +219,22 @@ function RocController:Spawnbodyparts()
     local tail = SpawnPrefab("roc_tail")
     tail.Transform:SetPosition(pos.x + offset.x, 0, pos.z + offset.z)
     tail.Transform:SetRotation(self.inst.Transform:GetRotation())
-    tail.sg:GoToState("enter")
+    if tail.sg ~= nil then
+        tail.sg:GoToState("enter")
+    end
+    tail.body = self.inst
     self.tail = tail
     table.insert(self.inst.bodyparts, tail)
 end
 
 function RocController:EatSomething(food)
-    food:Remove()
-    print("FOOD EATEN")
+    if IsValidEnt(food) then
+        food:Remove()
+    end
 end
 
 function RocController:GetTarget()
-    if not self.target or not self.target:IsValid() or self.target:HasTag("player") then
+    if not IsValidEnt(self.target) or self.target:HasTag("player") then
         -- look for items..
         local pos = Vector3(self.inst.Transform:GetWorldPosition())
         local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 20, { "structure" })
@@ -193,7 +242,7 @@ function RocController:GetTarget()
         local sorted = {}
         if #ents > 0 then
             for i, ent in ipairs(ents) do
-                if ent then
+                if IsValidEnt(ent) and IsValidEnt(self.head) then
                     local x, y, z = ent.Transform:GetWorldPosition()
                     local ground = TheWorld
 
@@ -213,7 +262,7 @@ function RocController:GetTarget()
         -- look for player		
     end
 
-    if self.target and self.target:IsValid() then
+    if IsValidEnt(self.target) then
         return self.target
     end
 
@@ -222,6 +271,10 @@ function RocController:GetTarget()
 end
 
 function RocController:OnUpdate(dt)
+    if self.inst:IsAsleep() then
+        return
+    end
+
     local function getanglepointtopoint(x1, z1, x2, z2)
         local dz = z1 - z2
         local dx = x2 - x1
@@ -230,34 +283,28 @@ function RocController:OnUpdate(dt)
     end
 
     local player = GetClosestInstWithTag("player", self.inst, 100)
-    if player == nil then player = self.inst end
+    if player == nil then
+        player = self.inst
+    end
     local px, py, pz = player.Transform:GetWorldPosition()
+    local onvalidtiles = player:IsInHamletArea()
 
-    local ground = TheWorld
-    local tile = ground.Map:GetTileAtPoint(px, py, pz)
-    local onvalidtiles = true
-    if tile == WORLD_TILES.OCEAN_BRINEPOOL or tile == WORLD_TILES.OCEAN_WATERLOG or tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or tile == WORLD_TILES.OCEAN_HAZARDOUS or tile == WORLD_TILES.OCEAN_ROUGH or tile == WORLD_TILES.OCEAN_COASTAL or tile == WORLD_TILES.OCEAN_COASTAL_SHORE or tile == WORLD_TILES.OCEAN_SWELL or tile == WORLD_TILES.INVALID or tile == WORLD_TILES.IMPASSABLE then --  tile == WORLD_TILES.FIELDS or
-        onvalidtiles = false
-    end
-
-    local onvaliddungtiles = true
-    if tile == WORLD_TILES.RAINFOREST or tile == WORLD_TILES.PLAINS or tile == WORLD_TILES.DEEPRAINFOREST then
-        onvaliddungtiles = true
-    end
-
-
+    -- 检查是否可以落地
     local disttoplayer = self.inst:GetDistanceSqToInst(player)
     if disttoplayer > SCREEN_DIST * SCREEN_DIST then
         -- has landed and is flying again, should leave now
         if self.liftoff and not self.inst.teleporting then
-            print("FLY AWAY")
             self.inst:Remove()
+            return
         elseif not self.landed then
             self.inst.Transform:SetRotation(self.inst:GetAngleToPoint(px, py, pz))
         end
     end
 
-    if TheWorld.state.isnight and not self.landed then self.inst:Remove() end
+    if TheWorld.state.isnight and not self.landed then
+        self.inst:Remove()
+        return
+    end
 
     if self.scaleup then
         local currentscale = self.inst.Transform:GetScale()
@@ -279,13 +326,8 @@ function RocController:OnUpdate(dt)
     end
 
     local dungok = true
-    --	if TheWorld.getworldgenoptions(TheWorld)["dungpile"] then
-    --		if TheWorld.getworldgenoptions(TheWorld)["dungpile"] == "never" then
-    --			dungok = false
-    --		end
-    --	end
 
-    if not self.landed and onvaliddungtiles and dungok then
+    if not self.landed and onvalidtiles and dungok then
         local cx, cy, cz = self.inst.Transform:GetWorldPosition()
         if self.dungtime > 0 then
             self.dungtime = math.max(self.dungtime - dt, 0)
@@ -294,9 +336,17 @@ function RocController:OnUpdate(dt)
             local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 50, { "dungpile" })
             if #ents < 2 then
                 self.inst:DoTaskInTime(1 + Remap(self.inst.Transform:GetScale(), 0.35, 1, 2, 0), function()
+                    if not IsValidEnt(self.inst) then
+                        return
+                    end
+
                     local crap = SpawnPrefab("dungpile")
-                    crap.Transform:SetPosition(cx, cy, cz)
-                    crap.fall(crap)
+                    if crap ~= nil then
+                        crap.Transform:SetPosition(cx, cy, cz)
+                        if crap.fall ~= nil then
+                            crap.fall(crap)
+                        end
+                    end
                 end)
             end
             self.dungtime = math.random() * 10 + 2
@@ -304,18 +354,18 @@ function RocController:OnUpdate(dt)
     end
 
     if not self.busy then
-        if self.landed and self.head and self.tail and self.leg1 and self.leg2 then
+        if self.landed and IsValidEnt(self.head) and IsValidEnt(self.tail) and IsValidEnt(self.leg1) and IsValidEnt(self.leg2) then
             if onvalidtiles and not TheWorld.state.isnight then
                 local target = self:GetTarget() or self.inst
                 -- HEAD
-                if not self.head.sg:HasStateTag("busy") then
+                if not HasStateTag(self.head, "busy") then
                     local targetpos = Vector3(target.Transform:GetWorldPosition())
                     local headdistsq = self.head:GetDistanceSqToInst(target)
                     if headdistsq > HEAD_ATTACK_DIST * HEAD_ATTACK_DIST then
                         self.head_vel = math.min(self.head_vel + (self.head_acc * dt), self.head_vel_max)
                     else
-                        if self.target:HasTag("_inventoryitem") or self.target:HasTag("player") then
-                            if self.target:HasTag("player") and not self.target.sg:HasStateTag("cower") then
+                        if IsValidEnt(self.target) and (self.target:HasTag("_inventoryitem") or self.target:HasTag("player")) then
+                            if self.target:HasTag("player") and not HasStateTag(self.target, "cower") then
                                 self.target:PushEvent("cower")
                             end
                             if headdistsq < 0.2 then
@@ -335,9 +385,7 @@ function RocController:OnUpdate(dt)
                 end
 
                 -- BODY
-                local bodistsq = self.inst:GetDistanceSqToInst(self.head)
                 local pos = Vector3(self.inst.Transform:GetWorldPosition())
-
                 local BOD_VEL_MAX = self.speed
                 local BOD_ACC_MAX = 0.5 --5
                 local targetpos = Vector3(self.head.Transform:GetWorldPosition())
@@ -434,7 +482,7 @@ function RocController:OnUpdate(dt)
                 currentAngle = currentAngle + (self.body_angle_vel * dt)
                 self.inst.Transform:SetRotation(currentAngle)
 
-                if not self.head.sg:HasStateTag("busy") then
+                if not HasStateTag(self.head, "busy") then
                     local targetpos = Vector3(target.Transform:GetWorldPosition())
                     local angle = self.head:GetAngleToPoint(targetpos.x, targetpos.y, targetpos.z)
                     self.head.Transform:SetRotation(angle)
@@ -444,9 +492,13 @@ function RocController:OnUpdate(dt)
                 self.tail.Transform:SetRotation(self.inst.Transform:GetRotation())
 
                 -- LEGS
-                if not self.leg1.sg:HasStateTag("walking") and not self.leg2.sg:HasStateTag("walking") then
+                if self.currentleg == nil or not IsValidEnt(self.currentleg) then
+                    self.currentleg = self.leg1
+                end
+
+                if not HasStateTag(self.leg1, "walking") and not HasStateTag(self.leg2, "walking") then
                     local legdir = PI / 2
-                    if self.currentleg == 2 then
+                    if self.currentleg == self.leg2 then
                         legdir = legdir * -1
                     end
 
@@ -489,28 +541,49 @@ end
 
 function RocController:FadeInFinished()
     -- Last step in transition
-    local player = ThePlayer
-    player.components.health:SetInvincible(false)
-    player.components.playercontroller:Enable(true)
+    local player = self.grabbedplayer
+    if IsValidEnt(player) then
+        if player.components.health ~= nil then
+            player.components.health:SetInvincible(false)
+        end
+        if player.components.playercontroller ~= nil then
+            player.components.playercontroller:Enable(true)
+        end
+    end
+    self.grabbedplayer = nil
     self.inst.teleporting = nil
 end
 
 function RocController:FadeOutFinished()
     self.inst:DoTaskInTime(2, function()
+        local player = self.grabbedplayer
+        if not IsValidEnt(player) then
+            self.inst.teleporting = nil
+            return
+        end
+
         for k, v in pairs(Ents) do
             if v:HasTag("roc_nest") then
                 local pt = Vector3(v.Transform:GetWorldPosition())
-                ThePlayer.Transform:SetPosition(pt.x, pt.y, pt.z)
-                ThePlayer.components.sanity:DoDelta(-TUNING.SANITY_MED)
+                player.Transform:SetPosition(pt.x, pt.y, pt.z)
+                if player.components.sanity ~= nil then
+                    player.components.sanity:DoDelta(-TUNING.SANITY_MED)
+                end
                 self.inst.Transform:SetPosition(pt.x, pt.y, pt.z)
-                TheCamera:Snap()
-
-                TheFrontEnd:SetFadeLevel(1)
-                ThePlayer:Show()
-                ThePlayer.HUD:Show()
-                ThePlayer:PushEvent("wakeup")
-                ThePlayer.DynamicShadow:Enable(true)
-                TheFrontEnd:Fade(true, 2, function() self:FadeInFinished() end)
+                player:Show()
+                if player.HUD ~= nil then
+                    player.HUD:Show()
+                end
+                player:PushEvent("wakeup")
+                if player.DynamicShadow ~= nil then
+                    player.DynamicShadow:Enable(true)
+                end
+                if player.ScreenFade ~= nil then
+                    player:ScreenFade(true, 2)
+                    self.inst:DoTaskInTime(2, function() self:FadeInFinished() end)
+                else
+                    self:FadeInFinished()
+                end
                 break
             end
         end
@@ -518,22 +591,42 @@ function RocController:FadeOutFinished()
 end
 
 function RocController:teleport()
-    TheFrontEnd:Fade(false, 2, function() self:FadeOutFinished() end)
+    local player = self.grabbedplayer
+    if IsValidEnt(player) and player.ScreenFade ~= nil then
+        player:ScreenFade(false, 2)
+        self.inst:DoTaskInTime(2, function() self:FadeOutFinished() end)
+    else
+        self:FadeOutFinished()
+    end
 end
 
-function RocController:playergrabbed()
-    ThePlayer:PushEvent("grabbed")
-    self.head:AddChild(ThePlayer)
+function RocController:playergrabbed(player)
+    player = player or self.target
+    if not IsValidEnt(player) or not IsValidEnt(self.head) then
+        return
+    end
+
+    self.grabbedplayer = player
+    player:PushEvent("grabbed")
+    self.head:AddChild(player)
     self.head:AddTag("HasPlayer")
-    ThePlayer.Transform:SetRotation(self.head.Transform:GetRotation())
-    ThePlayer.AnimState:SetFinalOffset(-10)
+    player.Transform:SetRotation(self.head.Transform:GetRotation())
+    player.AnimState:SetFinalOffset(-10)
 
-    ThePlayer.Transform:SetPosition(0, 0, 0)
+    player.Transform:SetPosition(0, 0, 0)
 
-    ThePlayer.components.health:SetInvincible(true)
-    ThePlayer.components.playercontroller:Enable(false)
-    ThePlayer.HUD:Hide()
-    ThePlayer.DynamicShadow:Enable(false)
+    if player.components.health ~= nil then
+        player.components.health:SetInvincible(true)
+    end
+    if player.components.playercontroller ~= nil then
+        player.components.playercontroller:Enable(false)
+    end
+    if player.HUD ~= nil then
+        player.HUD:Hide()
+    end
+    if player.DynamicShadow ~= nil then
+        player.DynamicShadow:Enable(false)
+    end
 
     self.inst:DoTaskInTime(2.5, function() self:teleport() end)
     self.inst.teleporting = true
@@ -543,10 +636,13 @@ function RocController:UnchildPlayer(inst)
     if not inst then
         inst = self.head
     end
-    inst:RemoveChild(ThePlayer)
-    ThePlayer.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    ThePlayer:Hide()
-    inst:RemoveTag("HasPlayer")
+    local player = self.grabbedplayer
+    if IsValidEnt(inst) and IsValidEnt(player) then
+        inst:RemoveChild(player)
+        player.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        player:Hide()
+        inst:RemoveTag("HasPlayer")
+    end
 end
 
 function RocController:OnSave()
@@ -563,7 +659,7 @@ function RocController:OnSave()
 
     data.dungtime = self.dungtime
 
-    if self.currentleg then
+    if IsValidEnt(self.currentleg) then
         data.currentleg = self.currentleg.GUID
     end
     if self.scaleup then
@@ -578,19 +674,19 @@ function RocController:OnSave()
 
     data.scale = self.inst.Transform:GetScale()
 
-    if self.head then
+    if IsValidEnt(self.head) then
         data.head = self.head.GUID
         table.insert(refs, self.head.GUID)
     end
-    if self.tail then
+    if IsValidEnt(self.tail) then
         data.tail = self.tail.GUID
         table.insert(refs, self.tail.GUID)
     end
-    if self.leg1 then
+    if IsValidEnt(self.leg1) then
         data.leg1 = self.leg1.GUID
         table.insert(refs, self.leg1.GUID)
     end
-    if self.leg2 then
+    if IsValidEnt(self.leg2) then
         data.leg2 = self.leg2.GUID
         table.insert(refs, self.leg2.GUID)
     end
@@ -599,17 +695,14 @@ function RocController:OnSave()
 end
 
 function RocController:OnLoad(data)
-    data.body_vel_x = self.body_vel.x
-    data.body_vel_z = self.body_vel.z
+    if data == nil then
+        return
+    end
 
-    data.tail_vel_x = self.tail_vel.x
-    data.tail_vel_z = self.tail_vel.z
-
-    self.head_vel = data.head_vel
-    self.body_vel = { x = data.body_vel_x, z = data.body_vel_z }
-    self.tail_vel = { x = data.tail_vel_x, z = data.tail_vel_z }
-    self.dungtime = data.dungtime
-
+    self.head_vel = data.head_vel or self.head_vel
+    self.body_vel = { x = data.body_vel_x or self.body_vel.x, z = data.body_vel_z or self.body_vel.z }
+    self.tail_vel = { x = data.tail_vel_x or self.tail_vel.x, z = data.tail_vel_z or self.tail_vel.z }
+    self.dungtime = data.dungtime or self.dungtime
 
     if data.currentleg then
         self.currentleg = data.currentleg
@@ -624,36 +717,57 @@ function RocController:OnLoad(data)
         self.liftoff = data.liftoff
     end
 
-    self:setscale(data.scale)
+    self:setscale(data.scale or self.inst.Transform:GetScale())
 end
 
 function RocController:LoadPostPass(ents, data)
+    if data == nil then
+        return
+    end
+
     self.inst.bodyparts = {}
+
     if data.currentleg then
-        self.currentleg = ents[data.currentleg].entity
+        self.currentleg = GetSavedEntity(ents, data.currentleg)
     end
+
     if data.head then
-        self.head = ents[data.head].entity
-        self.head.body = self.inst
-        self.head.controller = self
-        table.insert(self.inst.bodyparts, self.head)
+        self.head = GetSavedEntity(ents, data.head)
+        if IsValidEnt(self.head) then
+            self.head.body = self.inst
+            self.head.controller = self
+            table.insert(self.inst.bodyparts, self.head)
+        end
     end
+
     if data.tail then
-        self.tail = ents[data.tail].entity
-        self.tail.body = self.inst
-        table.insert(self.inst.bodyparts, self.tail)
+        self.tail = GetSavedEntity(ents, data.tail)
+        if IsValidEnt(self.tail) then
+            self.tail.body = self.inst
+            table.insert(self.inst.bodyparts, self.tail)
+        end
     end
+
     if data.leg1 then
-        self.leg1 = ents[data.leg1].entity
-        self.leg1.body = self.inst
-        self.leg1.legoffsetdir = PI / 2
-        table.insert(self.inst.bodyparts, self.leg1)
+        self.leg1 = GetSavedEntity(ents, data.leg1)
+        if IsValidEnt(self.leg1) then
+            self.leg1.body = self.inst
+            self.leg1.legoffsetdir = PI / 2
+            table.insert(self.inst.bodyparts, self.leg1)
+        end
     end
+
     if data.leg2 then
-        self.leg2 = ents[data.leg2].entity
-        self.leg2.body = self.inst
-        self.leg2.legoffsetdir = -PI / 2
-        table.insert(self.inst.bodyparts, self.leg2)
+        self.leg2 = GetSavedEntity(ents, data.leg2)
+        if IsValidEnt(self.leg2) then
+            self.leg2.body = self.inst
+            self.leg2.legoffsetdir = -PI / 2
+            table.insert(self.inst.bodyparts, self.leg2)
+        end
+    end
+
+    if self.currentleg == nil or not IsValidEnt(self.currentleg) then
+        self.currentleg = self.leg1
     end
 end
 
