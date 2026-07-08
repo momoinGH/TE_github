@@ -1,117 +1,116 @@
-local assets =
-{
-	Asset("ANIM", "anim/messagebottle.zip"),
-	Asset("MINIMAP_IMAGE", "messageBottle"),
-}
+-- local assets =
+-- {
+-- 	Asset("ANIM", "anim/messagebottle.zip"),
+-- 	Asset("MINIMAP_IMAGE", "messageBottle"),
+-- }
 
-local function getrevealtargetpos(inst, doer)
-	local map = TheWorld.Map
-	local x, y, z
-	local inventory = inst.components.inventoryitem:GetContainer()
-	-- 返回这两个家伙的位置
-	for _, name in ipairs({ "kraken", "octopusking" }) do
-		for _, v in ipairs(TroGetEntsByPrefab(name)) do
-			if not v.revelado then
-				v.revelado = true
-				x, y, z = v.Transform:GetWorldPosition()
-				local empty_bottle = SpawnPrefab("messagebottleempty_sw")
-				empty_bottle.Transform:SetPosition(inst.Transform:GetWorldPosition())
-				inst:Remove()
-				if inventory ~= nil then
-					inventory:GiveItem(empty_bottle)
-				end
-				return Vector3(math.floor(x), 0, math.floor(z))
-			end
-		end
-	end
+-- local function getrevealtargetpos(inst, doer)
+-- 	local map = TheWorld.Map
+-- 	local x, y, z
+-- 	local inventory = inst.components.inventoryitem:GetContainer()
+-- 	-- 返回这两个家伙的位置
+-- 	for _, name in ipairs({ "kraken", "octopusking" }) do
+-- 		for _, v in ipairs(TroGetEntsByPrefab(name)) do
+-- 			if not v.revelado then
+-- 				v.revelado = true
+-- 				x, y, z = v.Transform:GetWorldPosition()
+-- 				local empty_bottle = SpawnPrefab("messagebottleempty")
+-- 				empty_bottle.Transform:SetPosition(inst.Transform:GetWorldPosition())
+-- 				inst:Remove()
+-- 				if inventory ~= nil then
+-- 					inventory:GiveItem(empty_bottle)
+-- 				end
+-- 				return Vector3(math.floor(x), 0, math.floor(z))
+-- 			end
+-- 		end
+-- 	end
 
-	local sx, sy = TheWorld.Map:GetSize()
+-- 	local sx, sy = TheWorld.Map:GetSize()
 
-	for i = 1, 500 do
-		x = math.random(-sx, sx)
-		z = math.random(-sy, sy)
-		if map:IsAboveGroundAtPoint(x, 0, z) then
-			break
-		end
-	end
+-- 	for i = 1, 500 do
+-- 		x = math.random(-sx, sx)
+-- 		z = math.random(-sy, sy)
+-- 		if map:IsAboveGroundAtPoint(x, 0, z) then
+-- 			break
+-- 		end
+-- 	end
 
-	SpawnPrefab("buriedtreasure").Transform:SetPosition(x, 0, z)
-	return Vector3(x, 0, z)
-end
+-- 	SpawnPrefab("buriedtreasure").Transform:SetPosition(x, 0, z)
+-- 	return Vector3(x, 0, z)
+-- end
 
-local function messagebottlefn(Sim)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
+-- local function messagebottlefn(Sim)
+-- 	local inst = CreateEntity()
+-- 	inst.entity:AddTransform()
+-- 	inst.entity:AddAnimState()
+-- 	inst.entity:AddNetwork()
 
-	MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
+-- 	MakeInventoryPhysics(inst)
+-- 	MakeInventoryFloatable(inst)
 
-	inst.AnimState:SetBank("messagebottle")
-	inst.AnimState:SetBuild("messagebottle")
-	inst.AnimState:PlayAnimation("idle", true)
+-- 	inst.AnimState:SetBank("messagebottle")
+-- 	inst.AnimState:SetBuild("messagebottle")
+-- 	inst.AnimState:PlayAnimation("idle", true)
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon("messageBottle.png")
+-- 	local minimap = inst.entity:AddMiniMapEntity()
+-- 	minimap:SetIcon("messageBottle.png")
 
-	inst:AddTag("aquatic")
-	inst:AddTag("messagebottle")
-	inst:AddTag("nosteal")
-	inst:AddTag("unwrappable")
+-- 	inst:AddTag("aquatic")
+-- 	inst:AddTag("messagebottle")
+-- 	inst:AddTag("nosteal")
+-- 	inst:AddTag("unwrappable")
 
-	inst.entity:SetPristine()
+-- 	inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
+-- 	if not TheWorld.ismastersim then
+-- 		return inst
+-- 	end
 
-	inst:AddComponent("inspectable")
-	inst:AddComponent("inventoryitem")
+-- 	inst:AddComponent("inspectable")
+-- 	inst:AddComponent("inventoryitem")
 
-	inst:AddComponent("waterproofer")
-	inst.components.waterproofer:SetEffectiveness(0)
+-- 	inst:AddComponent("waterproofer")
+-- 	inst.components.waterproofer:SetEffectiveness(0)
 
-	inst:AddComponent("mapspotrevealer")
-	inst.components.mapspotrevealer:SetGetTargetFn(getrevealtargetpos)
-	inst.components.mapspotrevealer.postreveal = inst.Remove
+-- 	inst:AddComponent("mapspotrevealer")
+-- 	inst.components.mapspotrevealer:SetGetTargetFn(getrevealtargetpos)
+-- 	inst.components.mapspotrevealer.postreveal = inst.Remove
 
-	return inst
-end
+-- 	return inst
+-- end
 
-local function emptybottlefn()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
+-- local function emptybottlefn()
+-- 	local inst = CreateEntity()
+-- 	inst.entity:AddTransform()
+-- 	inst.entity:AddAnimState()
+-- 	inst.entity:AddNetwork()
 
-	MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
+-- 	MakeInventoryPhysics(inst)
+-- 	MakeInventoryFloatable(inst)
 
-	inst.AnimState:SetBank("messagebottle")
-	inst.AnimState:SetBuild("messagebottle")
-	inst.AnimState:PlayAnimation("idle_empty", true)
+-- 	inst.AnimState:SetBank("messagebottle")
+-- 	inst.AnimState:SetBuild("messagebottle")
+-- 	inst.AnimState:PlayAnimation("idle_empty", true)
 
-	inst:AddTag("aquatic")
-	inst:AddTag("messagebottleempty")
+-- 	inst:AddTag("aquatic")
+-- 	inst:AddTag("messagebottleempty")
 
-	inst.entity:SetPristine()
+-- 	inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
+-- 	if not TheWorld.ismastersim then
+-- 		return inst
+-- 	end
 
-	inst:AddComponent("inspectable")
-	inst:AddComponent("inventoryitem")
+-- 	inst:AddComponent("inspectable")
+-- 	inst:AddComponent("inventoryitem")
 
-	inst:AddComponent("waterproofer")
-	inst.components.waterproofer:SetEffectiveness(0)
+-- 	inst:AddComponent("waterproofer")
+-- 	inst.components.waterproofer:SetEffectiveness(0)
 
-	inst:AddComponent("stackable")
-	inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
+-- 	inst:AddComponent("stackable")
+-- 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
 
-	return inst
-end
+-- 	return inst
+-- end
 
-return Prefab("messagebottle_sw", messagebottlefn, assets),
-	Prefab("messagebottleempty_sw", emptybottlefn, assets)
+-- return Prefab("messagebottle_sw", messagebottlefn, assets)

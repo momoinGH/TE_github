@@ -1442,7 +1442,7 @@ local internalloot =
 		loot =
 		{
 			icehat = 1,
-            tropicalfan = 1,
+			tropicalfan = 1,
 			--	palmleaf_umbrella = 1,
 		},
 	},
@@ -2221,20 +2221,19 @@ local function SpawnReward(inst, reward, lootdropper, pt, delay)
 				local sp = math.random() * 3 + 2
 
 				local item = SpawnPrefab(k)
-
-				if item.components.inventoryitem and not item.components.health then
-					local pt = inst:GetPosition() +
-						Vector3(2 * math.cos(spawnangle), 3, 2 * math.sin(spawnangle))
-					inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/slotmachine_reward")
-					item.Transform:SetPosition(pt:Get())
-					item.Physics:SetVel(sp * math.cos(angle), math.random() * 2 + 9, sp * math.sin(angle))
-					--	item.components.inventoryitem:OnStartFalling()
-				else
-					local pt = inst:GetPosition() +
-						Vector3(2 * math.cos(spawnangle), 0, 2 * math.sin(spawnangle))
-					pt = pt + Vector3(sp * math.cos(angle), 0, sp * math.sin(angle))
-					item.Transform:SetPosition(pt:Get())
-					SpawnPrefab("collapse_small").Transform:SetPosition(pt:Get())
+				if item then
+					if item.components.inventoryitem and not item.components.health then
+						local pt = inst:GetPosition() + Vector3(2 * math.cos(spawnangle), 3, 2 * math.sin(spawnangle))
+						inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/slotmachine_reward")
+						item.Transform:SetPosition(pt:Get())
+						item.Physics:SetVel(sp * math.cos(angle), math.random() * 2 + 9, sp * math.sin(angle))
+						--	item.components.inventoryitem:OnStartFalling()
+					else
+						local pt = inst:GetPosition() + Vector3(2 * math.cos(spawnangle), 0, 2 * math.sin(spawnangle))
+						pt = pt + Vector3(sp * math.cos(angle), 0, sp * math.sin(angle))
+						item.Transform:SetPosition(pt:Get())
+						SpawnPrefab("collapse_small").Transform:SetPosition(pt:Get())
+					end
 				end
 			end)
 			delay = delay + 0.25
@@ -2285,7 +2284,7 @@ local function DoneSpinning(inst)
 		local offset, check_angle, deflected = FindWalkableOffset(pos, math.random() * TWOPI, radius, 8, true, false) -- try to avoid walls
 		if offset then
 			if treasure then
-				SpawnReward(inst, treasure)
+				SpawnReward(inst, treasure, inst.components.lootdropper, pos + offset)
 			elseif func then
 				func(inst, item, doaction)
 			elseif item == "trinket" then
@@ -2325,7 +2324,9 @@ local function ShouldAcceptItem(inst, item)
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
-	giver.components.sanity:DoDelta(-TUNING.SANITY_TINY)
+	if giver and giver.components.sanity then
+		giver.components.sanity:DoDelta(-TUNING.SANITY_TINY)
+	end
 
 	PickPrize(inst)
 	StartSpinning(inst)

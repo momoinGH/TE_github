@@ -244,26 +244,6 @@ local natureskins = {
 
 }
 
--- 条件检查，根据skintype使用对应的检查函数
-local testfns = {
-    tropical = function(inst)
-        return inst:IsInTropicalArea()
-    end,
-    shipwrecked = function(inst)
-        return inst:IsInShipwreckedArea()
-    end,
-    hamlet = function(inst)
-        return inst:IsInHamletArea()
-    end,
-
-    -- 在雨林地皮上
-    tile_rainforest = function(inst)
-        local tile_id = TheWorld.Map:GetTileAtPoint(inst.Transform:GetWorldPosition())
-        return tile_id == WORLD_TILES.RAINFOREST or tile_id == WORLD_TILES.DEEPRAINFOREST
-    end
-}
-
-
 for prefabname, prefabdata in pairs(natureskins) do
     for skinname, skindata in pairs(prefabdata) do
         if skinname ~= "default" then
@@ -280,4 +260,4 @@ for prefabname, prefabdata in pairs(natureskins) do
     prefabdata.default = nil ----赋值给皮肤base数据之后就没啥用了
 end
 
-return { skinlist = natureskins, testfns = testfns }
+return { skinlist = natureskins }

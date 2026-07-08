@@ -102,7 +102,6 @@ PrefabFiles = {
     "waterchest",            --海上箱子
     "mussel_bed",            --贻贝岩
     "mussel_stick",          --采贝器
-    "messagebottle_sw",      --漂流瓶
     "bottlelantern",         --水瓶灯
     "researchlab5",          --海上实验室
     "roe",                   --鱼卵

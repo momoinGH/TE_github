@@ -213,7 +213,6 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.MOSQUITO_POISON               = "Glurgh, these 
 STRINGS.CHARACTERS.WURT.DESCRIBE.WATERYGRAVE                   = "Thought scale-less end up in dirt?"
 STRINGS.CHARACTERS.WURT.DESCRIBE.BIOLUMINESCENCE               = "It called bye-oh-loomy...loominess...loomin-essence... GLOWY!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.BOTTLELANTERN                 = "Glowy in a bottle!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.MESSAGEBOTTLEEMPTY_SW         = "Grr! Nothing in here!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.CORAL_BRAIN                   = "Thinky bit."
 STRINGS.CHARACTERS.WURT.DESCRIBE.CORAL_BRAIN_ROCK              = "It thinking very hard."
 STRINGS.CHARACTERS.WURT.DESCRIBE.SANDBAG                       = "This keep water out, not useful."

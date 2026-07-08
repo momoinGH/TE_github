@@ -33,10 +33,11 @@ modimport "modmain/common/components/teleporter.lua"
 modimport "modmain/common/components/childspawner.lua"
 modimport "modmain/common/components/ambientlighting"
 modimport "modmain/common/components/colourcube.lua"
-modimport "modmain/common/components/worldstate.lua"    --世界状态，比如新增的季节
-modimport "modmain/common/components/minionspawner.lua" --子单位生成
-modimport "modmain/common/components/ambientsound"      --走在不同地皮上播放的音乐
-modimport "modmain/common/components/dynamicmusic.lua"  --战斗时音乐
+modimport "modmain/common/components/worldstate.lua"           --世界状态，比如新增的季节
+modimport "modmain/common/components/minionspawner.lua"        --子单位生成
+modimport "modmain/common/components/ambientsound"             --走在不同地皮上播放的音乐
+modimport "modmain/common/components/dynamicmusic.lua"         --战斗时音乐
+modimport "modmain/common/components/messagebottlemanager.lua" --瓶中信内容
 
 ----------------------------------------------------------------------------------------------------
 
@@ -56,6 +57,4 @@ modimport "modmain/common/prefabs/koalefant.lua"
 modimport "modmain/common/prefabs/rock_ice.lua"
 modimport "modmain/common/prefabs/heatrock.lua"
 modimport "modmain/common/prefabs/grass.lua"
-
-
-
+modimport "modmain/common/prefabs/forest.lua"

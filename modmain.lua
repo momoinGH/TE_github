@@ -80,7 +80,6 @@ modimport "modmain/cansleep_periodictask" --提供一个TroDoCanSleepPeriodicTas
 modimport "modmain/save_tag.lua"          --提供一个EntityScript:TroAddSaveTag方法，该方法添加的标签会自动保存和加载
 modimport "modmain/mainfunctions.lua"
 
-
 -- 文本
 local language = string.lower(GetModConfigData("language"))
 trosafemodimport("modmain/languages/strings_en") --英文版本兜底，不使用的台词不应该添加

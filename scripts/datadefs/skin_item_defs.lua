@@ -2,7 +2,7 @@ local itemskins =
 {
     double_umbrellahat = {
         default = {
-            basebuild = "hat_double_umbrella",
+            basebuild = "hat_double_umbrella", --到时候会用来还原皮肤
         },
         double_umbrellahat_palmleaf = {
             assetname = "hat_double_umbrella_palm",
@@ -61,6 +61,34 @@ local itemskins =
             name = "viper",
         },
     },
+    messagebottleempty = {
+        default = {
+            basebank = "bottle",
+            basebuild = "bottle",
+        },
+        messagebottleempty_sw = {
+            assetname = "messagebottle",
+            build = "messagebottle",
+            bank = "messagebottle",
+            build_name_override = "messagebottle",
+            name = "messagebottleempty_sw",
+            skintype = "shipwrecked",
+        }
+    },
+    messagebottle = {
+        default = {
+            basebank = "bottle",
+            basebuild = "bottle",
+        },
+        messagebottle_sw = {
+            assetname = "messagebottle",
+            build = "messagebottle",
+            bank = "messagebottle",
+            build_name_override = "messagebottle",
+            name = "messagebottle_sw",
+            skintype = "shipwrecked",
+        }
+    }
 }
 
 

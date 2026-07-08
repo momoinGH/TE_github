@@ -75,7 +75,7 @@ AddRoomPreInit("OceanCoastal", function(room)
     room.contents.countprefabs.mermboat = 4 --鱼人海盗船
 
     table.tromerge(room.contents.distributeprefabs, {
-        messagebottle_sw = 0.1,
+        messagebottle = 0.1,
         seaweed_planted = 3,
         mussel_farm = 2,
         lobsterhole = 1 / 2,

@@ -7,6 +7,7 @@ local trace_prefabs = {
     cave_exit_roc = true,                    --洞穴出口
     kraken = true,                           --海妖
     octopusking = true,                      --章鱼王
+    volcano = true,                          --火山
 
     anthill_exit = true,                     --蚁巢出口
     frosttocave = true,                      --洞穴隧道
@@ -41,43 +42,50 @@ end)
 
 -- 获取所有指定预制体名的实体
 function _G.TroGetEntsByPrefab(prefab)
-    if not trace_prefabs[prefab] then
-        TroErrorHandle("查找的预制体必须是trace_prefabs表里定义过的" .. tostring(prefab))
-    end
-
     local ents = {}
-    local guids = trace_ents[prefab]
-    if guids then
-        for guid, _ in pairs(guids) do
-            local ent = Ents[guid]
-            if ent then
-                table.insert(ents, ent)
-            else
-                guids[guid] = nil --对象没了，虽然不太可能
+    if trace_prefabs[prefab] then
+        local guids = trace_ents[prefab]
+        if guids then
+            for guid, _ in pairs(guids) do
+                local ent = Ents[guid]
+                if ent then
+                    table.insert(ents, ent)
+                else
+                    guids[guid] = nil --对象没了，虽然不太可能
+                end
+            end
+        end
+    else
+        --没有定义
+        for _, v in pairs(Ents) do
+            if v.prefab == prefab then
+                table.insert(ents, v)
             end
         end
     end
-
     return ents
 end
 
 -- 获取任意一个
 function _G.TroGetAnyEntByPrefab(prefab)
-    if not trace_prefabs[prefab] then
-        TroErrorHandle("查找的预制体必须是trace_prefabs表里定义过的" .. tostring(prefab))
-    end
-
-    local guids = trace_ents[prefab]
-    if guids then
-        for guid, _ in pairs(guids) do
-            local ent = Ents[guid]
-            if ent then
-                return ent
-            else
-                guids[guid] = nil --对象没了，虽然不太可能
+    if trace_prefabs[prefab] then
+        local guids = trace_ents[prefab]
+        if guids then
+            for guid, _ in pairs(guids) do
+                local ent = Ents[guid]
+                if ent then
+                    return ent
+                else
+                    guids[guid] = nil --对象没了，虽然不太可能
+                end
+            end
+        end
+    else
+        for _, v in pairs(Ents) do
+            if v.prefab == prefab then
+                return v
             end
         end
     end
-
     return nil
 end

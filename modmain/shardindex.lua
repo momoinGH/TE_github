@@ -4,24 +4,54 @@
 ]]
 
 local skin_nature_defs = require("datadefs/skin_nature_defs")
+local skin_item_defs = require("datadefs/skin_item_defs")
+
+-- 条件检查，根据skintype使用对应的检查函数
+local testfns = {
+    tropical = function(inst)
+        return inst:IsInTropicalArea()
+    end,
+    shipwrecked = function(inst)
+        return inst:IsInShipwreckedArea()
+    end,
+    hamlet = function(inst)
+        return inst:IsInHamletArea()
+    end,
+
+    -- 在雨林地皮上
+    tile_rainforest = function(inst)
+        local tile_id = TheWorld.Map:GetTileAtPoint(inst.Transform:GetWorldPosition())
+        return tile_id == WORLD_TILES.RAINFOREST or tile_id == WORLD_TILES.DEEPRAINFOREST
+    end
+}
+
 
 local function OnWorldEntsSpawned()
-    if TUNING.tropical.sea then
-        require("tro_seaworldinit")()
-    end
+    -- if TUNING.tropical.sea then
+    --     require("tro_seaworldinit")()
+    -- end
 
     print("所有实体创建完成，开始根据地形替换皮肤")
     --检查皮肤是否满足条件，满足就替换皮肤
     for guid, ent in pairs(Ents) do
-        if skin_nature_defs.skinlist[ent.prefab] then
+        -- 植物、建筑皮肤
+        if ent.prefab and skin_nature_defs.skinlist[ent.prefab] then
             for skin_name, skin_data in pairs(skin_nature_defs.skinlist[ent.prefab]) do
-                if skin_data.skintype and skin_nature_defs.testfns[skin_data.skintype] and skin_nature_defs.testfns[skin_data.skintype](ent) then
-                    TheSim:ReskinEntity(guid, ent.skinname, skin_name)
+                if skin_data.skintype and testfns[skin_data.skintype] and testfns[skin_data.skintype](ent) then
+                    TheSim:ReskinEntity(ent.GUID, ent.skinname, skin_name)
+                end
+            end
+        end
+
+        -- 物品换皮
+        if ent.prefab and skin_item_defs.skinlist[ent.prefab] then
+            for skin_name, skin_data in pairs(skin_item_defs.skinlist[ent.prefab]) do
+                if skin_data.skintype and testfns[skin_data.skintype] and testfns[skin_data.skintype](ent) then
+                    TheSim:ReskinEntity(ent.GUID, ent.skinname, skin_name)
                 end
             end
         end
     end
-
 
     print("给猪镇上的东西加个标记，表示属于猪人的")
     for guid, ent in pairs(Ents) do
