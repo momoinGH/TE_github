@@ -25,12 +25,12 @@ local prefabs =
 
 SetSharedLootTable('anchientrobot',
     {
-        { 'iron', 1.00 },
-        { 'iron', 1.00 },
-        { 'iron', 1.00 },
-        { 'iron', 0.33 },
-        { 'iron', 0.33 },
-        { 'iron', 0.33 },
+        { 'iron',  1.00 },
+        { 'iron',  1.00 },
+        { 'iron',  1.00 },
+        { 'iron',  0.33 },
+        { 'iron',  0.33 },
+        { 'iron',  0.33 },
         { 'gears', 1.00 },
         { 'gears', 0.33 },
     })
@@ -286,7 +286,7 @@ local function ribsfn()
     return inst
 end
 
-local function armfn(Sim)
+local function armfn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -399,7 +399,7 @@ local function armfn(Sim)
 end
 
 
-local function legfn(Sim)
+local function legfn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()

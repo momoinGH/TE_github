@@ -24,7 +24,7 @@ local function OnWorked(inst, worker, workleft)
     end
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()

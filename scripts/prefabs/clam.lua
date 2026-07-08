@@ -22,21 +22,21 @@ local function OnEntitySleep(inst)
 	inst.components.und_bubbleblower:Stop()
 end
 
-local function fn(Sim)
+local function fn()
 	local inst = CreateEntity()
-	inst.entity:AddNetwork()
-	local trans = inst.entity:AddTransform()
+
+	inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
-	local minimap = inst.entity:AddMiniMapEntity()
-	inst.Transform:SetTwoFaced()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
 
 	inst.entity:AddMiniMapEntity()
 	inst.MiniMapEntity:SetIcon("clam.png")
 
-
 	MakeObstaclePhysics(inst, 0.8, 1.2)
+
 	inst.Transform:SetScale(0.7, 0.7, 0.7)
+	inst.Transform:SetTwoFaced()
 
 	anim:SetBank("clam")
 	anim:SetBuild("clam")
@@ -68,9 +68,6 @@ local function fn(Sim)
 	inst.components.lootdropper:SetLoot({ "fish_fillet", "fish_fillet", "slurtle_shellpieces", "slurtle_shellpieces" })
 	inst.components.lootdropper:AddChanceLoot("pearl", 1)
 	inst.components.lootdropper:AddChanceLoot("saltrock", 0.2)
-
-	--inst:AddComponent("sleeper")
-	--inst.components.sleeper:SetResistance(2)
 
 	inst:SetStateGraph("SGclam")
 

@@ -81,8 +81,8 @@ AddTask("岛一战场", {
         ["BG_battleground_base"] = math.random(0, 1),
         ["battleground_head"] = 1, --头
         ["battleground_ribs"] = 1, --躯干
-        ["battleground_claw"] = 1, --爪子
-        ["battleground_leg"] = 1,  --脚
+        ["battleground_claw"] = 2, --爪子
+        ["battleground_leg"] = 2,  --脚
     },
     room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_painted_base",

@@ -150,38 +150,6 @@ local states =
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
             inst.components.lootdropper:DropLoot(inst:GetPosition())
-            if TheWorld:HasTag("cave") then
-                local tamanhodomapa = (TheWorld.Map:GetSize()) * 2 - 2
-                local map = TheWorld.Map
-                local x
-                local z
-                local numerodeitens = 1
-
-                repeat
-                    x = math.random(-tamanhodomapa, tamanhodomapa)
-                    z = math.random(-tamanhodomapa, tamanhodomapa)
-                    local curr = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z))
-                    local curr1 = map:GetTile(map:GetTileCoordsAtPoint(x - 4, 0, z))
-                    local curr2 = map:GetTile(map:GetTileCoordsAtPoint(x + 4, 0, z))
-                    local curr3 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z - 4))
-                    local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
-                    -------------------coloca os itens------------------------
-                    if (curr == WORLD_TILES.UNDERWATER_SANDY and curr1 == WORLD_TILES.UNDERWATER_SANDY and curr2 == WORLD_TILES.UNDERWATER_SANDY and curr3 == WORLD_TILES.UNDERWATER_SANDY and curr4 == WORLD_TILES.UNDERWATER_SANDY)
-                        or (curr == WORLD_TILES.UNDERWATER_ROCKY and curr1 == WORLD_TILES.UNDERWATER_ROCKY and curr2 == WORLD_TILES.UNDERWATER_ROCKY and curr3 == WORLD_TILES.UNDERWATER_ROCKY and curr4 == WORLD_TILES.UNDERWATER_ROCKY)
-                        or (curr == WORLD_TILES.BEACH and curr1 == WORLD_TILES.BEACH and curr2 == WORLD_TILES.BEACH and curr3 == WORLD_TILES.BEACH and curr4 == WORLD_TILES.BEACH)
-                        or (curr == WORLD_TILES.MAGMAFIELD and curr1 == WORLD_TILES.MAGMAFIELD and curr2 == WORLD_TILES.MAGMAFIELD and curr3 == WORLD_TILES.MAGMAFIELD and curr4 == WORLD_TILES.MAGMAFIELD)
-                        or (curr == WORLD_TILES.PAINTED and curr1 == WORLD_TILES.PAINTED and curr2 == WORLD_TILES.PAINTED and curr3 == WORLD_TILES.PAINTED and curr4 == WORLD_TILES.PAINTED)
-                        or (curr == WORLD_TILES.PIGRUINS and curr1 == WORLD_TILES.PIGRUINS and curr2 == WORLD_TILES.PIGRUINS and curr3 == WORLD_TILES.PIGRUINS and curr4 == WORLD_TILES.BATTLEGROUND)
-                        or (curr == WORLD_TILES.PEBBLEBEACH and curr1 == WORLD_TILES.PEBBLEBEACH and curr2 == WORLD_TILES.PEBBLEBEACH and curr3 == WORLD_TILES.PEBBLEBEACH and curr4 == WORLD_TILES.PEBBLEBEACH)
-                    then
-                        local colocaitem = SpawnPrefab(inst.prefab)
-                        colocaitem.Transform:SetPosition(x, 0, z)
-                        numerodeitens = numerodeitens - 1
-                    end
-                    -----------------------------------------------------------
-                until
-                    numerodeitens <= 0
-            end
         end,
 
     },
@@ -200,23 +168,19 @@ local combatanims =
     hit = hitanim,
 }
 
-CommonStates.AddCombatStates(states,
-    {
-        hittimeline = {
-            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rocklobster/hurt") end),
-            TimeEvent(0 * FRAMES,
-                function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rocklobster/foley") end),
-        },
-
-        deathtimeline = {
-            TimeEvent(0 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve/creatures/rocklobster/death")
-                inst.SoundEmitter:PlaySound("dontstarve/creatures/rocklobster/explode")
-            end),
-        },
+CommonStates.AddCombatStates(states, {
+    hittimeline = {
+        TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rocklobster/hurt") end),
+        TimeEvent(0 * FRAMES,
+            function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rocklobster/foley") end),
     },
-    combatanims)
 
---CommonStates.AddSleepStates(states)
+    deathtimeline = {
+        TimeEvent(0 * FRAMES, function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/rocklobster/death")
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/rocklobster/explode")
+        end),
+    },
+}, combatanims)
 
 return StateGraph("clam", states, events, "idle")

@@ -16,25 +16,22 @@ local function teleport(inst)
     inst.teleporttime = nil
     local pt = inst:GetPosition()
 
-
-    if inst.components.combat.target then
-        pt = Vector3(inst.components.combat.target.Transform:GetWorldPosition())
+    local target = inst.components.combat.target
+    if target and target:IsValid() then
+        local target_pos = target:GetPosition()
+        if TheWorld.Map:IsLandTileAtPoint(target_pos.x, target_pos.y, target_pos.z) then
+            pt = target_pos
+        end
     end
-
-    local tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-    if tile == WORLD_TILES.IMPASSABLE or tile == WORLD_TILES.INVALID or tile == WORLD_TILES.OCEAN_COASTAL or tile == WORLD_TILES.OCEAN_COASTAL_SHORE or tile == WORLD_TILES.OCEAN_SWELL or tile == WORLD_TILES.OCEAN_ROUGH or tile == WORLD_TILES.OCEAN_BRINEPOOL or tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or tile == WORLD_TILES.OCEAN_WATERLOG or tile == WORLD_TILES.OCEAN_HAZARDOUS then
-        pt = inst:GetPosition()
-    end
-
 
     local theta = math.random() * TWOPI
     local offset = FindWalkableOffset(pt, theta, 12 + math.random() * 5, 12, true) --12
-    if not offset then
-        return
+    if offset then
+        pt.x = pt.x + offset.x
+        pt.z = pt.z + offset.z
     end
 
-    pt.x = pt.x + offset.x
-    pt.z = pt.z + offset.z
+    inst.Physics:SetActive(true)
     inst.Physics:Teleport(pt.x, 0, pt.z)
     inst.sg:GoToState("telportin")
 end
@@ -627,17 +624,14 @@ local states =
         timeline =
         {
             TimeEvent(0 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/teleport_in")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/hulk_metal_robot/teleport_in")
             end),
             -----------step---------------
             TimeEvent(15 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
             end),
             TimeEvent(19 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
             end),
             TimeEvent(16 * FRAMES, function(inst)
                 TheMixer:PushMix("boom")
@@ -1041,6 +1035,7 @@ local states =
             inst.Transform:SetSixFaced()
             inst.spintime = 10
             inst.components.combat.playerdamagepercent = .5
+            inst.SoundEmitter:KillSound("laserburn")
         end,
 
         events =
@@ -1094,7 +1089,7 @@ local states =
                 inst.components.groundpounder.numRings = 4
                 inst.components.groundpounder:GroundPound()
                 local pt = inst:GetPosition()
-                TheWorld:DoTaskInTime(0.6, function() inst.spawnbarrier(inst, pt) end)
+                inst:DoTaskInTime(0.6, function() inst.spawnbarrier(inst, pt) end)
                 local fx = SpawnPrefab("metal_hulk_ring_fx")
                 fx.Transform:SetPosition(pt.x, pt.y, pt.z)
                 --                fx.AnimState:SetOrientation( ANIM_ORIENTATION.OnGround )
