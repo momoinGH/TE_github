@@ -52,29 +52,8 @@ local function GoHomeAction(inst)
     end
 end
 
-local function GetIsOnWater(target)
-    if target then
-        local map = TheWorld.Map
-        local x, y, z = target.Transform:GetWorldPosition()
-        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-        if ground == WORLD_TILES.OCEAN_SWELL or
-            ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-            ground == WORLD_TILES.OCEAN_BRINEPOOL or
-            ground == WORLD_TILES.OCEAN_HAZARDOUS or
-            ground == WORLD_TILES.OCEAN_ROUGH or
-            ground == WORLD_TILES.IMPASSABLE or
-            ground == WORLD_TILES.OCEAN_COASTAL or
-            ground == WORLD_TILES.OCEAN_WATERLOG or
-            ground == WORLD_TILES.OCEAN_COASTAL_SHORE then
-            return true
-        else
-            return false
-        end
-    end
-end
-
 local function EatFoodAction(inst)
-    local target = FindEntity(inst, SEE_FOOD_DIST, function(item) return inst.components.eater:CanEat(item) and item:IsOnValidGround() and not GetIsOnWater(item) end)
+    local target = FindEntity(inst, SEE_FOOD_DIST, function(item) return inst.components.eater:CanEat(item) and item:IsOnPassablePoint() end)
     if target then
         return BufferedAction(inst, target, ACTIONS.EAT)
     end

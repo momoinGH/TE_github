@@ -109,18 +109,6 @@ local function restartgrowing(inst)
     end
 end
 
-
-local function test_ground(inst, pt)
-    if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == WORLD_TILES.BEACH) then return true end --adicionado por vagner
-    return false
-end
-
-local function describe(inst)
-    if inst.growtime then
-        return "PLANTED"
-    end
-end
-
 local function displaynamefn(inst)
     if inst.growtime then
         return STRINGS.NAMES.COCONUT_SAPLING

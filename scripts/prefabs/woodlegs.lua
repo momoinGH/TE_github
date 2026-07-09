@@ -70,11 +70,8 @@ local common_postinit = function(inst)
 end
 
 local function sanityfn(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local map = TheWorld.Map
-    local posicao = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     local delta = 0
-    if posicao == WORLD_TILES.OCEAN_COASTAL or posicao == WORLD_TILES.OCEAN_WATERLOG or posicao == WORLD_TILES.OCEAN_COASTAL_SHORE or posicao == WORLD_TILES.OCEAN_SWELL or posicao == WORLD_TILES.OCEAN_ROUGH or posicao == WORLD_TILES.OCEAN_BRINEPOOL or posicao == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or posicao == WORLD_TILES.OCEAN_HAZARDOUS then
+    if inst:IsOnOcean() then
         delta = 0.08
     end
     return delta

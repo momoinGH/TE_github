@@ -8,17 +8,6 @@ local function ShouldAcceptItem(inst, item)
 	return item:HasTag("magicpowder") and not inst:HasTag("magicy") and TheWorld.state.isnight
 end
 
-
-local function onpickedfn(inst, picker)
-	--local x, y, z = inst.Transform:GetWorldPosition()
-	--local gem_flower = SpawnPrefab("gem_flower")
-	--if gem_flower then
-	--gem_flower.Transform:SetPosition(x, y, z)
-	--gem_flower.SoundEmitter:PlaySound("dontstarve/wilson/pickup_reeds")
-	--end
-	inst:Remove()
-end
-
 local function mature(inst)
 	inst:AddTag("magicy")
 

@@ -1541,29 +1541,6 @@ return Class(function(self, inst)
     --Private
     local _scheduledtasks = {}
 
-    --------------------------------------------------------------------------
-    --[[ Private member functions ]]
-    --------------------------------------------------------------------------
-    local TEMPOMINIMO = 5
-    local TEMPOMAXIMO = 10
-    local GNARWAIL_TEST_RADIUS = 100
-    local GNARWAIL_SPAWN_CHANCE = 0.05
-    local GNARWAIL_SPAWN_RADIUS = 10
-    local GNARWAIL_TIMING = { 8, 10 } -- min 8, max 10
-    local function testforgnarwail(comp, spawnpoint)
-        local ents = TheSim:FindEntities(spawnpoint.x, spawnpoint.y, spawnpoint.z, GNARWAIL_TEST_RADIUS, { "eel" })
-        if #ents < 2 and math.random() < GNARWAIL_SPAWN_CHANCE then
-            local offset = FindWalkableOffset(spawnpoint, math.random() * TWOPI, GNARWAIL_SPAWN_RADIUS)
-            if offset then
-                comp.inst:DoTaskInTime(GetRandomMinMax(GNARWAIL_TIMING[1], GNARWAIL_TIMING[2]), function()
-                    local gnarwail = SpawnPrefab("sea_eel")
-                    gnarwail.Transform:SetPosition(spawnpoint.x + offset.x, 0, spawnpoint.z + offset.z)
-                    --                gnarwail.sg:GoToState("emerge")			
-                end)
-            end
-        end
-    end
-
     local function SpawnSchoolForPlayer(player, reschedule)
         if self:ShouldSpawnANewSchoolForPlayer(player) then
             local spawnpoint = self:GetSpawnPoint(player:GetPosition())
@@ -1654,15 +1631,8 @@ return Class(function(self, inst)
     end
 
     local function DoSpawnFish(prefab, pos, rot, herd)
-        local map = TheWorld.Map
-        local x, y, z = pos:Get()
-        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-        --if ground == WORLD_TILES.UNDERWATER_ROCKY or
-        --ground == WORLD_TILES.UNDERWATER_SANDY then
         local fish = SpawnPrefab(prefab)
         fish.Transform:SetPosition(pos:Get())
-        --    fish.sg:GoToState("arrive")
-        --end
     end
 
     function self:SpawnSchool(spawnpoint, target)
@@ -1676,13 +1646,7 @@ return Class(function(self, inst)
         local schoolsize = math.random(schooldata.schoolmin, schooldata.schoolmax)
         local rotation = math.random() * 360
 
-        local school_rand_angle = math.random() * 360
         local school_spawnpoint = spawnpoint
-        --[[+ (FindWalkableOffset(spawnpoint, school_rand_angle, 20, 12, nil, nil, nil, true)
-											or FindWalkableOffset(spawnpoint, school_rand_angle, 13, 12, nil, nil, nil, true)
-											or FindWalkableOffset(spawnpoint, school_rand_angle, 7, 12, nil, nil, nil, true)
-											or Vector3(0,0,0))
-]]
         local count = 0
         for i = 1, schoolsize do
             local radius = math.sqrt(math.random()) * schooldata.schoolrange
@@ -1700,39 +1664,7 @@ return Class(function(self, inst)
                 count = count + 1
             end
         end
-
-        --print("[schools - SpawnSchool] Spawned " .. tostring(count) .. "x " .. tostring(schooldata.prefab) .. " for " .. tostring(target))
-
-        if count > 0 then
-
-            --        self.inst:PushEvent("schoolspawned", {spawnpoint = spawnpoint})
-
-            local tile_at_spawnpoint = TheWorld.Map:GetTileAtPoint(spawnpoint:Get())
-            --        if tile_at_spawnpoint == WORLD_TILES.OCEAN_SWELL or tile_at_spawnpoint == WORLD_TILES.OCEAN_ROUGH then
-            --            testforgnarwail(self, spawnpoint)
-            --        end
-        else
-            --		herd:Remove()
-            --		herd = nil
-        end
     end
-
-    --------------------------------------------------------------------------
-    --[[ Save/Load ]]
-    --------------------------------------------------------------------------
-
-    function self:OnSave()
-        return
-        {
-        }
-    end
-
-    function self:OnLoad(data)
-    end
-
-    --------------------------------------------------------------------------
-    --[[ Debug ]]
-    --------------------------------------------------------------------------
 
     function self:GetDebugString()
         local str = nil

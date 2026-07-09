@@ -11,7 +11,6 @@ local prefabs =
 
 local function onpicked(inst)
 	TheWorld:PushEvent("beginregrowth", inst)
-	inst:Remove()
 end
 
 local function fn()
@@ -39,7 +38,7 @@ local function fn()
 	inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
 	inst.components.pickable:SetUp("grotto_parsnip", 10)
 	inst.components.pickable.onpickedfn = onpicked
-
+    inst.components.pickable.remove_when_picked = true
 	inst.components.pickable.quickpick = true
 
 	MakeSmallBurnable(inst)

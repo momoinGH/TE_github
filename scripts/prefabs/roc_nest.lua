@@ -51,10 +51,6 @@ local lamp_loot = {
     { "transistor", 1 },
 }
 
-local function onpickedfn(inst)
-    inst:Remove()
-end
-
 local function onworked(inst, worker)
     if inst:HasTag("fire") and inst.components.burnable then
         inst.components.burnable:Extinguish()

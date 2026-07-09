@@ -77,43 +77,6 @@ local function GoHomeAction(inst)
         or nil
 end
 
-local function IsValidGround(pos)
-    local ground = TheWorld
-
-    if ground and pos then
-        local tile = ground.Map:GetTileAtPoint(pos.x, pos.y, pos.z)
-        return tile ~= WORLD_TILES.IMPASSABLE and tile < GROUND.UNDERGROUND and not ground.Map:IsWater(tile)
-    end
-
-    return false
-end
-
-local function FleeAction(inst)
-    local search_for_point = true
-    local pos = nil
-
-    while search_for_point do
-        local rad = math.random(10, 25)
-        local angle = math.random(360)
-        pos = inst:GetPosition() + Vector3(rad * math.cos(angle), 0, rad * math.sin(angle))
-
-        if IsValidGround(pos) then
-            search_for_point = false
-        end
-    end
-
-    inst.is_fleeing = true
-    if inst.flee_task then
-        inst.flee_task:Cancel()
-    end
-    inst.flee_task = inst:DoTaskInTime(MAX_FLEE_TIME, function() inst.is_fleeing = false end)
-
-    inst.Transform:SetFourFaced()
-    inst.lightning_target = nil
-
-    return BufferedAction(inst, nil, ACTIONS.WALKTO, nil, pos)
-end
-
 local function RunAwayAction(inst)
     if ThreatInAttackRange(inst) then
         inst.is_fleeing = true

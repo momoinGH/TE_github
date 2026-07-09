@@ -264,24 +264,17 @@ local function EatFoodAction(inst)
     if inst.sg:HasStateTag("busy") or
         (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < TIME_BETWEEN_EATING) or
         (inst.components.inventory ~= nil and inst.components.inventory:IsFull()) or
-        math.random() < .75 then
+        math.random() < .75
+    then
         return
-    elseif inst.components.inventory ~= nil and inst.components.eater ~= nil then
-        local target = inst.components.inventory:FindItem(function(item) return inst.components.eater:CanEat(item) end)
+    end
+
+    if inst.components.inventory ~= nil and inst.components.eater ~= nil then
+        local target = inst.components.inventory:FindItem(function(item)
+            return inst.components.eater:CanEat(item) and item:IsOnPassablePoint()
+        end)
         if target ~= nil then
-            local map = TheWorld.Map
-            local x, y, z = target.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_SWELL and
-                ground ~= WORLD_TILES.OCEAN_ROUGH and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-                return BufferedAction(inst, target, ACTIONS.EAT)
-            end
+            return BufferedAction(inst, target, ACTIONS.EAT)
         end
     end
 
@@ -299,20 +292,9 @@ local function EatFoodAction(inst)
                 item.components.equippable.equipslot == EQUIPSLOTS.HEAD and
                 item.components.inventoryitem ~= nil and
                 item.components.inventoryitem.canbepickedup and
-                item:IsOnValidGround() then
-                local map = TheWorld.Map
-                local x, y, z = item.Transform:GetWorldPosition()
-                local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-                if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                    ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                    ground ~= WORLD_TILES.OCEAN_SWELL and
-                    ground ~= WORLD_TILES.OCEAN_ROUGH and
-                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                    ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                    ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-                    return BufferedAction(inst, item, ACTIONS.PICKUP)
-                end
+                item:IsOnPassablePoint()
+            then
+                return BufferedAction(inst, item, ACTIONS.PICKUP)
             end
         end
     end
@@ -322,21 +304,9 @@ local function EatFoodAction(inst)
         if item:GetTimeAlive() > 8 and
             item.components.inventoryitem ~= nil and
             item.components.inventoryitem.canbepickedup and
-            --            inst.components.eater:CanEat(item) and
-            item:IsOnValidGround() then
-            local map = TheWorld.Map
-            local x, y, z = item.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_SWELL and
-                ground ~= WORLD_TILES.OCEAN_ROUGH and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-                return BufferedAction(inst, item, ACTIONS.PICKUP)
-            end
+            item:IsOnPassablePoint()
+        then
+            return BufferedAction(inst, item, ACTIONS.PICKUP)
         end
     end
 
@@ -345,40 +315,20 @@ local function EatFoodAction(inst)
         if item.components.pickable ~= nil and
             item.components.pickable.caninteractwith and
             item.components.pickable:CanBePicked() and
-            (item.prefab == "worm" or ItemIsInList(item.components.pickable.product, ValidFoodsToPick)) then
-            local map = TheWorld.Map
-            local x, y, z = item.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_SWELL and
-                ground ~= WORLD_TILES.OCEAN_ROUGH and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-                return BufferedAction(inst, item, ACTIONS.PICK)
-            end
+            (item.prefab == "worm" or ItemIsInList(item.components.pickable.product, ValidFoodsToPick)) and
+            item:IsOnPassablePoint()
+        then
+            return BufferedAction(inst, item, ACTIONS.PICK)
         end
     end
 
     --Look for crops items, harvest them.
     for i, item in ipairs(ents) do
         if item.components.crop ~= nil and
-            item.components.crop:IsReadyForHarvest() then
-            local map = TheWorld.Map
-            local x, y, z = item.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_SWELL and
-                ground ~= WORLD_TILES.OCEAN_ROUGH and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-                return BufferedAction(inst, item, ACTIONS.HARVEST)
-            end
+            item.components.crop:IsReadyForHarvest() and
+            item:IsOnPassablePoint()
+        then
+            return BufferedAction(inst, item, ACTIONS.HARVEST)
         end
     end
 
@@ -390,32 +340,16 @@ local function EatFoodAction(inst)
     for i, item in ipairs(ents) do
         if item.components.inventoryitem ~= nil and
             item.components.inventoryitem.canbepickedup and
-            item:IsOnValidGround() then
+            item:IsOnPassablePoint()
+        then
             inst.curious = false
             if inst._curioustask ~= nil then
                 inst._curioustask:Cancel()
             end
             inst._curioustask = inst:DoTaskInTime(10, SetCurious)
-            local map = TheWorld.Map
-            local x, y, z = item.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_SWELL and
-                ground ~= WORLD_TILES.OCEAN_ROUGH and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-                return BufferedAction(inst, item, ACTIONS.PICKUP)
-            end
+            return BufferedAction(inst, item, ACTIONS.PICKUP)
         end
     end
-end
-
-local function OnLootingCooldown(inst)
-    inst._canlootcheststask = nil
-    inst.canlootchests = true
 end
 
 local function AnnoyLeader(inst)
@@ -575,43 +509,26 @@ local function AssistPlayer(inst)
 
         --Look for harvestable items, pick them.
         for _, item in pairs(ents) do
-            if item.components.pickable and item.components.pickable.caninteractwith and item.components.pickable:CanBePicked() then
-                local map = TheWorld.Map
-                local x, y, z = item.Transform:GetWorldPosition()
-                local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-                if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                    ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                    ground ~= WORLD_TILES.OCEAN_SWELL and
-                    ground ~= WORLD_TILES.OCEAN_ROUGH and
-                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                    ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                    ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-                    inst.components.timer:StartTimer("CanThrow", 60)
-                    inst.CanThrowItems = false
-                    return BufferedAction(inst, item, ACTIONS.PICK)
-                end
+            if item.components.pickable
+                and item.components.pickable.caninteractwith
+                and item.components.pickable:CanBePicked()
+                and item:IsOnPassablePoint()
+            then
+                inst.components.timer:StartTimer("CanThrow", 60)
+                inst.CanThrowItems = false
+                return BufferedAction(inst, item, ACTIONS.PICK)
             end
         end
 
         --Look for crops items, harvest them.
         for _, item in pairs(ents) do
-            if item.components.crop and item.components.crop:IsReadyForHarvest() then
-                local map = TheWorld.Map
-                local x, y, z = item.Transform:GetWorldPosition()
-                local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-                if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                    ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                    ground ~= WORLD_TILES.OCEAN_SWELL and
-                    ground ~= WORLD_TILES.OCEAN_ROUGH and
-                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                    ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                    ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-                    inst.components.timer:StartTimer("CanThrow", 60)
-                    inst.CanThrowItems = false
-                    return BufferedAction(inst, item, ACTIONS.HARVEST)
-                end
+            if item.components.crop
+                and item.components.crop:IsReadyForHarvest()
+                and item:IsOnPassablePoint()
+            then
+                inst.components.timer:StartTimer("CanThrow", 60)
+                inst.CanThrowItems = false
+                return BufferedAction(inst, item, ACTIONS.HARVEST)
             end
         end
     end

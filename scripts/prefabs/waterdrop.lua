@@ -4,18 +4,6 @@ local assets =
     Asset("ANIM", "anim/lifeplant.zip"),
 }
 
-local function IsWater(tile)
-    return tile == WORLD_TILES.OCEAN_SWELL or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        tile == WORLD_TILES.OCEAN_HAZARDOUS or
-        tile == WORLD_TILES.OCEAN_ROUGH or
-        tile == WORLD_TILES.IMPASSABLE or
-        tile == WORLD_TILES.OCEAN_COASTAL or
-        tile == WORLD_TILES.OCEAN_WATERLOG or
-        tile == WORLD_TILES.OCEAN_COASTAL_SHORE
-end
-
 local function oneat(inst, eater)
     if eater.components.poisonable ~= nil then
         eater.components.poisonable:WearOff()
@@ -33,18 +21,12 @@ local function ondeploy(inst, pt)
     inst:Remove()
 end
 
-local notags = { 'NOBLOCK', 'player', 'FX' }
 local function test_ground(inst, pt)
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    local ground_OK = tiletype ~= WORLD_TILES.ROCKY and tiletype ~= WORLD_TILES.ROAD and tiletype ~= WORLD_TILES.IMPASSABLE and
+    return tiletype ~= WORLD_TILES.ROCKY and tiletype ~= WORLD_TILES.ROAD and tiletype ~= WORLD_TILES.IMPASSABLE and
         tiletype ~= WORLD_TILES.UNDERROCK and tiletype ~= WORLD_TILES.WOODFLOOR and
         tiletype ~= WORLD_TILES.CARPET and tiletype ~= WORLD_TILES.CHECKER and tiletype < GROUND.UNDERGROUND and
-        not IsWater(tiletype)
-
-    if ground_OK then
-        return true
-    end
-    return false
+        not TheWorld.Map:IsOceanAtPoint(pt.x, pt.y, pt.z)
 end
 
 

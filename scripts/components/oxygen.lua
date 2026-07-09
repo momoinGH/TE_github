@@ -77,22 +77,7 @@ function Oxygen:DoDelta(delta, overtime)
         return
     end
 
-    local map = TheWorld.Map
-    local x, y, z = self.inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-    local ground1 = map:GetTile(map:GetTileCoordsAtPoint(x + 5, y, z))
-    local ground2 = map:GetTile(map:GetTileCoordsAtPoint(x - 5, y, z))
-    local ground3 = map:GetTile(map:GetTileCoordsAtPoint(x, y, z + 5))
-    local ground4 = map:GetTile(map:GetTileCoordsAtPoint(x, y, z - 5))
-    local naagua = false
-    if ground == WORLD_TILES.UNDERWATER_SANDY or ground == WORLD_TILES.UNDERWATER_ROCKY or (ground == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-    if ground1 == WORLD_TILES.UNDERWATER_SANDY or ground1 == WORLD_TILES.UNDERWATER_ROCKY or (ground1 == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground1 == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground1 == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground1 == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground1 == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-    if ground2 == WORLD_TILES.UNDERWATER_SANDY or ground2 == WORLD_TILES.UNDERWATER_ROCKY or (ground2 == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground2 == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground2 == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground2 == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground2 == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-    if ground3 == WORLD_TILES.UNDERWATER_SANDY or ground3 == WORLD_TILES.UNDERWATER_ROCKY or (ground3 == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground3 == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground3 == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground3 == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground3 == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-    if ground4 == WORLD_TILES.UNDERWATER_SANDY or ground4 == WORLD_TILES.UNDERWATER_ROCKY or (ground4 == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground4 == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground4 == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground4 == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground4 == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-
-
-
+    local naagua = self.inst:IsInUnderWaterArea()
     -- Oxygen loss only occurs while underwater
     if not naagua then
         self.rate = 0

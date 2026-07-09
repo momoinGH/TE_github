@@ -21,58 +21,19 @@ local prefabs =
 
 local function DoStep(inst)
     local x, y, z = inst.Transform:GetLocalPosition()
-    local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(x, y, z))
-
-    local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
-    local plataforma = false
-    local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
-    local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
-    for i, v in ipairs(entities) do
-        local walkable_platform = v.components.walkableplatform
-        if walkable_platform and walkable_platform.radius == nil then walkable_platform.radius = 4 end
-        if walkable_platform ~= nil then
-            local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
-            local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
-            if distance_sq <= walkable_platform.radius * walkable_platform.radius then plataforma = true end
-        end
-    end
-
-    if math.random() < VOLCANO_FIRERAIN_LAVA_CHANCE and not plataforma then
-        local lavapool = SpawnPrefab("lavapool")
+    if inst:IsOnOcean() then
+        local lavapool = SpawnPrefab("bombsplash")
         lavapool.Transform:SetPosition(x, y, z)
-        if (ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS) then
-            lavapool:Remove()
-            local lavapool = SpawnPrefab("bombsplash")
-            lavapool.Transform:SetPosition(x, y, z)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_large")
-            TroSpawnAttackWavesForEnt(inst, nil, nil, 8, 360, 6, "rogue_wave")
-        end
+        inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_large")
+        TroSpawnAttackWavesForEnt(inst, nil, nil, 8, 360, 6, "rogue_wave")
     else
-        if (ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS) and not plataforma then
-            local lavapool = SpawnPrefab("bombsplash")
+        if math.random() < VOLCANO_FIRERAIN_LAVA_CHANCE then
+            local lavapool = SpawnPrefab("lavapool")
             lavapool.Transform:SetPosition(x, y, z)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_large")
-            TroSpawnAttackWavesForEnt(inst, nil, nil, 8, 360, 6, "rogue_wave")
         else
-            if not plataforma then
-                local impact = SpawnPrefab("meteor_impact")
-                impact.components.timer:StartTimer("remove", TUNING.TOTAL_DAY_TIME * 2)
-                impact.Transform:SetPosition(x, y, z)
-            end
+            local impact = SpawnPrefab("meteor_impact")
+            impact.components.timer:StartTimer("remove", TUNING.TOTAL_DAY_TIME * 2)
+            impact.Transform:SetPosition(x, y, z)
         end
     end
 
@@ -81,18 +42,6 @@ local function DoStep(inst)
     inst.components.groundpounder.burner = true
     inst.components.groundpounder:GroundPound()
     ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1.25, inst, 40)
-end
-
-local function roundToNearest(numToRound, multiple)
-    local half = multiple / 2
-    return numToRound + half - (numToRound + half) % multiple
-end
-
-local function SimulateStep(inst)
-    inst:DoTaskInTime(VOLCANO_FIRERAIN_WARNING, function(inst)
-        inst:DoStep()
-        inst:Remove()
-    end)
 end
 
 local function StartStep(inst)
@@ -171,10 +120,6 @@ local function OnRemove(inst)
     end
 end
 
-local function Impact(inst)
-    inst:Remove()
-end
-
 local function shadowfn(Sim)
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
@@ -200,10 +145,6 @@ local function shadowfn(Sim)
     inst.StartingScale = s
     inst.Transform:SetScale(s, s, s)
     inst.TimeToImpact = VOLCANO_FIRERAIN_WARNING
-
-    --	inst:AddComponent("colourtweener")
-    --	inst.AnimState:SetMultColour(0,0,0,0)
-    --	inst.components.colourtweener:StartTween({0,0,0,1}, inst.TimeToImpact, Impact)
 
     inst.OnRemoveEntity = OnRemove
 

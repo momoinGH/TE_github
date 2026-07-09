@@ -13,10 +13,10 @@ local prefabs =
 SetSharedLootTable('bramble',
     {
         { 'bramble_bulb', 1.00 },
-        { 'vine', 1.00 },
-        { 'vine', 1.00 },
-        { 'vine', 0.25 },
-        { 'vine', 0.25 },
+        { 'vine',         1.00 },
+        { 'vine',         1.00 },
+        { 'vine',         0.25 },
+        { 'vine',         0.25 },
     })
 
 local BRAMBLE_THORN_DAMAGE = 3
@@ -73,9 +73,7 @@ local function OnChildDeath(inst, rotdist)
 end
 
 local function testlocation(inst, pt)
-    local testTile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-
-    if testTile == WORLD_TILES.OCEAN_SWELL or testTile == WORLD_TILES.OCEAN_WATERLOG or testTile == WORLD_TILES.OCEAN_BRINEPOOL or testTile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or testTile == WORLD_TILES.OCEAN_HAZARDOUS or testTile == WORLD_TILES.OCEAN_ROUGH or testTile == WORLD_TILES.IMPASSABLE or testTile == WORLD_TILES.OCEAN_COASTAL_SHORE or testTile == WORLD_TILES.OCEAN_COASTAL then
+    if TheWorld.Map:IsOceanAtPoint(pt.x, 0, pt.z) then
         return false
     end
 

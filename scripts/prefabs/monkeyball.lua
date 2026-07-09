@@ -10,10 +10,6 @@ local prefabs =
 
 local MONKEYBALL_USES = 10
 
-local function unclaim(inst)
-    inst.claimed = nil
-end
-
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_monkeyball", "swap_monkeyball")
     owner.AnimState:Show("ARM_carry")
@@ -40,69 +36,30 @@ local function onthrown(inst, thrower, pt)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:CollidesWith(COLLISION.GIANTS)
     --targetPos, attacker, owningweapon
-    local thrower = inst.components.complexprojectile.attacker
     inst.Physics:SetFriction(.2)
     inst.Transform:SetFourFaced()
 
     inst.AnimState:PlayAnimation("throw", true)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/coconade_throw")
-end
-
-local function onthrown2(inst, thrower, pt)
-    inst.unclaimtask = inst:DoTaskInTime(1, unclaim)
-
-    inst.Physics:SetFriction(.2)
-    inst.Transform:SetFourFaced()
-    inst:FacePoint(pt:Get())
-    --    inst.components.floatable:UpdateAnimations("idle_water", "throw")
-    inst.AnimState:PlayAnimation("throw", true)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/coconade_throw")
-
-    -- inst.components.inventoryitem.canbepickedup = false
 end
 
 local function onhitground(inst)
     inst.components.finiteuses:Use(1)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:CollidesWith(COLLISION.GIANTS)
 
-    if ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
+    if inst:IsOnOcean() then
         inst.AnimState:PlayAnimation("idle_water", true)
-    end
-    if ground ~= WORLD_TILES.OCEAN_COASTAL and
-        ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-        ground ~= WORLD_TILES.OCEAN_SWELL and
-        ground ~= WORLD_TILES.OCEAN_ROUGH and
-        ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-        ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-        ground ~= WORLD_TILES.OCEAN_WATERLOG and
-        ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
+    else
         inst.AnimState:PlayAnimation("idle", true)
     end
 end
 
 local function oncollision(inst, other)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/monkey_ball/bounce")
-end
-
-local function pop(inst)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/monkey_ball/pop")
-    SpawnPrefab("small_puff_light").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    SpawnPrefab("coconut_chunks").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst:Remove()
 end
 
 local function onfinished(inst)

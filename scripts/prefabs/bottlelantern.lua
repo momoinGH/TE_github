@@ -66,86 +66,25 @@ local function starttrackingowner(inst, owner)
 end
 
 local function turnon(inst)
-    local map = TheWorld.Map
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    if not inst.components.fueled:IsEmpty() then
-        inst.components.fueled:StartConsuming()
-
-        local owner = inst.components.inventoryitem.owner
-
-        if inst._light == nil then
-            inst._light = SpawnPrefab("lanternlightbottle")
-            inst._light._lantern = inst
-            inst:ListenForEvent("onremove", onremovelight, inst._light)
-            fuelupdate(inst)
-            PlayTurnOnSound(inst)
-        end
-        inst._light.entity:SetParent((owner or inst).entity)
-
-
-        local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
-        local plataforma = false
-        local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
-        local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
-        for i, v in ipairs(entities) do
-            local walkable_platform = v.components.walkableplatform
-            if walkable_platform and walkable_platform.radius == nil then walkable_platform.radius = 4 end
-            if walkable_platform ~= nil then
-                local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
-                local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
-                if distance_sq <= walkable_platform.radius * walkable_platform.radius then plataforma = true end
-            end
-        end
-
-        if not plataforma and (ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS) then
-            inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-            inst.AnimState:PlayAnimation("idle_on_water", true)
-            inst.AnimState:OverrideSymbol("water_ripple", "ripple_build", "water_ripple")
-            inst.AnimState:OverrideSymbol("water_shadow", "ripple_build", "water_shadow")
-        else
-            inst.AnimState:SetLayer(LAYER_WORLD)
-            inst.AnimState:PlayAnimation("idle_on", true)
-            inst.AnimState:ClearOverrideSymbol("water_ripple", "ripple_build", "water_ripple")
-            inst.AnimState:ClearOverrideSymbol("water_shadow", "ripple_build", "water_shadow")
-        end
-
-        if owner ~= nil and inst.components.equippable:IsEquipped() then
-            owner.AnimState:Show("LANTERN_OVERLAY")
-        end
-
-        inst.components.machine.ison = true
-
-        inst.components.inventoryitem:ChangeImageName("bottlelantern_lit")
-        inst:PushEvent("lantern_on")
+    if inst.components.fueled:IsEmpty() then
+        return
     end
-end
 
-local function turnoff(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    stoptrackingowner(inst)
-
-    inst.components.fueled:StopConsuming()
-
-    if inst._light ~= nil then
-        inst._light:Remove()
-        PlayTurnOffSound(inst)
+    inst.components.fueled:StartConsuming()
+    local owner = inst.components.inventoryitem.owner
+    if inst._light == nil then
+        inst._light = SpawnPrefab("lanternlightbottle")
+        inst._light._lantern = inst
+        inst:ListenForEvent("onremove", onremovelight, inst._light)
+        fuelupdate(inst)
+        PlayTurnOnSound(inst)
     end
+    inst._light.entity:SetParent((owner or inst).entity)
+
 
     local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
     local plataforma = false
-    local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
     local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
     for i, v in ipairs(entities) do
         local walkable_platform = v.components.walkableplatform
@@ -157,14 +96,52 @@ local function turnoff(inst)
         end
     end
 
-    if not plataforma and (ground == WORLD_TILES.OCEAN_COASTAL or
-            ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-            ground == WORLD_TILES.OCEAN_SWELL or
-            ground == WORLD_TILES.OCEAN_ROUGH or
-            ground == WORLD_TILES.OCEAN_BRINEPOOL or
-            ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-            ground == WORLD_TILES.OCEAN_WATERLOG or
-            ground == WORLD_TILES.OCEAN_HAZARDOUS) then
+    if not plataforma and inst:IsOnOcean() then
+        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+        inst.AnimState:PlayAnimation("idle_on_water", true)
+        inst.AnimState:OverrideSymbol("water_ripple", "ripple_build", "water_ripple")
+        inst.AnimState:OverrideSymbol("water_shadow", "ripple_build", "water_shadow")
+    else
+        inst.AnimState:SetLayer(LAYER_WORLD)
+        inst.AnimState:PlayAnimation("idle_on", true)
+        inst.AnimState:ClearOverrideSymbol("water_ripple", "ripple_build", "water_ripple")
+        inst.AnimState:ClearOverrideSymbol("water_shadow", "ripple_build", "water_shadow")
+    end
+
+    if owner ~= nil and inst.components.equippable:IsEquipped() then
+        owner.AnimState:Show("LANTERN_OVERLAY")
+    end
+
+    inst.components.machine.ison = true
+
+    inst.components.inventoryitem:ChangeImageName("bottlelantern_lit")
+    inst:PushEvent("lantern_on")
+end
+
+local function turnoff(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+
+    stoptrackingowner(inst)
+    inst.components.fueled:StopConsuming()
+    if inst._light ~= nil then
+        inst._light:Remove()
+        PlayTurnOffSound(inst)
+    end
+
+    local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
+    local plataforma = false
+    local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
+    for i, v in ipairs(entities) do
+        local walkable_platform = v.components.walkableplatform
+        if walkable_platform and walkable_platform.radius == nil then walkable_platform.radius = 4 end
+        if walkable_platform ~= nil then
+            local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
+            local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
+            if distance_sq <= walkable_platform.radius * walkable_platform.radius then plataforma = true end
+        end
+    end
+
+    if not plataforma and inst:IsOnOcean() then
         inst.AnimState:PlayAnimation("idle_water", true)
     else
         inst.AnimState:PlayAnimation("idle_off", true)

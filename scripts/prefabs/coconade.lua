@@ -17,15 +17,7 @@ local function OnHitWater(inst, attacker, target)
     inst.SoundEmitter:KillSound("hiss")
     inst.components.explosive:OnBurnt()
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(x, y, z))
-    if ground ~= WORLD_TILES.OCEAN_COASTAL and
-        ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-        ground ~= WORLD_TILES.OCEAN_SWELL and
-        ground ~= WORLD_TILES.OCEAN_ROUGH and
-        ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-        ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-        ground ~= WORLD_TILES.OCEAN_WATERLOG and
-        ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
+    if inst:IsOnValidGround() then
         inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
         local explode = SpawnPrefab("explode_small")
         explode.Transform:SetPosition(x, y, z)

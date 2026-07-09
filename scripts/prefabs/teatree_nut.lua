@@ -63,12 +63,16 @@ local function restartgrowing(inst)
 end
 
 
-local notags = { 'NOBLOCK', 'player', 'FX' }
 local function test_ground(inst, pt)
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    local ground_OK = tiletype ~= WORLD_TILES.ROCKY and tiletype ~= WORLD_TILES.ROAD and tiletype ~= WORLD_TILES.IMPASSABLE and
-        tiletype ~= WORLD_TILES.UNDERROCK and tiletype ~= WORLD_TILES.WOODFLOOR and
-        tiletype ~= WORLD_TILES.CARPET and tiletype ~= WORLD_TILES.CHECKER and tiletype < GROUND.UNDERGROUND
+    local ground_OK = tiletype ~= WORLD_TILES.ROCKY
+        and tiletype ~= WORLD_TILES.ROAD
+        and tiletype ~= WORLD_TILES.IMPASSABLE
+        and tiletype ~= WORLD_TILES.UNDERROCK
+        and tiletype ~= WORLD_TILES.WOODFLOOR
+        and tiletype ~= WORLD_TILES.CARPET
+        and tiletype ~= WORLD_TILES.CHECKER
+        and tiletype < GROUND.UNDERGROUND
 
     if ground_OK then
         return true

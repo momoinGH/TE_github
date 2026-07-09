@@ -20,11 +20,11 @@ local prefabs =
 }
 
 SetSharedLootTable('dragoonegg', {
-    { 'flint', 1.0 },
-    { 'flint', 0.5 },
-    { 'rocks', 1.0 },
-    { 'rocks', 0.5 },
-    { 'rocks', 0.3 },
+    { 'flint',    1.0 },
+    { 'flint',    0.5 },
+    { 'rocks',    1.0 },
+    { 'rocks',    0.5 },
+    { 'rocks',    0.3 },
     { 'obsidian', 0.5 },
     { 'obsidian', 0.5 },
 })
@@ -112,15 +112,7 @@ local function groundfn(Sim)
     return inst
 end
 
--------
-
-
 local function DoStep(inst)
-    --	local player = ThePlayer
-    --	local distToPlayer = inst:GetPosition():Dist(player:GetPosition())
-    --	local power = Lerp(3, 1, distToPlayer/180)
-
-
     inst.components.groundpounder.numRings = 2
     inst.components.groundpounder.burner = true
     inst.components.groundpounder.onfinished = function(inst)
@@ -134,26 +126,11 @@ local function DoStep(inst)
     end
     inst.components.groundpounder:GroundPound()
 
-
     --	ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1.25, inst, 40)	
 end
 
-local function roundToNearest(numToRound, multiple)
-    local half = multiple / 2
-    return numToRound + half - (numToRound + half) % multiple
-end
-
-local function SimulateStep(inst)
-    inst:DoTaskInTime(VOLCANO_FIRERAIN_WARNING, function(inst)
-        inst:DoStep()
-        inst:Remove()
-    end)
-end
-
 local function StartStep(inst)
-    local map = TheWorld.Map
     local x, y, z = inst.Transform:GetLocalPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     local shadow = SpawnPrefab("firerainshadow")
     shadow.Transform:SetPosition(inst:GetPosition():Get())
     shadow.Transform:SetRotation(math.random(0, 360)) --(GetRotation(inst))
@@ -162,8 +139,6 @@ local function StartStep(inst)
     inst:DoTaskInTime(VOLCANO_FIRERAIN_WARNING - (17 * FRAMES), function(inst)
         inst:Show()
 
-        local pt = inst:GetPosition()
-
         inst.AnimState:PlayAnimation("egg_crash_pre")
         inst.AnimState:PushAnimation("egg_crash")
         inst.AnimState:PushAnimation("egg_idle", false)
@@ -171,7 +146,6 @@ local function StartStep(inst)
         inst:DoTaskInTime(16 * FRAMES, function(inst)
             local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
             local plataforma = false
-            local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
             local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
             for i, v in ipairs(entities) do
                 local walkable_platform = v.components.walkableplatform
@@ -183,14 +157,7 @@ local function StartStep(inst)
                 end
             end
 
-            if not plataforma and (ground == WORLD_TILES.OCEAN_COASTAL or
-                    ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                    ground == WORLD_TILES.OCEAN_SWELL or
-                    ground == WORLD_TILES.OCEAN_ROUGH or
-                    ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                    ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                    ground == WORLD_TILES.OCEAN_WATERLOG or
-                    ground == WORLD_TILES.OCEAN_HAZARDOUS) then
+            if not plataforma and inst:IsOnOcean() then
                 TroSpawnAttackWavesForEnt(inst, nil, nil, 8, 360, 6, "rogue_wave")
                 local lavapool = SpawnPrefab("bombsplash")
                 lavapool.Transform:SetPosition(x, y, z)

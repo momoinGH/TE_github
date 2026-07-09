@@ -17,12 +17,12 @@ local prefabs =
 
 local loots =
 {
-    { 'snowitem', 1.00 },
-    { 'rocks', 1.00 },
-    { 'cutgrass', 0.05 },
+    { 'snowitem',  1.00 },
+    { 'rocks',     1.00 },
+    { 'cutgrass',  0.05 },
     { 'boneshard', 0.2 },
-    { 'flint', 0.05 },
-    { 'twigs', 0.05 },
+    { 'flint',     0.05 },
+    { 'twigs',     0.05 },
 }
 
 local RESETTIME = 480 * 3
@@ -153,7 +153,12 @@ local function destroy(inst)
             local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
             contagem = contagem + 1
             -------------------coloca os itens------------------------
-            if (curr == WORLD_TILES.SNOWLAND and curr1 == WORLD_TILES.SNOWLAND and curr2 == WORLD_TILES.SNOWLAND and curr3 == WORLD_TILES.SNOWLAND and curr4 == WORLD_TILES.SNOWLAND) then
+            if (curr == WORLD_TILES.SNOWLAND
+                    and curr1 == WORLD_TILES.SNOWLAND
+                    and curr2 == WORLD_TILES.SNOWLAND
+                    and curr3 == WORLD_TILES.SNOWLAND
+                    and curr4 == WORLD_TILES.SNOWLAND)
+            then
                 local colocaitem = SpawnPrefab(inst.prefab)
                 colocaitem.Transform:SetPosition(x, 0, z)
                 numerodeitens = numerodeitens - 1

@@ -12,12 +12,6 @@ end
 
 local WORLD_TILES = WORLD_TILES
 
--- WORLD_TILES.OCEAN_COASTAL_SHORE = WORLD_TILES.OCEAN_SHALLOW_SHORE
--- WORLD_TILES.OCEAN_COASTAL = WORLD_TILES.OCEAN_SHALLOW
--- WORLD_TILES.OCEAN_SWELL = WORLD_TILES.OCEAN_MEDIUM
--- WORLD_TILES.OCEAN_ROUGH = WORLD_TILES.OCEAN_DEEP
-
-
 ------------tool functions
 
 local function is_oceanlined(tile)
@@ -32,15 +26,6 @@ end
 local function IsWaterTile(ground)
 	return (IsOceanTile(ground) and (ground ~= WORLD_TILES.MANGROVE) and (ground ~= WORLD_TILES.LILYPOND))
 end
-
-local function IsTropicalOceanTile(ground)
-	return (ground == WORLD_TILES.OCEAN_SHALLOW) or
-		(ground == WORLD_TILES.OCEAN_MEDIUM) or
-		(ground == WORLD_TILES.OCEAN_DEEP) or
-		(ground == WORLD_TILES.OCEAN_SHIPGRAVEYARD) or
-		(ground == WORLD_TILES.OCEAN_CORAL)
-end
-
 
 local function isWaterOrInvalid(ground)
 	return IsWaterTile(ground) or TileGroupManager:IsInvalidTile(ground)

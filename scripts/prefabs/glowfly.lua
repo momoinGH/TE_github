@@ -77,32 +77,16 @@ local function changetococoon(inst, forced)
 
     inst.SoundEmitter:KillSound("buzz")
     inst:Remove()
-
-
-
-    --	if not TheWorld.state.issummer then
-    --        inst:AddTag("readytohatch")
-    --        inst:AddComponent("playerprox")
-    --        inst.components.playerprox:SetDist(5,10)
-    --        inst.components.playerprox:SetOnPlayerNear(onnear)
-    --    end
 end
 
 local function updatelight(inst)
-    --print(TheWorld.state.remainingdaysinseason)
-
-
-    --if TheWorld.state.remainingdaysinseason < 4 and not inst:HasTag("cocoon") and math.random() < 0.30 then
-
-    if TheWorld.state.iswinter and not inst:HasTag("cocoon") and math.random() < 0.30 then
-        local map = TheWorld.Map
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-        if ground ~= WORLD_TILES.OCEAN_SWELL and ground ~= WORLD_TILES.OCEAN_WATERLOG and ground ~= WORLD_TILES.OCEAN_BRINEPOOL and ground ~= WORLD_TILES.OCEAN_HAZARDOUS and ground ~= WORLD_TILES.OCEAN_ROUGH and ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and ground ~= WORLD_TILES.OCEAN_COASTAL then
-            return changetococoon(inst)
-        end
+    if TheWorld.state.iswinter
+        and not inst:HasTag("cocoon")
+        and math.random() < 0.30
+        and not inst:IsOnOcean()
+    then
+        return changetococoon(inst)
     end
-
 
     if (TheWorld.state.isnight or TheWorld.state.isdusk or inst:HasTag("under_leaf_canopy")) and not inst.components.inventoryitem.owner then
         if not inst.lighton then
@@ -120,12 +104,6 @@ local function updatelight(inst)
             inst.Light:SetIntensity(0)
         end
         inst.lighton = false
-    end
-end
-
-local function OnWorked(inst, worker)
-    if worker.components.inventory ~= nil then
-        worker.components.inventory:GiveItem(inst, nil, inst:GetPosition())
     end
 end
 

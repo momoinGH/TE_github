@@ -68,11 +68,6 @@ local merm_guard_loot =
     "froglegs",
 }
 
-local merm_shadow_loot =
-{
-    "nightmarefuel",
-}
-
 SetSharedLootTable("merm_lunar_loot", {
     -- NOTES(JBK): This is added onto whatever the base merm loot was.
     { "tentaclespots", 0.25 },
@@ -96,11 +91,8 @@ local sounds_guard = {
     --debuff = ,
 }
 
-local merm_brain = require "brains/mermbrain"
 local merm_guard_brain = require "brains/mermguardbrain"
 
-local MAX_TARGET_SHARES = 5
-local SHARE_TARGET_DIST = 40
 
 local SLIGHTDELAY = 1
 
@@ -463,33 +455,6 @@ local function SuggestTreeTarget(inst, data)
     end
 end
 
-local function RoyalUpgrade(inst)
-    if inst.components.health:IsDead() then
-        return
-    end
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH_KINGBONUS)
-    inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
-    inst.Transform:SetScale(1.05, 1.05, 1.05)
-    if inst.updateeyebuild then
-        inst:updateeyebuild()
-    end
-end
-
-local function RoyalDowngrade(inst)
-    if inst.components.health:IsDead() then
-        return
-    end
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH)
-    inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
-    inst.Transform:SetScale(1, 1, 1)
-
-    if inst.updateeyebuild then
-        inst:updateeyebuild()
-    end
-end
-
 local function RoyalGuardUpgrade(inst)
     if inst.components.health:IsDead() then
         return
@@ -736,14 +701,6 @@ local function itemget(inst, data)
     end
 end
 
-local function ShadowMerm_OnItemEquipped(inst, data)
-    inst._equipschanged:push()
-
-    if not TheNet:IsDedicated() then
-        inst:_OnEquipsChanged()
-    end
-end
-
 local function DoThorns(inst)
     SpawnPrefab("lunarmerm_thorns_fx"):SetFXOwner(inst)
 
@@ -789,42 +746,6 @@ local function DoLunarMutation(inst)
     return lunarmerm
 end
 
-local function DoLunarRevert(inst)
-    if inst.reverting then
-        return
-    end
-    inst.reverting = true
-    local prefab = inst:HasTag("guard") and "mermguard" or "merm"
-
-    local merm = SpawnPrefab(prefab)
-    merm.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    merm.Transform:SetRotation(inst.Transform:GetRotation())
-
-    inst.components.health:TransferComponent(merm)
-    inst.components.inventory:TransferComponent(merm)
-
-    local leader = inst.components.follower ~= nil and inst.components.follower:GetLeader() or nil
-
-    if leader ~= nil then
-        leader.components.leader:AddFollower(merm)
-    end
-
-    local home = inst.components.homeseeker ~= nil and inst.components.homeseeker:GetHome() or nil
-
-    inst:PushEvent("detachchild")
-
-    if home ~= nil and home.components.childspawner ~= nil then
-        home.components.childspawner:TakeOwnership(merm)
-    end
-
-    merm.components.combat:SetTarget(inst.components.combat.target)
-    merm:PushEvent("demutated", { oldbuild = inst.AnimState:GetBuild() })
-
-    inst:Remove()
-
-    return merm
-end
-
 local function TestForLunarMutation(inst, item)
     if item:HasTag("moonglass_piece") then
         inst:DoLunarMutation()
@@ -850,37 +771,6 @@ local function living_merm_common_master(inst)
     MakeMediumFreezableCharacter(inst, "pig_torso")
 end
 
-local function CreateFlameFx(parent)
-    local inst = CreateEntity()
-
-    inst:AddTag("FX")
-    --[[Non-networked entity]]
-    if not TheWorld.ismastersim then
-        inst.entity:SetCanSleep(false)
-    end
-    inst.persists = false
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddFollower()
-
-    inst.AnimState:SetMultColour(1, 1, 1, 0.5)
-
-    inst.AnimState:SetBank("pigman")
-    inst.AnimState:SetBuild("merm_actions_skills")
-
-    local anim = parent:HasTag("shadowminion") and "alternateeyes" or "flame"
-
-    inst.AnimState:PlayAnimation(anim, true)
-
-    --inst.AnimState:SetSymbolLightOverride("fx_flame_red", 1)
-    --inst.AnimState:SetSymbolLightOverride("fx_red", 1)
-
-    inst.AnimState:SetFrame(math.random(inst.AnimState:GetCurrentAnimationNumFrames()))
-
-    return inst
-end
-
 local function onunequip(inst, data)
     if data.item then
         if data.item.components.equippable and data.item.components.equippable.equipslot == EQUIPSLOTS.HANDS then
@@ -895,26 +785,6 @@ local function equip(inst, data)
             inst.AnimState:Show("ARM_carry_up")
             inst.AnimState:Hide("ARM_carry")
         end
-    end
-end
-
-local function updateeyebuild(inst)
-    if inst:HasDebuff("wurt_merm_planar") then
-        if inst:HasTag("mermguard") then
-            local hasking = TheWorld.components.mermkingmanager ~= nil and
-            TheWorld.components.mermkingmanager:HasKingAnywhere()
-            if hasking then
-                inst.AnimState:AddOverrideBuild("merm_guard_lunar_eye_build")
-            else
-                inst.AnimState:AddOverrideBuild("merm_guard_small_lunar_eye_build")
-            end
-        else
-            inst.AnimState:AddOverrideBuild("merm_lunar_eye_build")
-        end
-    else
-        inst.AnimState:ClearOverrideBuild("merm_guard_lunar_eye_build")
-        inst.AnimState:ClearOverrideBuild("merm_guard_small_lunar_eye_build")
-        inst.AnimState:ClearOverrideBuild("merm_lunar_eye_build")
     end
 end
 
@@ -1082,45 +952,8 @@ end
 
 local SLIGHTDELAY = 1
 
-local function OnEat(inst, data)
-    if data.food and data.food.components.edible then
-        if TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst) then
-            inst.components.mermcandidate:AddCalories(data.food)
-        end
-    end
-end
-
 local function no_holes(pt)
     return not TheWorld.Map:IsPointNearHole(pt)
-end
-
-local function OnAttackOther(inst, data)
-    local victim = data.target
-    if not victim then return end
-
-    local leader = (inst.components.follower and inst.components.follower.leader) or nil
-    if not leader then return end
-
-    local leader_has_shadow_terrain_skill = (leader.components.skilltreeupdater
-        and leader.components.skilltreeupdater:IsActivated("wurt_shadow_allegiance_2")
-    ) or false
-    if leader_has_shadow_terrain_skill and math.random() > TUNING.WURT_TERRAFORMING_SHADOW_PROCCHANCE then
-        local tile_type = inst:GetCurrentTileType()
-        if tile_type == WORLD_TILES.SHADOW_MARSH then
-            local pt = victim:GetPosition()
-            local offset = FindWalkableOffset(pt, math.random() * TWOPI, 2, 3, false, true, no_holes, false, true)
-            if offset ~= nil then
-                inst.SoundEmitter:PlaySound("dontstarve/common/shadowTentacleAttack_1")
-                inst.SoundEmitter:PlaySound("dontstarve/common/shadowTentacleAttack_2")
-                local tentacle = SpawnPrefab("shadowtentacle")
-                if tentacle ~= nil then
-                    tentacle.owner = inst
-                    tentacle.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
-                    tentacle.components.combat:SetTarget(victim)
-                end
-            end
-        end
-    end
 end
 
 -- Guard
@@ -1244,370 +1077,14 @@ local function guard_master(inst)
     inst:DoTaskInTime(0, on_guard_initialize)
 end
 
--- Common
-local function common_displaynamefn(inst)
-    return (inst:HasTag("mermprince") and STRINGS.NAMES.MERM_PRINCE) or nil
-end
-
-local function common_common(inst)
-    inst.sounds = sounds
-    inst.AnimState:SetBuild("merm_trader1_build")
-    inst.build = "merm_trader1_build"
-    inst.displaynamefn = common_displaynamefn
-end
-
-local function common_common2(inst)
-    inst.sounds = sounds
-    inst.AnimState:SetBuild("merm_trader2_build")
-    inst.build = "merm_trader2_build"
-end
-
 local function common_common3(inst)
     inst.sounds = sounds
     inst.AnimState:SetBuild("merm_fisherman_build")
     inst.build = "merm_fisherman_build"
 end
 
-
-local function on_mermking_created_upgrade(inst)
-    RoyalUpgrade(inst)
-    inst:PushEvent("onmermkingcreated")
-end
-local function on_mermking_created_anywhere(inst)
-    inst:DoTaskInTime(math.random() * SLIGHTDELAY, on_mermking_created_upgrade)
-end
-
-local function on_mermking_destroyed_downgrade(inst)
-    RoyalDowngrade(inst)
-    inst:PushEvent("onmermkingdestroyed")
-end
-local function on_mermking_destroyed_anywhere(inst)
-    inst:DoTaskInTime(math.random() * SLIGHTDELAY, on_mermking_destroyed_downgrade)
-end
-
-local function no_holes(pt)
-    return not TheWorld.Map:IsPointNearHole(pt)
-end
-
-
-local function OnEat(inst, data)
-    if TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst) then
-        if data.food and data.food.components.edible then
-            inst.components.mermcandidate:AddCalories(data.food)
-        end
-    end
-end
-
-local function common_master(inst)
-    -- Let the lootdropper take care of adding these dependencies correctly.
-    inst.scrapbook_deps = { "merm_lunar", "merm_shadow" }
-    inst.scrapbook_damage = { TUNING.MERM_DAMAGE, TUNING.MERM_DAMAGE_KINGBONUS }
-
-    inst.components.locomotor.runspeed = TUNING.MERM_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.MERM_WALK_SPEED
-
-    inst:SetStateGraph("SGmerm")
-
-    --inst:SetStateGraph("SGmermtrader")
-    inst:SetBrain(merm_brain)
-
-    inst.components.sleeper:SetNocturnal(true)
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-    inst.components.sleeper:SetWakeTest(ShouldWakeUp)
-
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-    inst.components.combat:SetRetargetFunction(1, RetargetFn)
-    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH)
-    inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-
-    MakeHauntablePanic(inst)
-
-    inst.components.lootdropper:SetLoot(merm_loot)
-
-    inst.components.follower.maxfollowtime = TUNING.MERM_LOYALTY_MAXTIME
-
-    inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
-
-    inst:ListenForEvent("onmermkingcreated_anywhere", function() on_mermking_created_anywhere(inst) end, TheWorld)
-    inst:ListenForEvent("onmermkingdestroyed_anywhere", function() on_mermking_destroyed_anywhere(inst) end, TheWorld)
-    inst:ListenForEvent("onattackother", OnAttackOther)
-    inst:ListenForEvent("oneat", OnEat)
-
-
-    if TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:HasKingAnywhere() then
-        RoyalUpgrade(inst)
-    end
-end
-
--------------------------------------------------------------------------------
--- SHADOW MERM DEFS
-
-
-local function AddEyeSpecialEffect(inst)
-    local flamesL = CreateFlameFx(inst)
-    flamesL.entity:SetParent(inst.entity)
-    flamesL.Follower:FollowSymbol(inst.GUID, "flameL", nil, nil, nil, true)
-    inst.flamesL = flamesL
-
-    local flamesR = CreateFlameFx(inst)
-    flamesR.entity:SetParent(inst.entity)
-    flamesR.Follower:FollowSymbol(inst.GUID, "flameR", nil, nil, nil, true)
-    inst.flamesR = flamesR
-end
-
-local function RemoveEyeSpecialEffect(inst)
-    if inst.flamesL then
-        inst.flamesL:Remove()
-    end
-    if inst.flamesR then
-        inst.flamesR:Remove()
-    end
-end
-
-local function planarbuffed_changed(inst)
-    if inst.planarbuffed:value() then
-        AddEyeSpecialEffect(inst)
-    else
-        RemoveEyeSpecialEffect(inst)
-    end
-end
-
-local function ShadowMerm_OnLoseLoyalty(inst, data)
-    local leader = data.leader
-    if not inst.components.health:IsDead() then
-        inst.sg:GoToState("shadow_loyaltyover")
-    end
-end
-
-local function CLIENT_ShadowMerm_OnEquipsChanged(inst)
-    if inst.highlightchildren ~= nil then
-        for _, child in ipairs(inst.highlightchildren) do
-            child.AnimState:SetMultColour(0, 0, 0, .5)
-            child.AnimState:UsePointFiltering(true)
-        end
-    end
-end
-
-local function shadow_merm_common(inst)
-    common_common(inst)
-    inst.AnimState:SetBuild("merm_shadow_build")
-    inst:SetPhysicsRadiusOverride(0.5)
-
-    inst.DynamicShadow:Enable(false)
-
-    inst:AddTag("shadowminion")
-    inst:AddTag("shadow_aligned")
-    inst.AnimState:UsePointFiltering(true)
-
-    inst.AnimState:SetMultColour(0, 0, 0, 0.5)
-
-    inst._equipschanged = net_event(inst.GUID, "merm_shadow._equipschanged")
-    inst.planarbuffed = net_bool(inst.GUID, "merm.planarbuffed", "planarbuffeddirty")
-
-    inst._OnEquipsChanged = CLIENT_ShadowMerm_OnEquipsChanged
-
-    if not TheWorld.ismastersim then
-        inst:ListenForEvent("merm_shadow._equipschanged", inst._OnEquipsChanged)
-    end
-
-    if not TheNet:IsDedicated() then
-        inst:DoTaskInTime(0, inst._OnEquipsChanged) -- Load.
-        inst:ListenForEvent("planarbuffeddirty", planarbuffed_changed)
-    end
-end
-
-local function OnChangedLeaderShadow(inst, new_leader)
-    if new_leader == nil and not inst.components.health:IsDead() then
-        inst.sg:GoToState("hit_shadow")
-    end
-end
-
-local function shadow_merm_master(inst)
-    common_master(inst)
-
-    inst.scrapbook_multcolour = { 0, 0, 0 }
-
-    inst:RemoveComponent("sleeper")
-
-    --
-    local locomotor = inst.components.locomotor
-    locomotor:SetTriggersCreep(false)
-    locomotor.pathcaps = { ignorecreep = true }
-
-    --
-    local combat = inst.components.combat
-    combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-    combat:SetRetargetFunction(1, RetargetFn)
-    combat:SetKeepTargetFunction(KeepTargetFn)
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH)
-    combat:SetDefaultDamage(inst:MermDamageCalculator())
-    combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-
-    inst:AddComponent("planardamage")
-    inst.components.planardamage:SetBaseDamage(0)
-
-    inst.components.talker:IgnoreAll()
-
-    inst.components.lootdropper:SetLoot(merm_shadow_loot)
-
-    local follower = inst.components.follower
-
-    follower.neverexpire = true
-    follower.OnChangedLeader = OnChangedLeaderShadow
-
-    inst:ListenForEvent("loseloyalty", ShadowMerm_OnLoseLoyalty) -- NOTE: This shouldn't happen, and is a failsafe.
-    inst:ListenForEvent("equip", ShadowMerm_OnItemEquipped)
-end
-
-local function shadow_mermguard_common(inst)
-    guard_common(inst)
-    inst.AnimState:SetBuild("merm_guard_shadow_build")
-    inst:SetPhysicsRadiusOverride(0.5)
-
-    inst.DynamicShadow:Enable(false)
-
-    inst:AddTag("shadowminion")
-    inst:AddTag("shadow_aligned")
-    inst.AnimState:UsePointFiltering(true)
-    inst.AnimState:SetMultColour(0, 0, 0, 0.5)
-
-    inst._equipschanged = net_event(inst.GUID, "merm_shadow._equipschanged")
-    inst.planarbuffed = net_bool(inst.GUID, "merm.planarbuffed", "planarbuffeddirty")
-
-    inst._OnEquipsChanged = CLIENT_ShadowMerm_OnEquipsChanged
-
-    if not TheWorld.ismastersim then
-        inst:ListenForEvent("merm_shadow._equipschanged", inst._OnEquipsChanged)
-    end
-
-    if not TheNet:IsDedicated() then
-        inst:DoTaskInTime(0, inst._OnEquipsChanged) -- Load.
-        inst:ListenForEvent("planarbuffeddirty", planarbuffed_changed)
-    end
-end
-
-local function shadow_mermguard_master(inst)
-    guard_master(inst)
-
-    inst.scrapbook_multcolour = { 0, 0, 0 }
-
-    inst.components.locomotor:SetTriggersCreep(false)
-    inst.components.locomotor.pathcaps = { ignorecreep = true }
-
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-    inst.components.combat:SetRetargetFunction(1, RetargetFn)
-    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_GUARD_HEALTH)
-    inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_GUARD_ATTACK_PERIOD)
-
-    inst:AddComponent("planardamage")
-    inst.components.planardamage:SetBaseDamage(0)
-
-    inst.components.lootdropper:SetLoot(merm_shadow_loot)
-
-    inst.components.follower.neverexpire = true
-    inst.components.follower.OnChangedLeader = OnChangedLeaderShadow
-
-    inst:ListenForEvent("loseloyalty", ShadowMerm_OnLoseLoyalty) -- NOTE: This shouldn't happen, and is a failsafe.
-    inst:ListenForEvent("equip", ShadowMerm_OnItemEquipped)
-end
-
 -------------------------------------------------------------------------------
 -- LUNAR MERM DEFS
-
-local function OnChangedLeaderLunar(inst, new_leader)
-    if inst:IsValid() and new_leader == nil and not inst.components.health:IsDead() then
-        DoLunarRevert(inst)
-    end
-end
-
-local function lunar_merm_common(inst)
-    common_common(inst)
-    inst.AnimState:SetBuild("merm_lunar_build")
-    inst:SetPhysicsRadiusOverride(0.5)
-
-    inst.planarbuffed = net_bool(inst.GUID, "merm.planarbuffed", "planarbuffeddirty")
-
-    if not TheNet:IsDedicated() then
-        inst:ListenForEvent("planarbuffeddirty", planarbuffed_changed)
-    end
-
-    inst:AddTag("lunarminion")
-    inst:AddTag("lunar_aligned")
-end
-
-local function lunar_merm_master(inst)
-    common_master(inst)
-
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-    inst.components.combat:SetRetargetFunction(1, RetargetFn)
-    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_LUNAR_HEALTH)
-    inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-
-    inst:AddComponent("planardamage")
-    inst.components.planardamage:SetBaseDamage(0)
-
-    inst.components.talker:IgnoreAll()
-
-    inst.components.lootdropper:SetChanceLootTable('merm_lunar_loot')
-
-    inst.updateeyebuild = updateeyebuild
-
-    inst.components.follower.neverexpire = true
-    inst.components.follower.OnChangedLeader = OnChangedLeaderLunar
-end
-
-local function lunar_mermguard_common(inst)
-    guard_common(inst)
-    inst.AnimState:SetBuild("merm_guard_lunar_build")
-    inst:SetPhysicsRadiusOverride(0.5)
-
-    inst.planarbuffed = net_bool(inst.GUID, "merm.planarbuffed", "planarbuffeddirty")
-
-    if not TheNet:IsDedicated() then
-        inst:ListenForEvent("planarbuffeddirty", planarbuffed_changed)
-    end
-
-    inst:AddTag("lunarminion")
-    inst:AddTag("lunar_aligned")
-end
-
-local function lunar_mermguard_master(inst)
-    guard_master(inst)
-
-    inst:RemoveComponent("sleeper")
-
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-    inst.components.combat:SetRetargetFunction(1, RetargetFn)
-    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_LUNAR_GUARD_HEALTH)
-    inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_GUARD_ATTACK_PERIOD)
-
-    inst:AddComponent("planardamage")
-    inst.components.planardamage:SetBaseDamage(0)
-
-    inst.components.lootdropper:SetChanceLootTable('merm_lunar_loot')
-
-    inst.updateeyebuild = updateeyebuild
-
-    inst.components.follower.neverexpire = true
-    inst.components.follower.OnChangedLeader = OnChangedLeaderLunar
-end
-
-
-
 local function ontimerdone(inst, data)
     if data.name == "fish" then
         inst.CanFish = true

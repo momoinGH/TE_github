@@ -62,18 +62,7 @@ local states =
             inst.AnimState:PlayAnimation("idle_loop")
             inst.components.vacuum:SpitItem()
 
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-            if ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS then
+            if inst:IsOnOcean() then
                 inst.AnimState:Show("twister_water_fx")
             else
                 inst.AnimState:Hide("twister_water_fx")
@@ -159,18 +148,7 @@ local states =
         {
             EventHandler("animover", function(inst)
                 if inst.CanVacuum then
-                    local map = TheWorld.Map
-                    local x, y, z = inst.Transform:GetWorldPosition()
-                    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-                    if ground == WORLD_TILES.OCEAN_COASTAL or
-                        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                        ground == WORLD_TILES.OCEAN_SWELL or
-                        ground == WORLD_TILES.OCEAN_ROUGH or
-                        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                        ground == WORLD_TILES.OCEAN_WATERLOG or
-                        ground == WORLD_TILES.OCEAN_HAZARDOUS then
+                    if inst:IsOnOcean() then
                         inst.sg:GoToState("waves_antic_pre")
                     else
                         inst.sg:GoToState("vacuum_antic_pre")
@@ -188,7 +166,7 @@ local states =
 
         onenter = function(inst)
             if TheWorld.components.tro_hurricane then
-                TheWorld.components.tro_hurricane:StartHurricaneStorm(6,inst)
+                TheWorld.components.tro_hurricane:StartHurricaneStorm(6, inst)
             end
 
             TheMixer:PushMix("twister")
@@ -212,7 +190,7 @@ local states =
 
         onenter = function(inst)
             if TheWorld.components.tro_hurricane then
-                TheWorld.components.tro_hurricane:StartHurricaneStorm(6,inst)
+                TheWorld.components.tro_hurricane:StartHurricaneStorm(6, inst)
             end
             if inst.components.locomotor then
                 inst.components.locomotor:StopMoving()
@@ -257,7 +235,7 @@ local states =
 
         onenter = function(inst)
             if TheWorld.components.tro_hurricane then
-                TheWorld.components.tro_hurricane:StartHurricaneStorm(6,inst)
+                TheWorld.components.tro_hurricane:StartHurricaneStorm(6, inst)
             end
             if inst.components.locomotor then
                 inst.components.locomotor:StopMoving()
@@ -298,7 +276,7 @@ local states =
 
         onenter = function(inst)
             if TheWorld.components.tro_hurricane then
-                TheWorld.components.tro_hurricane:StartHurricaneStorm(6,inst)
+                TheWorld.components.tro_hurricane:StartHurricaneStorm(6, inst)
             end
             TheMixer:PopMix("twister")
 
@@ -467,17 +445,7 @@ local states =
                 inst.components.locomotor:StopMoving()
                 inst.components.vacuum:TurnOff()
             end
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS then
+            if inst:IsOnOcean() then
                 inst.AnimState:PlayAnimation("death_water")
             else
                 inst.AnimState:PlayAnimation("death")
@@ -518,20 +486,7 @@ local states =
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("walk_pre")
-
-
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-            if ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS then
+            if inst:IsOnOcean() then
                 inst.AnimState:Show("twister_water_fx")
             else
                 inst.AnimState:Hide("twister_water_fx")
@@ -553,19 +508,7 @@ local states =
             inst.components.locomotor:WalkForward()
             inst.components.vacuum:SpitItem()
 
-
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-            if ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS then
+            if inst:IsOnOcean() then
                 inst.AnimState:Show("twister_water_fx")
             else
                 inst.AnimState:Hide("twister_water_fx")
@@ -591,19 +534,7 @@ local states =
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("walk_pst")
 
-
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-            if ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS then
+            if inst:IsOnOcean() then
                 inst.AnimState:Show("twister_water_fx")
             else
                 inst.AnimState:Hide("twister_water_fx")
@@ -629,19 +560,7 @@ local states =
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/twister/charge_roar")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/twister/run_charge_up")
 
-
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-            if ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS then
+            if inst:IsOnOcean() then
                 inst.AnimState:Show("twister_water_fx")
             else
                 inst.AnimState:Hide("twister_water_fx")
@@ -664,18 +583,7 @@ local states =
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/twister/run_charge_up")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/twister/charge_roar")
 
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-            if ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS then
+            if inst:IsOnOcean() then
                 inst.AnimState:Show("twister_water_fx")
             else
                 inst.AnimState:Hide("twister_water_fx")
@@ -698,19 +606,7 @@ local states =
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("charge_pst")
 
-
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-            if ground == WORLD_TILES.OCEAN_COASTAL or
-                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-                ground == WORLD_TILES.OCEAN_SWELL or
-                ground == WORLD_TILES.OCEAN_ROUGH or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL or
-                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-                ground == WORLD_TILES.OCEAN_WATERLOG or
-                ground == WORLD_TILES.OCEAN_HAZARDOUS then
+            if inst:IsOnOcean() then
                 inst.AnimState:Show("twister_water_fx")
             else
                 inst.AnimState:Hide("twister_water_fx")

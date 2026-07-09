@@ -186,17 +186,7 @@ local states =
         tags = { "busy" },
 
         onenter = function(inst, target)
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= WORLD_TILES.OCEAN_COASTAL and
-                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_SWELL and
-                ground ~= WORLD_TILES.OCEAN_ROUGH and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
+            if not inst:IsOnOcean() then
                 inst.components.groundpounder:GroundPound()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound", nil, .5)
             else

@@ -31,8 +31,6 @@ local events =
 
 local states =
 {
-
-
     State {
         name = "gotobelow",
         tags = { "busy" },
@@ -251,40 +249,6 @@ local states =
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
             inst.components.lootdropper:DropLoot(inst:GetPosition())
-
-
-
-            --[[
-local tamanhodomapa = (TheWorld.Map:GetSize())*2 - 2
-local map = TheWorld.Map
-local x
-local z
-local numerodeitens = 1
-
-repeat
-x = math.random(-tamanhodomapa,tamanhodomapa)
-z = math.random(-tamanhodomapa,tamanhodomapa)
-local curr = map:GetTile(map:GetTileCoordsAtPoint(x,0,z))
-local curr1 = map:GetTile(map:GetTileCoordsAtPoint(x-4,0,z))
-local curr2 = map:GetTile(map:GetTileCoordsAtPoint(x+4,0,z))
-local curr3 = map:GetTile(map:GetTileCoordsAtPoint(x,0,z-4))
-local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x,0,z+4))
--------------------coloca os itens------------------------
-if (curr == WORLD_TILES.IMPASSABLE and curr1 == WORLD_TILES.IMPASSABLE and curr2 == WORLD_TILES.IMPASSABLE and curr3 == WORLD_TILES.IMPASSABLE and curr4 == WORLD_TILES.IMPASSABLE)
-or (curr == WORLD_TILES.SNOWLAND and curr1 == WORLD_TILES.SNOWLAND and curr2 == WORLD_TILES.SNOWLAND and curr3 == WORLD_TILES.SNOWLAND and curr4 == WORLD_TILES.SNOWLAND)
-or (curr == WORLD_TILES.WATER_CORAL and curr1 == WORLD_TILES.WATER_CORAL and curr2 == WORLD_TILES.WATER_CORAL and curr3 == WORLD_TILES.WATER_CORAL and curr4 == WORLD_TILES.WATER_CORAL)
-or (curr == WORLD_TILES.WATER_DEEP and curr1 == WORLD_TILES.WATER_DEEP and curr2 == WORLD_TILES.WATER_DEEP and curr3 == WORLD_TILES.WATER_DEEP and curr4 == WORLD_TILES.WATER_DEEP)
-or (curr == WORLD_TILES.WATER_MEDIUM and curr1 == WORLD_TILES.WATER_MEDIUM and curr2 == WORLD_TILES.WATER_MEDIUM and curr3 == WORLD_TILES.WATER_MEDIUM and curr4 == WORLD_TILES.WATER_MEDIUM)
-or (curr == WORLD_TILES.WATER_SHALLOW and curr1 == WORLD_TILES.WATER_SHALLOW and curr2 == WORLD_TILES.WATER_SHALLOW and curr3 == WORLD_TILES.WATER_SHALLOW and curr4 == WORLD_TILES.WATER_SHALLOW)
-then
-local colocaitem = SpawnPrefab(inst.prefab)
-colocaitem.Transform:SetPosition(x, 0, z)
-numerodeitens = numerodeitens - 1 end
------------------------------------------------------------
-until
-numerodeitens <= 0
-
-]]
         end,
 
     },
@@ -306,8 +270,6 @@ numerodeitens <= 0
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-
-
 
     State {
         name = "frozen",
@@ -344,16 +306,5 @@ CommonStates.AddSleepStates(states,
             end)
         },
     })
-
---CommonStates.AddFrozenStates(states,
---{
---    frozentimeline =
---    {
---        TimeEvent(FRAMES*1, function(inst)
---            inst.AnimState:SetOrientation(ANIM_ORIENTATION.Default )
---            inst.Transform:SetFourFaced()
---        end)
---    },
---})
 
 return StateGraph("solofish", states, events, "idle", actionhandlers)

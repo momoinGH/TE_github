@@ -10,19 +10,19 @@ local prefabs =
 
 SetSharedLootTable('reconstruction_project',
     {
-        { "boards", 1.00 },
-        { "boards", 0.50 },
-        { "pigskin", 1.00 },
-        { "pigskin", 0.50 },
+        { "boards",   1.00 },
+        { "boards",   0.50 },
+        { "pigskin",  1.00 },
+        { "pigskin",  0.50 },
         { "cutstone", 1.00 },
     })
 
 SetSharedLootTable('lawnornamentsdrop',
     {
-        { "oinc", 1.00 },
-        { "oinc", 1.00 },
-        { "oinc", 1.00 },
-        { "oinc", 1.00 },
+        { "oinc",     1.00 },
+        { "oinc",     1.00 },
+        { "oinc",     1.00 },
+        { "oinc",     1.00 },
         { "cutstone", 1.00 },
     })
 
@@ -47,9 +47,9 @@ SetSharedLootTable('topiarylarge',
 
 SetSharedLootTable('lamp_post',
     {
-        { "alloy", 1.00 },
+        { "alloy",      1.00 },
         { "transistor", 1.00 },
-        { "lantern", 1.00 },
+        { "lantern",    1.00 },
     })
 
 
@@ -271,17 +271,6 @@ local function getstatus(inst)
     end
 end
 
-local function IsWater(tile)
-    return tile == WORLD_TILES.OCEAN_SWELL or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL or
-        tile == WORLD_TILES.OCEAN_HAZARDOUS or
-        tile == WORLD_TILES.OCEAN_ROUGH or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        tile == WORLD_TILES.OCEAN_COASTAL or
-        tile == WORLD_TILES.OCEAN_WATERLOG or
-        tile == WORLD_TILES.OCEAN_COASTAL_SHORE
-end
-
 local function GetSpawnPoint(inst, pt)
     local theta = math.random() * TWOPI
     local radius = OFF_SCREENDIST
@@ -289,15 +278,7 @@ local function GetSpawnPoint(inst, pt)
     local offset = FindWalkableOffset(pt, theta, radius, 12, true)
     if offset then
         local pos = pt + offset
-
-        local ground = TheWorld
-        local tile = WORLD_TILES.GRASS
-        if ground and ground.Map then
-            tile = inst:GetCurrentTileType(pos:Get())
-        end
-
-        local onWater = IsWater(tile)
-        if not onWater then
+        if not TheWorld.Map:IsOceanAtPoint(pos.x, pos.y, pos.z) then
             return pos
         end
     end

@@ -15,37 +15,13 @@ local assets =
 
 
 local function ondropped(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-
-    local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
-    local plataforma = false
-    local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
-    local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
-    for i, v in ipairs(entities) do
-        local walkable_platform = v.components.walkableplatform
-        if walkable_platform and walkable_platform.radius == nil then walkable_platform.radius = 4 end
-        if walkable_platform ~= nil then
-            local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
-            local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
-            if distance_sq <= walkable_platform.radius * walkable_platform.radius then plataforma = true end
-        end
-    end
-
-    if not plataforma and (ground == WORLD_TILES.OCEAN_COASTAL or
-            ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-            ground == WORLD_TILES.OCEAN_SWELL or
-            ground == WORLD_TILES.OCEAN_ROUGH or
-            ground == WORLD_TILES.OCEAN_BRINEPOOL or
-            ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-            ground == WORLD_TILES.OCEAN_WATERLOG or
-            ground == WORLD_TILES.OCEAN_HAZARDOUS) then
+    if inst:IsOnOcean() then
         inst.AnimState:PlayAnimation("idle_water", true)
         inst.AnimState:OverrideSymbol("water_ripple", "ripple_build", "water_ripple")
         inst.AnimState:OverrideSymbol("water_shadow", "ripple_build", "water_shadow")
-        if not inst.replica.inventoryitem:IsHeld() then inst.components.inventoryitem:AddMoisture(80) end
+        if not inst.replica.inventoryitem:IsHeld() then
+            inst.components.inventoryitem:AddMoisture(80)
+        end
     else
         inst.AnimState:SetLayer(LAYER_WORLD)
         inst.AnimState:PlayAnimation("idle", true)

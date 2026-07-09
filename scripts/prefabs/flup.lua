@@ -14,7 +14,7 @@ local prefabs =
 
 SetSharedLootTable('flup',
     {
-        { 'monstermeat', 1.00 },
+        { 'monstermeat',   1.00 },
         { 'blowdart_flup', 0.25 },
     })
 
@@ -55,23 +55,6 @@ local function keeptargetfn(inst, target)
         and not target.components.health:IsDead()
         and inst:GetPosition():Dist(target:GetPosition()) < 15
         and (homePos and homePos:Dist(target:GetPosition()) < 30)
-end
-
-local function oninit(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    if ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
-        inst:Remove()
-    end
 end
 
 local function fn()
@@ -137,7 +120,6 @@ local function fn()
 
     MakeTinyFreezableCharacter(inst)
     MakeSmallBurnable(inst)
-    inst:DoTaskInTime(1, oninit)
 
     return inst
 end

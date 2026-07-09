@@ -704,17 +704,7 @@ local function makefn(build, stage, data)
 
 
         inst:DoTaskInTime(0.2, function(inst)
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if (ground ~= WORLD_TILES.OCEAN_COASTAL and
-                    ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                    ground ~= WORLD_TILES.OCEAN_SWELL and
-                    ground ~= WORLD_TILES.OCEAN_ROUGH and
-                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                    ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                    ground ~= WORLD_TILES.OCEAN_HAZARDOUS) then
+            if not inst:IsOnOcean() then
                 inst.AnimState:OverrideSymbol("droplet", "tree_mangrove_build", " ")
                 inst.AnimState:OverrideSymbol("water_ripple", "tree_mangrove_build", " ")
             end

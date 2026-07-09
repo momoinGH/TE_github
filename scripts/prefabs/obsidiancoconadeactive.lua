@@ -14,38 +14,8 @@ local COCONADE_OBSIDIAN_EXPLOSIONRANGE = 9
 local COCONADE_OBSIDIAN_BUILDINGDAMAGE = 15
 
 local function ondropped(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
-    local plataforma = false
-    local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
-    local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
-    for i, v in ipairs(entities) do
-        local walkable_platform = v.components.walkableplatform
-        if walkable_platform and walkable_platform.radius == nil then walkable_platform.radius = 4 end
-        if walkable_platform ~= nil then
-            local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
-            local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
-            if distance_sq <= walkable_platform.radius * walkable_platform.radius then plataforma = true end
-        end
-    end
-
-    if ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
-        if not plataforma then
-            inst.AnimState:PlayAnimation("idle_water", true)
-        else
-            inst.AnimState:PlayAnimation("idle",
-                true)
-        end
+    if inst:IsOnOcean() then
+        inst.AnimState:PlayAnimation("idle_water", true)
     else
         inst.AnimState:PlayAnimation("idle", true)
     end
@@ -78,13 +48,6 @@ local function OnUpdateFade(inst)
         inst._fadetask:Cancel()
         inst._fadetask = nil
     end
-end
-
-local function OnFadeDirty(inst)
-    if inst._fadetask == nil then
-        inst._fadetask = inst:DoPeriodicTask(FRAMES, OnUpdateFade)
-    end
-    OnUpdateFade(inst)
 end
 
 local function FadeOut(inst)
@@ -131,46 +94,9 @@ local function OnIgniteFn(inst)
     inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_fuse_LP", "hiss")
 end
 
-local function OnExtinguishFn(inst)
-    inst.SoundEmitter:KillSound("hiss")
-end
-
-local function OnExplodeFn(inst)
-    inst.SoundEmitter:KillSound("hiss")
-end
-
-
-
 local function Explode(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    if ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
-        local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local plataforma = false
-        local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
-        local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
-        for i, v in ipairs(entities) do
-            local walkable_platform = v.components.walkableplatform
-            if walkable_platform and walkable_platform.radius == nil then walkable_platform.radius = 4 end
-            if walkable_platform ~= nil then
-                local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
-                local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
-                if distance_sq <= walkable_platform.radius * walkable_platform.radius then plataforma = true end
-            end
-        end
-        if not plataforma then
-            TroSpawnAttackWavesForEnt(inst, nil, nil, 8, 360, 6, "rogue_wave")
-        end
+    if inst:IsOnOcean() then
+        TroSpawnAttackWavesForEnt(inst, nil, nil, 8, 360, 6, "rogue_wave")
     end
     local prefab = "mushroombomb"
     local fx = SpawnPrefab(prefab)
@@ -193,7 +119,7 @@ local function Explode(inst)
 end
 
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
@@ -214,7 +140,6 @@ local function fn(Sim)
     if not TheWorld.ismastersim then
         return inst
     end
-
 
     inst:AddComponent("explosive")
     inst.components.explosive.explosivedamage = COCONADE_OBSIDIAN_DAMAGE

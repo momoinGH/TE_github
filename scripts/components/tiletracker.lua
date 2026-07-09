@@ -46,8 +46,6 @@ function TileTracker:OnUpdate(dt)
 		end
 	end
 
-
-
 	local tile, tileinfo = self.inst:GetCurrentTileType()
 
 	if tile then --and tile ~= self.tile then

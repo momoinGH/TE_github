@@ -6,14 +6,7 @@ local assets =
     Asset("ANIM", "anim/sprinkler_meter.zip"),
 }
 
-local MOISTURE_SPRINKLER_PERCENT_INCREASE_PER_SPRAY = 5
 local SPRINKLER_MAX_FUEL_TIME = 480
-local MOISTURE_MAX_WETNESS = 100
-
-local projectile_assets =
-{
-    Asset("ANIM", "anim/firefighter_projectile.zip")
-}
 
 local prefabs =
 {
@@ -24,18 +17,6 @@ local prefabs =
 
 RANGE = 8
 
-local function IsWater(tile)
-    return tile == WORLD_TILES.OCEAN_COASTAL or
-        tile == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        tile == WORLD_TILES.OCEAN_SWELL or
-        tile == WORLD_TILES.OCEAN_ROUGH or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        tile == WORLD_TILES.OCEAN_WATERLOG or
-        tile == WORLD_TILES.OCEAN_HAZARDOUS
-end
-
-
 local function spawndrop(inst)
     local drop = SpawnPrefab("raindrop")
     local pt = inst:GetPosition()
@@ -44,63 +25,6 @@ local function spawndrop(inst)
     local offset = Vector3(dist * math.cos(angle), 0, -dist * math.sin(angle))
     drop.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
     drop.Transform:SetScale(0.5, 0.5, 0.5)
-end
-
-local function OnFuelSectionChange(old, new, inst)
-    local fuelAnim = 0
-    if inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.01 then
-        fuelAnim = "0"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.1 then
-        fuelAnim = "1"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.2 then
-        fuelAnim = "2"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.3 then
-        fuelAnim = "3"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.4 then
-        fuelAnim = "4"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.5 then
-        fuelAnim = "5"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.6 then
-        fuelAnim = "6"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.7 then
-        fuelAnim = "7"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.8 then
-        fuelAnim = "8"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.9 then
-        fuelAnim = "9"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 1 then
-        fuelAnim = "10"
-    end
-    if inst then inst.AnimState:OverrideSymbol("swap_meter", "sprinkler_meter", fuelAnim) end
-end
-
-local function ontakefuelfn(inst)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/machine_fuel")
-    local fuelAnim = 0
-    if inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.01 then
-        fuelAnim = "0"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.1 then
-        fuelAnim = "1"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.2 then
-        fuelAnim = "2"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.3 then
-        fuelAnim = "3"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.4 then
-        fuelAnim = "4"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.5 then
-        fuelAnim = "5"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.6 then
-        fuelAnim = "6"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.7 then
-        fuelAnim = "7"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.8 then
-        fuelAnim = "8"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.9 then
-        fuelAnim = "9"
-    elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 1 then
-        fuelAnim = "10"
-    end
-    if inst then inst.AnimState:OverrideSymbol("swap_meter", "sprinkler_meter", fuelAnim) end
 end
 
 local function TurnOn(inst)
@@ -296,39 +220,11 @@ local function UpdateSpray(inst)
             v.components.crop.growthpercent = v.components.crop.growthpercent + (0.001)
         end
 
-
-
-
-
-        --    if v.components.pickable ~= nil then
-        --        if v.components.pickable:CanBePicked() and v.components.pickable.caninteractwith then
-        --            return false
-        --        end
-        --        if v.components.pickable:FinishGrowing() then
-        --			v.components.pickable:ConsumeCycles(1) -- magic grow is hard on plants
-        --			return true
-        --		end
-        --    end
-
-        --    if v.components.crop ~= nil and (v.components.crop.rate or 0) > 0 then
-        --        if v.components.crop:DoGrow(1 / v.components.crop.rate, true) then
-        --			return true
-        --		end
-        --    end
-
         if v.components.growable ~= nil then
             -- If we're a tree and not a stump, or we've explicitly allowed magic growth, do the growth.
             v.components.growable:ExtendGrowTime(-0.2)
-            --		if v.components.growable.targettime and v.components.growable.targettime > 1 then
-            --        v.components.growable.targettime = v.components.growable.targettime - 0.4
-            --		end
         end
 
-        --    if v.components.harvestable ~= nil and v.components.harvestable:CanBeHarvested() and v:HasTag("mushroom_farm") then
-        --        if v.components.harvestable:Grow() then
-        --			return true
-        --		end
-        --    end
         if v then
             local a, b, c = v.Transform:GetWorldPosition()
             if inst.components.wateryprotection then
@@ -341,103 +237,6 @@ local function UpdateSpray(inst)
         if v.components.witherable and v.components.witherable:IsWithered() then
             v.components.witherable:ForceRejuvenate()
         end
-    end
-end
-
-local function IsValidSprinklerTile(tile)
-    return not IsWater(tile) and (tile ~= WORLD_TILES.INVALID)
-end
-
-local function GetValidWaterPointNearby(pt)
-    local range = 20
-
-    local cx, cy = TheWorld.Map:GetTileCoordsAtPoint(pt.x, 0, pt.z)
-    local center_tile = TheWorld.Map:GetTile(cx, cy)
-
-    local min_sq_dist = 999999999999
-    local best_point = nil
-
-    for x = pt.x - range, pt.x + range, 1 do
-        for z = pt.z - range, pt.z + range, 1 do
-            local tx, ty = TheWorld.Map:GetTileCoordsAtPoint(x, 0, z)
-            local tile = TheWorld.Map:GetTile(tx, ty)
-
-            if IsValidSprinklerTile(center_tile) and IsWater(tile) then
-                local cur_point = Vector3(x, 0, z)
-                local cur_sq_dist = cur_point:DistSq(pt)
-
-                if cur_sq_dist < min_sq_dist then
-                    min_sq_dist = cur_sq_dist
-                    best_point = cur_point
-                end
-            end
-        end
-    end
-
-    return best_point
-end
-
-local function PlaceTestFn(inst, pt)
-    return GetValidWaterPointNearby(pt) ~= nil
-end
-
-local function RotateToTarget(inst, dest)
-    local px, py, pz = inst.Transform:GetWorldPosition()
-    local dz = pz - dest.z
-    local dx = dest.x - px
-    local angle = math.atan2(dz, dx) / DEGREES
-
-    -- Offset angle to account for pipe orientation in file.sa
-    local OFFSET_ANGLE = 90
-    inst.Transform:SetRotation(angle - OFFSET_ANGLE)
-end
-
-local function CreatePipes(inst)
-    local P0 = inst:GetPosition()
-    local P1 = GetValidWaterPointNearby(P0)
-
-    local totalDist = P1:Dist(P0)
-    local pipeLength = 2
-    local metricPipeLength = pipeLength / totalDist
-
-    inst.pipes = {}
-
-    for t = 0.0, 1.0, metricPipeLength do
-        local Pt = (P1 - P0) * t + P0
-        local pipe = SpawnPrefab("water_pipe")
-        pipe.pipesound = tostring(inst.GUID) .. "pipesound"
-        pipe.Transform:SetPosition(Pt.x, 0.0, Pt.z)
-        RotateToTarget(pipe, P1)
-
-        table.insert(inst.pipes, pipe)
-    end
-end
-
-local function DestroyPipes(inst)
-    for i, pipe in ipairs(inst.pipes) do
-        pipe:Remove()
-    end
-end
-
-local function ConnectPipes(inst)
-    local numPipes = #inst.pipes
-
-    if numPipes > 2 then
-        for i = 2, numPipes, 1 do
-            inst.pipes[i - 1].nextPipe = inst.pipes[i]
-            inst.pipes[i].prevPipe = inst.pipes[i - 1]
-        end
-    end
-end
-
-local function ExtendPipes(inst)
-    TheWorld[tostring(inst.GUID) .. "pipesound"] = 1
-    if inst.loadedPipesFromFile then
-        for i, pipe in ipairs(inst.pipes) do
-            pipe.sg:GoToState("idle")
-        end
-    else
-        inst.pipes[1].sg:GoToState("extend")
     end
 end
 
@@ -563,13 +362,6 @@ local function fn()
 
     return inst
 end
-
-local function OnHit(inst, dist)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/firesupressor_impact")
-    SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst:GetPosition():Get())
-    inst:Remove()
-end
-
 
 
 return Prefab("sprinkler", fn, assets, prefabs),

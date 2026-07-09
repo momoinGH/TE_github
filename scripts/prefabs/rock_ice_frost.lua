@@ -209,9 +209,6 @@ local function TryStageChange(inst)
     end
 
     local pct = TheWorld.state.seasonprogress
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     if TheWorld.state.isspring then
         SetStage(
             inst,
@@ -232,7 +229,9 @@ local function TryStageChange(inst)
             "tall",
             "grow"
         )
-    elseif TheWorld.state.iswinter or ground == WORLD_TILES.SNOWLAND or ground == WORLD_TILES.ICELAND or ground == WORLD_TILES.OCEAN_COASTAL_SHORE or ground == WORLD_TILES.OCEAN_COASTAL or ground == WORLD_TILES.OCEAN_WATERLOG then
+    elseif TheWorld.state.iswinter
+        or inst:IsInFrostisLandArea()
+    then
         SetStage(inst, "tall", "grow")
     end
 end
@@ -368,12 +367,12 @@ local function rock_ice_fn()
 
     -- Make sure we start at a good height for starting in a season when it shouldn't start as full
     inst:DoTaskInTime(0, function()
-        local map = TheWorld.Map
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
         if inst.stage then
             SetStage(inst, inst.stage)
-        elseif TheWorld.state.isspring or TheWorld.state.iswinter or ground == WORLD_TILES.SNOWLAND or ground == WORLD_TILES.ICELAND or ground == WORLD_TILES.OCEAN_COASTAL_SHORE or ground == WORLD_TILES.OCEAN_COASTAL or ground == WORLD_TILES.OCEAN_WATERLOG then
+        elseif TheWorld.state.isspring
+            or TheWorld.state.iswinter
+            or inst:IsInFrostisLandArea()
+        then
             SetStage(inst, "tall")
         elseif TheWorld.state.issummer then
             SetStage(inst, "short")

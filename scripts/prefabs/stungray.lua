@@ -13,26 +13,13 @@ local prefabs =
     "splash_water",
 }
 
-local SLEEP_DIST_FROMHOME = 1
-local SLEEP_DIST_FROMTHREAT = 20
-local MAX_CHASEAWAY_DIST = 80
-local MAX_TARGET_SHARES = 5
-local SHARE_TARGET_DIST = 30
-
-local STINKRAY_DAMAGE = 3
 local STINKRAY_HEALTH = 100
 local STINKRAY_ATTACK_PERIOD = 1
 local STINKRAY_ATTACK_DIST = 2
 local STINKRAY_TARGET_DIST = 6
 local STINKRAY_WALK_SPEED = 8
-local STINKRAY_CHASE_TIME = 3
-local STINKRAY_CHASE_DIST = 10
 local STINKRAY_SCALE_FLYING = 1.05
 local STINKRAY_SCALE_WATER = 1.00
-
-local function KeepThreat(inst, threat)
-    return threat:GetIsOnWater(threat:GetPosition():Get()) -- and not (threat.components.poisonable and threat.components.poisonable:IsPoisoned())
-end
 
 local function MakeTeam(inst, attacker)
     local leader = SpawnPrefab("teamleader")
@@ -62,30 +49,10 @@ local function Retarget(inst)
 end
 
 local function KeepTarget(inst, target)
-    --[[
-if target then
-local map = TheWorld.Map
-local x, y, z = target.Transform:GetWorldPosition()
-local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-if ground ~= WORLD_TILES.OCEAN_COASTAL and
-ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-ground ~= WORLD_TILES.OCEAN_SWELL and
-ground ~= WORLD_TILES.OCEAN_ROUGH and
-ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
-if inst.components.teamleader then inst.components.teamleader:DisbandTeam() end
-print("chega")
-end
-end
-]]
     return (inst.components.teamattacker.inteam and not inst.components.teamattacker.teamleader:CanAttack())
         or inst.components.teamattacker.orders == ORDERS.ATTACK
 end
 
-local SLEEP_DIST_FROMHOME = 1
-local SLEEP_DIST_FROMTHREAT = 20
-local MAX_CHASEAWAY_DIST = 80
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 40
 
@@ -101,15 +68,6 @@ local function OnAttacked(inst, data)
         inst.components.combat:SetTarget(attacker)
         inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("bat") end,
             MAX_TARGET_SHARES)
-    end
-end
-
-local function OnCombatTarget(inst, data)
-    --If you're in a team or have a combat target then run.
-    if (data and data.target) or inst.components.teamattacker.inteam then
-        inst.components.locomotor:SetShouldRun(true)
-    else
-        inst.components.locomotor:SetShouldRun(false)
     end
 end
 

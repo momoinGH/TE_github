@@ -16,8 +16,6 @@ end
 
 local function onthrown(inst, thrower, pt)
     --targetPos, attacker, owningweapon
-    local thrower = inst.components.complexprojectile.attacker
-
 
     inst:DoTaskInTime(0.3, function(inst)
         inst.claimed = nil
@@ -31,34 +29,16 @@ local function onthrown(inst, thrower, pt)
     inst.AnimState:PlayAnimation("throw", true)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/coconade_throw")
 
+    local thrower = inst.components.complexprojectile.attacker
     if thrower and thrower.components.sanity then
         thrower.components.sanity:DoDelta(TUNING.SANITY_SUPERTINY)
     end
 end
 
 local function onhitground(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    if ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
+    if inst:IsOnOcean() then
         inst.AnimState:PlayAnimation("idle_water", true)
-    end
-    if ground ~= WORLD_TILES.OCEAN_COASTAL and
-        ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-        ground ~= WORLD_TILES.OCEAN_SWELL and
-        ground ~= WORLD_TILES.OCEAN_ROUGH and
-        ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-        ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-        ground ~= WORLD_TILES.OCEAN_WATERLOG and
-        ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
+    else
         inst.AnimState:PlayAnimation("idle", true)
     end
 end

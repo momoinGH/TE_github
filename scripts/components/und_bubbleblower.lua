@@ -70,24 +70,7 @@ function BubbleBlower:OnUpdate(dt)
     -- Increment timer
     self.time_since_bubble = self.time_since_bubble + dt
 
-
-    local map = TheWorld.Map
-    local x, y, z = self.inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-    local naagua = false
-    if ground == WORLD_TILES.UNDERWATER_SANDY
-        or ground == WORLD_TILES.UNDERWATER_ROCKY
-        or (ground == WORLD_TILES.BEACH and TheWorld:HasTag("cave"))
-        or (ground == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave"))
-        or (ground == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave"))
-        or (ground == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave"))
-        or (ground == WORLD_TILES.PAINTED and TheWorld:HasTag("cave"))
-    then
-        naagua = true
-    end
-
-    --naagua = true
-    if (self.time_since_bubble > self.time_til_bubble) and naagua then
+    if (self.time_since_bubble > self.time_til_bubble) and self.inst:IsInUnderWaterArea() then
         -- Create bubble
         local pt = Vector3(self.inst.Transform:GetWorldPosition())
         local bubble = SpawnPrefab(self.tipo)

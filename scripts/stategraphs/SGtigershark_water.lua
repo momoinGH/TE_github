@@ -42,25 +42,6 @@ local events =
     EventHandler("gotosleep", function(inst) inst.sg:GoToState("sleeping") end),
 }
 
-local function GetIsOnWater(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    if ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
-        return true
-    else
-        return false
-    end
-end
-
 local states =
 {
     State {
@@ -343,18 +324,7 @@ local states =
 
         ontimeout = function(inst)
             inst:Show()
-            local map = TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-            if ground ~= WORLD_TILES.OCEAN_SWELL and
-                ground ~= WORLD_TILES.OCEAN_COASTAL and
-                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_ROUGH and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
-                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
-                ground ~= WORLD_TILES.OCEAN_WATERLOG and
-                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
+            if not inst:IsOnOcean() then
                 inst:ClearStateGraph()
                 inst:SetStateGraph("SGtigershark_ground")
                 inst.AnimState:SetBuild("tigershark_ground_build")

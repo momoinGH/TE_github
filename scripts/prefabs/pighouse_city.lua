@@ -207,16 +207,6 @@ local function onvacate(inst, child)
 end
 
 local function onhammered(inst, worker)
-    --[[
-if worker and worker:HasTag("player") then
-local x, y, z = inst.Transform:GetWorldPosition()
-local guarda = GetClosestInstWithTag("guard", inst, 30)
-if guarda and worker and guarda.components.combat and guarda.components.combat.target == nil then guarda.components.combat:SetTarget(worker) end
-end
-]]
-
-
-
     local pt = inst:GetPosition()
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
     if tiletype == WORLD_TILES.SUBURB or tiletype == WORLD_TILES.FOUNDATION or tiletype == WORLD_TILES.COBBLEROAD or tiletype == WORLD_TILES.FIELDS or tiletype == WORLD_TILES.LAWN then
@@ -248,26 +238,10 @@ end
     inst:Remove()
 end
 
-local function ongusthammerfn(inst)
-    onhammered(inst, nil)
-end
-
 local function onhit(inst, worker)
     if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("hit")
         inst.AnimState:PushAnimation("idle")
-    end
-end
-
-local function paytax(inst)
-    local jogador = GetClosestInstWithTag("player", inst, 30)
-    if inst.components.spawner.child and jogador and inst:HasTag("paytax") then
-        inst:DoTaskInTime(4, function()
-            if inst.components.spawner.child then
-                inst.components.spawner.child:AddTag("paytax")
-            end
-            inst:RemoveTag("paytax")
-        end)
     end
 end
 
@@ -315,9 +289,6 @@ local function onsave(inst, data)
     data.colornum = inst.colornum
     data.paytax = inst:HasTag("paytax")
     data.feitapelojogador = inst:HasTag("feitapelojogador")
-    --    if inst.components.spawner.childname then
-    --        data.childname = inst.components.spawner.childname
-    --    end
 end
 
 local function onload(inst, data)
@@ -359,20 +330,6 @@ local function ConfigureSpawner(inst, selected_citizens)
     inst:WatchWorldState("isday", OnDay)
 end
 
-local function citypossessionfn(inst)
-    local selected_citizens = {}
-    --    if inst.components.citypossession and inst.components.citypossession.cityID then
-    --        for i=1, inst.components.citypossession.cityID do
-    --            selected_citizens = JoinArrays(selected_citizens, city_citizens[i])
-    --        end
-    --    else
-    --        for i=1, 2 do
-    --            selected_citizens = JoinArrays(selected_citizens, city_citizens[i])
-    --        end
-    --    end
-    ConfigureSpawner(inst, selected_citizens)
-end
-
 local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle")
@@ -380,14 +337,10 @@ local function onbuilt(inst)
     --    citypossessionfn( inst )
 end
 
-local function OnLoadPostPass(inst)
-    --citypossessionfn( inst )
-end
-
 local function makefn(animset, setbuild, spawnList, minimapicon)
     local function fn()
         local inst = CreateEntity()
-        
+
         local trans = inst.entity:AddTransform()
         local anim = inst.entity:AddAnimState()
         local light = inst.entity:AddLight()
@@ -532,7 +485,7 @@ end
 local function makefn2(animset, setbuild, spawnList)
     local function fn()
         local inst = CreateEntity()
-        
+
         local trans = inst.entity:AddTransform()
         local anim = inst.entity:AddAnimState()
         local light = inst.entity:AddLight()

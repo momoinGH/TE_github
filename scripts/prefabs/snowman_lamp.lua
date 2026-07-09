@@ -43,7 +43,12 @@ local function onhammered(inst)
         local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
         contagem = contagem + 1
         -------------------coloca os itens------------------------
-        if (curr == WORLD_TILES.SNOWLAND and curr1 == WORLD_TILES.SNOWLAND and curr2 == WORLD_TILES.SNOWLAND and curr3 == WORLD_TILES.SNOWLAND and curr4 == WORLD_TILES.SNOWLAND) then
+        if (curr == WORLD_TILES.SNOWLAND
+                and curr1 == WORLD_TILES.SNOWLAND
+                and curr2 == WORLD_TILES.SNOWLAND
+                and curr3 == WORLD_TILES.SNOWLAND
+                and curr4 == WORLD_TILES.SNOWLAND)
+        then
             local colocaitem = SpawnPrefab(inst.prefab)
             colocaitem.Transform:SetPosition(x, 0, z)
             numerodeitens = numerodeitens - 1

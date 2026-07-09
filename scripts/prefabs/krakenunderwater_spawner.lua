@@ -18,7 +18,7 @@ local function OnTimerDone(inst, data)
         until
             curr == WORLD_TILES.UNDERWATER_SANDY
 
-        local tesouro = SpawnPrefab("krakenunderwater").Transform:SetPosition(x, 0, z)
+        SpawnPrefab("krakenunderwater").Transform:SetPosition(x, 0, z)
         inst:Remove()
     end
 end

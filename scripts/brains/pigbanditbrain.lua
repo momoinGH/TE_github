@@ -17,27 +17,14 @@ local MAX_WANDER_DIST = 20
 
 local function FindRandomOffscreenPoint(inst)
     local OFFSET = 70
-    --local x,y,z = inst.Transform:GetWorldPosition()
 
     local pt = inst:GetPosition()
 
     local theta = math.random() * TWOPI
     local radius = OFFSET
-
     local offset = FindWalkableOffset(pt, theta, radius, 12, true) --12
-
     if offset then
-        local newpt = pt + offset
-        local ground = TheWorld
-        local tile = WORLD_TILES.GRASS
-        if ground and ground.Map then
-            tile = inst:GetCurrentTileType(newpt:Get())
-
-            --            local onWater = ground.Map:IsWater(tile)
-            --            if not onWater then
-            return newpt
-            --            end
-        end
+        return pt + offset
     end
     print("FAILED!!!!!!")
     return nil
@@ -62,23 +49,6 @@ local function GoHomeAction(inst)
     end
 end
 
-local function EatFoodAction(inst)
-    local target = FindEntity(inst, SEE_FOOD_DIST,
-        function(item)
-            return inst.components.eater:CanEat(item) and
-                item.components.bait and
-                not item:HasTag("planted") and
-                not (item.components.inventoryitem and
-                    item.components.inventoryitem:IsHeld())
-        end)
-
-    if target then
-        local act = BufferedAction(inst, target, ACTIONS.EAT)
-        act.validfn = function() return not (target.components.inventoryitem and target.components.inventoryitem:IsHeld()) end
-        return act
-    end
-end
-
 local function OincNearby(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
@@ -90,28 +60,25 @@ local function OincNearby(inst)
             plataforma = true
         end
     end
-    local pt = Vector3(x, y, z)
 
     if not TheWorld.Map:IsVisualGroundAtPoint(x, y, z) then
         if inst and inst.components.health and plataforma == false and inst.sg:HasStateTag("moving") then
-            inst
-                .components.health:Kill()
+            inst.components.health:Kill()
         end
     end
-    return FindEntity(inst, SEE_STOLEN_ITEM_DIST,
-        function(item)
-            local x, y, z = item.Transform:GetWorldPosition()
-            local isValidPosition = x and y and z
-            local isValidPickupItem =
-                isValidPosition and
-                item.components.inventoryitem and
-                not item.components.inventoryitem:IsHeld() and
-                item.components.inventoryitem.canbepickedup and
-                item:IsOnValidGround() and
-                not item:HasTag("trap") and
-                item:HasTag("oinc") -- bandits only steal money
-            return isValidPickupItem
-        end)
+    return FindEntity(inst, SEE_STOLEN_ITEM_DIST, function(item)
+        local x, y, z = item.Transform:GetWorldPosition()
+        local isValidPosition = x and y and z
+        local isValidPickupItem =
+            isValidPosition and
+            item.components.inventoryitem and
+            not item.components.inventoryitem:IsHeld() and
+            item.components.inventoryitem.canbepickedup and
+            item:IsOnValidGround() and
+            not item:HasTag("trap") and
+            item:HasTag("oinc")     -- bandits only steal money
+        return isValidPickupItem
+    end)
 end
 
 local function PickupAction(inst)

@@ -36,22 +36,16 @@ function CloudPuffManager:OnUpdate(dt)
         return
     end
 
-
     for i, v in ipairs(AllPlayers) do
         local px, py, pz = v.Transform:GetWorldPosition()
-
         self.cloudpuff_spawn_rate = self.cloudpuff_spawn_rate + self.cloudpuff_per_sec * dt
-
         local radius = getCloudPuffRadius()
-
         while self.cloudpuff_spawn_rate > 10.0 do
             local dx, dz = radius * UnitRand(), radius * UnitRand()
             local x, y, z = px + dx, py, pz + dz
-
             if isSky(map, x, y, z) then
                 spawnCloudPuff(x, y, z)
             end
-
             self.cloudpuff_spawn_rate = self.cloudpuff_spawn_rate - 1.0
         end
     end

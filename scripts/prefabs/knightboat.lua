@@ -48,24 +48,8 @@ local function OnAttacked(inst, data)
 end
 
 local function OnAttack(inst, data)
-    local numshots = 3
-    if data.target then
-        local map = TheWorld.Map
-        local x, y, z = data.target.Transform:GetWorldPosition()
-        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-        local naagua = false
-        if ground == WORLD_TILES.OCEAN_COASTAL or
-            ground == WORLD_TILES.OCEAN_SWELL or
-            ground == WORLD_TILES.OCEAN_ROUGH or
-            ground == WORLD_TILES.OCEAN_BRINEPOOL or
-            ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-            ground == WORLD_TILES.OCEAN_WATERLOG or
-            ground == WORLD_TILES.OCEAN_HAZARDOUS then
-            naagua = true
-        end
-
-        if naagua == true and not data.target:HasTag("aquatic") then return end
-        for i = 0, numshots - 1 do
+    if data and data.target and not data.target:IsOnOcean() then
+        for i = 0, 2 do
             local offset = Vector3(math.random(-4, 4), math.random(-4, 4), math.random(-4, 4))
             inst:DoTaskInTime(FRAMES * 10 * i, function()
                 local x, y, z = inst.Transform:GetWorldPosition()

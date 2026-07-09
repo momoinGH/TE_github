@@ -1,7 +1,6 @@
 local PlayerNearSpawnForOne = require("components/tro_playernearspawnforone")
 
 local function CanSpawn(player)
-    -- if tiletype == GROUND.SUBURB or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.FOUNDATION or tiletype == GROUND.LAWN then	
     return not IsEntityDeadOrGhost(player)
         and player.components.areaaware
         and (player.components.areaaware:CurrentlyInTag("City1") or player.components.areaaware:CurrentlyInTag("City2")) --单机是判断地皮的

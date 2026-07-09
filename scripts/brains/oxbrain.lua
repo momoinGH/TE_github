@@ -7,8 +7,6 @@ require "behaviours/attackwall"
 --require "behaviours/runaway"
 --require "behaviours/doaction"
 
-local STOP_RUN_DIST = 10
-local SEE_PLAYER_DIST = 5
 local WANDER_DIST_DAY = 20
 local WANDER_DIST_NIGHT = 5
 local START_FACE_DIST = 4
@@ -41,14 +39,6 @@ local function GetWanderDistFn(inst)
     end
 end
 
-local function GoHomeAction(inst)
-    if inst.components.homeseeker and
-        inst.components.homeseeker.home and
-        inst.components.homeseeker.home:IsValid() then
-        return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
-    end
-end
-
 local OxBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
@@ -60,12 +50,6 @@ end
 function OxBrain:OnStart()
     local root = PriorityNode(
         {
-            --       WhileNode( function()
-            --                local tile = self.inst.components.tiletracker.tile
-            --                return tile == WORLD_TILES.OCEAN_MEDIUM or tile == WORLD_TILES.OCEAN_DEEP or tile == WORLD_TILES.OCEAN_SHALLOW
-            --            end, "intheocean",
-            --            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, WANDER_DIST_NIGHT)),
-
             WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
             IfNode(function() return self.inst.components.combat.target ~= nil end, "hastarget", AttackWall(self.inst)),
             ChaseAndAttack(self.inst, MAX_CHASE_TIME),

@@ -67,21 +67,9 @@ end
 
 local function onhitground_hail(inst)
     MakeInventoryPhysics(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    if ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
+    if inst:IsOnOcean() then
         inst:Remove()
-        local bolha = SpawnPrefab("frogsplash")
-        bolha.Transform:SetPosition(x, y, z)
+        SpawnAt("frogsplash", inst)
     else
         playfallsound(inst)
     end
