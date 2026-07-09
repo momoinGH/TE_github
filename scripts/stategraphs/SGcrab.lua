@@ -29,7 +29,7 @@ local events =
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     CommonHandlers.OnLocomote(true, true),
-    EventHandler("attacked",function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked", function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("trapped", function(inst) inst.sg:GoToState("trapped") end),
     EventHandler("locomote",
@@ -225,18 +225,18 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "death",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
             inst.SoundEmitter:PlaySound(inst.sounds.scream)
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-			--print("data.afflicter",tostring(data.afflicter),type(data.afflicter))
-			-- KAJ: I'm not happy with this, I'd rather set this somewhere else
-			inst.causeofdeath = data and data.afflicter or nil
+            --print("data.afflicter",tostring(data.afflicter),type(data.afflicter))
+            -- KAJ: I'm not happy with this, I'd rather set this somewhere else
+            inst.causeofdeath = data and data.afflicter or nil
             inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()), data and data.afflicter or nil)
         end,
 
@@ -348,6 +348,7 @@ local states =
         tags = { "busy", "invisible" },
 
         onenter = function(inst)
+            inst:AddTag("invisible")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crab/bury")
             inst.AnimState:PlayAnimation("hide")
             inst.Physics:Stop()
@@ -359,6 +360,7 @@ local states =
         onexit = function(inst)
             ChangeToCharacterPhysics(inst)
             inst.components.health:SetInvincible(false)
+            inst:RemoveTag("invisible")
         end,
 
         events =
@@ -372,6 +374,7 @@ local states =
         tags = { "busy", "invisible" },
 
         onenter = function(inst)
+            inst:AddTag("invisible")
             inst.AnimState:PlayAnimation("hide_idle")
             inst.Physics:Stop()
             ChangeToInventoryPhysics(inst)
@@ -384,6 +387,7 @@ local states =
         end,
 
         onexit = function(inst)
+            inst:RemoveTag("invisible")
             if inst.components.workable then
                 inst.components.workable.workable = false
             end
@@ -402,6 +406,7 @@ local states =
         tags = { "busy", "invisible" },
 
         onenter = function(inst)
+            inst:AddTag("invisible")
             inst.AnimState:PlayAnimation("look_pre")
             inst.AnimState:PushAnimation("look")
             inst.AnimState:PushAnimation("look_pst", false)
@@ -416,6 +421,7 @@ local states =
         end,
 
         onexit = function(inst)
+            inst:RemoveTag("invisible")
             if inst.components.workable then
                 inst.components.workable.workable = false
             end

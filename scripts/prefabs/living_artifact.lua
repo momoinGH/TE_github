@@ -350,15 +350,11 @@ local function fn(Sim)
     return inst
 end
 
-local function displaynamefn(inst) return "" end
-
 local function lightfn(Sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddNetwork()
     inst.entity:AddLight()
-
-    inst.displaynamefn = displaynamefn
 
     inst.Light:Enable(true)
     inst.Light:SetRadius(5)

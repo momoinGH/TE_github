@@ -27,43 +27,6 @@ local function ondeploy(inst, pt)
     inst:Remove()
 end
 
-local function stopgrowing(inst)
-    if inst.growtask then
-        inst.growtask:Cancel()
-        inst.growtask = nil
-    end
-    inst.growtime = nil
-end
-
-local notags = { 'NOBLOCK', 'player', 'FX' }
-
-
-local function describe(inst)
-    if inst.growtime then
-        return "PLANTED"
-    end
-end
-
-local function displaynamefn(inst)
-    if inst.growtime then
-        return STRINGS.NAMES.NUBBIN
-    end
-    return STRINGS.NAMES.NUBBIN
-end
-
-local function OnSave(inst, data)
-    if inst.growtime then
-        data.growtime = inst.growtime - GetTime()
-    end
-end
-
-local function OnLoad(inst, data)
-    if data and data.growtime then
-        plant(inst, data.growtime)
-    end
-end
-
-
 local function fnnubbin(sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()

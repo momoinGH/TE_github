@@ -324,7 +324,7 @@ local function apaga(inst)
 end
 
 
-local function fnbaby(Sim)
+local function fnbaby()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()

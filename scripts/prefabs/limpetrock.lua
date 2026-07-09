@@ -129,19 +129,6 @@ local function fn()
 	inst.components.pickable.makefullfn = makefullfn
 	inst.components.pickable.oceanic = true
 
-	--inst.components.pickable.ontransplantfn = ontransplantfn
-
-	-- WTF is this below..?
-
-	-- local variance = math.random() * 4 - 2
-	-- inst.makewitherabletask = inst:DoTaskInTime(
-	-- 	TUNING.WITHER_BUFFER_TIME + variance,
-	-- 	function(inst)
-	-- 		inst.components.pickable:MakeWitherable()
-	-- 	end
-	-- )
-
-
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:SetChanceLootTable('limpetrockempty')
 

@@ -20,18 +20,18 @@ local prefabs =
 
 SetSharedLootTable('treeguard',
     {
-        { "livinglog", 1.0 },
-        { "livinglog", 1.0 },
-        { "livinglog", 1.0 },
-        { "livinglog", 0.5 },
-        { "livinglog", 0.5 },
-        { "livinglog", 0.5 },
+        { "livinglog",   1.0 },
+        { "livinglog",   1.0 },
+        { "livinglog",   1.0 },
+        { "livinglog",   0.5 },
+        { "livinglog",   0.5 },
+        { "livinglog",   0.5 },
         { "monstermeat", 1.0 },
         { "monstermeat", 0.5 },
-        { "coconut", 1.0 },
-        { "coconut", 0.5 },
-        { "palmleaf", 1.0 },
-        { "palmleaf", 0.5 },
+        { "coconut",     1.0 },
+        { "coconut",     0.5 },
+        { "palmleaf",    1.0 },
+        { "palmleaf",    0.5 },
     })
 
 local function OnLoad(inst, data)
@@ -116,7 +116,7 @@ local function SetMeleeMode(inst)
     inst:RemoveEventCallback("onattackother", OnAttack)
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
@@ -125,6 +125,7 @@ local function fn(Sim)
     inst.entity:AddNetwork()
 
     shadow:SetSize(4, 1.5)
+
     inst.Transform:SetFourFaced()
 
     MakeCharacterPhysics(inst, 1000, .5)

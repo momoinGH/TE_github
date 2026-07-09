@@ -6,7 +6,6 @@ local assets =
     Asset("ANIM", "anim/palmtree_tall.zip"),
 }
 local seg_time = 30 --each segment of the clock is 30 seconds
-local total_day_time = seg_time * 16
 
 local day_segs = 10
 local day_time = seg_time * day_segs
@@ -23,10 +22,8 @@ local PALMTREE_CHOPS_NORMAL = 10
 local PALMTREE_CHOPS_TALL = 15
 local PALMTREE_COCONUT_CHANCE = 0.01
 local LEIF_REAWAKEN_RADIUS = 20
-local LEIF_BURN_TIME = 10
-local LEIF_BURN_DAMAGE_PERCENT = 1 / 8
 local LEIF_MIN_DAY = 3
-local LEIF_PERCENT_CHANCE = 1 / 50
+local LEIF_PERCENT_CHANCE = 1 / 30 --概率调高一点
 local LEIF_MAXSPAWNDIST = 15
 local DEF = "i"
 
@@ -390,11 +387,15 @@ local function chop_tree(inst, chopper, chops)
     if inst.components.growable and inst.components.growable.stage == 3 then
         if math.random() <= PALMTREE_COCONUT_CHANCE then
             local coconut = SpawnPrefab("coconut")
-            local rad = chopper:GetPosition():Dist(inst:GetPosition())
-            local vec = (chopper:GetPosition() - inst:GetPosition()):Normalize()
-            local offset = Vector3(vec.x * rad, 4, vec.z * rad)
+            local spawn_pos = inst:GetPosition()
+            if chopper then
+                local rad = chopper:GetPosition():Dist(inst:GetPosition())
+                local vec = (chopper:GetPosition() - inst:GetPosition()):Normalize()
+                local offset = Vector3(vec.x * rad, 4, vec.z * rad)
+                spawn_pos = spawn_pos + offset
+            end
 
-            coconut.Transform:SetPosition((inst:GetPosition() + offset):Get())
+            coconut.Transform:SetPosition(spawn_pos:Get())
             coconut.updatetask = coconut:DoPeriodicTask(0.1, grounddetection_update, 0.05)
         end
     end
@@ -448,64 +449,58 @@ local function chop_down_tree(inst, chopper)
     inst:DoTaskInTime(2, function() inst:RemoveTag("NOCLICK") end)
 end
 
+local notags = { "FX", "NOCLICK", "INLIMBO", "stump", "burnt" }
+local yestags = { "tree" }
 local function chop_down_tree_leif(inst, chopper)
     chop_down_tree(inst, chopper)
 
     local days_survived = TheWorld.state.cycles
-    if days_survived >= LEIF_MIN_DAY then
-        if math.random() <= LEIF_PERCENT_CHANCE then
-            local numleifs = 3
-            if days_survived > 30 then
-                numleifs = math.random(3, 4)
-            elseif days_survived > 80 then
-                numleifs = math.random(4, 5)
-            end
+    if days_survived >= LEIF_MIN_DAY and math.random() <= LEIF_PERCENT_CHANCE then
+        local numleifs = 3
+        if days_survived > 80 then
+            numleifs = math.random(4, 5)
+        elseif days_survived > 30 then
+            numleifs = math.random(3, 4)
+        end
 
-            local notags = { "FX", "NOCLICK", "INLIMBO", "stump", "burnt" }
-            local yestags = { "tree" }
-
-            for k = 1, numleifs do
-                local target = FindEntity(inst, LEIF_MAXSPAWNDIST,
-                    function(item)
-                        if item.components.growable and item.components.growable.stage <= 3 then
-                            return not item.noleif
-                        end
-                        return false
-                    end, yestags, notags)
-
-                if target then
-                    target.noleif = true
-                    target.leifscale = growth_stages[target.components.growable.stage].leifscale or 1
-                    target:DoTaskInTime(1 + math.random() * 3, function()
-                        if target and not target:HasTag("stump") and not target:HasTag("burnt") and
-                            target.components.growable and target.components.growable.stage <= 3 then
-                            local target = target
-                            if builds[target.build] and builds[target.build].leif then
-                                local leif = SpawnPrefab("treeguard")
-                                if leif then
-                                    local scale = target.leifscale
-                                    local r, g, b, a = target.AnimState:GetMultColour()
-                                    leif.AnimState:SetMultColour(r, g, b, a)
-
-                                    --we should serialize this?
-                                    leif.components.locomotor.walkspeed = leif.components.locomotor.walkspeed * scale
-                                    leif.components.combat.defaultdamage = leif.components.combat.defaultdamage * scale
-                                    leif.components.health.maxhealth = leif.components.health.maxhealth * scale
-                                    leif.components.health.currenthealth = leif.components.health.currenthealth * scale
-                                    leif.components.combat.hitrange = leif.components.combat.hitrange * scale
-                                    leif.components.combat.attackrange = leif.components.combat.attackrange * scale
-
-                                    leif.Transform:SetScale(scale, scale, scale)
-                                    leif.components.combat:SuggestTarget(chopper)
-                                    leif.sg:GoToState("spawn")
-                                    target:Remove()
-
-                                    leif.Transform:SetPosition(target.Transform:GetWorldPosition())
-                                end
-                            end
-                        end
-                    end)
+        for k = 1, numleifs do
+            local target = FindEntity(inst, LEIF_MAXSPAWNDIST, function(item)
+                if item.components.growable and item.components.growable.stage <= 3 then
+                    return not item.noleif
                 end
+                return false
+            end, yestags, notags)
+
+            if target then
+                target.noleif = true
+                target.leifscale = growth_stages[target.components.growable.stage].leifscale or 1
+                target:DoTaskInTime(1 + math.random() * 3, function()
+                    if target
+                        and not target:HasTag("stump")
+                        and not target:HasTag("burnt")
+                        and target.components.growable and target.components.growable.stage <= 3
+                        and builds[target.build] and builds[target.build].leif
+                    then
+                        local leif = SpawnPrefab("treeguard")
+                        local scale = target.leifscale
+                        local r, g, b, a = target.AnimState:GetMultColour()
+                        leif.AnimState:SetMultColour(r, g, b, a)
+
+                        --we should serialize this?
+                        leif.components.locomotor.walkspeed = leif.components.locomotor.walkspeed * scale
+                        leif.components.combat.defaultdamage = leif.components.combat.defaultdamage * scale
+                        leif.components.health.maxhealth = leif.components.health.maxhealth * scale
+                        leif.components.health.currenthealth = leif.components.health.currenthealth * scale
+                        leif.components.combat.hitrange = leif.components.combat.hitrange * scale
+                        leif.components.combat.attackrange = leif.components.combat.attackrange * scale
+
+                        leif.Transform:SetScale(scale, scale, scale)
+                        leif.components.combat:SuggestTarget(chopper)
+                        leif.sg:GoToState("spawn")
+                        leif.Transform:SetPosition(target.Transform:GetWorldPosition())
+                        target:Remove()
+                    end
+                end)
             end
         end
     end

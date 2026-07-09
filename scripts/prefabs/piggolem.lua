@@ -267,20 +267,7 @@ local function GuardKeepTargetFn(inst, target)
     return target:IsNear(home, defendDist) and inst:IsNear(home, defendDist)
 end
 
-local function GuardShouldSleep(inst)
-    return false
-end
-
-local function GuardShouldWake(inst)
-    return true
-end
-
 local guardbrain = require "brains/pigguardbrain"
-
-local function displaynamefn(inst)
-    return inst.name
-end
-
 
 local function guard()
     local inst = CreateEntity()

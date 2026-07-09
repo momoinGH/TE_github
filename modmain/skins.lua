@@ -127,3 +127,35 @@ AddComponentPostInit("inventory", function(self)
         return OldAddAllOfActiveItemToSlot(self, slot, ...)
     end
 end)
+
+----------------------------------------------------------------------------------------------------
+
+-- 解决GiveItem获得带皮肤的物品不能合并的问题
+local function CanCombineSkinnedStack(target, item)
+    return target ~= nil and
+        item ~= nil and
+        target ~= item and
+        target.prefab == item.prefab and
+        skin_can_combine_prefabs[target.prefab] and
+        target.skinname ~= item.skinname
+end
+
+AddComponentPostInit("stackable", function(self)
+    local OldCanStackWith = self.CanStackWith
+    function self:CanStackWith(item, ...)
+        if OldCanStackWith(self, item, ...) then
+            return true
+        end
+
+        if not CanCombineSkinnedStack(self.inst, item) then
+            return false
+        end
+
+        local old_skinname = item.skinname
+        item.skinname = self.inst.skinname
+        local can_stack = OldCanStackWith(self, item, ...)
+        item.skinname = old_skinname
+
+        return can_stack
+    end
+end)

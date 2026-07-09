@@ -266,11 +266,6 @@ end
 
 local guardbrain = require "brains/wildborebrain"
 
-local function displaynamefn(inst)
-    return inst.name
-end
-
-
 local function guard()
     local inst = CreateEntity()
 

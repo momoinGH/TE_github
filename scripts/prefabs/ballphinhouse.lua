@@ -182,7 +182,6 @@ local function fn(Sim)
     inst.components.playerprox:SetOnPlayerFar(onfar)
 
     inst:AddComponent("inspectable")
-
     inst.components.inspectable.getstatus = getstatus
 
     MakeSnowCovered(inst, .01)
