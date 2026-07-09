@@ -261,15 +261,14 @@ end
 
 local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-    anim:SetBank("quacken")
-    anim:SetBuild("quacken")
-    anim:PlayAnimation("idle_loop", true)
-
+    inst.AnimState:SetBank("quacken")
+    inst.AnimState:SetBuild("quacken")
+    inst.AnimState:PlayAnimation("idle_loop", true)
     inst.AnimState:OverrideSymbol("droplet", "quacken", "")
     inst.AnimState:OverrideSymbol("inner_bubble", "quacken", "")
     inst.AnimState:OverrideSymbol("ripple3_back", "quacken", "")
@@ -365,9 +364,7 @@ local function fn1()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-    --	inst.AnimState:SetLayer(4)	
 
     anim:SetBank("quackenhole")
     anim:SetBuild("quackenhole")
@@ -382,11 +379,9 @@ local function fn2()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-    inst.AnimState:SetLayer(2)
-    --	inst.AnimState:SetSortOrder(2)
 
+    inst.AnimState:SetLayer(2)
     anim:SetBank("quackenhole")
     anim:SetBuild("quackenhole")
     anim:PlayAnimation("fundo", true)
@@ -395,6 +390,7 @@ local function fn2()
 
     return inst
 end
--- TODO kraken、krakenunderwater、krakenholefundo怎么这么多海妖？
-return Prefab("krakenunderwater", fn, assets, prefabs), Prefab("krakenholefrente", fn1, assets, prefabs),
+
+return Prefab("krakenunderwater", fn, assets, prefabs),
+    Prefab("krakenholefrente", fn1, assets, prefabs),
     Prefab("krakenholefundo", fn2, assets, prefabs)

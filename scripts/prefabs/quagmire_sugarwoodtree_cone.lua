@@ -1,3 +1,12 @@
+local assets =
+{
+    Asset("ANIM", "anim/sugarwoodtree_cone.zip"),
+    Asset("ATLAS", "images/inventoryimages/cottontree_cone.xml")
+}
+
+RegisterInventoryItemAtlas("images/inventoryimages/cottontree_cone.xml", "cottontree_cone.tex")
+
+
 local function plant(inst, growtime)
     local sapling = SpawnPrefab(inst._spawn_prefab or "pinecone_sapling")
     sapling:StartGrowing()
@@ -43,15 +52,9 @@ end
 
 local cones = {}
 
-local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
-    local assets =
-    {
-        Asset("ANIM", "anim/" .. build .. ".zip"),
-    }
-    if bank ~= build then
-        table.insert("ANIM", "anim/" .. bank .. ".zip")
-    end
 
+
+local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
     local prefabs =
     {
         spawn_prefab or "pinecone_sapling",

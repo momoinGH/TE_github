@@ -173,7 +173,6 @@ local function workable(file, anim, action, loot, lootmax, minimap, eightfaced)
             if not inst.rotation then
                 local pt = Point(inst.Transform:GetWorldPosition())
                 local ent = TheSim:FindFirstEntityWithTag("roc_nest")
-
                 if ent then
                     local pt2 = Point(ent.Transform:GetWorldPosition())
                     local angle = inst:GetAngleToPoint(pt2)
@@ -217,9 +216,7 @@ local function chop_tree(inst, chopper, chops)
 end
 
 local function chop_down_tree(inst, chopper)
-    inst:RemoveComponent("workable")
     inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
-    local pt = inst:GetPosition()
 
     inst.components.lootdropper:DropLoot()
 
@@ -244,16 +241,14 @@ local function chop_down_tree(inst, chopper)
         inst.AnimState:PushAnimation("branch2_stump")
     end
 
-    inst:AddComponent("workable")
+    if not inst.components.workable then
+        inst:AddComponent("workable")
+    end
     inst.components.workable:SetWorkAction(ACTIONS.DIG)
     inst.components.workable:SetOnFinishCallback(dig_up_stump)
     inst.components.workable:SetWorkLeft(1)
 
     inst:AddTag("stump")
-    --	if inst.components.growable then
-    --		inst.components.growable:StopGrowing()
-    --	end
-
     inst:AddTag("NOCLICK")
     inst:DoTaskInTime(2, function() inst:RemoveTag("NOCLICK") end)
 end
@@ -313,12 +308,6 @@ local function nest()
     inst.AnimState:SetBank("roc_nest")
     inst.AnimState:SetBuild("roc_nest")
     inst.AnimState:PlayAnimation("nest_decal")
-    --[[
-    if minimapicon then
-        local minimap = inst.entity:AddMiniMapEntity()
-        minimap:SetIcon(minimapicon..".png")
-    end
-]]
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
