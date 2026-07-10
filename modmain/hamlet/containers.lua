@@ -5,6 +5,8 @@ table.insert(Assets, Asset("ATLAS", "images/ui/honeychest.xml"))
 local containers = require("containers")
 local params = containers.params
 
+params.ro_bin = params.chester
+
 params.smelter = deepcopy(params.cookpot)
 params.smelter.widget.buttoninfo.text = STRINGS.ACTIONS.SMELT
 

@@ -155,7 +155,7 @@ local function create_ro_bin()
     MakeMediumBurnableCharacter(inst, "hound_body")
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("chester")
+    inst.components.container:WidgetSetup("ro_bin")
     inst.components.container.onopenfn = OnOpen
     inst.components.container.onclosefn = OnClose
 

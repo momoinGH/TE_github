@@ -167,20 +167,18 @@ local function SetStage(inst, stage, source, snap_to_stage)
     end
 end
 
+local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
 local function OnWorked(inst, worker, workleft)
-    local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
     local xjp, yjp, zjp = worker.Transform:GetWorldPosition()
-    local entities = TheSim:FindEntities(xjp, yjp, zjp, 5, WALKABLE_PLATFORM_TAGS)
-    for i, v in ipairs(entities) do
-        local walkable_platform = v.components.walkableplatform
-        if not v:HasTag("swboat") and walkable_platform ~= nil then
-            if math.random() < 0.17 then
-                local penguin = SpawnPrefab("penguin")
-                local bolha = SpawnPrefab("splash")
-                if bolha then bolha.Transform:SetPosition(inst.Transform:GetWorldPosition()) end
-                if penguin then
-                    penguin.Transform:SetPosition(inst.Transform:GetWorldPosition())
-                end
+    for i, v in ipairs(TheSim:FindEntities(xjp, yjp, zjp, 5, WALKABLE_PLATFORM_TAGS)) do
+        if v.components.walkableplatform ~= nil and math.random() < 0.17 then
+            local bolha = SpawnPrefab("splash")
+            if bolha then
+                bolha.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            end
+            local penguin = SpawnPrefab("penguin")
+            if penguin then
+                penguin.Transform:SetPosition(inst.Transform:GetWorldPosition())
             end
         end
     end
@@ -359,7 +357,6 @@ local function rock_ice_fn()
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(TUNING.ICE_MINE)
-
     inst.components.workable:SetOnWorkCallback(OnWorked)
 
     inst:AddComponent("timer")

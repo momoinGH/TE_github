@@ -15,6 +15,25 @@ local STOP_RUN_DIST = 25
 local MAX_FLEE_TIME = 75
 local SEE_IRON_DIST = 15
 
+local ORIGIN_PERCENTS = {
+    [FACING_DOWN] = 0,
+    [FACING_RIGHT] = 0.25,
+    [FACING_UP] = 0.5,
+    [FACING_LEFT] = 0.75
+}
+
+local function InitLookAtPercent(inst, force_reset)
+    local facing_percent = ORIGIN_PERCENTS[inst.AnimState:GetCurrentFacing()] or inst.current_percent or inst.origin or 0
+
+    if force_reset or inst.origin == nil then
+        inst.origin = facing_percent
+    end
+
+    if force_reset or inst.current_percent == nil then
+        inst.current_percent = inst.origin
+    end
+end
+
 local function GetTarget(inst, distance)
     return GetClosestInstWithTag("player", inst, distance) or GetClosestInstWithTag("monster", inst, distance)
 end
@@ -182,17 +201,11 @@ local function TargetAtLookDistance(inst)
         if keep then
             if inst.lightning_target == nil or inst.lightning_target ~= target then
                 inst.lightning_target = target
-
-                local origin_percents = {
-                    [FACING_DOWN] = 0,
-                    [FACING_RIGHT] = 0.25,
-                    [FACING_UP] = 0.5,
-                    [FACING_LEFT] = 0.75
-                }
-
-                inst.origin = origin_percents[inst.AnimState:GetCurrentFacing()]
-                inst.current_percent = inst.origin
-
+                InitLookAtPercent(inst, true)
+                inst.Transform:SetNoFaced()
+            elseif inst.current_percent == nil or inst.origin == nil then
+                -- lightning_target may be set by other actions (e.g. attack) before look-at starts.
+                InitLookAtPercent(inst, false)
                 inst.Transform:SetNoFaced()
             end
         else
@@ -208,6 +221,14 @@ local function TargetAtLookDistance(inst)
 end
 
 local function LookAtFn(inst)
+    if inst.lightning_target == nil or not inst.lightning_target:IsValid() then
+        return
+    end
+
+    if inst.current_percent == nil or inst.origin == nil then
+        InitLookAtPercent(inst, false)
+    end
+
     local x1, y1, z1 = inst.Transform:GetWorldPosition()
     local x2, y2, z2 = inst.lightning_target.Transform:GetWorldPosition()
 
@@ -225,7 +246,7 @@ local function LookAtFn(inst)
     angle = FixAngle(angle - TheCamera:GetHeadingTarget())
     local percent = angle / 360
 
-    local diff = percent > inst.current_percent and percent - inst.current_percent or inst.current_percent - percent or 0
+    local diff = percent > inst.current_percent and percent - inst.current_percent or inst.current_percent - percent
     -- Minimum percent for us to change frames
     if diff > 0.02 then
         -- Determines the orientation we're supposed to rotate towards

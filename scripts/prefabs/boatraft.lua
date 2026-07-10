@@ -222,7 +222,10 @@ local function IsBoatEdgeOverLand(inst, override_position_pt)
     return false
 end
 
-local function MakeBoat(name, radius)
+local FilePrefabs = {}
+
+local function MakeBoat(name, data, common_post, master_post)
+    local radius = data.radius
     local stats_multiplier = (radius / 4) ^ 2
     local scale_multiplier = radius / 4
 
@@ -233,16 +236,16 @@ local function MakeBoat(name, radius)
         inst.entity:AddAnimState()
         inst.entity:AddSoundEmitter()
         inst.entity:AddMiniMapEntity()
-        --inst.MiniMapEntity:SetIcon("boat.png")
         inst.entity:AddNetwork()
 
-        inst:AddTag("ignorewalkableplatforms")
-
-        if name == "boat_raft_rot" then
-            inst:AddTag("boat")
-        else
-            inst:AddTag("swboat")
+        if data.minimap then
+            inst.MiniMapEntity:SetIcon(data.minimap)
+            inst.MiniMapEntity:SetPriority(-1)
         end
+
+        inst:AddTag("ignorewalkableplatforms")
+        inst:AddTag("boat")
+
         inst.sounds = sounds
         inst.walksound = "wood"
 
@@ -329,40 +332,23 @@ local function MakeBoat(name, radius)
         inst.components.boatringdata:SetRadius(radius)
         inst.components.boatringdata:SetNumSegments(8)
 
+        if common_post then
+            common_post(inst)
+        end
+
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
             return inst
         end
+
         inst:AddComponent("hull")
         inst.components.hull:SetRadius(radius)
         local boatlip = SpawnPrefab('boatlipinvisible')
 
-        if name == "lograft" then
-            inst.barco = SpawnPrefab('boatliplograft')
+        if data.anim_prefab then
+            inst.barco = SpawnPrefab(data.anim_prefab)
             inst.barco.entity:SetParent(inst.entity)
-            inst.barco.Transform:SetPosition(0, 0, 0)
-            inst.MiniMapEntity:SetIcon("lograft.png")
-        end
-
-        if name == "raft" then
-            inst.barco = SpawnPrefab('boatlipraft')
-            inst.barco.entity:SetParent(inst.entity)
-            inst.barco.Transform:SetPosition(0, 0, 0)
-            inst.MiniMapEntity:SetIcon("raft.png")
-        end
-
-        if name == "boat_raft_rot" then
-            inst.barco2 = SpawnPrefab('boatlipraftrot')
-            inst.barco2.entity:SetParent(inst.entity)
-            inst.barco2.Transform:SetPosition(0, 0, 0)
-            inst.MiniMapEntity:SetIcon("boat_raft.png")
-
-            inst.barco3 = SpawnPrefab('boatlip')
-            inst.barco3.AnimState:OverrideSymbol("boat_plants", "boat_test", "")
-            inst.barco3.entity:SetParent(inst.entity)
-            inst.barco3.Transform:SetPosition(0, 0, 0)
-            inst.barco3.Transform:SetScale(0.88, 0.88, 0.88)
         end
 
         boatlip.AnimState:SetScale(scale_multiplier, scale_multiplier, scale_multiplier)
@@ -420,6 +406,10 @@ local function MakeBoat(name, radius)
         inst.GetSafePhysicsRadius = GetSafePhysicsRadius
         inst.IsBoatEdgeOverLand = IsBoatEdgeOverLand
         inst.OnLoadPostPass = OnLoadPostPass
+
+        if master_post then
+            master_post(inst)
+        end
 
         return inst
     end
@@ -538,22 +528,35 @@ local function MakeBoat(name, radius)
         return inst
     end
 
-    return { Prefab(name, fn, assets, prefabs),
-        Prefab("boat_player_collision_" .. name, boat_player_collision_fn),
-        Prefab("boat_item_collision_" .. name, boat_item_collision_fn) }
+    table.insert(FilePrefabs, Prefab(name, fn, assets, prefabs))
+    table.insert(FilePrefabs, MakePlacer(name .. "_placer", "raft", data.placer_build, data.placer_anim or "run_loop"))
+    table.insert(FilePrefabs, Prefab("boat_player_collision_" .. name, boat_player_collision_fn))
+    table.insert(FilePrefabs, Prefab("boat_item_collision_" .. name, boat_item_collision_fn))
 end
 
-local FilePrefabs = {}
-for i, v in ipairs(MakeBoat("lograft", 0.8)) do
-    table.insert(FilePrefabs, v)
-end
-
-for i, v in ipairs(MakeBoat("raft", 0.8)) do
-    table.insert(FilePrefabs, v)
-end
-
-for i, v in ipairs(MakeBoat("boat_raft_rot", 3.2)) do
-    table.insert(FilePrefabs, v)
-end
+MakeBoat("lograft", {
+    radius = 0.8,
+    placer_build = "raft_log_build",
+    minimap = "lograft.png",
+    anim_prefab = "boatliplograft"
+})
+MakeBoat("raft", {
+    radius = 0.8,
+    placer_build = "raft_build",
+    minimap = "raft.png",
+    anim_prefab = "boatlipraft",
+})
+MakeBoat("boat_raft_rot", {
+    radius = 3.2,
+    placer_build = "raft_rot",
+    placer_anim = "idle_full",
+    minimap = "boat_raft.png",
+    anim_prefab = "boatlipraftrot"
+}, nil, function(inst)
+    inst.barco3 = SpawnPrefab('boatlip')
+    inst.barco3.AnimState:OverrideSymbol("boat_plants", "boat_test", "")
+    inst.barco3.entity:SetParent(inst.entity)
+    inst.barco3.Transform:SetScale(0.88, 0.88, 0.88)
+end)
 
 return unpack(FilePrefabs)

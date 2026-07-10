@@ -422,40 +422,6 @@ configuration_options =
         }
     },
 
-    title(en_zh_zht("<greenworld>", "<绿色世界>", "<绿色世界>"), tro_modules.greenworld),
-    {
-        name = "greenworld",
-        label = en_zh_zht("Green World", "绿色世界群系", "綠色世界羣系"),
-        hover = en_zh_zht(
-            "It will generate the Green World",
-            "将生成来自绿色世界(Green World)模组的生态群系",
-            "將生成來自綠色世界(Green World)模組的生態羣系"),
-        options = options_enable(),
-        default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.greenworld,
-            world = { "forest" },
-        }
-    },
-
-    title(en_zh_zht("<windy>", "<大风平原>", "<大风平原>"), tro_modules.windy),
-    {
-        name = "windy",
-        label = en_zh_zht("Windy Plains Biome", "大风平原群系", "大風平原羣系"),
-        hover = en_zh_zht(
-            "It will generate the Windy Plains Biome",
-            "将生成来自大风平原(Windy Plains)模组的生态群系",
-            "將生成來自大風平原(Windy Plains)模組的生態羣系"),
-        options = options_enable(),
-        default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.windy,
-            world = { "forest" },
-        }
-    },
-
     title(en_zh_zht("<frostisland>", "<冰霜岛屿>", "<冰霜岛屿>"), tro_modules.frostisland),
     {
         name = "frostisland",
@@ -506,6 +472,40 @@ configuration_options =
             world = { "forest" },
         }
     },
+
+    -- title(en_zh_zht("<greenworld>", "<绿色世界>", "<绿色世界>"), tro_modules.greenworld),
+    -- {
+    --     name = "greenworld",
+    --     label = en_zh_zht("Green World", "绿色世界群系", "綠色世界羣系"),
+    --     hover = en_zh_zht(
+    --         "It will generate the Green World",
+    --         "将生成来自绿色世界(Green World)模组的生态群系",
+    --         "將生成來自綠色世界(Green World)模組的生態羣系"),
+    --     options = options_enable(),
+    --     default = 1,
+    --     world_gen = {
+    --         category = { LEVELCATEGORY.WORLDGEN },
+    --         group = tro_modules.greenworld,
+    --         world = { "forest" },
+    --     }
+    -- },
+
+    -- title(en_zh_zht("<windy>", "<大风平原>", "<大风平原>"), tro_modules.windy),
+    -- {
+    --     name = "windy",
+    --     label = en_zh_zht("Windy Plains Biome", "大风平原群系", "大風平原羣系"),
+    --     hover = en_zh_zht(
+    --         "It will generate the Windy Plains Biome",
+    --         "将生成来自大风平原(Windy Plains)模组的生态群系",
+    --         "將生成來自大風平原(Windy Plains)模組的生態羣系"),
+    --     options = options_enable(),
+    --     default = 1,
+    --     world_gen = {
+    --         category = { LEVELCATEGORY.WORLDGEN },
+    --         group = tro_modules.windy,
+    --         world = { "forest" },
+    --     }
+    -- },
 
     -- title(en_zh_zht("<lavaarena>", "<熔炉竞技场>", "<熔炉竞技场>"), tro_modules.lavaarena),
     -- {

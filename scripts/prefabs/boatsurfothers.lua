@@ -98,8 +98,6 @@ local function fnlog()
     inst.AnimState:SetBuild("raft_log_build")
     inst.Transform:SetFourFaced()
     inst.AnimState:PlayAnimation("run_loop", true)
-
-
     inst.AnimState:SetSortOrder(ANIM_SORT_ORDER.OCEAN_BOAT)
     inst.AnimState:SetFinalOffset(1)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)

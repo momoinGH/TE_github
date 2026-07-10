@@ -307,6 +307,7 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetPriority(-1)
     inst.MiniMapEntity:SetIcon("boat_iron.png")
     inst.entity:AddNetwork()
 
