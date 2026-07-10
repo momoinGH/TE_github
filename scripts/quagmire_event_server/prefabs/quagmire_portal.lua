@@ -88,6 +88,7 @@ return {
         inst.components.trader.deleteitemonaccept = false
 
         inst:DoTaskInTime(1, function(inst)
+            if inst.components.teleporter.targetTeleporter then return end
             for _, v in ipairs(TroGetEntsByPrefab("quagmire_portal")) do
                 if v ~= inst and not v.components.teleporter.targetTeleporter then
                     inst.components.teleporter.targetTeleporter = v

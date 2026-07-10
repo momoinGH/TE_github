@@ -158,3 +158,14 @@ Hooks.FnDecorator(Map, "CanDeployPlantAtPoint", function(self, pt, inst, ...)
             true
     end
 end)
+
+----------------------------------------------------------------------------------------------------
+
+-- 如果x是Vector3时阻止报错，科雷暴食还有部分调用是传的Vector3，直接走可能会报错
+local OldCanTillSoilAtPoint = Map.CanTillSoilAtPoint
+function Map:CanTillSoilAtPoint(x, y, z, ...)
+    if Vector3.is_instance(x) then
+        x, y, z = x:Get()
+    end
+    return OldCanTillSoilAtPoint(self, x, y, z, ...)
+end

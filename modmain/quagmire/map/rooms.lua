@@ -1,22 +1,3 @@
-AddRoom("gorge_main", {
-    colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = WORLD_TILES.IMPASSABLE,
-    tags = { "RoadPoison" },
-    contents = {
-        countstaticlayouts =
-        {
-            ["quagmire_kitchen"] = 1 --adds 1 per room											
-        },
-        distributepercent = .25,
-        distributeprefabs =
-        {
-            rocks = .1,
-        },
-
-    }
-})
-
-
 AddRoom("quagmire", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.QUAGMIRE_GATEWAY,
@@ -318,6 +299,7 @@ AddRoom("quagmirepink", {
 })
 
 -----------blue biome ------------------					
+-- 远古大门
 AddRoom("quagmireblueset", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.QUAGMIRE_GATEWAY,
@@ -345,7 +327,6 @@ AddRoom("quagmireblueset", {
     }
 })
 
-
 AddRoom("quagmireblue", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.QUAGMIRE_GATEWAY,
@@ -354,8 +335,6 @@ AddRoom("quagmireblue", {
         distributeprefabs =
         {
             sapling = 0.1, --nitre
-            --										twiggytree = 0.2,
-            --										cave_fern=0.112,
             carrot_planted = 0.05,
             flint = 0.05,
             quagmire_spotspice_shrub = 0.3,
@@ -365,9 +344,16 @@ AddRoom("quagmireblue", {
             red_mushroom = .004,
             rabbithole = 0.01,
         },
-        countprefabs =
-        {
-            --										quagmire_swampig_house_rubble = 4,
-        }
     }
+})
+
+----------------------------------------------------------------------------------------------------
+AddRoom("TE_QuagmireKitchenRoom", {
+    colour = { r = .55, g = .75, b = .75, a = .50 },
+    value = WORLD_TILES.IMPASSABLE,
+    contents = {
+        countstaticlayouts = {
+            Quagmire_Kitchen = 1,
+        },
+    },
 })

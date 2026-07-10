@@ -2,7 +2,7 @@ AddTask("连接岛四和岛五中间的海", {
     locks = LOCKS.PINACLE,
     keys_given = KEYS.LAND_DIVIDE_4,
     room_choices = {
-        ["ForceDisconnectedRoom"] = 20,
+        ["ForceDisconnectedRoom"] = 10,
     },
     room_bg = WORLD_TILES.OCEAN_SWELL,
     background_room = "ForceDisconnectedRoom",

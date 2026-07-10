@@ -1,12 +1,3 @@
-local MATERIAL_BONUSES =
-{
-    generic = 0,
-    silver = 3,
-    gold = 5,
-}
-
-local CRAVING_BONUS = 3
-
 local function copytable(tbl)
     local tblcopy = {}
     for k, v in pairs(tbl) do
@@ -49,22 +40,22 @@ local function OnCoinDrop(inst, doer, coin)
     coin.updatetask = coin:DoPeriodicTask(0.1, OnCheckCoinDropped, 0.05)
 end
 
+-- 给予硬币
 local function GiveReward(inst, self, doer)
-    if self.reward == nil or #self.reward == 0 then
+    if #self.reward == 0 then
         return
     end
-    local coin = table.remove(self.reward, 1)
-    OnCoinDrop(inst, doer, coin)
+    local coin_prefab = table.remove(self.reward, 1)
+    OnCoinDrop(inst, doer, SpawnPrefab(coin_prefab))
     inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/gnaw/chomp")
-    -- self.reward = self.reward - 1
-    if self.reward and #self.reward > 0 then
-        inst:DoTaskInTime(0.5, GiveReward, self, doer)
+    if #self.reward > 0 then
+        inst:DoTaskInTime(0.4, GiveReward, self, doer)
     end
 end
 
 local Snackrificer = Class(function(self, inst)
     self.inst = inst
-    self.reward = nil
+    self.reward = {}
     self.onsnackrificefn = nil
 end)
 
@@ -79,7 +70,6 @@ function Snackrificer:ComputeValue(item)
     if item.components.saltable and item.components.saltable.saltlevel >= 0.75 then
         saltbonus = 1
     end
-    local platebonus = 0
     local value = basevalue + cravingbonus + saltbonus
     local satisfaction = cravingbonus > 0 and 1 or -1
     return value, satisfaction
@@ -106,8 +96,7 @@ function Snackrificer:ComputeReward(item, value, satisfaction)
             self.reward = {}
             for coinprefab, amount in pairs(reward) do
                 for i = 1, amount do
-                    local coin = SpawnPrefab("quagmire_" .. coinprefab .. "")
-                    table.insert(self.reward, coin)
+                    table.insert(self.reward, "quagmire_" .. coinprefab)
                 end
             end
         end

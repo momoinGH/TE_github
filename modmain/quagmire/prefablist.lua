@@ -36,7 +36,6 @@ PrefabFiles =
     "quagmire_pebblecrab",            --石蟹
     "quagmire_safe",                  --保险箱
     "quagmire_parkspike",             --铁栅栏
-    "quagmire_key",                   --钥匙
 
 
     "quagmire_goatmum",      --玛姆茜
