@@ -271,16 +271,12 @@ TroAddAction({ priority = 11, distance = 25 }, "BOATCANNON", STRINGS.ACTIONS.BOA
     return true
 end)
 
-local SMELT = Action({ priority = 10, mount_valid = true })
-SMELT.str = (STRINGS.ACTIONS.SMELT)
-SMELT.id = "SMELT"
-SMELT.fn = function(act)
-    if act.target.components.melter then
-        act.target.components.melter:StartCooking()
+TroAddAction({ priority = 10, mount_valid = true }, "SMELT", STRINGS.ACTIONS.SMELT, function(act)
+    if act.target and act.target.components.stewer and act.target.components.stewer:CanCook() then
+        act.target.components.stewer:StartCooking()
         return true
     end
-end
-AddAction(SMELT)
+end)
 
 -- 剪，支持workable和shearable
 TroAddAction({}, "SHEAR", STRINGS.ACTIONS.SHEAR, function(act)

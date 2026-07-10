@@ -15,8 +15,8 @@ local function onhammered(inst, worker)
     if inst:HasTag("fire") and inst.components.burnable then
         inst.components.burnable:Extinguish()
     end
-    if not inst:HasTag("burnt") and inst.components.melter and inst.components.melter.product and inst.components.melter.done then
-        inst.components.lootdropper:AddChanceLoot(inst.components.melter.product, 1)
+    if not inst:HasTag("burnt") and inst.components.stewer and inst.components.stewer.product and inst.components.stewer.done then
+        inst.components.lootdropper:AddChanceLoot(inst.components.stewer.product, 1)
     end
     inst.components.lootdropper:DropLoot()
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -28,9 +28,9 @@ local function onhit(inst, worker)
     if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("hit_empty")
 
-        if inst.components.melter.cooking then
+        if inst.components.stewer:IsCooking() then
             inst.AnimState:PushAnimation("smelting_loop")
-        elseif inst.components.melter.done then
+        elseif inst.components.stewer.done then
             inst.AnimState:PushAnimation("idle_full")
         else
             inst.AnimState:PushAnimation("idle_empty")
@@ -42,7 +42,7 @@ end
 
 local function ShowProduct(inst)
     if not inst:HasTag("burnt") then
-        local product = inst.components.melter.product
+        local product = inst.components.stewer.product
         local smelting = require("smelting")
         local build, symbol = smelting.getOverrideSymbol(product)
         inst.AnimState:OverrideSymbol("swap_item", build or GetInventoryItemAtlas(product .. ".tex"),
@@ -112,14 +112,12 @@ end
 
 local function onclose(inst)
     playJoggleAnim(inst)
-    if inst.components.melter and inst.components.melter:CanCook() then
-        inst.components.melter:StartCooking()
+    if inst.components.stewer and inst.components.stewer:CanCook() then
+        inst.components.stewer:StartCooking()
     end
 
-
-
     if not inst:HasTag("burnt") then
-        if not inst.components.melter.cooking then
+        if not inst.components.stewer:IsCooking() then
             inst.AnimState:PlayAnimation("idle_empty")
             inst.SoundEmitter:KillSound("snd")
         end
@@ -129,7 +127,7 @@ end
 
 local function spoilfn(inst)
     if not inst:HasTag("burnt") then
-        inst.components.melter.product = inst.components.melter.spoiledproduct
+        inst.components.stewer.product = inst.components.stewer.spoiledproduct
         ShowProduct(inst)
     end
 end
@@ -201,11 +199,11 @@ end
 local function getstatus(inst)
     if inst:HasTag("burnt") then
         return "BURNT"
-    elseif inst.components.melter.cooking and inst.components.melter:GetTimeToCook() > 15 then
+    elseif inst.components.stewer.cooking and inst.components.stewer:GetTimeToCook() > 15 then
         return "COOKING_LONG"
-    elseif inst.components.melter.cooking then
+    elseif inst.components.stewer.cooking then
         return "COOKING_SHORT"
-    elseif inst.components.melter.done then
+    elseif inst.components.stewer.done then
         return "DONE"
     else
         return "EMPTY"
@@ -261,25 +259,8 @@ local function onload(inst, data)
         inst.Light:Enable(false)
     end
 end
---[[
-local function onFloodedStart(inst)
-	if inst.components.container then
-		inst.components.container.canbeopened = false
-	end
-	if inst.components.melter then
-		if inst.components.melter.cooking then
-			inst.components.melter.product = "wetgoop"
-		end
-	end
-end
 
-local function onFloodedEnd(inst)
-	if inst.components.container then
-		inst.components.container.canbeopened = true
-	end
-end
-]]
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -313,13 +294,14 @@ local function fn(Sim)
         return inst
     end
 
-    inst:AddComponent("melter")
-    inst.components.melter.onstartcooking = startcookfn
-    inst.components.melter.oncontinuecooking = continuecookfn
-    inst.components.melter.oncontinuedone = continuedonefn
-    inst.components.melter.ondonecooking = donecookfn
-    inst.components.melter.onharvest = harvestfn
-    inst.components.melter.onspoil = spoilfn
+    inst:AddComponent("stewer")
+    inst.components.stewer.onstartcooking = startcookfn
+    inst.components.stewer.oncontinuecooking = continuecookfn
+    inst.components.stewer.oncontinuedone = continuedonefn
+    inst.components.stewer.ondonecooking = donecookfn
+    inst.components.stewer.onharvest = harvestfn
+    inst.components.stewer.onspoil = spoilfn
+    inst.components.stewer.spoiledproduct = "ash"
 
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("smelter")

@@ -11,7 +11,7 @@ local Products = {
         overridebuild = "gems",
         overridesymbolname = "opalgem",
         card_def = {
-            attributes = {{"greengem", 1}, {"yellowgem", 1}, {"orangegem", 2}},
+            attributes = { { "greengem", 1 }, { "yellowgem", 1 }, { "orangegem", 2 } },
         },
     },
     greengem = {
@@ -20,7 +20,7 @@ local Products = {
         overridebuild = "gems",
         overridesymbolname = "greengem",
         card_def = {
-            attributes = {{"yellowgem", 3}, {"purplegem", 1}},
+            attributes = { { "yellowgem", 3 }, { "purplegem", 1 } },
         },
     },
     yellowgem = {
@@ -29,7 +29,7 @@ local Products = {
         overridebuild = "gems",
         overridesymbolname = "yellowgem",
         card_def = {
-            attributes = {{"orangegem", 3}, {"purplegem", 1}},
+            attributes = { { "orangegem", 3 }, { "purplegem", 1 } },
         },
     },
     orangegem = {
@@ -38,7 +38,7 @@ local Products = {
         overridebuild = "gems",
         overridesymbolname = "orangegem",
         card_def = {
-            attributes = {{"purplegem", 4}},
+            attributes = { { "purplegem", 4 } },
         },
     },
     alloy = { -- iron
@@ -47,7 +47,7 @@ local Products = {
         overridebuild = "alloy",
         overridesymbolname = "alloy01",
         card_def = {
-            attributes = {{"iron", 4}},
+            attributes = { { "iron", 4 } },
         },
     },
     gunpowder = { -- nitro
@@ -56,7 +56,7 @@ local Products = {
         overridebuild = "gunpowder",
         overridesymbolname = "gunpowder01",
         card_def = {
-            attributes = {{"nitre", 4}},
+            attributes = { { "nitre", 4 } },
         },
     },
     nitre = {
@@ -65,7 +65,7 @@ local Products = {
         overridebuild = "nitre",
         overridesymbolname = "nitre01",
         card_def = {
-            attributes = {{"flint", 4}},
+            attributes = { { "flint", 4 } },
         },
     },
     goldenbar = { -- gold
@@ -74,7 +74,7 @@ local Products = {
         overridebuild = "alloygold",
         overridesymbolname = "alloy01",
         card_def = {
-            attributes = {{"goldnugget", 1}, {"dubloon", 1}, {"gold_dust", 2}},
+            attributes = { { "goldnugget", 1 }, { "dubloon", 1 }, { "gold_dust", 2 } },
         },
     },
     goldnugget = {
@@ -83,7 +83,7 @@ local Products = {
         overridebuild = "gold_dust",
         overridesymbolname = "gold_dust01",
         card_def = {
-            attributes = {{"gold_dust", 4}},
+            attributes = { { "gold_dust", 4 } },
         },
     },
     stonebar = { -- mineral
@@ -92,9 +92,17 @@ local Products = {
         overridebuild = "alloystone",
         overridesymbolname = "alloy01",
         card_def = {
-            attributes = {{"rocks", 4}},
+            attributes = { { "rocks", 4 } },
         },
     },
 }
+
+for k, v in pairs(Products) do
+    v.name = v.name or k
+    v.weight = v.weight or 1
+    v.priority = v.priority or 0
+    v.no_cookbook = true
+    -- v.cookbook_category = "smelter" -- 有这个键但是这样写没用
+end
 
 return Products

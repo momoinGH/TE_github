@@ -325,13 +325,14 @@ end
 
 ----------------------------------------------------------------------------------------------------
 -- 防止一些报错导致游戏崩溃，仅打印就行了
+local LUA_ERROR_STR = "LUA ERROR stack traceback:\n"
 
 local OldDoTaskInTime = EntityScript.DoTaskInTime
 function EntityScript:DoTaskInTime(time, fn, ...)
     local new_fn = function(inst, ...)
         local success, err = pcall(fn, inst, ...)
         if not success then
-            TroErrorHandle(err, false)
+            TroErrorHandle(LUA_ERROR_STR .. err, false)
             StackTraceToLog()
         end
     end
@@ -343,7 +344,7 @@ function EntityScript:DoPeriodicTask(time, fn, initialdelay, ...)
     local new_fn = function(inst, ...)
         local success, err = pcall(fn, inst, ...)
         if not success then
-            TroErrorHandle(err, false)
+            TroErrorHandle(LUA_ERROR_STR .. err, false)
             StackTraceToLog()
         end
     end
@@ -354,7 +355,7 @@ local OldPushEvent_Internal = EntityScript.PushEvent_Internal
 function EntityScript:PushEvent_Internal(event, data, immediate)
     local success, err = pcall(OldPushEvent_Internal, self, event, data, immediate)
     if not success then
-        TroErrorHandle(err, false)
+        TroErrorHandle(LUA_ERROR_STR .. err, false)
         StackTraceToLog()
     end
 end
@@ -380,7 +381,7 @@ local OldSpawnPrefabFromSim = SpawnPrefabFromSim
 GLOBAL.SpawnPrefabFromSim = function(name, ...)
     local success, err = pcall(OldSpawnPrefabFromSim, name, ...)
     if not success then
-        TroErrorHandle(err, false)
+        TroErrorHandle(LUA_ERROR_STR .. err, false)
         StackTraceToLog()
         return
     end
@@ -414,7 +415,7 @@ local OldGoToState = StateGraphInstance.GoToState
 function StateGraphInstance:GoToState(statename, ...)
     local success, err = pcall(OldGoToState, self, statename, ...)
     if not success then
-        TroErrorHandle(err, false)
+        TroErrorHandle(LUA_ERROR_STR .. err, false)
         StackTraceToLog()
     end
 end
@@ -423,7 +424,7 @@ local OldUpdateState = StateGraphInstance.UpdateState
 function StateGraphInstance:UpdateState(dt)
     local success, err = pcall(OldUpdateState, self, dt)
     if not success then
-        TroErrorHandle(err, false)
+        TroErrorHandle(LUA_ERROR_STR .. err, false)
         StackTraceToLog()
     end
 end

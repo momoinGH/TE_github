@@ -37,7 +37,7 @@ end
 
 
 -- 熔炼
-local Smelter = require("smeltrecipes")
+local Smelter = require("datadefs/smeltrecipes")
 for _, d in pairs(Smelter) do
     AddCookerRecipe("smelter", d)
 end
