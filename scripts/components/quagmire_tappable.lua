@@ -84,21 +84,23 @@ function Quagmire_Tappable:InstallTap(player, bucket)
         return false
     end
 
-    local pos = self.inst:GetPosition()
-
-    self.inst.AnimState:OverrideSymbol("swap_sapbucket", "quagmire_sapbucket", "swap_sapbucket_" .. BUCKET_LEVELS[1])
-
-    if bucket and bucket.components.stackable then
-        bucket.components.stackable:Get(1):Remove()
-        self.inst.AnimState:PlayAnimation("install")
-        self.inst.AnimState:PushAnimation("sway1_loop", true)
-        self.inst.SoundEmitter:PlaySound("dontstarve/quagmire/common/craft/sap_extractor")
-        self.hasbucket = true
+    if bucket then
+        if bucket.components.stackable then
+            bucket.components.stackable:Get(1):Remove()
+        else
+            bucket:Remove()
+        end
+        local pos = self.inst:GetPosition()
+        SpawnPrefab("sugarwood_leaf_fx_chop").Transform:SetPosition(pos.x, 1, pos.z)
     end
 
-    SpawnPrefab("sugarwood_leaf_fx_chop").Transform:SetPosition(pos.x, 1, pos.z)
-
+    self.hasbucket = true
+    self.inst.AnimState:OverrideSymbol("swap_sapbucket", "quagmire_sapbucket", "swap_sapbucket_" .. BUCKET_LEVELS[1])
+    self.inst.AnimState:PlayAnimation("install")
+    self.inst.AnimState:PushAnimation("sway1_loop", true)
     self.inst.AnimState:Show("swap_tapper")
+    self.inst.SoundEmitter:PlaySound("dontstarve/quagmire/common/craft/sap_extractor")
+
     self.inst:RemoveTag("tappable")
     self:ScheduleProduceTask()
 end
@@ -186,17 +188,34 @@ function Quagmire_Tappable:Harvest(picker)
 end
 
 function Quagmire_Tappable:ScheduleProduceTask()
-    self.delay = TUNING.GORGE.SUGARTREE.SAP / 2
+    self.delay = 120 / 2
     self.task = self.inst:DoTaskInTime(self.delay, DelayProduceHandler, self)
 end
 
 function Quagmire_Tappable:ScheduleSpoilTask()
-    self.delay = TUNING.GORGE.SUGARTREE.ROT
+    self.delay = 120
     self.task = self.inst:DoTaskInTime(self.delay, DelaySpoilHandler, self)
 end
 
 function Quagmire_Tappable:GetDebugString()
     return string.format("has bucket:%s level:%i delay:%i", tostring(self.hasbucket), self.level, self.delay)
+end
+
+function Quagmire_Tappable:OnSave()
+    return {
+        hasbucket = self.hasbucket,
+        level = self.level
+    }
+end
+
+function Quagmire_Tappable:OnLoad(data)
+    if not data then return end
+
+    self.hasbucket = data.hasbucket or self.hasbucket
+    self.level = data.level or self.level
+    if self.hasbucket then
+        self:InstallTap()
+    end
 end
 
 return Quagmire_Tappable

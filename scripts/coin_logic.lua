@@ -1,5 +1,6 @@
 local CoinLogic = {}
 
+-- 计算料理奖励
 function CoinLogic:CalculateReward(coins_data, stale, spoiled, current_craving, cravings, plated)
     print(coins_data, stale, spoiled, current_craving, cravings, plated)
     local appraisal_data = {}

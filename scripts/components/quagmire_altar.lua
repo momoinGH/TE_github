@@ -95,7 +95,7 @@ function Quagmire_Altar:AcceptFoodTribute(player, food)
 			salted = food:HasTag("quagmire_salted"),
 			recipe = food.recipe or {},
 			coins = coins,
-			matched = appraisal_data.matchedcraving ~= "",
+			matched = true,
 		}
 	})
 
