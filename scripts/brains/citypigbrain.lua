@@ -332,7 +332,7 @@ local function getfacespeech(inst)
         end
 
         --        if GetAporkalypse():IsNear() then
-        if TheWorld.components.aporkalyps then
+        if TheWorld.components.aporkalypse then
             speech = deepcopy(getSpeechType(inst, STRINGS.CITY_PIG_TALK_APORKALYPSE_SOON))
         end
 
@@ -386,7 +386,7 @@ function CityPigBrain:OnStart()
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_GO_HOME),
                     DoAction(self.inst, GoHomeAction, "go home", true))),
 
-            WhileNode(function() needlight(self.inst) end, "NeedLight",
+            WhileNode(function() return needlight(self.inst) end, "NeedLight",
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_FIND_LIGHT),
                     FindLight(self.inst))),
 

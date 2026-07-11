@@ -31,7 +31,7 @@ end
 
 local function translationfn(inst)
     local player = GetClosestInstWithTag("player", inst, 30)
-    if player:HasTag("antlingual") then
+    if player and player:HasTag("antlingual") then
         return true
     else
         return false

@@ -82,9 +82,9 @@ end
 
 local function GetWanderDistFn(inst)
     if TheWorld.state.isday then
-        return WANDER_DIST_NIGHT
-    else
         return WANDER_DIST_DAY
+    else
+        return WANDER_DIST_NIGHT
     end
 end
 

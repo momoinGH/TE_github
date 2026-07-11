@@ -205,7 +205,7 @@ function TigerSharker:SpawnShark(ignore_cooldown)
     self:TakeOwnership(shark)
 
     local home_pos = self:GetHomePosition()
-    shark.components.knownlocations:RememberLocation("point_owaf_interest", home_pos)
+    shark.components.knownlocations:RememberLocation("point_of_interest", home_pos)
 
     TheWorld.components.worldsettingstimer:StopTimer(SHARK_TIMERNAME)
 

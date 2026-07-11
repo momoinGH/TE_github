@@ -37,7 +37,7 @@ end
 local function GoEatFood(inst)
     if not inst:HasTag("up") then
         local target = inst.foodtarget
-        if not target or not target:IsInLimbo() then
+        if not target or target:IsInLimbo() then
             target = FoodNear(inst)
         end
         if target and not target:IsInLimbo() then

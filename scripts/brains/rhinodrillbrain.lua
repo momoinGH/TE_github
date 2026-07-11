@@ -5,6 +5,7 @@ require "behaviours/wander"
 require "behaviours/rhinocebrobuff_forge"
 require "behaviours/doaction"
 require "behaviours/maintaindistance"
+require "behaviours/standstill"
 
 local MOB_MAX_CHASE_TIME = 8
 local MAX_WANDER_DISTANCE = 5

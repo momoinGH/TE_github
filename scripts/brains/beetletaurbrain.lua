@@ -51,7 +51,7 @@ local behaviour_values = {
 
 local function GetWanderPoint(inst)
     local target = inst.components.knownlocations:GetLocation("spawnpoint")
-    return target ~= nil and target:GetPosition() or nil
+    return target ~= nil and target or nil
 end
 
 function BeetletaurBrain:OnStart()

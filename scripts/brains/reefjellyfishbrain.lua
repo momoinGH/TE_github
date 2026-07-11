@@ -1,4 +1,5 @@
 require "behaviours/wander"
+require "behaviours/chaseandattack"
 
 local ReefJellyFishBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)

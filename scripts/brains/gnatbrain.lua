@@ -26,7 +26,7 @@ local function infestplayer(inst, brain)
 end
 
 local function findlighttarget(inst)
-    local light = inst.findlight(inst)
+    local light = FindLight(inst)
     if light then
         return light
     end
@@ -62,7 +62,7 @@ function GnatBrain:OnStart()
                             Panic(self.inst)),
                         WhileNode(function() return TheWorld.state.isdusk or TheWorld.state.isnight end, "chase light", Follow(self.inst, function() return
                             findlighttarget(self.inst) end, 0, 1, 1)),
-                        WhileNode(function() return findinfesttarget end, "chase player", Follow(self.inst, function() return
+                        WhileNode(function() return findinfesttarget(self.inst) end, "chase player", Follow(self.inst, function() return
                             findinfesttarget(self.inst) end, 0, 1, 1)),
 
                         DoAction(self.inst, function() return infestplayer(self.inst, self) end, "infest", true),

@@ -27,7 +27,7 @@ end
 
 local function AddFuelAction(inst)
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
-    if home ~= nil and home.components.fueled:GetCurrentSection() <= 1 then
+    if home ~= nil and home.components.fueled ~= nil and home.components.fueled:GetCurrentSection() <= 1 then
         local fuel = inst.components.inventory:FindItem(function(item) return item.prefab == "pigtorch_fuel" end)
         if fuel == nil then
             fuel = SpawnPrefab("pigtorch_fuel")

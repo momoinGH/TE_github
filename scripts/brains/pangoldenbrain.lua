@@ -72,7 +72,7 @@ local function drink(inst)
 end
 
 local function poop(inst)
-    if inst.goldlevel >= 1 then
+    if inst.goldlevel >= 1 and inst.puddle then
         inst.goldlevel = inst.goldlevel - 1
         return BufferedAction(inst, inst.puddle, ACTIONS.SPECIAL_ACTION2)
     end

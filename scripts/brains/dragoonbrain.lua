@@ -115,7 +115,7 @@ local function FindLavaSpitTargetAction(inst)
 
 	while not target and prio <= #tagpriority do
 		currtag = { tagpriority[prio] }
-		ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_BAIT_DIST, currtag, { "fire" })
+		ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_DIST, currtag, { "fire" })
 
 		for k, v in pairs(ents) do
 			if v and v.components.burnable and (not v.components.inventoryitem or not v.components.inventoryitem:IsHeld()) then

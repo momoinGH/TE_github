@@ -346,7 +346,7 @@ local function getfacespeech(inst)
         end
 
         --        if GetAporkalypse():IsNear() then
-        if TheWorld.components.aporkalyps then
+        if TheWorld.components.aporkalypse then
             speech = deepcopy(getSpeechType(inst, STRINGS.CITY_PIG_TALK_APORKALYPSE_SOON))
         end
 

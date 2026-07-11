@@ -249,7 +249,7 @@ local function GetAnnoyedFn(inst, target)
 end
 
 local function ShouldRunFromPlayerFn(hunter, inst)
-    inst.annoyance = inst.annoyance + 1
+    inst.annoyance = (inst.annoyance or 0) + 1
 
     local resetfn = function()
         inst.annoyance = 0

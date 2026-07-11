@@ -63,7 +63,7 @@ local function IsNestEmpty(inst)
     if inst.components.homeseeker then
         local nest = inst.components.homeseeker.home
         if nest then
-            return not nest.components.pickable:CanBePicked()
+            return nest.components.pickable ~= nil and not nest.components.pickable:CanBePicked()
         end
     end
 

@@ -72,8 +72,9 @@ local function GetWanderPoint(inst)
 end
 
 local function ShouldStandStill(inst)
+    local home = GetHome(inst)
     return inst:HasTag("pet_hound") and not TheWorld.state.isday and not GetLeader(inst) and
-    not inst.components.combat.target and inst:IsNear(GetHome(inst), SIT_BOY_DIST)
+    not inst.components.combat.target and home ~= nil and inst:IsNear(home, SIT_BOY_DIST)
 end
 
 function CrocodogBrain:OnStart()

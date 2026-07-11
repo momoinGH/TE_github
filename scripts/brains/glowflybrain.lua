@@ -6,9 +6,8 @@ require "behaviours/runaway"
 
 local MAX_LEASH_DIST = 40
 local MAX_WANDER_DIST = 40
-local RUN_AWAY_DIST = 4
-local STOP_RUN_AWAY_DIST = 8
 local RUN_AWAY_DIST = 5
+local STOP_RUN_AWAY_DIST = 8
 
 local MAX_CHASE_DIST = 8
 local MAX_CHASE_TIME = 10

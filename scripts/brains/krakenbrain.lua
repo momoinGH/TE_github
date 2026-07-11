@@ -1,3 +1,6 @@
+require "behaviours/standandattack"
+require "behaviours/standstill"
+
 local KrakenBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)

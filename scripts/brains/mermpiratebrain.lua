@@ -312,7 +312,7 @@ local function Fish(inst)
         if distancia > 6 then
             --	inst:ForceFacePoint(pos.x, pos.y, pos.z)
             fishtime = 0
-            return BufferedAction(inst, pond, ACTIONS.FISH1)
+            return BufferedAction(inst, oceanfish, ACTIONS.FISH1)
         end
     end
 end

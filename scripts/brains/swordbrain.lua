@@ -1,5 +1,7 @@
 require "behaviours/follow"
 require "behaviours/wander"
+require "behaviours/chaseandattack"
+require "behaviours/faceentity"
 
 local SealBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)

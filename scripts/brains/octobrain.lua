@@ -53,7 +53,7 @@ end)
 
 function octobrain:OnStart()
     --at night time return home
-    local night = WhileNode(function() return clock and not clock:IsDay() end, "IsNight",
+    local night = WhileNode(function() return TheWorld and not TheWorld.state.isday end, "IsNight",
         PriorityNode {
             --at night time go home (if it has one)
             DoAction(self.inst, GoHomeAction, "go home", true),
@@ -61,6 +61,7 @@ function octobrain:OnStart()
 
     local root = PriorityNode(
         {
+            night,
             ChaseAndAttack(self.inst, MAX_CHASE_TIME),
             RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
             FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),

@@ -42,33 +42,6 @@ local function EscapeAction(inst)
 end
 
 local function EatFoodAction(inst)
-    if inst.sg:HasStateTag("busy") then
-        return
-    elseif inst.components.inventory ~= nil and inst.components.eater ~= nil then
-        local target = inst.components.inventory:FindItem(function(item)
-            return inst.components.eater:CanEat(item)
-        end)
-        if target ~= nil then
-            return BufferedAction(inst, target, ACTIONS.EAT)
-        end
-    end
-
-    local target = FindEntity(
-        inst,
-        SEE_FOOD_DIST,
-        function(item)
-            return item:GetTimeAlive() >= 8
-                and item:IsOnPassablePoint(true)
-                and inst.components.eater:CanEat(item)
-        end,
-        nil,
-        NO_TAGS,
-        inst.components.eater:GetEdibleTags()
-    )
-    return target ~= nil and BufferedAction(inst, target, ACTIONS.PICKUP) or nil
-end
-
-local function EatFoodAction(inst)
 
     local target = nil
 

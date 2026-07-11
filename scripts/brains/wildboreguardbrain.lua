@@ -230,7 +230,7 @@ function WildboreGuardBrain:OnStart()
 	
         WhileNode(function() return self.inst.sg:HasStateTag("jumping") end, "Standby",
             ActionNode(function() --[[do nothing]] end)),
-        WhileNode(function() return self.inst.components.hauntable.panic end, "PanicHaunted",
+        WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted",
             ChattyNode(self.inst, "PIG_TALK_PANICHAUNT",
                 PanicAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST))),
         WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",

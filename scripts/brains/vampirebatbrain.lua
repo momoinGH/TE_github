@@ -20,7 +20,7 @@ local function GoHomeAction(inst)
         and inst.components.homeseeker.home ~= nil
         and inst.components.homeseeker.home:IsValid()
         and inst.components.homeseeker.home.components.childspawner ~= nil
-        and not inst.components.teamattacker.inteam
+        and (inst.components.teamattacker == nil or not inst.components.teamattacker.inteam)
         and BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
         or nil
 end

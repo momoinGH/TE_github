@@ -184,9 +184,7 @@ function WobsterBrain:OnStart()
                     DoAction(self.inst, go_home_action, "Going Home")
                 ),
 
-                NotDecorator(
-                    ActionNode(function() find_lure_target(self.inst) end)				
-                ),
+                ActionNode(function() find_lure_target(self.inst) end),
                 WhileNode(
                     function()
                         return get_instance_lure_target(self.inst) ~= nil
