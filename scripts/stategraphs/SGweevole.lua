@@ -177,7 +177,7 @@ local states =
             TimeEvent(9 * FRAMES, function(inst)
                 inst.DynamicShadow:Enable(false)
                 inst.sg:AddStateTag("invisible")
-                if inst.components.burnable:IsBurning() then
+                if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then
                     inst.components.burnable:Extinguish()
                 end
             end),

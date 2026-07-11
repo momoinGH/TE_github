@@ -703,7 +703,7 @@ local states =
         onenter = function(inst, target)
             inst.sg.statemem.target = target
             inst.components.locomotor:Stop()
-            inst:PlayAnimation("toss" or "emerge")
+            inst:PlayAnimation("toss")
         end,
 
         timeline =

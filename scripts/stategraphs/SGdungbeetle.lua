@@ -752,4 +752,4 @@ local states =
 
 }
 
-return StateGraph("rabbit", states, events, "idle", actionhandlers)
+return StateGraph("dungbeetle", states, events, "idle", actionhandlers)

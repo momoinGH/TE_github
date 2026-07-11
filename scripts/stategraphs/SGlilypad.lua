@@ -140,4 +140,4 @@ local states =
     },
 }
 
-return StateGraph("lilypad.", states, events, "idle")
+return StateGraph("lilypad", states, events, "idle")

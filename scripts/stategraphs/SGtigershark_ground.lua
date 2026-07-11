@@ -37,9 +37,15 @@ local function onattackfn(inst)
         else
             local variador = math.random(1, 3)
             --inst.sg:GoToState("warrior_attack")
-            if variador == 1 then inst.sg:GoToState("attack") end
-            if variador == 2 and inst.podeTaunt then inst.sg:GoToState("taunt") end
-            if variador == 3 and inst.podeFeed then inst.sg:GoToState("feed") end
+            if variador == 1 then
+                inst.sg:GoToState("attack")
+            elseif variador == 2 and inst.podeTaunt then
+                inst.sg:GoToState("taunt")
+            elseif variador == 3 and inst.podeFeed then
+                inst.sg:GoToState("feed")
+            else
+                inst.sg:GoToState("attack")
+            end
         end
     end
 end

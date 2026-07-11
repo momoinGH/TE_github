@@ -97,7 +97,7 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle_loop") end)
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle_on") end)
         },
     },
 
@@ -114,7 +114,7 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle_loop") end)
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle_on") end)
         },
     },
 
@@ -137,7 +137,7 @@ local states =
         {
             EventHandler("animover", function(inst)
                 if inst.on then
-                    inst.sg:GoToState("idle_loop")
+                    inst.sg:GoToState("idle_on")
                 else
                     inst.sg:GoToState("idle_off")
                 end

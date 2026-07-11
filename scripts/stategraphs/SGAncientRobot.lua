@@ -455,7 +455,7 @@ local states =
 
     State {
         name = "hit_dormant",
-        tags = { "bisy", "dormant" },
+        tags = { "busy", "dormant" },
 
         onenter = function(inst, pushanim)
             --inst.wantstodeactivate = nil

@@ -38,7 +38,6 @@ local events =
         end
     end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("gotosleep", function(inst) inst.sg:GoToState("sleeping") end),
     EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake") end),
 

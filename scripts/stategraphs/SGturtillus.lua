@@ -28,7 +28,7 @@ local events =
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("doattack", function(inst, data)
         if not inst.components.health:IsDead()
-            or not inst.sg:HasStateTag("busy")
+            and not inst.sg:HasStateTag("busy")
         then
             inst.sg:GoToState("attack", data.target)
         end

@@ -139,7 +139,7 @@ local states =
 
         events = 
         {
-            EventHandler("attacked", function(inst) inst.components.inventory:DropEverything() inst.sg:GoToState("idle") end) --drop food
+            EventHandler("attacked", function(inst) if inst.components.inventory then inst.components.inventory:DropEverything() end inst.sg:GoToState("idle") end) --drop food
         },
     },
 

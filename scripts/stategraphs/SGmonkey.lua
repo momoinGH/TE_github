@@ -156,6 +156,7 @@ local states =
         onenter = function(inst)
             if not inst.HasAmmo(inst) then
                 inst.sg:GoToState("idle")
+                return
             end
 
             if inst.components.locomotor then

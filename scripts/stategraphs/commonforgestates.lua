@@ -81,7 +81,7 @@ local function onsleep(inst, data)
     if inst.sg:HasStateTag("nosleep") then
         inst.sg.mem.sleep_duration = 3
     elseif inst.sg.currentstate.name ~= "sleep" then
-        inst.sg:GoToState(inst.sg.currentstate == "sleeping" and "sleeping" or "sleep")
+        inst.sg:GoToState(inst.sg.currentstate.name == "sleeping" and "sleeping" or "sleep")
     end
 end
 

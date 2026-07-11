@@ -24,9 +24,6 @@ local events =
                 if not inst.sg:HasStateTag("idle") then
                     inst.sg:GoToState("idle")
                 end
-                if inst.sg:HasStateTag("idle") then
-                    inst.sg:GoToState("shock")
-                end
             else
                 if not inst.sg:HasStateTag("moving") then
                     inst.sg:GoToState("swimming")

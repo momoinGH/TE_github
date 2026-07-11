@@ -122,7 +122,7 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("close") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("closing") end),
         },
     },
 
@@ -137,7 +137,7 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("close") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("closing") end),
         },
     },
 

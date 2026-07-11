@@ -425,4 +425,4 @@ local states =
 --CommonStates.AddWalkStates(states)
 --CommonStates.AddRunStates(states)
 
-return StateGraph("sgballphinocean", states, events, "idle", actionhandlers)
+return StateGraph("sgdogfishocean", states, events, "idle", actionhandlers)

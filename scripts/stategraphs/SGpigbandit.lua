@@ -318,4 +318,4 @@ CommonStates.AddHopStates(states, true, { pre = "run_pre", loop = "idle_loop", p
 
 CommonStates.AddSimpleActionState(states, "gohome", "pig_pickup", 4 * FRAMES, { "busy" })
 
-return StateGraph("pig", states, events, "idle", actionhandlers)
+return StateGraph("pigbandit", states, events, "idle", actionhandlers)

@@ -5,7 +5,7 @@ local actionhandlers =
     -- ActionHandler(ACTIONS.GOHOME, "action"),
 }
 
-SHAKE_DIST = 40
+local SHAKE_DIST = 40
 
 local events =
 {
@@ -30,8 +30,10 @@ local function oncameraarrive(inst, doer)
     if doer:IsValid() then
         doer:SnapCamera()
         doer:ScreenFade(true, 2)
+        if doer.sg then
+            doer.sg:GoToState("wakeup")
+        end
     end
-    doer.sg:GoToState("wakeup")
 end
 
 local function DoGrab(inst)
@@ -39,7 +41,7 @@ local function DoGrab(inst)
 
     if controller.target and controller.target:HasTag("_inventoryitem") then
         controller:EatSomething(controller.target)
-    elseif controller.target:HasTag("player") then
+    elseif controller.target and controller.target:HasTag("player") then
         local dist = inst:GetDistanceSqToInst(controller.target)
         if dist < 2 then
             controller.target.components.combat:GetAttacked(inst, 50, nil, nil)

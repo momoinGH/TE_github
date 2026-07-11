@@ -391,7 +391,7 @@ local states =
 			end
 		end,
 
-		timeine =
+		timeline =
 		{
 			TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
 				"dontstarve_DLC002/creatures/Stinkray/sleep") end),
@@ -416,7 +416,7 @@ local states =
 			end
 		end,
 
-		timeine =
+		timeline =
 		{
 			TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
 				"dontstarve_DLC002/creatures/Stinkray/sleep") end),
@@ -443,7 +443,7 @@ local states =
 			end
 		end,
 
-		timeine =
+		timeline =
 		{
 			TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
 				"dontstarve_DLC002/creatures/Stinkray/wingflap") end),

@@ -184,8 +184,8 @@ local states =
             local ignitefragments = inst.activefires > 0
             local locus_point = inst:GetPosition()
 
-            inst:Remove()
             local radius = inst.components.walkableplatform.radius
+            inst:Remove()
             for i = 1, radius ^ 2 / 4 do
                 SpawnFragment(locus_point, "boards", math.random() * radius - radius / 2, 0,
                     math.random() * radius - radius / 2, ignitefragments)

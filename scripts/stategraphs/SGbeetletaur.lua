@@ -213,7 +213,7 @@ local events = {
             if inst.sg:HasStateTag("attack") then
                 inst.sg.mem.wants_to_slam = true
                 --inst.components.sleeper.isasleep = false
-            elseif not (inst.sg:HasStateTag("nofreeze") or inst.sg:HasStateTag("nointerrupt") or inst:HasTag("fire" or inst.sg.currentstate.name == "sleep")) then
+            elseif not (inst.sg:HasStateTag("nofreeze") or inst.sg:HasStateTag("nointerrupt") or inst:HasTag("fire") or inst.sg.currentstate.name == "sleep") then
                 inst.sg:GoToState(inst.sg.currentstate.name == "sleeping" and "sleeping" or
                     not inst.sg:HasStateTag("sleeping") and inst.attacks.body_slam and inst.attack_body_slam_ready and
                     "body_slam" or "sleep")

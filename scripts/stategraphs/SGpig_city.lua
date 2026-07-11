@@ -77,7 +77,7 @@ local states =
         tags = { "canrotate", "busy" },
         onenter = function(inst, pushanim)
             if math.random() < 0.3 then
-                inst.components.talker:Say(STRINGS.CITY_PIG_TALK_FIESTA.DEFALT)
+                inst.components.talker:Say(STRINGS.CITY_PIG_TALK_FIESTA.DEFAULT)
             end
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("idle_happy")
@@ -408,7 +408,7 @@ local states =
         tags = { "busy" },
 
         onenter = function(inst)
-            inst.components.talker:Say(STRINGS.CITY_PIG_TALK_POOPTIP.DEFALT)
+            inst.components.talker:Say(STRINGS.CITY_PIG_TALK_POOPTIP.DEFAULT)
             inst.AnimState:PlayAnimation("interact")
             inst.Physics:Stop()
         end,
@@ -445,7 +445,7 @@ local states =
         tags = { "busy" },
 
         onenter = function(inst)
-            inst.components.talker:Say(STRINGS.CITY_PIG_TALK_PAYTAX.DEFALT)
+            inst.components.talker:Say(STRINGS.CITY_PIG_TALK_PAYTAX.DEFAULT)
             inst.AnimState:PlayAnimation("interact")
             inst.Physics:Stop()
         end,
@@ -482,9 +482,9 @@ local states =
         tags = { "busy" },
 
         onenter = function(inst)
-            local speechset = STRINGS.CITY_PIG_TALK_DAILYGIFT.DEFALT
+            local speechset = STRINGS.CITY_PIG_TALK_DAILYGIFT.DEFAULT
             if inst:TroIsAporkalypse() then
-                speechset = STRINGS.CITY_PIG_TALK_APORKALYPSE_REWARD.DEFALT
+                speechset = STRINGS.CITY_PIG_TALK_APORKALYPSE_REWARD.DEFAULT
             end
             inst.components.talker:Say(speechset)
             inst.AnimState:PlayAnimation("interact")
