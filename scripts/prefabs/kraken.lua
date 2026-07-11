@@ -96,17 +96,12 @@ end
 
 local function OnSave(inst, data)
     data.health_stage = inst.health_stage
-    data.revelado = inst.revelado
 end
 
 local function OnLoad(inst, data)
     if data and data.health_stage then
         inst.health_stage = data.health_stage or inst.health_stage
         inst.components.health:SetMinHealth(max_health * MIN_HEALTH[inst.health_stage])
-    end
-
-    if data and data.revelado then
-        inst.revelado = data.revelado
     end
 end
 

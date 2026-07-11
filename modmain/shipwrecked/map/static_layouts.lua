@@ -155,7 +155,7 @@ Layouts["coralpool1"] = StaticLayout.Get("map/static_layouts/coralpool1", {
                 if tipo == 21 then return { "lobsterhole" } end
                 if tipo == 22 then return { "lobsterhole" } end
                 if tipo == 23 then return { "lobsterhole" } end
-                if tipo == 24 then return { "messagebottle" } end
+                if tipo == 24 then return { "messagebottle_sw" } end
                 if tipo == 25 then return { "tar_pool" } end
             end
         end,
@@ -199,7 +199,7 @@ Layouts["coralpool2"] = StaticLayout.Get("map/static_layouts/coralpool2", {
                 if tipo == 21 then return { "lobsterhole" } end
                 if tipo == 22 then return { "lobsterhole" } end
                 if tipo == 23 then return { "lobsterhole" } end
-                if tipo == 24 then return { "messagebottle" } end
+                if tipo == 24 then return { "messagebottle_sw" } end
                 if tipo == 25 then return { "tar_pool" } end
             end
         end,
@@ -242,7 +242,7 @@ Layouts["coralpool3"] = StaticLayout.Get("map/static_layouts/coralpool3", {
                 if tipo == 21 then return { "lobsterhole" } end
                 if tipo == 22 then return { "lobsterhole" } end
                 if tipo == 23 then return { "lobsterhole" } end
-                if tipo == 24 then return { "messagebottle" } end
+                if tipo == 24 then return { "messagebottle_sw" } end
                 if tipo == 25 then return { "tar_pool" } end
             end
         end,
@@ -254,7 +254,7 @@ Layouts["wreck"] = StaticLayout.Get("map/static_layouts/wreck", {
     areas = {
         ship_area = { "wreck" },
         mast_area = function() if math.random() < 0.75 then return { "wreck" } else return {} end end,
-        debris_area = PickSomeWithDups(math.random(1, 4), { "boards", "rope", "fabric", "messagebottleempty" })
+        debris_area = PickSomeWithDups(math.random(1, 4), { "boards", "rope", "fabric", "messagebottleempty_sw" })
     },
 })
 
@@ -263,7 +263,7 @@ Layouts["wreck2"] = StaticLayout.Get("map/static_layouts/wreck2", {
     areas = {
         ship_area = { "wreck" },
         mast_area = function() if math.random() < 0.75 then return { "wreck" } else return {} end end,
-        debris_area = PickSomeWithDups(math.random(1, 4), { "boards", "rope", "fabric", "messagebottleempty" })
+        debris_area = PickSomeWithDups(math.random(1, 4), { "boards", "rope", "fabric", "messagebottleempty_sw" })
     },
 })
 

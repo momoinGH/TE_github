@@ -22,7 +22,7 @@ local function stopgrowing(inst)
     inst.components.timer:StopTimer("grow")
 end
 
-startgrowing = function(inst) -- this was forward declared
+local function startgrowing(inst) -- this was forward declared
     if not inst.components.timer:TimerExists("grow") then
         local growtime = GetRandomWithVariance(TUNING.PINECONE_GROWTIME.base, TUNING.PINECONE_GROWTIME.random)
         inst.components.timer:StartTimer("grow", growtime)

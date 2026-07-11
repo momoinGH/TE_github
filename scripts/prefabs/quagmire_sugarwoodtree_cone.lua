@@ -1,10 +1,10 @@
 local assets =
 {
     Asset("ANIM", "anim/sugarwoodtree_cone.zip"),
-    Asset("ATLAS", "images/inventoryimages/cottontree_cone.xml")
+    Asset("ATLAS", "images/inventoryimages/quagmire_cottontree_cone.xml")
 }
 
-RegisterInventoryItemAtlas("images/inventoryimages/cottontree_cone.xml", "cottontree_cone.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmire_cottontree_cone.xml", "quagmire_cottontree_cone.tex")
 
 
 local function plant(inst, growtime)
@@ -18,8 +18,7 @@ end
 local function ondeploy(inst, pt, deployer)
     inst = inst.components.stackable:Get()
     inst.Physics:Teleport(pt:Get())
-    local timeToGrow = GetRandomWithVariance(TUNING.PINECONE_GROWTIME.base, TUNING.PINECONE_GROWTIME.random)
-    plant(inst, timeToGrow)
+    plant(inst)
 
     --tell any nearby leifs to chill out
     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, TUNING.LEIF_PINECONE_CHILL_RADIUS, { "leif" })
@@ -124,6 +123,6 @@ local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
     table.insert(cones, MakePlacer(name .. "_placer", bank, build, anim))
 end
 
-addcone("cottontree_cone", "cottontree_sapling", "sugarwoodtree_cone", "sugarwoodtree_cone", "idle_planted")
+addcone("quagmire_cottontree_cone", "quagmire_cottontree_sapling", "sugarwoodtree_cone", "sugarwoodtree_cone", "idle_planted")
 
 return unpack(cones)

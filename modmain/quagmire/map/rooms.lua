@@ -6,7 +6,7 @@ AddRoom("quagmire", {
         distributepercent = .2,
         distributeprefabs =
         {
-            sugarwood_tall = 0.5, --nitre
+            quagmire_sugarwood_tall = 0.5, --nitre
             --					                    quagmire_pond_salt = .1,
             flower = 0.112,
             carrot_planted = 0.05,
@@ -39,7 +39,7 @@ AddRoom("quagmire1", {
         distributepercent = .2,
         distributeprefabs =
         {
-            cottontree_normal = 0.5, --nitre
+            quagmire_sugarwoodtree_normal = 0.5, --nitre
             --					                    quagmire_pond_salt = .1,
             quagmire_spotspice_shrub = 0.1,
         },
@@ -62,7 +62,7 @@ AddRoom("gorgeislandcity", {
         distributepercent = .2,
         distributeprefabs =
         {
-            --cottontree = 0.5, --nitre
+            --quagmire_cottontree = 0.5, --nitre
             --					                    quagmire_pond_salt = .15,
             quagmire_spotspice_shrub = 0.1,
             rock1 = 0.3,
@@ -91,7 +91,7 @@ AddRoom("gorgeislandcity2", {
         distributepercent = .2,
         distributeprefabs =
         {
-            --cottontree = 0.5, --nitre
+            --quagmire_cottontree = 0.5, --nitre
             --					                    quagmire_pond_salt = .15,
             quagmire_spotspice_shrub = 0.1,
             rock1 = 0.3,
@@ -119,7 +119,7 @@ AddRoom("quagmire2", {
         distributepercent = .2,
         distributeprefabs =
         {
-            --cottontree = 0.5, --nitre
+            --quagmire_cottontree = 0.5, --nitre
             quagmire_spotspice_shrub = 0.1,
             rock1 = 0.3,
             rock2 = 0.3,
@@ -249,7 +249,7 @@ AddRoom("quagmirepinkset", {
         distributepercent = .6,
         distributeprefabs =
         {
-            cottontree_small = 0.5, --nitre
+            quagmire_sugarwoodtree_small = 0.5, --nitre
             cave_fern = 0.112,
             turnip_planted = 0.05,
             flint = 0.05,
@@ -277,7 +277,7 @@ AddRoom("quagmirepink", {
         distributepercent = .6,
         distributeprefabs =
         {
-            cottontree_normal = 0.5, --nitre
+            quagmire_sugarwoodtree_normal = 0.5, --nitre
             cave_fern = 0.112,
             turnip_planted = 0.05,
             flint = 0.05,

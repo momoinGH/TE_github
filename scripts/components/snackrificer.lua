@@ -50,6 +50,8 @@ local function GiveReward(inst, self, doer)
     inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/gnaw/chomp")
     if #self.reward > 0 then
         inst:DoTaskInTime(0.4, GiveReward, self, doer)
+    else
+        self.inst:RemoveTag("giving_reward") --停止给予奖励
     end
 end
 
@@ -112,6 +114,7 @@ function Snackrificer:Snackrifice(doer, item)
     item:Remove()
 
     if value > 0 then
+        self.inst:AddTag("giving_reward") --给予奖励中
         self:ComputeReward(item, value, satisfaction)
         self.inst:DoTaskInTime(1, GiveReward, self, doer)
         if self.onsnackrificefn then

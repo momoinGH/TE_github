@@ -29,7 +29,7 @@ local function onregen(inst)
 	--print('onregen', inst.components.activatable.inactive)
 end
 
-startregen = function(inst, regentime)
+local function startgrowing(inst, regentime)
 	if inst.components.workable.workleft < #anims - 1 then
 		-- more to grow
 		regentime = regentime or (SAND_REGROW_TIME + math.random() * SAND_REGROW_VARIANCE)

@@ -30,7 +30,7 @@ AddRoom("OceanCoastal_SEA", {
         {
             seaweed_planted = 200,
             mussel_farm = 300,
-            messagebottle = 20,
+            messagebottle_sw = 20,
             mermboat = 4,
         },
 

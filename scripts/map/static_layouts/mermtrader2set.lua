@@ -111,7 +111,7 @@ return {
         },
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 289,
           y = 348,
@@ -189,7 +189,7 @@ return {
         },
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 321,
           y = 98,
@@ -200,7 +200,7 @@ return {
         },
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 426,
           y = 149,
@@ -211,7 +211,7 @@ return {
         },
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 438,
           y = 309,
@@ -222,7 +222,7 @@ return {
         },
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 409,
           y = 332,
@@ -233,7 +233,7 @@ return {
         },
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 376,
           y = 417,
@@ -244,7 +244,7 @@ return {
         },
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 240,
           y = 412,
@@ -255,7 +255,7 @@ return {
         },
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 130,
           y = 438,
@@ -267,7 +267,7 @@ return {
 
         {
           name = "",
-          type = "cottontree",
+          type = "quagmire_cottontree",
           shape = "rectangle",
           x = 100,
           y = 247,

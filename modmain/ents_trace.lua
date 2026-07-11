@@ -20,6 +20,7 @@ local trace_prefabs = {
     lavaarena_battlestandard_heal = true,
 
     quagmire_portal = true, --苔藓大门
+    quagmire_altar = true,  --饕餮祭坛
 }
 
 local trace_ents = {}
@@ -88,4 +89,22 @@ function _G.TroGetAnyEntByPrefab(prefab)
         end
     end
     return nil
+end
+
+---查找最近实体
+---@param loc Vector3|ent 可以是坐标可以是实体
+---@param prefab any
+---@return unknown
+function _G.TroGetClosestEnt(loc, prefab)
+    local pos = (loc.prefab and loc:GetPosition()) or loc
+    local min_dist_sq
+    local ent
+    for _, v in ipairs(TroGetEntsByPrefab(prefab)) do
+        local dist_sq = pos:DistSq(v:GetPosition())
+        if not ent or dist_sq < min_dist_sq then
+            ent = v
+            min_dist_sq = dist_sq
+        end
+    end
+    return ent
 end

@@ -13,7 +13,7 @@ local loot =
 {
     "bamboo",
     "bamboo",
-    "messagebottleempty",
+    "messagebottleempty_sw",
     "bioluminescence",
     "bioluminescence",
 }

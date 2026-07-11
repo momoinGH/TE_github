@@ -8,11 +8,6 @@ local actionhandlers =
 local events =
 {
     CommonHandlers.OnLocomote(true, true),
-    CommonHandlers.OnSleep(),
-    CommonHandlers.OnFreeze(),
-    CommonHandlers.OnAttack(),
-    CommonHandlers.OnAttacked(),
-    CommonHandlers.OnDeath(),
 }
 
 local states =
@@ -32,36 +27,6 @@ local states =
             end
         end,
 
-    },
-
-    --[[    State{
-        name = "death",
-        tags = {"busy"},
-
-        onenter = function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/merm/death")
-            inst.AnimState:PlayAnimation("death")
-            inst.Physics:Stop()
-            RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(inst:GetPosition())
-        end,
-    },	
-]]
-
-
-
-    State {
-        name = "hit",
-        tags = { "hit", "busy" },
-        onenter = function(inst)
-            inst.AnimState:PlayAnimation("start_pst")
-            inst.Physics:Stop()
-        end,
-
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
     },
 
     State {
@@ -123,14 +88,38 @@ local states =
     State {
         name = "coin",
         tags = { "busy" },
+
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("coin")
-            inst.Physics:Stop()
+            inst.components.locomotor:Stop()
+            inst.Transform:SetRotation(270)
+            inst.AnimState:PlayAnimation("coin", false)
+            inst.coin = true
         end,
+
+        timeline = {
+            TimeEvent(23 * FRAMES, function(inst)
+                for i = 1, 10 do
+                    inst:DoTaskInTime(math.random() / 5 + i / 100, function(inst)
+                        local offset = 1
+                        local spd = 1.75 + math.random() * 2.5
+                        local angle = (135 + math.random() * 45) * DEGREES * 1.1
+                        local x, y, z = inst.Transform:GetWorldPosition()
+                        local coin = SpawnPrefab("quagmire_coin1")
+                        coin.Transform:SetPosition(x - math.sin(angle) * offset, 1.35, z - math.cos(angle) * offset)
+                        coin:Toss()
+                        coin.Physics:SetVel(math.cos(angle) * spd, 12, math.sin(angle) * spd)
+                    end)
+                end
+
+                inst.sg:RemoveStateTag("busy")
+            end),
+        },
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
         },
     },
 

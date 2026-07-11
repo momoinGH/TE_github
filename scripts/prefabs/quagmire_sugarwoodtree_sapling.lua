@@ -8,7 +8,7 @@ local pinecone_prefabs =
     "quagmire_sugarwoodtree_small",
 }
 local function growtree(inst)
-    local tree = SpawnPrefab("cottontree_small")
+    local tree = SpawnPrefab(inst.growprefab)
     if tree then
         tree.Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst:Remove()
@@ -19,7 +19,7 @@ local function stopgrowing(inst)
     inst.components.timer:StopTimer("grow")
 end
 
-startgrowing = function(inst) -- this was forward declared
+local function startgrowing(inst) -- this was forward declared
     if not inst.components.timer:TimerExists("grow") then
         local growtime = GetRandomWithVariance(TUNING.PINECONE_GROWTIME.base, TUNING.PINECONE_GROWTIME.random)
         inst.components.timer:StartTimer("grow", growtime)
@@ -91,6 +91,4 @@ local function sapling_fn(build, anim, growprefab, tag, fireproof, overrideloot)
     return fn
 end
 
-return Prefab("cottontree_sapling",
-    sapling_fn("sugarwoodtree_cone", "idle_planted", "quagmire_sugarwoodtree_small", "sugarwood", true), pinecone_assets,
-    pinecone_prefabs)
+return Prefab("quagmire_cottontree_sapling", sapling_fn("sugarwoodtree_cone", "idle_planted", "quagmire_sugarwoodtree_small", "sugarwood", false), pinecone_assets, pinecone_prefabs)

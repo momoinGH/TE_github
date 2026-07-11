@@ -20,8 +20,6 @@ PrefabFiles =
     "quagmire_slaughtertool",         --屠宰工具
     "quagmire_altar",                 --饕餮祭坛
     "quagmire_seedpackets",           --种子包
-    "quagmire_sugarwoodtree",         --糖木树
-    -- "quagmire_sugarwood_sapling",
     "quagmire_sugarwoodtree_sapling", --棉树苗
     "quagmire_sugarwoodtree_cone",    --棉树种子
     "quagmire_oldstructures",         --一堆破烂建筑
@@ -38,14 +36,12 @@ PrefabFiles =
     "quagmire_parkspike",             --铁栅栏
 
 
-    "quagmire_goatmum",      --玛姆茜
     "quagmire_mealingstone", --碾磨石
     "quagmire_goatkid",      --比利
     "quagmire_traders",      --商人
     "quagmire_swampigelder", --沼泽猪长老
 
 
-    "quagmire_coins",               --钱
     "quagmire_portal_key",          --远古钥匙
     "quagmiregoat",                 --沼地山羊
     "quagmiregoatherd",             --沼地山羊生成器

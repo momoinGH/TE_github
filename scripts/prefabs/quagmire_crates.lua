@@ -17,7 +17,7 @@ local KIT_ITEMS =
     ["pot_hanger"] =
     {
         "pot_hanger_item",
-        "pot_small",
+        "quagmire_pot_small",
     },
     ["oven"] =
     {

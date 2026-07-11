@@ -29,7 +29,7 @@ local SEED_TYPES = {
     "pinecone",
     "acorn",
     "twiggy_nut",
-    "cottontree_cone",
+    "quagmire_cottontree_cone",
     "coconut",
     "tree_forestseed",
 }

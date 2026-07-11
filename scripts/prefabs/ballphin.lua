@@ -36,22 +36,6 @@ local function OnNewTarget(inst, data)
     end
 end
 
-local function NormalRetargetFn(inst)
-    return FindEntity(inst, PIG_TARGET_DIST,
-        function(guy)
-            if not guy.LightWatcher or guy.LightWatcher:IsInLight() then
-                return guy.components.health and not guy.components.health:IsDead()
-                    and inst.components.combat:CanTarget(guy)
-            end
-        end, { "monster" }, { "abigail" })
-end
--- local function NormalKeepTargetFn(inst, target)
---     --give up on dead guys, or guys in the dark, or werepigs
---     return inst.components.combat:CanTarget(target)
---            and (not target.LightWatcher or target.LightWatcher:IsInLight())
---            and not (target.sg and target.sg:HasStateTag("transform") )
--- end
-
 local function retargetfn(inst)
     local dist = BALLPHIN_TARGET_DIST
     return FindEntity(inst, dist, function(guy)

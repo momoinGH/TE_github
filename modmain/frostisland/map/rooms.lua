@@ -358,7 +358,7 @@ AddRoom("frost_island_palace", {
         distributepercent = .2,
         distributeprefabs =
         {
-            --					                    cottontree = 0.5, --nitre
+            --					                    quagmire_cottontree = 0.5, --nitre
             --					                    quagmire_pond_salt = .1,
             evergreen_sparse = 0.5,
             pond = .1,
