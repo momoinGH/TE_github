@@ -111,7 +111,7 @@ local commonspawnfn = {
     mangrovetree = function(x, y, ents)
         return SpawnUtil.IsSurroundedByTile(x, y, 1, WORLD_TILES.MANGROVE)
     end,
-    grass_water = function(x, y, ents)
+    grass = function(x, y, ents)
         return SpawnUtil.IsSurroundedByTile(x, y, 1, WORLD_TILES.MANGROVE)
     end,
 }

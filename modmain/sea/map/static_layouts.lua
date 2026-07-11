@@ -19,7 +19,7 @@ Layouts["oceanbamboforest"] = StaticLayout.Get("map/static_layouts/oceanbambofor
                 if tipo == 3 then return { "mangrovetree" } end
                 if tipo == 4 then return { "bambootreebig" } end
                 if tipo == 5 then return { "spidercoralhole" } end
-                if tipo == 6 then return { "grass_water" } end
+                if tipo == 6 then return { "grass" } end
                 if tipo == 7 then return { "fishinhole" } end
                 if tipo == 8 then return { "waterygrave" } end
                 if tipo == 9 then return { "sapling" } end
@@ -68,7 +68,7 @@ Layouts["oceanforest"] = StaticLayout.Get("map/static_layouts/oceanforest", {
                 elseif tipo == 5 then
                     return { "spidercoralhole" }
                 elseif tipo == 6 then
-                    return { "grass_water" }
+                    return { "grass" }
                 elseif tipo == 7 then
                     return { "fishinhole" }
                 elseif tipo == 8 then
@@ -115,7 +115,7 @@ Layouts["oceanrocks"] = StaticLayout.Get("map/static_layouts/oceanrocks", {
         rochaaleatoria = function()
             local variador = math.random()
             if variador > 0.8 then
-                return { "grass_water" }
+                return { "grass" }
             else
                 local tipo = math.random(1, 10)
                 if tipo == 1 then return { "mangrovetree" } end

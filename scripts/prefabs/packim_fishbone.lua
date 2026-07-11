@@ -22,11 +22,6 @@ local function CloseEye(inst)
     end
 end
 
-local function RefreshEye(inst)
-    inst.components.inventoryitem:ChangeImageName(inst.isOpenEye and inst.openEye or inst.closedEye)
-end
-
-
 local function GetSpawnPoint(pt)
     local theta = math.random() * TWOPI
     local radius = SPAWN_DIST
@@ -35,14 +30,9 @@ local function GetSpawnPoint(pt)
 end
 
 local function SpawnChester(inst)
-    --print("chester_eyebone - SpawnChester")
-
     local pt = inst:GetPosition()
-    --print("    near", pt)
-
     local spawn_pt = GetSpawnPoint(pt)
     if spawn_pt ~= nil then
-        --print("    at", spawn_pt)
         local chester = SpawnPrefab("packim")
         if chester ~= nil then
             chester.Physics:Teleport(spawn_pt:Get())
@@ -50,10 +40,6 @@ local function SpawnChester(inst)
 
             return chester
         end
-
-        --else
-        -- this is not fatal, they can try again in a new location by picking up the bone again
-        --print("chester_eyebone - SpawnChester: Couldn't find a suitable spawn point for chester")
     end
 end
 

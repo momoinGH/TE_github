@@ -5,8 +5,6 @@ PrefabFiles = {
     "crabapple_tree",          --醋栗树
     "feather_thunder",         --雷羽
     "fennel",                  --茴香
-    "grass_water",             --水草
-    "grasswaterspawner",       --水草生成器
     "grotto_grub_nest",        --虫穴
     "grotto_grub",             --石窟蛴螬
     "grotto_parsnip",          --防风草

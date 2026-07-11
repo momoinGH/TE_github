@@ -130,20 +130,6 @@ local natureskins = {
     --     },
     -- },
 
-    -- grass_water = {
-    --     default = {
-    --         base_minimapicon = "grass.png",skintype = "tropical",
-    --         baseoverride = { { "grass_pieces", "grass1", "grass_pieces" }, },
-    --     },
-    --     grass_water_green = {
-    --         build = "grassgreen_build",
-    --         image = "grassGreen", skintype = "tropical",
-    --         override = { { "grass_pieces", "grassgreen_build", "grass_pieces" },
-    --         },
-
-    --     },
-    -- },
-
     krampus = {
         default = { basebuild = "krampus_build" },
         krampus_hawaiian = { build = "krampus_hawaiian_build", skintype = "tropical", },

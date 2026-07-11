@@ -294,8 +294,6 @@ PrefabFiles = {
     "volcanostaff",          --火山魔杖
     "armor_snakeskin",       --蛇皮夹克
     "mangrove",              --红树
-    "grass_water",           --水草
-    "grasswaterspawner",     --水草生成器
     "pirateghost",           --海盗幽灵
     "waterygrave",           --海墓
     "flotsam_debris_sw",     --残骸

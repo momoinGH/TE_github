@@ -3088,7 +3088,7 @@ AddRoom("WaterMangrove", {
         distributeprefabs = {
             mangrovetree = 1,
             fishinhole = 0.5,
-            grass_water = 1,
+            grass = 1,
             seataro_planted = 0.5,
             seacucumber_planted = 0.5,
             watertree_root = 0.5,
