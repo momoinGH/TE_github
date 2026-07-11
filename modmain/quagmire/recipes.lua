@@ -134,23 +134,23 @@ TroAddRecipe("mermwatchtower", { Ig("boards", 5), Ig("tentaclespots", 1), Ig("sp
 
 ----------------------------------------------------------------------------------------------------
 
-local cookers = {
-    grill = { "grill", "grill_small" },
-    oven = { "quagmire_oven" },
-    quagmire_pot = { "quagmire_pot" },
-}
-local preparedFoods = require("gorge_foods")
-for k, v in pairs(preparedFoods) do
-    if v.cookers then
-        for _, cookertype in ipairs(v.cookers) do
-            for _, cookerprefab in ipairs(cookers[cookertype] or {}) do
-                AddCookerRecipe(cookerprefab, v)
-            end
-        end
-    else
-        AddCookerRecipe("cookpot", v)
-    end
-end
+-- local cookers = {
+--     grill = { "grill", "grill_small" },
+--     oven = { "quagmire_oven" },
+--     quagmire_pot = { "quagmire_pot" },
+-- }
+-- local preparedFoods = require("gorge_foods")
+-- for k, v in pairs(preparedFoods) do
+--     if v.cookers then
+--         for _, cookertype in ipairs(v.cookers) do
+--             for _, cookerprefab in ipairs(cookers[cookertype] or {}) do
+--                 AddCookerRecipe(cookerprefab, v)
+--             end
+--         end
+--     else
+--         AddCookerRecipe("cookpot", v)
+--     end
+-- end
 
 ----------------------------------------------------------------------------------------------------
 

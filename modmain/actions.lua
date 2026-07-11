@@ -455,13 +455,13 @@ TroAddAction({ priority = 3, instant = false, mount_valid = true, rmb = true, di
     end
 )
 
-TroAddAction(nil, "SNACKRIFICE", STRINGS.ACTIONS.SNACKRIFICE, function(act)
-    local snackrificer = act.target.components.snackrificer
-    if snackrificer then
-        snackrificer:Snackrifice(act.doer, act.invobject)
-        return true
-    end
-end)
+-- TroAddAction(nil, "SNACKRIFICE", STRINGS.ACTIONS.SNACKRIFICE, function(act)
+--     local snackrificer = act.target.components.snackrificer
+--     if snackrificer then
+--         snackrificer:Snackrifice(act.doer, act.invobject)
+--         return true
+--     end
+-- end)
 
 
 

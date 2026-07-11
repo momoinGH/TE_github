@@ -177,7 +177,7 @@ function SpecialStewer:CanCook()
 end
 
 function SpecialStewer:OverrideProduct()
-    if self.product == "syrup" and self.inst.dish and self.inst.dish.prefab ~= "quagmire_pot_syrup" then
+    if self.product == "syrquagmire_syrupup" and self.inst.dish and self.inst.dish.prefab ~= "quagmire_pot_syrup" then
         self.product = "wetgoop"
     end
 end

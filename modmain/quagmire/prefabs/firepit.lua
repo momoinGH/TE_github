@@ -53,7 +53,6 @@ AddPrefabPostInit("firepit", function(inst)
     inst:AddComponent("quagmire_installations")
     inst.components.quagmire_installations.oninstallfn = function(inst, station)
         local stationprefab = station.prefab
-        print("检查", stationprefab)
         if stationprefab == "quagmire_grill" or stationprefab == "quagmire_grill_small" then
             inst.components.container.canbeopened = true
             inst.components.container:WidgetSetup(stationprefab)

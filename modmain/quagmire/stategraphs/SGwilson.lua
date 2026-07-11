@@ -1,6 +1,6 @@
 local actionhandlers = {
     ActionHandler(ACTIONS.MEAL, "doshortaction"),
-    ActionHandler(ACTIONS.SNACKRIFICE, "give"),
+    -- ActionHandler(ACTIONS.SNACKRIFICE, "give"),
 }
 
 local eventhandlers = {

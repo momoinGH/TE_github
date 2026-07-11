@@ -1,5 +1,5 @@
 AddIngredientValues({ "quagmire_spotspice_ground" }, { spice = 1 }, true, false)
-AddIngredientValues({ "syrup" }, { sweetener = 2 }, true, false)
+AddIngredientValues({ "quagmire_syrup" }, { sweetener = 2 }, true, false)
 AddIngredientValues({ "tomato", "potato", "turnip", "garlic", "onion" }, { veggie = 1 }, true, false)
 AddIngredientValues({ "quagmire_flour" }, { flour = 1, }, true, false)
 AddIngredientValues({ "rocks" }, { rocks = 1 }, true, false)
@@ -13,7 +13,7 @@ TroUpdateCookingIngredientTags({ "meat", "monstermeat" }, { bigmeat = 1, })
 
 
 AddCookerRecipe("quagmire_pot", {
-    name = "syrup",
+    name = "quagmire_syrup",
     test = function(cooker, names, tags) return names.sap and names.sap >= 3 end,
     priority = 1,
     weight = 1,
