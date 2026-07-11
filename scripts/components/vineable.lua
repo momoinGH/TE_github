@@ -37,7 +37,7 @@ function Vineable:SetOpen(open)
 
 	local target = self.inst.components.teleporter:GetTarget()
 	if target and target ~= self.inst and target.components.vineable and (target.components.vineable.vines_open ~= open) then
-		target.components.vineable:SetOpen(true)
+		target.components.vineable:SetOpen(open)
 	end
 end
 

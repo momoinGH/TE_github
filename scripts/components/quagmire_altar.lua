@@ -73,7 +73,7 @@ function Quagmire_Altar:AcceptFoodTribute(player, food)
 	local silverdish = food:HasTag("replated_plate") or food:HasTag("replated_bowl")
 
 	-- 计算奖励
-	local coins, appraisal_data = CoinLogic:CalculateReward(
+	local coins, appraisal_data = CoinLogic.CalculateReward(
 		COIN_VALUES[food_id] or { 10, 1 }, -- coins_data
 		food.components.perishable:IsStale(), -- stale
 		food.components.perishable:IsSpoiled(), -- spoiled

@@ -66,8 +66,8 @@ function Economy:OnSave()
 	local data = {}
 	data.cities = self.cities
 
-	for city, data in pairs(self.cities) do
-		for item, itemdata in pairs(data) do
+	for city, d in pairs(self.cities) do
+		for item, itemdata in pairs(d) do
 			for guid, guiddata in pairs(itemdata.GUIDS) do
 				table.insert(refs, guid)
 			end

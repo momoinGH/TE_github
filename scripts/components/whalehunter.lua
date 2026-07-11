@@ -132,8 +132,7 @@ return Class(function(self, inst)
 
     local function StartCooldown(inst, hunt, cooldown)
         assert(hunt)
-        local cooldown = cooldown or HUNT_COOLDOWN + HUNT_COOLDOWNDEVIATION * (math.random() * 2 - 1)
-        --print("Hunter:StartCooldown", cooldown)
+        cooldown = cooldown or HUNT_COOLDOWN + HUNT_COOLDOWNDEVIATION * (math.random() * 2 - 1)
 
         StopHunt(hunt)
         StopCooldown(hunt)
@@ -144,7 +143,6 @@ return Class(function(self, inst)
         end
 
         if cooldown and cooldown > 0 then
-            --print("The Hunt begins in", cooldown)
             hunt.activeplayer = nil
             hunt.lastdirt = nil
             hunt.lastdirttime = nil
@@ -155,7 +153,6 @@ return Class(function(self, inst)
     end
 
     local function StartHunt()
-        --print("Hunter:StartHunt")
         -- Given the way hunt is used, it should really be its own class now
         local newhunt =
         {
@@ -169,20 +166,17 @@ return Class(function(self, inst)
     end
 
     local function GetSpawnPoint(pt, radius, hunt)
-        --print("Hunter:GetSpawnPoint", tostring(pt), radius)
 
         local angle = hunt.direction
         if angle then
             local offset = Vector3(radius * math.cos(angle), 0, -radius * math.sin(angle))
             local spawn_point = pt + offset
-            --print(string.format("Hunter:GetSpawnPoint RESULT %s, %2.2f", tostring(spawn_point), angle/DEGREES))
             return spawn_point
         end
     end
 
     local function SpawnDirt(pt, hunt)
         assert(hunt)
-        --print("Hunter:SpawnDirt")
 
         local spawn_pt = GetSpawnPoint(pt, HUNT_SPAWN_DIST, hunt)
         if spawn_pt ~= nil then
@@ -197,10 +191,12 @@ return Class(function(self, inst)
                     local num_bats = math.min(3 + math.floor(day / 35), 6)
                     for i = 1, num_bats do
                         spawned:DoTaskInTime(0.2 * i + math.random() * 0.3, function()
-                            local bat = SpawnPrefab(_ambush_prefab)
                             local pos = FindNearbyOcean(spawned:GetPosition(), 2)
-                            bat.Transform:SetPosition(pos:Get())
-                            bat:PushEvent("fly_back")
+                            if pos then
+                                local bat = SpawnPrefab(_ambush_prefab)
+                                bat.Transform:SetPosition(pos:Get())
+                                bat:PushEvent("fly_back")
+                            end
                         end)
                     end
                     hunt.ambush_track_num = nil
@@ -215,7 +211,6 @@ return Class(function(self, inst)
                 return true
             end
         end
-        --print("Hunter:SpawnDirt FAILED")
         return false
     end
 
@@ -225,24 +220,17 @@ return Class(function(self, inst)
     end
 
     local function GetNextSpawnAngle(pt, direction, radius)
-        --print("Hunter:GetNextSpawnAngle", tostring(pt), radius)
 
         local base_angle = direction or math.random() * TWOPI
         local deviation = math.random(-TRACK_ANGLE_DEVIATION, TRACK_ANGLE_DEVIATION) * DEGREES
 
         local start_angle = base_angle + deviation
-        --print(string.format("   original: %2.2f, deviation: %2.2f, starting angle: %2.2f", base_angle/DEGREES, deviation/DEGREES, start_angle/DEGREES))
 
-        --[[local angle =]]
         return GetRunAngle(pt, start_angle, radius)
-        --print(string.format("Hunter:GetSpawnPoint RESULT %s", tostring(angle and angle/DEGREES)))
-        --return angle
     end
 
     local function StartDirt(hunt, position)
         assert(hunt)
-
-        --print("Hunter:StartDirt")
 
         RemoveDirt(hunt)
 
@@ -256,12 +244,7 @@ return Class(function(self, inst)
 
         hunt.trackspawned = 0
         hunt.direction = GetNextSpawnAngle(pt, nil, HUNT_SPAWN_DIST)
-        --print(GetNextSpawnAngle(pt, nil, HUNT_SPAWN_DIST))
         if hunt.direction ~= nil then
-            --print(string.format("   first angle: %2.2f", hunt.direction/DEGREES))
-
-            --print("    numtrackstospawn", hunt.numtrackstospawn)
-
             -- it's ok if this spawn fails, because we'll keep trying every HUNT_UPDATE
             local spawnRelativeTo = pt
             if SpawnDirt(spawnRelativeTo, hunt) then

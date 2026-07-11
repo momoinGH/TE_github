@@ -4,7 +4,7 @@ local OxygenAura = Class(function(self, inst)
 	self.aurafn = nil
 	self.penalty = nil
 
-	self.inst.entity:AddTag("oxygen_aura")
+	self.inst:AddTag("oxygen_aura")
 end)
 
 function OxygenAura:SetAura(n)

@@ -28,7 +28,6 @@ end
 
 function Whirlpool:SpitItem(item)
 	if not item then
-		local slot = math.random(1, self.inst.components.inventory:GetNumSlots())
 		item = self.inst.components.inventory:DropItem()
 	end
 
@@ -48,10 +47,7 @@ end
 function Whirlpool:OnUpdate(dt)
 	-- find entities within radius and whirlpool them towards my location
 	local pt = self.inst:GetPosition()
-	local ents = TheSim:FindEntities(pt.x, 0, pt.z, self.consumeradius, nil, self.noTags)
-
-	ents = TheSim:FindEntities(pt.x, pt.y, pt.z, self.whirlpoolradius, nil, self.noTags)
-
+	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, self.whirlpoolradius, nil, self.noTags)
 	for k, v in pairs(ents) do
 		if v and v.Physics and v.components.floater and v.components.floater.showing_effect == true and CheckLOSFromPoint(self.inst:GetPosition(), v:GetPosition()) then
 			local x, y, z = v:GetPosition():Get()

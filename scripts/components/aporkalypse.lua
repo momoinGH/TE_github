@@ -156,7 +156,7 @@ end
 function Aporkalypse:EndAporkalypse()
     if not self.aporkalypse_active then return end
 
-    self.aporkalypse_active = nil
+    self.aporkalypse_active = false
     self.herald_spawn.enable = false
     self.bat_spawn.enable = false
     if TheWorld.net and TheWorld.net.tro_isaporkalypse then

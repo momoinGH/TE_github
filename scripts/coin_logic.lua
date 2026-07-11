@@ -1,7 +1,5 @@
-local CoinLogic = {}
-
 -- 计算料理奖励
-function CoinLogic:CalculateReward(coins_data, stale, spoiled, current_craving, cravings, plated)
+local function CalculateReward(coins_data, stale, spoiled, current_craving, cravings, plated)
     print(coins_data, stale, spoiled, current_craving, cravings, plated)
     local appraisal_data = {}
     local base_value = coins_data[1]
@@ -51,9 +49,9 @@ function CoinLogic:CalculateReward(coins_data, stale, spoiled, current_craving, 
     --if its not plated: all subsequent coin upgrades require having atleast 4 leftover old coins after the upgrade.
     --if its plated: all subsequent coin upgrades require having atleast 2 leftover old coins after the upgrade.
 
-    local coin_data = {{1, is_leftovers = true}, {6}, {12}, {18, max = 1, first_value = 18 + buffer_value}}
+    local coin_data = { { 1, is_leftovers = true }, { 6 }, { 12 }, { 18, max = 1, first_value = 18 + buffer_value } }
     local first_upgrade = true
-    local coins = {0, 0, 0, 0}
+    local coins = { 0, 0, 0, 0 }
 
     for i = recipeLvL, 1, -1 do
         --not not is a cast to boolean.
@@ -72,4 +70,6 @@ function CoinLogic:CalculateReward(coins_data, stale, spoiled, current_craving, 
     return coins, appraisal_data
 end
 
-return CoinLogic
+return {
+    CalculateReward = CalculateReward
+}

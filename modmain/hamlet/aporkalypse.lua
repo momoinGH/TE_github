@@ -33,7 +33,7 @@ for _, v in ipairs({
         if not TheWorld.ismastersim then return end
         inst:ListenForEvent("beginaporkalypse", function()
             if inst:IsInHamletArea() and inst:IsValid() then
-                RemoveFromRegrowthManager(inst) --花移除前要调用这个移除onrmeve的监听，不然会在附近再生的
+                RemoveFromRegrowthManager(inst) --花移除前要调用这个移除onremove的监听，不然会在附近再生的
                 inst:DoTaskInTime(0, ReplacePrefab, "flower_evil")
             end
         end, TheWorld)

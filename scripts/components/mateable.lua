@@ -50,7 +50,7 @@ function Mateable:SetPartner(partner, partnerismommy)
     self:RemovePartner()
 
     self.partner = partner
-    self.inst:ListenForEvent("onrmeve", self._on_partner_removed, partner)
+    self.inst:ListenForEvent("onremove", self._on_partner_removed, partner)
 
     if partnerismommy then
         self.inst:AddTag("daddy")
@@ -69,10 +69,10 @@ function Mateable:RemovePartner()
     if self.partner then
         self.inst:RemoveEventCallback("onremove", self._on_partner_removed, self.partner)
     end
-    self.inst:RemoveTag("daddy")
     self.inst:RemoveTag("mommy")
     self.inst:RemoveTag("mating")
     if self.inst:HasTag("daddy") then
+        self.inst:RemoveTag("daddy")
         local mommy = self.partner
         if mommy then
             mommy.components.mateable:RemovePartner()
@@ -106,7 +106,7 @@ end
 function Mateable:LoadPostPass(newents, data)
     if not data then return end
 
-    data.next_spawn_time = self.next_spawn_time
+    self.next_spawn_time = data.next_spawn_time or self.next_spawn_time
     if data.partner and newents[data.partner] then
         self:SetPartner(newents[data.partner].entity, data.partnerismommy)
     end

@@ -21,11 +21,11 @@ function Fixer:ClearTarget()
     self.target = nil
 end
 
-function Fixer:OnSave()
-    if self.target then
-        return { target = self.target.GUID }, { self.target.GUID }
-    end
-end
+-- function Fixer:OnSave()
+--     if self.target then
+--         return { target = self.target.GUID }, { self.target.GUID }
+--     end
+-- end
 
 function Fixer:GetDebugString()
     local str = ""

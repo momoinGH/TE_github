@@ -81,31 +81,27 @@ function Dislodgeable:Dislodge(dislodger)
         local pt = Vector3(self.inst.Transform:GetWorldPosition())
         for i = 1, self.numtoharvest do
             local loot = SpawnPrefab(self.product)
-            loot.Transform:SetPosition(pt.x, pt.y, pt.z)
-            if loot.Physics then
-                local angle = math.random() * TWOPI
-                local speed = 1
-                speed = speed * math.random()
-                loot.Physics:SetVel(speed * math.cos(angle), GetRandomWithVariance(8, 4), speed * math.sin(angle))
-                if loot and loot.Physics and self.inst and self.inst.Physics then
-                    local dir = Vector3(math.cos(angle), 0, math.sin(angle))
-                    pt = pt + dir * ((loot.Physics:GetRadius() or 1) + (self.inst.Physics:GetRadius() or 1))
-                    loot.Transform:SetPosition(pt.x, pt.y, pt.z)
-                end
-            end
-
-
-
             if loot then
+                loot.Transform:SetPosition(pt.x, pt.y, pt.z)
+                if loot.Physics then
+                    local angle = math.random() * TWOPI
+                    local speed = 1
+                    speed = speed * math.random()
+                    loot.Physics:SetVel(speed * math.cos(angle), GetRandomWithVariance(8, 4), speed * math.sin(angle))
+                    if loot.Physics and self.inst and self.inst.Physics then
+                        local dir = Vector3(math.cos(angle), 0, math.sin(angle))
+                        pt = pt + dir * ((loot.Physics:GetRadius() or 1) + (self.inst.Physics:GetRadius() or 1))
+                        loot.Transform:SetPosition(pt.x, pt.y, pt.z)
+                    end
+                end
                 if self.ondislodgedfn then
                     self.ondislodgedfn(self.inst, dislodger, loot)
                 end
 
-                self:SetDislodged()
-
                 self.inst:PushEvent("dislodged", { dislodger = dislodger, loot = loot })
             end
         end
+        self:SetDislodged()
     end
 end
 

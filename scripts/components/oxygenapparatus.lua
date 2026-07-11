@@ -2,7 +2,7 @@ local OxygenApparatus = Class(function(self, inst)
 	self.inst = inst
 	self.percentage = 1
 
-	self.inst.entity:AddTag("oxygen_apparatus")
+	self.inst:AddTag("oxygen_apparatus")
 end)
 
 function OxygenApparatus:SetReductionPercentage(n)

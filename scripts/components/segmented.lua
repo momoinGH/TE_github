@@ -1,4 +1,4 @@
-STATES = {
+local STATES = {
 	IDLE = 1,
 	MOVING = 2,
 	DEAD = 3,

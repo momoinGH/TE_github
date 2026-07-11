@@ -107,12 +107,8 @@ function Vacuum:OnUpdate(dt)
     end
 
     local jogadores = TheSim:FindEntities(pt.x, pt.y, pt.z, 20, { "player" })
-
     for k, player in pairs(jogadores) do
-        if player:HasTag("playerghost") or not self.inst.sg:HasStateTag("vacuo") then return end
-        --	local player = GetClosestInstWithTag("player", self.inst, 40)
-        --	if not player then return end
-        if player and not self.ignoreplayer or self.vacuuming_player then
+        if not (player:HasTag("playerghost") or not self.inst.sg:HasStateTag("vacuo")) and (not self.ignoreplayer or self.vacuuming_player) then
             player:RemoveTag("NOVACUUM")
             local playerpos = player:GetPosition()
             local displacement = playerpos - self.inst:GetPosition()

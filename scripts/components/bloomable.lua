@@ -11,7 +11,7 @@ end)
 
 function Bloomable:OnRemoveFromEntity()
     self:StopBloom()
-    self.StopWatchingWorldState("seasonChange", self.SeasonChange)
+    self:StopWatchingWorldState("seasonChange", self.SeasonChange)
 end
 
 function Bloomable:SetCanBloom(fn)
@@ -156,14 +156,14 @@ function Bloomable:OnLoad(data)
 end
 
 function Bloomable:GetDebugString()
-    local string = ""
+    local s = ""
     if self.bloomtaskinfo then
-        string = string .. "  bloomtask: " .. self.inst:TimeRemainingInTask(self.bloomtaskinfo)
+        s = s .. "  bloomtask: " .. self.inst:TimeRemainingInTask(self.bloomtaskinfo)
     end
     if self.unbloomtaskinfo then
-        string = string .. "  unbloomtask: " .. self.inst:TimeRemainingInTask(self.unbloomtaskinfo)
+        s = s .. "  unbloomtask: " .. self.inst:TimeRemainingInTask(self.unbloomtaskinfo)
     end
-    return string
+    return s
 end
 
 return Bloomable

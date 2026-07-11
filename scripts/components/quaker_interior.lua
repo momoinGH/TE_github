@@ -96,8 +96,7 @@ local debris =
 
 function Quaker_Interior:OnSave()
 	if not self.noserial then
-		return
-		{
+		return {
 			quaketime = self.quaketime,
 			debrispersecond = self.debrispersecond,
 			debrisbreakchance = self.debrisbreakchance,
@@ -106,14 +105,15 @@ function Quaker_Interior:OnSave()
 			mammal_spawn_offset = self.mammal_spawn_offset,
 		}
 	end
-	self.noserial = false
 end
 
 function Quaker_Interior:OnLoad(data)
+	if not data then return end
+
 	self.quaketime = data.quaketime or self.quakelevel.quaketime()
 	self.debrispersecond = data.debrispersecond or self.quakelevel.debrispersecond()
 	self.debrisbreakchance = data.debrisbreakchance or self.quakelevel.debrisbreakchance
-	self.quakeintensiy = data.quakeintensiy
+	self.quakeintensiy = data.quakeintensiy or self.quakeintensiy
 	self.mammals_per_quake = data.mammals or self.quakelevel.mammals
 	self.mammal_spawn_offset = data.mammal_spawn_offset
 end

@@ -89,7 +89,7 @@ function TalkingBird:MakeConversation()
     elseif owner == nil then
         --on the ground
         -- quiplist = STRINGS.TALKINGBIRD.on_ground
-    elseif grand_owner ~= owner and grand_owner == grand_owner:HasTag("player") then
+    elseif grand_owner ~= owner and grand_owner and grand_owner:HasTag("player") then
         --in a backpack
         quiplist = STRINGS.TALKINGBIRD.in_container
     elseif owner and owner.components.container then

@@ -165,7 +165,6 @@ function Quagmire_Tappable:Harvest(picker)
         sap.Transform:SetPosition(pos.x, 0.5, pos.z)
 
         if sap ~= nil then
-            local pos = self.inst:GetPosition()
             if picker ~= nil and picker.components.inventory ~= nil then
                 picker.components.inventory:GiveItem(sap, nil, pos)
             else

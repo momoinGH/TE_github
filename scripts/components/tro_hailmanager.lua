@@ -150,12 +150,10 @@ function HailManager:OnUpdate(dt)
     -- 清理无效玩家的发射器
     for player, emitter in pairs(self._emitters) do
         if not player:IsValid() or not player:IsInShipwreckedArea() then
-            self:RemoveEmitter(player)
-            if player:IsValid() then
-                if self.inst.SoundEmitter:PlayingSound("hail") then
-                    self.inst.SoundEmitter:KillSound("hail")
-                end
+            if self.inst.SoundEmitter:PlayingSound("hail") then
+                self.inst.SoundEmitter:KillSound("hail")
             end
+            self:RemoveEmitter(player)
         end
     end
 

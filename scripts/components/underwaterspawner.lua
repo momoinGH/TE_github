@@ -123,7 +123,7 @@ local CRIATURAS                        =
     },
 
     oceanfish_medium_underwater_4 = {
-        prefab = "oceanfish_medium_underwater_1",
+        prefab = "oceanfish_medium_underwater_4",
         schoolmin = 1,
         schoolmax = 1,
         schoolrange = SCHOOL_AREA.LARGE,
@@ -1593,7 +1593,7 @@ return Class(function(self, inst)
 
     --Initialize variables
     for i, v in ipairs(AllPlayers) do
-        ScheduleSpawn(player)
+        ScheduleSpawn(v)
     end
 
     --Register events

@@ -161,17 +161,15 @@ function Hayfever:DoSneezeEffects()
     if itemstodrop > 0 then
         local findItems = self.inst.components.inventory:FindItems(function(item) return not item:HasTag("nosteal") end)
         for i = 1, itemstodrop do
-            for j = 1, itemstodrop do
-                if #findItems > 0 then
-                    local itemnum = math.random(1, #findItems)
-                    local item = findItems[itemnum]
+            if #findItems > 0 then
+                local itemnum = math.random(1, #findItems)
+                local item = findItems[itemnum]
 
-                    table.remove(findItems, itemnum)
+                table.remove(findItems, itemnum)
 
-                    if item then
-                        local direction = Vector3(math.random(1) - 2, 0, math.random(1) - 2)
-                        self.inst.components.inventory:DropItem(item, false, direction:GetNormalized())
-                    end
+                if item then
+                    local direction = Vector3(math.random() * 2 - 1, 0, math.random() * 2 - 1)
+                    self.inst.components.inventory:DropItem(item, false, direction:GetNormalized())
                 end
             end
         end
