@@ -88,30 +88,30 @@ end)
 
 ----------------------------------------------------------------------------------------------------
 -- 检查预制件重复定义的，或者和科雷重名的
-local mod_prefab_files = {}
-local prefab_filepaths = {}
-Hooks.FnDecorator(GLOBAL, "LoadPrefabFile", nil, function(retTab, filename, async_batch_validation, search_asset_first_path)
-    if not search_asset_first_path then --有值表示是mod文件
-        return retTab
-    end
-    if not string.find(search_asset_first_path, modname) then --只检查当前mod
-        return retTab
-    end
-    if mod_prefab_files[filename] then --文件加载过了
-        return retTab
-    end
+-- local mod_prefab_files = {}
+-- local prefab_filepaths = {}
+-- Hooks.FnDecorator(GLOBAL, "LoadPrefabFile", nil, function(retTab, filename, async_batch_validation, search_asset_first_path)
+--     if not search_asset_first_path then --有值表示是mod文件
+--         return retTab
+--     end
+--     if not string.find(search_asset_first_path, modname) then --只检查当前mod
+--         return retTab
+--     end
+--     if mod_prefab_files[filename] then --文件加载过了
+--         return retTab
+--     end
 
-    local ret = retTab[1]
-    for _, prefab in ipairs(ret) do
-        local path = search_asset_first_path .. "/" .. filename
-        if Prefabs[prefab.name] then --仅打印
-            TroErrorHandle("预制件" .. tostring(prefab.name) .. "已经定义过了，文件路径：" .. path .. ", 最早定义文件：" .. tostring(prefab_filepaths[prefab.name]), false)
-        end
-        mod_prefab_files[filename] = true
-        prefab_filepaths[prefab.name] = path
-    end
-    return retTab
-end)
+--     local ret = retTab[1]
+--     for _, prefab in ipairs(ret) do
+--         local path = search_asset_first_path .. "/" .. filename
+--         if Prefabs[prefab.name] then --仅打印
+--             TroErrorHandle("预制件" .. tostring(prefab.name) .. "已经定义过了，文件路径：" .. path .. ", 最早定义文件：" .. tostring(prefab_filepaths[prefab.name]), false)
+--         end
+--         mod_prefab_files[filename] = true
+--         prefab_filepaths[prefab.name] = path
+--     end
+--     return retTab
+-- end)
 
 ----------------------------------------------------------------------------------------------------
 -- 检查ActionHandler的ACTION是否定义

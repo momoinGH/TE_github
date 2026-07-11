@@ -462,3 +462,24 @@ TroAddAction(nil, "SNACKRIFICE", STRINGS.ACTIONS.SNACKRIFICE, function(act)
         return true
     end
 end)
+
+
+
+-- AddAction("GIVE_DISH", "Put", function(act)
+--     if act.target ~= nil and act.target.components.specialstewer then
+--         if act.target.dish == nil and act.invobject.components.specialstewer_dish then
+--             if act.invobject.components.specialstewer_dish:IsDishType(act.target.components.specialstewer.cookertype) then
+--                 act.target:SetDish(act.doer, act.invobject)
+--                 return true
+--             end
+--         end
+--     end
+-- end)
+-- AddComponentAction("USEITEM", "specialstewer_dish", function(inst, doer, target, actions)
+--     if inst:HasTag("quagmire_casseroledish") and target:HasTag("oven") and target:HasTag("specialstewer_dishtaker") then
+--         table.insert(actions, GLOBAL.ACTIONS.GIVE_DISH)
+--     end
+--     if inst:HasTag("quagmire_pot") and target:HasTag("pot_hanger") and target:HasTag("specialstewer_dishtaker") then
+--         table.insert(actions, GLOBAL.ACTIONS.GIVE_DISH)
+--     end
+-- end)

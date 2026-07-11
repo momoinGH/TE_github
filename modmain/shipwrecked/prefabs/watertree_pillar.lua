@@ -42,12 +42,12 @@ local function InitCheck(inst)
         return --只在海难区域的水中木才行
     end
 
-    local old_fn = Hooks.GetEventCallback(inst, "phasechanged", nil, "scripts/prefabs/watertree_pillar.lua")
+    local old_fn = Hooks.GetEventCallback(inst, "phasechanged", TheWorld, "scripts/prefabs/watertree_pillar.lua")
     if old_fn then
         inst:RemoveEventCallback("phasechanged", old_fn)
         inst:ListenForEvent("phasechanged", function(src, phase) OnPhaseChanged(inst, phase) end, TheWorld)
     else
-        print("水中木求上值失败，没有拿到OnPhaseChanged，无法把生成萤火虫换成生成荧光生物。")
+        TroErrorHandle("水中木求上值失败，没有拿到OnPhaseChanged，无法把生成萤火虫换成生成荧光生物。")
     end
 end
 

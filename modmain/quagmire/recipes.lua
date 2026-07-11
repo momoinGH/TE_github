@@ -136,7 +136,7 @@ TroAddRecipe("mermwatchtower", { Ig("boards", 5), Ig("tentaclespots", 1), Ig("sp
 
 local cookers = {
     grill = { "grill", "grill_small" },
-    oven = { "oven" },
+    oven = { "quagmire_oven" },
     quagmire_pot = { "quagmire_pot" },
 }
 local preparedFoods = require("gorge_foods")

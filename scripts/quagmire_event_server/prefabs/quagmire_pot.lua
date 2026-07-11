@@ -43,8 +43,11 @@ return {
         inst.components.container.onopenfn = OnOpen
         inst.components.container.onclosefn = OnClose
 
-        -- inst:AddComponent("quagmire_stewer")
-        -- inst.components.quagmire_stewer.stationname = "pot"
+        -- inst:AddComponent("specialstewer_dish")
+        -- inst.components.specialstewer_dish:SetDishType("quagmire_pot")
+
+        inst:AddComponent("quagmire_stewer")
+        inst.components.quagmire_stewer.stationname = "pot"
 
         inst:ListenForEvent("itemget", OnOpen)
         inst:ListenForEvent("itemlose", OnItemLose)

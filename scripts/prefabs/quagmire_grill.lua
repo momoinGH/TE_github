@@ -262,11 +262,9 @@ local function OnInstall(inst, target)
 end
 
 local function MakeGrill(name, size)
-    local animname = "quagmire_" .. name
-
     local assets =
     {
-        Asset("ANIM", "anim/" .. animname .. ".zip"),
+        Asset("ANIM", "anim/" .. name .. ".zip"),
         Asset("ANIM", "anim/quagmire_pot_fire.zip"),
         Asset("ANIM", "anim/quagmire_ui_pot_1x" .. tostring(size) .. ".zip"),
     }
@@ -290,34 +288,22 @@ local function MakeGrill(name, size)
         inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
 
-        -- inst:AddTag("structure")
-        -- inst:AddTag("readytocook")
-
-        inst.AnimState:SetBank(animname)
-        inst.AnimState:SetBuild(animname)
+        inst.AnimState:SetBank(name)
+        inst.AnimState:SetBuild(name)
         inst.AnimState:PlayAnimation("idle")
         inst.AnimState:SetFinalOffset(-2)
-
-        -- MakeObstaclePhysics(inst, .6, 10)
 
         inst.AnimState:SetFinalOffset(-2)
 
         inst:AddTag("FX")
 
-        -- inst.smoke = CreateSmoke()
-
-
         inst._smoke = net_event(inst.GUID, name .. "._smoke")
-        -- inst._burnt = net_tinybyte(inst.GUID, name.."._burnt", "burntdirty")
         inst._embers = net_tinybyte(inst.GUID, name .. "._embers", "embersdirty")
 
         inst.entity:SetPristine()
 
-        inst.embersfx = CreateEmbers(animname)
+        inst.embersfx = CreateEmbers(name)
         inst.embersfx.entity:SetParent(inst.entity)
-
-        -- inst.embersfx = CreateEmbers(name)
-        -- inst.embersfx.entity:SetParent(inst.entity)
 
         inst.OnRemoveEntity = OnRemoveEntity
 
@@ -335,8 +321,6 @@ local function MakeGrill(name, size)
         inst.onopen = onopen
         inst.onclose = onclose
 
-        -- event_server_data("quagmire", "prefabs/quagmire_grill").master_postinit(inst, name, AddHighlightChildren, OnBurntDirty, OnGrillSmoke, OnEmbersDirty)
-
         return inst
     end
 
@@ -349,8 +333,8 @@ local function MakeGrill(name, size)
 
         MakeInventoryPhysics(inst)
         MakeInventoryFloatable(inst)
-        inst.AnimState:SetBank(animname)
-        inst.AnimState:SetBuild(animname)
+        inst.AnimState:SetBank(name)
+        inst.AnimState:SetBuild(name)
         inst.AnimState:PlayAnimation("item")
 
         inst.entity:SetPristine()
@@ -359,15 +343,13 @@ local function MakeGrill(name, size)
             return inst
         end
 
-        inst:AddComponent("installable")
-        inst.components.installable:SetUp(name, "specialstewer")
+        inst:AddComponent("quagmire_installable")
+        inst.components.quagmire_installable:SetPrefab(name)
 
         inst:AddComponent("inspectable")
 
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.imagename = animname .. "_item"
-
-        -- event_server_data("quagmire", "prefabs/quagmire_grill").master_postinit_item(inst, name)
+        inst.components.inventoryitem.imagename = name .. "_item"
 
         return inst
     end
@@ -376,6 +358,6 @@ local function MakeGrill(name, size)
     table.insert(ret, Prefab(name .. "_item", itemfn, assets, prefabs_item))
 end
 
-MakeGrill("grill", 4)
-MakeGrill("grill_small", 3)
+MakeGrill("quagmire_grill", 4)
+MakeGrill("quagmire_grill_small", 3)
 return unpack(ret)

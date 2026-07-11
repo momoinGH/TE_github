@@ -207,8 +207,8 @@ local function itemfn()
 
     inst:AddComponent("inspectable")
 
-    inst:AddComponent("installable")
-    inst.components.installable:SetUp("pot_hanger", "specialstewer")
+    inst:AddComponent("quagmire_installable")
+    inst.components.quagmire_installable:SetPrefab("quagmire_pot_hanger")
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "quagmire_pot_hanger_item"
@@ -218,5 +218,5 @@ local function itemfn()
     return inst
 end
 
-return Prefab("pot_hanger", fn, assets, prefabs),
-    Prefab("pot_hanger_item", itemfn, assets, prefabs_item)
+return Prefab("quagmire_pot_hanger", fn, assets, prefabs),
+    Prefab("quagmire_pot_hanger_item", itemfn, assets, prefabs_item)

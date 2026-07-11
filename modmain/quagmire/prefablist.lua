@@ -9,11 +9,9 @@ PrefabFiles =
     "quagmire_sap",                   --汁液
     "quagmire_syrup",                 --糖浆
     "quagmire_casseroledish",         --大法国砂锅
-    "quagmire_crates",                --厨具套装
     "quagmire_grill",                 --大烤架
     "quagmire_oven",                  --烤箱
     "quagmire_plates",                --银盘
-    "quagmire_pot",                   --大锅
     "quagmire_pot_hanger",            --挂锅装置
     "quagmire_salt_rack",             --盐架
     "quagmire_sapbucket",             --树液采集工具包
@@ -56,5 +54,13 @@ PrefabFiles =
     "quagmire_plants_planted",      --植物
     "quagmire_fish",                --鱼
     "pebblecrabspawner",
-    "chickenhouse"                  --鸡舍
+    "chickenhouse",                 --鸡舍
 }
+
+-- 把暴食依赖的预制件文件加到这里面，暴食预制件文件如果不提前声明，生成的时候会丢失动画，这里只把固定前缀的文件加进来，别的可手动写一下
+require("prefablist")
+for _, v in ipairs(PREFABFILES) do
+    if string.starts(v, "quagmire") then
+        table.insert(PrefabFiles, v)
+    end
+end

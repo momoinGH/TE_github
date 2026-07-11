@@ -30,6 +30,7 @@ local function SetStage(inst, stage)
 	stage = stage or DEFAULT_TREE_DEF
 	inst.stage = stage
 	inst.AnimState:SetBank(TREE_DEFS[stage].anim_file)
+	inst.AnimState:PlayAnimation("sway1_loop", true)
 	inst.components.lootdropper:SetLoot(TREE_DEFS[stage].loot)
 end
 

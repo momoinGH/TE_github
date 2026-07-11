@@ -41,17 +41,17 @@ ACTIONS.RUMMAGE.extra_arrive_dist = function(doer, dest)
 end
 
 
-Hooks.FnDecorator(ACTIONS.INSTALL, "fn", function(act)
-    if act.invobject ~= nil and act.target ~= nil then
-        if act.invobject.components.installable ~= nil
-            and act.target.components.installations ~= nil
-            and act.target.components.installations:CanInstall(act.invobject.components.installable.prefab)
-            and act.invobject.components.installable:DoInstall(act.target) then
-            act.invobject:Remove()
-            return { true }, true
-        end
-    end
-end)
+-- Hooks.FnDecorator(ACTIONS.INSTALL, "fn", function(act)
+--     if act.invobject ~= nil and act.target ~= nil then
+--         if act.invobject.components.quagmire_installable ~= nil
+--             and act.target.components.quagmire_installations ~= nil
+--             and act.target.components.quagmire_installations:CanInstall(act.invobject.components.quagmire_installable.prefab)
+--             and act.invobject.components.quagmire_installable:DoInstall(act.target) then
+--             act.invobject:Remove()
+--             return { true }, true
+--         end
+--     end
+-- end)
 
 
 -- 添加猪镇和暴食地皮挖起的特殊掉落

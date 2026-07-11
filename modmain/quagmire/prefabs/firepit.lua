@@ -2,8 +2,8 @@ local installables =
 {
     "grill",
     "grill_small",
-    "pot_hanger",
-    "oven",
+    "quagmire_pot_hanger",
+    "quagmire_oven",
 }
 
 local function CanInstall(prefab)
@@ -50,14 +50,22 @@ AddPrefabPostInit("firepit", function(inst)
         return
     end
 
-    inst:AddComponent("installations")
-    inst.components.installations:SetUp(CanInstall, OnInstall)
+    inst:AddComponent("quagmire_installations")
+    inst.components.quagmire_installations.oninstallfn = function(inst, station)
+        local stationprefab = station.prefab
+        print("检查", stationprefab)
+        if stationprefab == "quagmire_grill" or stationprefab == "quagmire_grill_small" then
+            inst.components.container.canbeopened = true
+            inst.components.container:WidgetSetup(stationprefab)
+        end
 
-    inst:AddComponent("shelf")
-    inst:AddComponent("specialstewer")
-    inst:AddComponent("stewer")
+        inst.prefaboverride:set(station)
+        inst.radius:set(140)
+
+        OnPrefabOverrideDirty(inst)
+        OnRadiusDirty(inst)
+    end
 
     inst:AddComponent("container")
-    -- inst.components.container:WidgetSetup("firepit") --不打开就不需要注册
     inst.components.container.canbeopened = false
 end)

@@ -47,8 +47,8 @@ local function MakePot(suffix, numslots)
         inst:AddComponent("container")
         inst.components.container:WidgetSetup(name)
 
-        inst:AddComponent("specialstewer_dish")
-        inst.components.specialstewer_dish:SetDishType("oven")
+        -- inst:AddComponent("specialstewer_dish")
+        -- inst.components.specialstewer_dish:SetDishType("quagmire_oven")
 
         return inst
     end

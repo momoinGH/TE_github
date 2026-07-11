@@ -40,12 +40,11 @@ AddComponentAction("INVENTORY", "ironmachine", function(inst, doer, actions)
     end
 end)
 
-AddComponentAction("USEITEM", "installable", function(inst, doer, target, actions)
-    if target:HasTag("installations") and not target:HasTag("installations_occupied") then
-        table.insert(actions, ACTIONS.INSTALL)
-    end
-end
-)
+-- AddComponentAction("USEITEM", "quagmire_installable", function(inst, doer, target, actions)
+--     if target:HasTag("installations") and not target:HasTag("installations_occupied") then
+--         table.insert(actions, ACTIONS.INSTALL)
+--     end
+-- end)
 
 AddComponentAction("SCENE", "tro_portablestructure", function(inst, doer, actions, right)
     if right

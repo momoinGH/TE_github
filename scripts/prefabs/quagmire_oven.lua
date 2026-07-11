@@ -212,7 +212,7 @@ local function backfn()
 end
 
 local function OnInstall(inst, target)
-    local back = SpawnPrefab("oven_back")
+    local back = SpawnPrefab("quagmire_oven_back")
     back.entity:SetParent(inst.entity)
     back.Transform:SetPosition(0, -0.1, 0)
     inst.entity:SetParent(target.entity)
@@ -226,7 +226,7 @@ local function OnInstall(inst, target)
     target.components.specialstewer.oncompletefn = OnCompleted
     target.components.specialstewer.oncookingstepfn = OnCookingStep
     target.components.specialstewer.containerfn = GetContainer
-    target.components.specialstewer.cookertype = "oven"
+    target.components.specialstewer.cookertype = "quagmire_oven"
     target.components.specialstewer:StartWorking()
 
     -- target:AddComponent("shelf")
@@ -297,8 +297,8 @@ local function itemfn()
         return inst
     end
 
-    inst:AddComponent("installable")
-    inst.components.installable:SetUp("oven", "specialstewer")
+    inst:AddComponent("quagmire_installable")
+    inst.components.quagmire_installable:SetPrefab("quagmire_oven")
 
     inst:AddComponent("inspectable")
 
@@ -310,6 +310,6 @@ local function itemfn()
     return inst
 end
 
-return Prefab("oven", fn, assets, prefabs),
-    Prefab("oven_back", backfn, assets_parts),
-    Prefab("oven_item", itemfn, assets_parts, prefabs_item)
+return Prefab("quagmire_oven", fn, assets, prefabs),
+    Prefab("quagmire_oven_back", backfn, assets_parts),
+    Prefab("quagmire_oven_item", itemfn, assets_parts, prefabs_item)
