@@ -5,23 +5,25 @@ local StaticLayout = require("map/static_layout")
 -- Reserve extra ocean around the 50x50 event layout so other regions cannot touch it.
 local QUAGMIRE_PADDING = 12
 local quagmire_layout = Layouts["Quagmire_Kitchen"]
-local padded_ground = {}
-local padded_size = #quagmire_layout.ground + QUAGMIRE_PADDING * 2
+if quagmire_layout then
+    local padded_ground = {}
+    local padded_size = #quagmire_layout.ground + QUAGMIRE_PADDING * 2
 
-for y = 1, padded_size do
-    local row = {}
-    for x = 1, padded_size do
-        local source_y = y - QUAGMIRE_PADDING
-        local source_x = x - QUAGMIRE_PADDING
-        row[x] = quagmire_layout.ground[source_y] ~= nil
-            and quagmire_layout.ground[source_y][source_x]
-            or 0
+    for y = 1, padded_size do
+        local row = {}
+        for x = 1, padded_size do
+            local source_y = y - QUAGMIRE_PADDING
+            local source_x = x - QUAGMIRE_PADDING
+            row[x] = quagmire_layout.ground[source_y] ~= nil
+                and quagmire_layout.ground[source_y][source_x]
+                or 0
+        end
+        padded_ground[y] = row
     end
-    padded_ground[y] = row
+
+    quagmire_layout.ground = padded_ground
 end
 
-quagmire_layout.ground = padded_ground
--- quagmire_layout.layout.spawnpoint_master = nil
 
 ----------------------------------------------------------------------------------------------------
 

@@ -18,8 +18,6 @@ AddLevelPreInitAny(function(level)
         return
     end
 
-    table.insert(level.tasks, "WindyPlainsisland")
-
     for _, t in ipairs(tasks) do
         table.insert(level.tasks, t)
     end

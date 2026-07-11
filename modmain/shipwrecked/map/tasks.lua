@@ -211,7 +211,6 @@ AddTask("JungleBeachy", {
     },
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "BeachSand",
-    "BeachUnkept",
     colour = { 1, .5, .5, .2 },
 })
 AddTask("JungleMonkey", {
@@ -251,7 +250,6 @@ AddTask("MoonRocky", {
     },
     room_bg = WORLD_TILES.BEACH,
     background_room = "MagmaGold",
-    "MagmaHomeBoon",
     colour = { 1, .5, .5, .2 },
 })
 AddTask("TigerSharky", {

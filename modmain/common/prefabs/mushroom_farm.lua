@@ -15,6 +15,7 @@ local mushroom_farm_seeds = {
 }
 
 local function DoMushroomOverrideSymbol(inst, productname)
+    local build
     if productname == "foliage" then
         build = TheWorld:HasTag("cave") and "mushroom_farm_foliage2_build" or "mushroom_farm_foliage1_build"
     else

@@ -50,12 +50,10 @@ local function tile_redirect(tbl)
                     TileGroupManager:AddValidTile(TileGroups.TAOceanTiles, v[1])
                 end
             elseif _blue then
-                for _, v2 in pairs(GroundTiles.ground) do
-                    for origin, override in pairs(tbl) do
-                        if v2[1] == WORLD_TILES[origin] then
-                            v2[2].colors = tro_tiledefs[override].ground_tile_def.colors
-                            break
-                        end
+                for origin, override in pairs(tbl) do
+                    if v[1] == WORLD_TILES[origin] then
+                        v[2].colors = tro_tiledefs[override].ground_tile_def.colors
+                        break
                     end
                 end
             end

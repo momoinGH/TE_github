@@ -3,7 +3,6 @@ local assets =
     Asset("ANIM", "anim/swap_lucy_axe.zip"),
     Asset("ANIM", "anim/lavaarena_lucy.zip"),
     Asset("INV_IMAGE", "lucy"),
-    Asset("ANIM", "anim/lavaarena_lucy.zip"),
 }
 
 local function OnLaunch(inst, attacker, targetPos)

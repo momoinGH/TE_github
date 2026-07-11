@@ -182,7 +182,7 @@ end)
 local last_teleport_node_id = nil
 -- 传送到指定标签的区域，可以用来判断有没有生成某个区域
 GLOBAL.c_teleportareahastag = function(tag)
-    node_id = nil
+    local node_id = nil
     for id, node in pairs(TheWorld.topology.nodes) do
         if node.tags and table.contains(node.tags, tag) then
             node_id = id

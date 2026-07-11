@@ -42,9 +42,6 @@ local filters = {
     end,
 }
 
-local filters_s = {}
-setmetatable(filters, filters_s)
-
 --[[ animations[animname] =
 table{[1]FrameAction:function(self, frame),
       [2]TotalFrame:number,
@@ -90,7 +87,7 @@ function AnimState:PlayExtendAnim(animname)
     inst._animTask = inst:StartThread(function()
         for frame = 0, animations[animname][2] do
             animations[animname][1](self, frame)
-            Sleep(FunctionOrValue(animations[animname][3], frame) or FRAMES or FRAMES)
+            Sleep(FunctionOrValue(animations[animname][3], frame) or FRAMES)
         end
         self:SetScale(1, 1)
         inst:Remove()

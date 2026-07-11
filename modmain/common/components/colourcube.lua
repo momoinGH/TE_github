@@ -1,4 +1,4 @@
-local CUBES = table.invert({ "default", "shipwrecked", "volcano", "hamlet" })
+local CUBES = table.invert({ "default", "shipwrecked", "volcano", "hamlet", "aporkalypse" })
 
 
 local dormant = resolvefilepath("images/colour_cubes/sw_volcano_cc.tex")
@@ -107,8 +107,8 @@ AddComponentPostInit("colourcube", function(self)
         end
 
         if _activatedplayer:TroIsAporkalypse() then
-            if _showencc ~= CUBES.aporka then
-                _showencc = CUBES.aporka
+            if _showencc ~= CUBES.aporkalypse then
+                _showencc = CUBES.aporkalypse
                 Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.aporkalypse)
             end
         elseif _activatedplayer:IsInShipwreckedArea() then
@@ -125,7 +125,7 @@ AddComponentPostInit("colourcube", function(self)
             end
         elseif _activatedplayer:IsInVolcanoArea() then
             --print("colourcube volcano")
-            if _showencc ~= CUBES.vlocano then
+            if _showencc ~= CUBES.volcano then
                 _showencc = CUBES.volcano
                 Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.volcano)
             end

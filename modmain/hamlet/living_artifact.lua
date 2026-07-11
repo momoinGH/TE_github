@@ -314,13 +314,13 @@ modimport "modmain/common/stategraphs/AddIronLordStates_client"
 
 local NEW_ACTIONS =
 {
-    { "CHOP", "work" },
-    { "HACK", "work" },
-    { "MINE", "work" },
-    { "DIG", "work" },
+    { "CHOP",   "work" },
+    { "HACK",   "work" },
+    { "MINE",   "work" },
+    { "DIG",    "work" },
     { "HAMMER", "work" },
     { "ATTACK", "punch" },
-    { "MOUNT", "" },
+    { "MOUNT",  "" },
 }
 
 local function ChangeActionHandler(inst, act, fn)
@@ -360,7 +360,9 @@ end
 local function death_fn(inst)
     inst:AddTag("preparetodie")
     if inst.sg:HasStateTag("artifact_busy") then return end
-    inst.artifact.components.ironmachine:TurnOff()
+    if inst.artifact then
+        inst.artifact.components.ironmachine:TurnOff()
+    end
 end
 
 local function powerup_wurt_fn(inst, data, old_fn)

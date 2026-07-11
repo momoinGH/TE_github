@@ -33,9 +33,7 @@ local function OnTransplantfnAfter(retTab, inst)
         or tiletype == WORLD_TILES.DEEPRAINFOREST then
         local newgrass = SpawnPrefab("grass_tall")
         newgrass.Transform:SetPosition(x, y, z)
-        if newgrass:HasTag("machetecut") then
-            inst:RemoveTag("machetecut")
-        end
+        newgrass:RemoveTag("machetecut")
         newgrass.components.workable:SetWorkAction(ACTIONS.DIG)
         newgrass.components.workable:SetWorkLeft(1)
         newgrass.components.timer:StartTimer("spawndelay", 60 * 8 * 4)

@@ -2,7 +2,6 @@ local assets =
 {
     Asset("ANIM", "anim/lavaarena_firebomb.zip"),
     Asset("ANIM", "anim/swap_lavaarena_firebomb.zip"),
-    Asset("ANIM", "anim/lavaarena_firebomb.zip"),
     Asset("ANIM", "anim/sparks_molotov.zip"),
 }
 
@@ -19,6 +18,10 @@ local function ClearCharge(inst)
 end;
 
 local function ChangeLevel(inst, level)
+    if not inst.components.inventoryitem.owner then
+        return
+    end
+
     if not inst.charge_fx then
         inst.charge_fx = SpawnPrefab("lavaarena_firebomb_sparks")
         inst.charge_fx.entity:AddFollower()

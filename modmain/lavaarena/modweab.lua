@@ -69,7 +69,7 @@ AddComponentPostInit("combat", function(self)
         end
     end;
 
-    _oldGetAttackRange = self.GetAttackRange;
+    local _oldGetAttackRange = self.GetAttackRange;
     function self:GetAttackRange()
         local z = self:GetWeapon()
         if z and z.components.weapon:CanAltAttack() then
@@ -80,7 +80,7 @@ AddComponentPostInit("combat", function(self)
         end
     end;
 
-    _oldGetHitRange = self.GetHitRange;
+    local _oldGetHitRange = self.GetHitRange;
     function self:GetHitRange()
         local z = self:GetWeapon()
         if z and z.components.weapon:CanAltAttack() then
@@ -239,7 +239,7 @@ AddComponentPostInit("combat", function(self)
         return I, J
     end;
 
-    _oldDoAttack = self.DoAttack;
+    local _oldDoAttack = self.DoAttack;
     function self:DoAttack(T, z, U, x, V)
         local I, J = GetBuffMults(false, self.inst, T or self.target, z, x)
         local W = (V or 1) * J * I;
@@ -333,7 +333,9 @@ AddComponentPostInit("weapon", function(self)
             return self.altcondition ~= nil and
                 self.altcondition(self.inst) or true
         end
-    end; _oldCanRangedAttack = self.CanRangedAttack;
+    end;
+
+    local _oldCanRangedAttack = self.CanRangedAttack;
     function self:CanRangedAttack() return self:CanAltAttack() and self.altprojectile or _oldCanRangedAttack(self) end;
 end)
 
@@ -461,7 +463,7 @@ AddClassPostConstruct("components/inventoryitem_replica", function(self)
         end
     end;
 
-    _oldAttackRange = self.AttackRange;
+    local _oldAttackRange = self.AttackRange;
     function self:AttackRange()
         return self:CanAltAttack() and self:AltAttackRange() or _oldAttackRange(self)
     end

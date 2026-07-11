@@ -72,7 +72,7 @@ AddRoom("OceanSwell_SEA", {
             ["CrabKing"] = 1,
             ["BullkelpFarmSmall"] = 6,
             ["BullkelpFarmMedium"] = 3,
-            ["lilypadnovo"] = 2 * GetModConfigData("lilypad") and 1 or 0,
+            ["lilypadnovo"] = 2 * (GetModConfigData("lilypad") and 1 or 0),
             ["icebergs"] = 8,
             ["oceangrotolunar"] = 1,
             ["oceanrocks"] = 4,
@@ -161,11 +161,6 @@ AddLevelPreInitAny(function(level)
     level.optionaltasks = {}
     level.valid_start_tasks = nil
     level.set_pieces = {}
-
-
-    if level.ocean_population == nil then
-        level.ocean_population = {}
-    end
 
     level.ocean_population = {
         "OceanCoastalShore_SEA",

@@ -1,3 +1,4 @@
+-- 区域刷怪逻辑
 AddComponentPostInit("hounded", function(self, inst)
     local _spawndata = Hooks.GetUpValue(self.SetSpawnData, "_spawndata")
     local _SummonSpawn = Hooks.GetUpValue(self.SummonSpawn, "SummonSpawn")
@@ -10,7 +11,7 @@ AddComponentPostInit("hounded", function(self, inst)
 
     local function SummonSpawn(pt, upgrade, radius_override)
         local x, y, z = pt:Get()
-        local spawndat = deepcopy(_spawndata)
+        -- local spawndat = deepcopy(_spawndata)
 
         if TheWorld:HasTag("cave") then
             _spawndata.base_prefab = "worm"
@@ -41,7 +42,7 @@ AddComponentPostInit("hounded", function(self, inst)
         end
 
         Hooks.SetUpvalue(_GetSpawnPoint, "SPAWN_DIST", _SPAWN_DIST)
-        Hooks.SetUpvalue(self.SetSpawnData, "_spawndata", spawndat)
+        -- Hooks.SetUpvalue(self.SetSpawnData, "_spawndata", spawndat)
         return _SummonSpawn(pt, upgrade, radius_override)
     end
 

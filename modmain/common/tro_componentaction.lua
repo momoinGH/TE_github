@@ -202,7 +202,7 @@ local function NoEquipActivator(bufs, self, pos, target, right)
     then
         local actions = { ACTIONS[UNARMED_ACT .. c.actiontypes["UNARMED"].priority] }
 
-        for _, buf in ipairs(self:SortActionList(actions, pos, useitem)) do
+        for _, buf in ipairs(self:SortActionList(actions, pos)) do
             table.insert(bufs, buf)
         end
         table.sort(bufs, OrderByPriority) --顺便和原来的一起排个序

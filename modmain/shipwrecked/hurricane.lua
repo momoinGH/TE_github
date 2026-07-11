@@ -147,6 +147,7 @@ AddPrefabPostInit("grass", function(inst)
     MakePickableBlowInWindGust(inst, 0.2, 0.01)
 end)
 AddPrefabPostInit("sapling", function(inst)
+    if not TheWorld.ismastersim then return end
     MakePickableBlowInWindGust(inst, 0.2, 0.1, "sway")
 end)
 

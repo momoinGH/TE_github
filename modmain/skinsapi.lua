@@ -277,8 +277,6 @@ end
 
 -- 皮肤权限hook--help 为什么 要用metatable
 
-local timelastest = TheSim:GetRealTime()
-
 local mt = getmetatable(TheInventory)
 local oldTheInventoryCheckOwnership = TheInventory.CheckOwnership
 mt.__index.CheckOwnership = function(i, name, ...)
@@ -452,7 +450,7 @@ AddClassPostConstruct("widgets/recipepopup", function(self)
 end)
 
 local skinselector = require("widgets/redux/craftingmenu_skinselector")
-function hookskinselector(self)
+local function hookskinselector(self)
     local oldfn = self.GetSkinOptions
     function self.GetSkinOptions(s, ...)
         local ret = oldfn(s, ...)

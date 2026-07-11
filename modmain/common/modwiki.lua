@@ -251,7 +251,7 @@ WIKI_DATA.aloe = {
     tex = "aloe.tex",
     bank = "aloe",
     build = "aloe",
-    anim = "ldle",
+    anim = "idle",
     foodtype = "VEGGIE",
 }
 WIKI_DATA.ancient_remnant = {

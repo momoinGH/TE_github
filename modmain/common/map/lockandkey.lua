@@ -1,6 +1,6 @@
 require("map/lockandkey")
 
-ARRAY_NEW =
+local ARRAY_NEW =
 {
     "JUNGLE_DEPTH_1",
     "JUNGLE_DEPTH_2",
@@ -54,7 +54,7 @@ local function AddSimpleKeyLock(name)
     table.insert(KEYS_ARRAY, name)
     KEYS[name] = #KEYS_ARRAY
     table.insert(LOCKS_ARRAY, name)
-    LOCKS[name] = #KEYS_ARRAY
+    LOCKS[name] = #LOCKS_ARRAY
     LOCKS_KEYS[LOCKS[name]] = { KEYS[name] } --解锁这个只需要name钥匙
 end
 

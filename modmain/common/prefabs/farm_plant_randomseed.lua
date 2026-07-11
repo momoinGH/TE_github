@@ -15,7 +15,7 @@ local function pickfarmplant()
             weights[k] = v.seed_weight * ((PLANT_DEFS[k] and PLANT_DEFS[k].good_seasons[season]) and season_mod or 1)
         end
 
-        for k, _ in ipairs(NOTINCLUDE) do
+        for k, _ in pairs(NOTINCLUDE) do
             weights[k] = 0
         end
 

@@ -10,6 +10,7 @@ local TileRanges =
     NOISE = "NOISE",
     OCEAN = "OCEAN",
     IMPASSABLE = "IMPASSABLE",
+    TRO_OCEAN = "TRO_OCEAN",
 }
 
 local WAVETINTS =

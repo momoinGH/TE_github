@@ -115,7 +115,7 @@ function _G.TroGetEquippedItem(inst, eslot)
     if inst.components.inventory then
         return inst.components.inventory:GetEquippedItem(eslot)
     end
-    return inst.replilca.inventory and inst.replilca.inventory:GetEquippedItem(eslot) or nil
+    return inst.replica.inventory and inst.replica.inventory:GetEquippedItem(eslot) or nil
 end
 
 -- 是否在哈姆雷特雾气中
@@ -140,7 +140,7 @@ function _G.TroCanResistHamletFog(player)
 end
 
 -- 伤害类型
-DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }
+_G.DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }
 
 
 

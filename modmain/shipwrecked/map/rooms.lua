@@ -294,7 +294,7 @@ AddRoom("BG_Magma", {
             flint = 0.5,
             rock1 = 0.2,
             rock2 = 1,
-            rocks = 25,
+            rocks = 0.25,
             tallbirdnest = 0.08,
             sapling = 1.5,
             spiderden = .1,
@@ -1947,7 +1947,6 @@ AddRoom("JungleClearing", {
         {
             fireflies = 0.2,
             jungletree = 1,
-            rock1 = 0.03,
             rock1 = 0.03,
             primeapebarrel = 0.1,
             flint = 0.03,

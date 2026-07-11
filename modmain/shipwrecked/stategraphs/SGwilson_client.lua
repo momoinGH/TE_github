@@ -12,13 +12,12 @@ local states = {
         tags = { "doing", "busy", "canrotate" },
 
         onenter = function(inst, data)
-            local act
             inst.sg.statemem.action = inst:GetBufferedAction()
             local buffaction = inst:GetBufferedAction()
             if buffaction ~= nil and buffaction.pos ~= nil then
-                act = buffaction:GetActionPoint()
+                local act = buffaction:GetActionPoint()
+                inst:ForceFacePoint(act.x, act.y, act.z)
             end
-            inst:ForceFacePoint(act.x, act.y, act.z)
             inst.components.playercontroller:Enable(false)
             inst.AnimState:PlayAnimation("telescope", false)
             inst.AnimState:PushAnimation("telescope_pst", false)
@@ -62,7 +61,7 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-AddStategraphPostInit("wilson", function(sg)
+AddStategraphPostInit("wilson_client", function(sg)
     --望远镜
     Hooks.FnDecorator(sg.actionhandlers[ACTIONS.CASTSPELL], "deststate", function(inst)
         local item = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)

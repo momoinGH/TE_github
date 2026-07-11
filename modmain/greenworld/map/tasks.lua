@@ -3,10 +3,10 @@ AddTask("GREENSWAMP_TASK_FOREST", {
     keys_given = { KEYS.TIER4 },
     room_choices =
     {
-        ["SnakesGreenSwamp"] = math.random(1),
-        ["SpidersGreenSwamp"] = math.random(1),
-        ["ForestGreenSwamp"] = math.random(1),
-        ["WillageGreenSwamp"] = math.random(1),
+        ["SnakesGreenSwamp"] = 1,
+        ["SpidersGreenSwamp"] = 1,
+        ["ForestGreenSwamp"] = 1,
+        ["WillageGreenSwamp"] = 1,
         ["WatcherGreenSwamp"] = 1,
     },
     entrance_room = "EntranceGreenSwamp",
@@ -21,10 +21,10 @@ AddTask("GREENSWAMP_TASK_FOREST_ISLAND", {
     region_id = "greenworld",
     room_choices =
     {
-        ["SnakesGreenSwamp"] = math.random(1),
-        ["SpidersGreenSwamp"] = math.random(1),
-        ["ForestGreenSwamp"] = math.random(1),
-        ["WillageGreenSwamp"] = math.random(1),
+        ["SnakesGreenSwamp"] = 1,
+        ["SpidersGreenSwamp"] = 1,
+        ["ForestGreenSwamp"] = 1,
+        ["WillageGreenSwamp"] = 1,
         ["WatcherGreenSwamp"] = 1,
         ["EntranceGreenSwamp"] = 1,
     },

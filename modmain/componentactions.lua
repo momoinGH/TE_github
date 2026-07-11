@@ -3,7 +3,7 @@ local function IsHold(doer, target)
 end
 
 local function IsRiding(doer)
-    return doer.replica.rider:IsRiding()
+    return doer.replica.rider and doer.replica.rider:IsRiding()
 end
 
 AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, actions, right)
@@ -103,14 +103,14 @@ AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
 end)
 
 AddComponentAction("POINT", "gasser", function(inst, doer, pos, actions, right)
-    if right and not doer.replica.rider:IsRiding() then
+    if right and not IsRiding(doer) then
         --喷洒杀毒剂
         table.insert(actions, ACTIONS.GAS)
     end
 end)
 
 AddComponentAction("EQUIPPED", "gasser", function(inst, doer, target, actions, right)
-    if right and not (doer.replica.rider:IsRiding() or doer:HasTag("bonked")) then
+    if right and not (IsRiding(doer) or doer:HasTag("bonked")) then
         --喷洒杀毒剂
         table.insert(actions, ACTIONS.GAS)
     end

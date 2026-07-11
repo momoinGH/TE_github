@@ -26,10 +26,16 @@ local function MakeWeapon(inst)
     inst.components.inventory:Equip(inst.weapon)
 end
 
+local function retargetfn(inst)
+    return FindEntity(inst, 16, function(guy)
+        return inst.components.combat:CanAttack(guy)
+    end)
+end
+
 local function master_postinit(inst)
     inst.voumorrer = 0
 
-    inst:SetStateGraph("SGtfwp_elemetal")
+    inst:SetStateGraph("SGtfwp_elemental")
     inst:SetBrain(brain)
 
     inst:AddComponent("health")
@@ -39,7 +45,7 @@ local function master_postinit(inst)
     inst.components.combat:SetDefaultDamage(25)
     inst.components.combat:SetAttackPeriod(TFWP_ELEMENTAL.ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(3, retargetfn)
-    inst.components.combat:SetKeepTargetFunction(KeepTarget)
+    -- inst.components.combat:SetKeepTargetFunction(KeepTarget)
     inst.components.combat:SetRange(TFWP_ELEMENTAL.RANGE * 1.3)
 
     inst:AddComponent("inspectable")

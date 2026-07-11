@@ -20,7 +20,7 @@ Hooks.FnDecorator(ACTIONS.MANUALEXTINGUISH, "fn", function(act)
             act.target.components.burnable:Extinguish()
             return { true }, true
         end
-    elseif act.target.components.sentientball then
+    elseif act.target.components.sentientball and act.target.components.burnable then
         act.target.components.burnable:Extinguish()
         -- damage player?
         return { true }, true
