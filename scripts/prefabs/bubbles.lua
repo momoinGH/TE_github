@@ -30,7 +30,7 @@ local function fx()
     inst.persists = false
 
     inst:DoTaskInTime(4, inst.Remove)
-    --    inst:ListenForEvent("animover", inst:Remove())
+    --    inst:ListenForEvent("animover", inst.Remove)
 
     return inst
 end
@@ -53,7 +53,7 @@ local function fx_small()
     inst.persists = false
 
     inst:DoTaskInTime(4, inst.Remove)
-    --    inst:ListenForEvent("animover", inst:Remove())
+    --    inst:ListenForEvent("animover", inst.Remove)
 
     return inst
 end
@@ -68,7 +68,7 @@ local function onfloated(inst)
     inst.AnimState:PlayAnimation("bubble_float")
     inst.stopfloating(inst)
     inst:DoTaskInTime(4, inst.Remove)
-    --    inst:ListenForEvent("animover", inst:Remove())
+    --    inst:ListenForEvent("animover", inst.Remove)
 end
 
 local function startfloating(inst)
@@ -175,8 +175,7 @@ local function pack()
         end
     end)
 
-    inst:DoTaskInTime(0.5, inst:Remove())
-
+    inst:DoTaskInTime(0.5, inst.Remove)
     return inst
 end
 

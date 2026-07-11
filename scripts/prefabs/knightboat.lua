@@ -88,7 +88,7 @@ local function fn()
     inst.AnimState:PlayAnimation("idle_loop")
 
 
-    inst:AddTag("moster")
+    inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("chess")
     inst:AddTag("knight")

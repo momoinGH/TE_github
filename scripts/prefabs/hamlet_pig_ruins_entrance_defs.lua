@@ -286,7 +286,7 @@ local function mazemaker(dungeondef)
         else
             local roomtypes = { "grownover", "storeroom", "smalltreasure", "snakes!", "speartraps!", "darts!" } -- lightfires -- critters
             -- if more than one exit, add the doortrap to the potential list
-            if builder:GetRoomExitCount(idx) > 1 and not room.sercretroom then
+            if builder:GetRoomExitCount(idx) > 1 and not room.secretroom then
                 table.insert(roomtypes, "doortrap")
                 table.insert(roomtypes, "doortrap")
             end
@@ -476,7 +476,7 @@ local function mazemaker(dungeondef)
                 for i = 0, 3 do
                     for t = 0, 3 do
                         local x = -depth / 2 + (depth / 4 * i)
-                        local z = -width / 2 + (width / 4 * i)
+                        local z = -width / 2 + (width / 4 * t)
                         if math.random() < 0.6 then
                             builder:AddRoomProp(idx, { name = "pig_ruins_light_beam", x_offset = x, z_offset = z })
                         end
@@ -540,7 +540,6 @@ local function mazemaker(dungeondef)
                 -- 雕像
                 local setups = { "darts n relics", "spears n relics", "relics n dust" }
                 local random = math.random(1, #setups)
-                random = 1
                 if setups[random] == "relics n dust" then
                     addgoldstatue(builder, idx, -depth / 3, -width / 3)
                     addgoldstatue(builder, idx, depth / 3, width / 3)
@@ -916,7 +915,7 @@ local function mazemaker(dungeondef)
             end
         end
         local hangingroots = math.random()
-        if hangingroots < 0.3 and not roomtype == "lightfires" then
+        if hangingroots < 0.3 and roomtype ~= "lightfires" then
             local function jostle()
                 return math.random() - 0.5
             end
@@ -928,7 +927,7 @@ local function mazemaker(dungeondef)
                 return test
             end
             local roots_left = {
-                { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = -width / 6 - width / 12 + jostle(), flip = flip() },
+                { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = -width / 6 - width / 12 + jostle(),     flip = flip() },
                 { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = -width / 6 - width / 12 * 2 + jostle(), flip = flip() },
                 { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = -width / 6 - width / 12 * 3 + jostle(), flip = flip() }
             }
@@ -941,7 +940,7 @@ local function mazemaker(dungeondef)
             if northexitopen then
                 local roots_center = {
                     { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = 0 + width / 12 + jostle(), flip = flip() },
-                    { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = 0 + jostle(), flip = flip() },
+                    { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = 0 + jostle(),              flip = flip() },
                     { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = 0 - width / 12 + jostle(), flip = flip() }
                 }
                 local num = math.random(#roots_center)
@@ -952,7 +951,7 @@ local function mazemaker(dungeondef)
                 end
             end
             local roots_right = {
-                { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = width / 6 + width / 12 + jostle(), flip = flip() },
+                { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = width / 6 + width / 12 + jostle(),     flip = flip() },
                 { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = width / 6 + width / 12 * 2 + jostle(), flip = flip() },
                 { name = "deco_ruins_roots" .. math.random(3), x_offset = -depth / 2, z_offset = width / 6 + width / 12 * 3 + jostle(), flip = flip() }
             }

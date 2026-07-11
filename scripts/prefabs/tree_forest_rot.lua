@@ -465,9 +465,8 @@ local function chop_down_tree_leif(inst, chopper)
 									leif.Transform:SetScale(scale, scale, scale)
 									leif.components.combat:SuggestTarget(chopper)
 									leif.sg:GoToState("spawn")
-									target:Remove()
-
 									leif.Transform:SetPosition(target.Transform:GetWorldPosition())
+									target:Remove()
 								end
 							end
 						end

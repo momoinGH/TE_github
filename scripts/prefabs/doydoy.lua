@@ -179,8 +179,8 @@ end
 
 local growth_stages =
 {
-    { name = "baby", time = GetBabyGrowTime, fn = SetBaby },
-    { name = "teen", time = GetTeenGrowTime, fn = SetTeen },
+    { name = "baby",  time = GetBabyGrowTime, fn = SetBaby },
+    { name = "teen",  time = GetTeenGrowTime, fn = SetTeen },
     { name = "grown", time = GetTeenGrowTime, fn = SetFullyGrown },
 }
 
@@ -199,10 +199,6 @@ local function OnEntityWake(inst)
         grown.Transform:SetRotation(inst.Transform:GetRotation())
         inst:Remove()
     end
-end
-
-local function CanEatFn(inst, food)
-    return food.prefab ~= "doydoyegg" and food.prefab ~= "doydoyegg_cooked" and food.prefab ~= "doydoyegg_cracked"
 end
 
 local function commonfn()
@@ -252,7 +248,6 @@ local function commonfn()
     inst:AddComponent("entitytracker")
 
     inst:AddComponent("eater")
-    inst.components.eater:SetOnEatFn(CanEatFn)
 
     inst:ListenForEvent("entitysleep", OnEntitySleep)
     inst:ListenForEvent("entitywake", OnEntityWake)

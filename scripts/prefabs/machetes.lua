@@ -68,10 +68,11 @@ local function fn(Sim)
     inst:AddTag("machete")
     inst:AddTag("aquatic")
 
+    inst.entity:SetPristine()
+
     if not TheWorld.ismastersim then
         return inst
     end
-    inst.entity:SetPristine()
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(MACHETE_DAMAGE)
@@ -270,7 +271,7 @@ end
 
 local function PercentChanged(inst)
     local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
-    if owner ~= nil and owner.sg:HasStateTag("prechop") then
+    if owner ~= nil and owner.sg:HasStateTag("prechop") and owner.bufferedaction then
         inst.components.obsidiantool:Use(owner, owner.bufferedaction.target)
     end
 end

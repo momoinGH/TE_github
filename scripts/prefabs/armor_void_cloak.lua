@@ -98,14 +98,14 @@ end
 
 local function OnBroken(inst)
     local owner = inst.components.inventoryitem.owner
-    if owner ~= nil and owner:HasTag("not_hit_stunned") ~= nil then
+    if owner then
         owner:RemoveTag("not_hit_stunned")
     end
 end
 
 local function OnRepaired(inst)
     local owner = inst.components.inventoryitem.owner
-    if owner ~= nil and owner:HasTag("not_hit_stunned") == nil then
+    if owner then
         owner:AddTag("not_hit_stunned")
     end
 end

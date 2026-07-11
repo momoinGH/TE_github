@@ -70,12 +70,12 @@ end
 local function OnAttacked(inst, data)
 	inst.components.combat:SetTarget(data.attacker)
 	inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
-		function(dude) return dude:HasTag("snake") and not dude.components.health:IsDead() end, 5)
+		function(dude) return dude:HasTag("flytrap") and not dude.components.health:IsDead() end, 5)
 end
 
 local function OnAttackOther(inst, data)
 	inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST,
-		function(dude) return dude:HasTag("snake") and not dude.components.health:IsDead() end, 5)
+		function(dude) return dude:HasTag("flytrap") and not dude.components.health:IsDead() end, 5)
 end
 
 local function DoReturn(inst)

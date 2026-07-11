@@ -121,7 +121,7 @@ end
 
 local function OnActivate(inst, player)
     if inst.components.follower:GetLeader() == nil then
-        local comida = SpawnPrefab("Meat")
+        local comida = SpawnPrefab("meat")
         inst.components.trader:AcceptGift(player, comida)
     elseif inst.components.follower:GetLeader() ~= nil then
         inst.components.talker:Say("Bye")

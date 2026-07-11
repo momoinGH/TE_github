@@ -103,7 +103,7 @@ local function pillarfn()
     inst.components.fueled:SetUpdateFn(function()
         local rate = 1
         if TheWorld.state.israining then
-            inst.components.fueled.rate = 1 + FIREPIT_RAIN_RATE * TheWorld.state.wetness
+            rate = 1 + FIREPIT_RAIN_RATE * TheWorld.state.wetness
         end
         rate = rate + FIREPIT_WIND_RATE
 

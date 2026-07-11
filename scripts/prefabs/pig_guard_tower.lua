@@ -232,7 +232,7 @@ local function callguards(inst, threat)
             local pig = inst.components.spawner.child
             if pig.components.combat.target == nil then
                 pig:DoTaskInTime(math.random() * 1, function()
-                    pig:PushEvent("atacked", { attacker = threat, damage = 0, weapon = nil })
+                    pig:PushEvent("attacked", { attacker = threat, damage = 0, weapon = nil })
                 end)
             end
         end

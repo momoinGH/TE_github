@@ -43,7 +43,7 @@ local function ondeploy(inst, pt)
 	inst.Transform:SetPosition(pt.x, pt.y, pt.z)
 	inst.AnimState:PlayAnimation("place")
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/quacken_drill/ramp")
-	inst:ListenForEvent("animover", nextstage(inst, pt))
+	inst:ListenForEvent("animover", nextstage, pt)
 end
 
 local function fn(Sim)

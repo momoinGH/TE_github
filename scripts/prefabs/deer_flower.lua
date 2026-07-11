@@ -41,13 +41,15 @@ local function onload(inst, data)
 end
 
 local function onpickedfn(inst, picker)
-    if picker and picker.components.sanity then
-        picker.components.sanity:DoDelta(TUNING.SANITY_TINY)
-    end
+    if picker then
+        if picker.components.sanity then
+            picker.components.sanity:DoDelta(TUNING.SANITY_TINY)
+        end
 
-    if inst.animname == ROSE_NAME and picker.components.combat ~= nil then
-        picker.components.combat:GetAttacked(inst, TUNING.ROSE_DAMAGE)
-        picker:PushEvent("thorns")
+        if inst.animname == ROSE_NAME and picker.components.combat ~= nil then
+            picker.components.combat:GetAttacked(inst, TUNING.ROSE_DAMAGE)
+            picker:PushEvent("thorns")
+        end
     end
 
     if not inst.planted then

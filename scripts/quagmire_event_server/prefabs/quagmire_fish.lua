@@ -14,7 +14,7 @@ return {
         inst.components.edible.foodtype = FOODTYPE.MEAT
 
         inst:AddComponent("perishable")
-        inst.components.perishable:SetPerishTime(TUNING.GORGE.PERISH_TIME.INGRIDIENTS.NORMAL)
+        inst.components.perishable:SetPerishTime(340)
         inst.components.perishable:StartPerishing()
         inst.components.perishable.onperishreplacement = "spoiled_food"
 

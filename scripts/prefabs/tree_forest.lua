@@ -422,10 +422,10 @@ local function chop_down_tree_leif(inst, chopper)
 	if days_survived >= LEIF_MIN_DAY then
 		if math.random() <= LEIF_PERCENT_CHANCE then
 			local numleifs = 1
-			if days_survived > 60 then
-				numleifs = math.random(1, 3)
-			elseif days_survived > 120 then
+			if days_survived > 120 then
 				numleifs = math.random(2, 4)
+			elseif days_survived > 60 then
+				numleifs = math.random(1, 3)
 			end
 
 			local notags = { "FX", "NOCLICK", "INLIMBO", "stump", "burnt" }
@@ -461,13 +461,11 @@ local function chop_down_tree_leif(inst, chopper)
 									leif.components.health.currenthealth = leif.components.health.currenthealth * scale
 									leif.components.combat.hitrange = leif.components.combat.hitrange * scale
 									leif.components.combat.attackrange = leif.components.combat.attackrange * scale
-
 									leif.Transform:SetScale(scale, scale, scale)
 									leif.components.combat:SuggestTarget(chopper)
 									leif.sg:GoToState("spawn")
-									target:Remove()
-
 									leif.Transform:SetPosition(target.Transform:GetWorldPosition())
+									target:Remove()
 								end
 							end
 						end

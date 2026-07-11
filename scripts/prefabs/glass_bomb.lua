@@ -64,7 +64,7 @@ local function removefirefx(inst)
 		inst.fire:Remove()
 		inst.fire = nil
 	end
-	inst.components.timer:StopTimer("extinguish", 3)
+	inst.components.timer:StopTimer("extinguish")
 end
 
 local function onequip(inst, owner)

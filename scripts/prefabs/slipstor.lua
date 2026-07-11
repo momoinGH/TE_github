@@ -115,65 +115,14 @@ local function SpawnDefenders(inst, attacker)
     end
 end
 
-local function IsInvestigator(child)
-    return child.components.knownlocations:GetLocation("investigate") ~= nil
-end
-
-local function SpawnInvestigators(inst, data)
-    if not inst.components.health:IsDead() and not (inst.components.freezable ~= nil and inst.components.freezable:IsFrozen()) then
-        --        inst.AnimState:PlayAnimation(inst.anims.hit)
-        --        inst.AnimState:PushAnimation(inst.anims.idle)
-        if inst.components.childspawner ~= nil then
-            local max_release_per_stage = { 1, 2, 3 }
-            local num_to_release = math.min(max_release_per_stage3 or 1, inst.components.childspawner.childreninside)
-            num_to_release = 3
-            local num_investigators = inst.components.childspawner:CountChildrenOutside(IsInvestigator)
-            num_to_release = num_to_release - num_investigators
-            local targetpos = data ~= nil and data.target ~= nil and data.target:GetPosition() or nil
-            for k = 1, num_to_release do
-                local spider = inst.components.childspawner:SpawnChild()
-                if spider ~= nil and targetpos ~= nil then
-                    spider.components.knownlocations:RememberLocation("investigate", targetpos)
-                end
-            end
-        end
-    end
-end
-
---local function StartSpawning(inst)
---    if inst.components.childspawner ~= nil and
---        not (inst.components.freezable ~= nil and
---            inst.components.freezable:IsFrozen()) and
---        not TheWorld.state.iscaveday then
---        inst.components.childspawner:StartSpawning()
---    end
---end
-
-local function StopSpawning(inst)
-    if inst.components.childspawner ~= nil then
-        inst.components.childspawner:StopSpawning()
-    end
-end
-
---local function OnIsCaveDay(inst, iscaveday)
---    if iscaveday then
---        StopSpawning(inst)
---    else
---        StartSpawning(inst)
---    end
---end
-
---local function OnInit(inst)
---    inst:WatchWorldState("iscaveday", OnIsCaveDay)
---    OnIsCaveDay(inst, TheWorld.state.iscaveday)
---end
-
 local function OnHaunt(inst)
     if math.random() <= TUNING.HAUNT_CHANCE_HALF then
         local target = FindEntity(
             inst,
             25,
-            CanTarget,
+            function(guy)
+                return inst.components.combat:CanTarget(guy)
+            end,
             { "_combat", "_health", "character" }, --see entityreplica.lua
             { "player", "spider", "INLIMBO" }
         )
@@ -195,14 +144,6 @@ end
 
 local function OnDeadSlipstor(inst)
     local x, y, z = inst.Transform:GetLocalPosition()
-
-    --inst:DoTaskInTime(50*FRAMES, function(inst)
-    --if inst.entrada == nil then
-    --local fx = SpawnPrefab("woodlegs_key2")
-    --if fx then fx.Transform:SetPosition(x, y, z) end
-    --inst.entrada = 1
-    --end
-    --end)
 
     local spawner = SpawnPrefab("slipstor_spawner")
     if spawner then

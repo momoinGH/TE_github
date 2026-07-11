@@ -24,42 +24,6 @@ local function onremove(inst)
 	end
 end
 
-local contador = 200
-
-local function ink_update(inst, dt)
-	contador = contador - 1
-
-	--	inst.ink_timer = inst.ink_timer - dt
-	--	inst.ink_scale = 1 -- Lerp(0, 1, inst.ink_timer/lerp_time)
-	inst.Transform:SetScale(contador / 200, contador / 200, contador / 200)
-	--
-	if contador < 2 then
-		--		inst.slowing_player = false
-		--ThePlayer.components.locomotor:RemoveSpeedModifier_Mult("INK")
-		--ThePlayer.components.locomotor.groundspeedmultiplier = 1
-		--ThePlayer.components.locomotor.externalspeedmultiplier = 1
-		inst:Remove()
-		return
-	end
-
-
-	--	local pos = inst:GetPosition()
-	--	local dist = pos:Dist(ThePlayer:GetPosition())
-	--	if not inst.slowing_player and dist <= inst.ink_scale * 3.66 then
-	--		inst.slowing_player = true
-
-	--	ThePlayer.components.locomotor.isrunning = true
-	--ThePlayer.components.locomotor.groundspeedmultiplier = 0.6
-	--ThePlayer.components.locomotor.externalspeedmultiplier = 0.6
-	--		ThePlayer.components.locomotor:AddSpeedModifier_Mult("INK", -0.7)
-	--	elseif inst.slowing_player and dist > inst.ink_scale * 3.66 then
-	--		inst.slowing_player = false
-	--ThePlayer.components.locomotor.groundspeedmultiplier = 1
-	--ThePlayer.components.locomotor.externalspeedmultiplier = 1
-	--		ThePlayer.components.locomotor:RemoveSpeedModifier_Mult("INK")
-	--	end
-end
-
 local function fn()
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -96,10 +60,7 @@ local function fn()
 	return inst
 end
 
-
-
 local function updateslowdowners(inst, range)
-	local ground = TheWorld
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local ents = TheSim:FindEntities(x, y, z, range, { "locomotor" })
 	for k, item in pairs(ents) do
@@ -118,9 +79,6 @@ local function updateslowdowners(inst, range)
 		end
 	end
 end
-
-
-
 
 local inktime = 10
 

@@ -17,6 +17,12 @@ local function StartSpawning(inst)
     end
 end
 
+local function StopSpawning(inst)
+    if not inst:HasTag("burnt") and inst.components.childspawner ~= nil then
+        inst.components.childspawner:StopSpawning()
+    end
+end
+
 local function OnSpawned(inst, child)
     if not inst:HasTag("burnt") then
         inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")

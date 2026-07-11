@@ -41,23 +41,6 @@ end
 local function OnDeath(inst)
     inst.AnimState:PlayAnimation("wither")
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/bramble/wilther")
-    --[[
-	RemovePhysicsColliders(inst)
-	if not inst.natrualdecay then
-		inst.rotdistance = 3 -- sets a min of 3. But can go much further due to the 30% chance to recude the rot number.
-	end
-	if inst.core then
-		inst.core.sustainablehedges = inst.core.sustainablehedges + 1
-	end
-	if inst.childhedge then
-		for i,child in ipairs(inst.childhedge) do
-			child.OnParentDeath(child, inst.rotdistance)
-		end
-	end
-	if inst.parenthedge then
-		inst.parenthedge.OnChildDeath(inst.parenthedge, inst.rotdistance)
-	end
-	]]
     local jogador = GetClosestInstWithTag("player", inst, 20)
     if jogador and inst.components.lootdropper then
         inst.components.lootdropper:DropLoot()
@@ -335,7 +318,7 @@ local function hedgefn()
 
         if (data.weapon == nil or (not data.weapon:HasTag("projectile") and data.weapon.projectile == nil))
             and data.attacker and data.attacker.components.combat and data.stimuli ~= "thorns" and not data.attacker:HasTag("thorny")
-            and (data.attacker.components.combat == nil or (data.attacker.components.combat.defaultdamage > 0)) then
+            and data.attacker.components.combat.defaultdamage > 0 then
             data.attacker.components.combat:GetAttacked(owner, BRAMBLE_THORN_DAMAGE, nil, "thorns")
             owner.SoundEmitter:PlaySound("dontstarve_DLC002/common/armour/cactus")
         end
@@ -405,26 +388,11 @@ local function fn()
         newhedge.Transform:SetPosition(pt.x, pt.y, pt.z)
         newhedge.coredistance = 0
         newhedge.core = inst
-        inst:DoTaskInTime(3, acabou(inst))
+        inst:DoTaskInTime(3, acabou)
     end)
-
-
-    --	inst:WatchWorldState("startday", acabou)
 
     return inst
 end
---[[
-local function sitefn()
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-    inst.entity:AddNetwork()	
-
-	local bm = TheWorld.components.bramblemanager
-	inst:DoTaskInTime(0,function() bm:RegisterBramble(inst) end)
-
-	return inst
-end
-]]
 
 local function corefn()
     local inst = CreateEntity()
@@ -471,7 +439,7 @@ local function corefn()
 
         if (data.weapon == nil or (not data.weapon:HasTag("projectile") and data.weapon.projectile == nil))
             and data.attacker and data.attacker.components.combat and data.stimuli ~= "thorns" and not data.attacker:HasTag("thorny")
-            and (data.attacker.components.combat == nil or (data.attacker.components.combat.defaultdamage > 0)) then
+            and data.attacker.components.combat.defaultdamage > 0 then
             data.attacker.components.combat:GetAttacked(owner, BRAMBLE_THORN_DAMAGE, nil, "thorns")
             owner.SoundEmitter:PlaySound("dontstarve_DLC002/common/armour/cactus")
         end
@@ -496,4 +464,3 @@ end
 return Prefab("bramblespike", hedgefn, assets, prefabs),
     Prefab("bramble", fn, assets, prefabs),
     Prefab("bramble_core", corefn, assets, prefabs)
---		Prefab("bramblesite", sitefn, assets, prefabs)

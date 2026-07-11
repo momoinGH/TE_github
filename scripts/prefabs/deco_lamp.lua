@@ -31,7 +31,7 @@ local function MasterInit(inst)
 
     inst:ListenForEvent("onbuilt", OnBuilt)
 
-    inst.OnSvae = OnSave
+    inst.OnSave = OnSave
     inst.OnLoad = OnLoad
 end
 
@@ -42,7 +42,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_stainglass", "interior_floorlamp", "interior_floorlamp", "floorlamp_stainglass", {
@@ -50,7 +50,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_downbridge", "interior_floorlamp", "interior_floorlamp", "floorlamp_downbridge", {
@@ -58,7 +58,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_2embroidered", "interior_floorlamp", "interior_floorlamp", "floorlamp_2embroidered", {
@@ -66,7 +66,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_ceramic", "interior_floorlamp", "interior_floorlamp", "floorlamp_ceramic", {
@@ -74,7 +74,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_glass", "interior_floorlamp", "interior_floorlamp", "floorlamp_glass", {
@@ -82,7 +82,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_2fringes", "interior_floorlamp", "interior_floorlamp", "floorlamp_2fringes", {
@@ -90,7 +90,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_candelabra", "interior_floorlamp", "interior_floorlamp", "floorlamp_candelabra", {
@@ -98,7 +98,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_elizabethan", "interior_floorlamp", "interior_floorlamp", "floorlamp_elizabethan", {
@@ -106,7 +106,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_gothic", "interior_floorlamp", "interior_floorlamp", "floorlamp_gothic", {
@@ -114,7 +114,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_orb", "interior_floorlamp", "interior_floorlamp", "floorlamp_orb", {
@@ -122,7 +122,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_bellshade", "interior_floorlamp", "interior_floorlamp", "floorlamp_bellshade", {
@@ -130,7 +130,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_crystals", "interior_floorlamp", "interior_floorlamp", "floorlamp_crystals", {
@@ -138,7 +138,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_upturn", "interior_floorlamp", "interior_floorlamp", "floorlamp_upturn", {
@@ -146,7 +146,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_2upturns", "interior_floorlamp", "interior_floorlamp", "floorlamp_2upturns", {
@@ -154,7 +154,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_spool", "interior_floorlamp", "interior_floorlamp", "floorlamp_spool", {
@@ -162,7 +162,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_edison", "interior_floorlamp", "interior_floorlamp", "floorlamp_edison", {
@@ -170,7 +170,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_adjustable", "interior_floorlamp", "interior_floorlamp", "floorlamp_adjustable", {
@@ -178,7 +178,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_rightangles", "interior_floorlamp", "interior_floorlamp", "floorlamp_rightangles", {
@@ -186,7 +186,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_lamp_hoofspa", "interior_floor_decor", "interior_floor_decor", "lamp", {
@@ -194,7 +194,7 @@ return
         light = DecoCreator:GetLights().GENERAL,
         tags = { "furniture", "playercrafted" },
         onbuilt = true,
-        coomonInit = CoomonInit,
+        commonInit = CoomonInit,
         masterInit = MasterInit,
     }),
     DecoCreator:Create("deco_plantholder_winterfeasttree", "interior_floorlamp", "interior_floorlamp", "festivetree_idle",
@@ -205,6 +205,6 @@ return
             onbuilt = true,
             loopanim = true,
             blink = true,
-            coomonInit = CoomonInit,
+            commonInit = CoomonInit,
             masterInit = MasterInit,
         })

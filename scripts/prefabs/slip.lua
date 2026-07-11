@@ -128,7 +128,7 @@ end
 local function ShouldWake(inst)
     return not TheWorld.state.iscaveday
         or BasicWakeCheck(inst)
-        or (inst:HasTag("splip_warrior") and
+        or (inst:HasTag("slip_warrior") and
             FindTarget(inst, TUNING.SPIDER_WARRIOR_WAKE_RADIUS) ~= nil)
 end
 

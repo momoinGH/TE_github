@@ -415,7 +415,7 @@ end
 local function OnGetItemFromPlayer(inst, giver, item)
     local loyalty_max = inst:HasTag("mermguard") and TUNING.MERM_GUARD_LOYALTY_MAXTIME or TUNING.MERM_LOYALTY_MAXTIME
     local loyalty_per_hunger = inst:HasTag("mermguard") and TUNING.MERM_GUARD_LOYALTY_PER_HUNGER or
-    TUNING.MERM_LOYALTY_PER_HUNGER
+        TUNING.MERM_LOYALTY_PER_HUNGER
 
     if item.components.edible ~= nil then
         if inst.components.combat:TargetIs(giver) then
@@ -527,13 +527,13 @@ end
 
 local function ShouldSleep(inst)
     return NocturnalSleepTest(inst)
-        and ((inst.components.follower == nil or inst.components.follower.leader) == nil and
-            not TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
+        and not (inst.components.follower and inst.components.follower.leader)
+        and not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
 end
 
 local function ShouldWakeUp(inst)
     return NocturnalWakeTest(inst) or
-    (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
+        (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
 end
 
 local function OnTimerDone(inst, data)
@@ -687,14 +687,14 @@ end
 local function itemget(inst, data)
     if not inst:HasTag("mermguard") then
         local tool = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or
-        nil
+            nil
         if not tool and (data.item:HasTag("merm_tool") or data.item:HasTag("merm_tool_upgraded")) then
             inst.components.inventory:Equip(data.item)
         end
     end
     if inst:HasTag("mermguard") then
         local armor = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or
-        nil
+            nil
         if not armor and (data.item:HasTag("mermarmorhat") or data.item:HasTag("mermarmorupgradedhat")) then
             inst.components.inventory:Equip(data.item)
         end
@@ -868,11 +868,11 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,
         -- Keep in sync with Wurt + mermking! But make sure no bonuses are applied!
         local foodaffinity = inst:AddComponent("foodaffinity")
         foodaffinity:AddFoodtypeAffinity(FOODTYPE.VEGGIE, 1)
-        foodaffinity:AddPrefabAffinity("kelp", 1)            -- prevents the negative stats
-        foodaffinity:AddPrefabAffinity("kelp_cooked", 1)     -- prevents the negative stats
-        foodaffinity:AddPrefabAffinity("boatpatch_kelp", 1)  -- prevents the negative stats
-        foodaffinity:AddPrefabAffinity("durian", 1)          -- prevents the negative stats
-        foodaffinity:AddPrefabAffinity("durian_cooked", 1)   -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("kelp", 1)           -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("kelp_cooked", 1)    -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("boatpatch_kelp", 1) -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("durian", 1)         -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("durian_cooked", 1)  -- prevents the negative stats
 
         inst:AddComponent("eater")
         inst.components.eater:SetDiet({ FOODTYPE.VEGETARIAN }, { FOODTYPE.VEGETARIAN })

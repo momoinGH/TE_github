@@ -84,7 +84,7 @@ local function fn(Sim)
     if not TheWorld.ismastersim then
         return inst
     end
-    
+
     inst._owner = nil
     inst._container = nil
 
@@ -141,7 +141,7 @@ local function iconfn()
 
     inst.icon = nil
     inst:DoTaskInTime(0, icon_init)
-    inst.OnRemoveEntity = inst.OnRemoveEntity
+    inst.OnRemoveEntity = OnRemoveEntity
     inst.persists = false
 
     return inst

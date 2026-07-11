@@ -48,12 +48,9 @@ end
 local function OnGetItem(inst, giver, item)
 	local fueled = inst.components.fueled:GetPercent()
 	if giver:HasTag("windy1") and giver:HasTag("windy2") then
-		inst.components.fueled:SetPercent(fueled + 0.40)
+		inst.components.fueled:SetPercent(math.min(1, fueled + 0.40))
 	else
-		inst.components.fueled:SetPercent(fueled + 0.10)
-	end
-	if fueled >= 1 then
-		inst.components.fueled:SetPercent(1)
+		inst.components.fueled:SetPercent(math.min(1, fueled + 0.10))
 	end
 end
 

@@ -11,18 +11,6 @@ local prefabs =
 
 local SEASHELL_REGEN_TIME = 480 * 2
 
-
-local function onsave(inst, data)
-    data.anim = inst.animname
-end
-
-local function onload(inst, data)
-    if data and data.anim then
-        inst.animname = data.anim
-        inst.AnimState:PlayAnimation(inst.animname)
-    end
-end
-
 local function onpickedfn(inst, picker)
     if picker and picker.components.sanity then
         picker.components.sanity:DoDelta(TUNING.SANITY_TINY)
@@ -40,16 +28,13 @@ local function onload(inst, data)
             inst:Hide()
             inst:AddTag("NOCLICK")
             if data.waitingfortide then
-                beginTideCheckTask(inst)
+                -- beginTideCheckTask(inst)
             end
         else
             inst.hidden = false
         end
     else
         inst.hidden = false
-        --inst:Hide()
-        --inst:AddTag("NOCLICK")
-        --beginTideCheckTask(inst)
     end
 end
 
@@ -60,7 +45,7 @@ local function onsave(inst, data)
 end
 
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -94,19 +79,6 @@ local function fn(Sim)
 
     inst.OnSave = onsave
     inst.OnLoad = onload
-    --inst:Hide()
-    --inst:AddTag("NOCLICK")
-    --beginTideCheckTask(inst)
-
-
-
-
-
-
-
-    --------SaveLoad
-    --inst.OnSave = onsave
-    --inst.OnLoad = onload
 
     return inst
 end

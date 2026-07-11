@@ -128,17 +128,6 @@ local function onload(inst, data)
     end
 end
 
-local function OnLoadPostPass(inst, data)
-    if data then
-        if data.followobject then
-            local follower = object.entity:AddFollower()
-            follower:FollowSymbol(data.followobject.GUID, data.followobject.symbol, data.followobject.x,
-                data.followobject.y, data.followobject.z)
-            inst.followobject = data.followobject
-        end
-    end
-end
-
 local function swinglightobjectfn()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()

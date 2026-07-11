@@ -336,4 +336,4 @@ local function fn()
 end
 
 return Prefab("smelter", fn, assets, prefabs),
-    MakePlacer("smetler_placer", "smelter", "smelter", "idle_empty")
+    MakePlacer("smelter_placer", "smelter", "smelter", "idle_empty")

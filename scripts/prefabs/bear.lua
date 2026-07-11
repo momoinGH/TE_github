@@ -42,7 +42,7 @@ local function ShouldAcceptItem(inst, item)
         local foodtype = item.components.edible.foodtype
         if foodtype == FOODTYPE.MEAT or foodtype == FOODTYPE.HORRIBLE then
             return inst.components.follower.leader == nil or
-            inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
+                inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
         elseif foodtype == FOODTYPE.VEGGIE or foodtype == FOODTYPE.RAW then
             local last_eat_time = inst.components.eater:TimeSinceLastEating()
             return (last_eat_time == nil or
@@ -80,8 +80,7 @@ end
 
 local function OnAttackedByDecidRoot(inst, attacker)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" },
-        { "werepig", "guard", "INLIMBO" })
+    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" }, { "INLIMBO" })
     local num_helpers = 0
     for i, v in ipairs(ents) do
         if v ~= inst and not v.components.health:IsDead() then
@@ -94,19 +93,7 @@ local function OnAttackedByDecidRoot(inst, attacker)
     end
 end
 
-local function IsPig(dude)
-    return dude:HasTag("walrus")
-end
-
-local function IsWerePig(dude)
-    return dude:HasTag("walrus")
-end
-
 local function IsNonWerePig(dude)
-    return dude:HasTag("walrus")
-end
-
-local function IsGuardPig(dude)
     return dude:HasTag("walrus")
 end
 
@@ -120,24 +107,13 @@ local function OnAttacked(inst, data)
     elseif attacker.prefab ~= "deciduous_root" and not attacker:HasTag("pigelite") then
         inst.components.combat:SetTarget(attacker)
 
-        if inst:HasTag("werepig") then
-            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
-        elseif inst:HasTag("guard") then
-            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST,
-                attacker:HasTag("pig") and IsGuardPig or IsPig, MAX_TARGET_SHARES)
-        elseif not (attacker:HasTag("walrus") and attacker:HasTag("walrus")) then
+        if not attacker:HasTag("walrus") then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsNonWerePig, MAX_TARGET_SHARES)
         end
     end
 end
 
-local function OnNewTarget(inst, data)
-    if inst:HasTag("werepig") then
-        inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
-    end
-end
-
-local function GuardRetargetFn(inst)
+local function RetargetFn(inst)
     --defend the king, then the torch, then myself
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
     local defendDist = SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
@@ -147,8 +123,7 @@ local function GuardRetargetFn(inst)
         inst
 
     if not defenseTarget.happy then
-        local invader = FindEntity(defenseTarget, SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, { "character" },
-            { "guard", "INLIMBO" })
+        local invader = FindEntity(defenseTarget, SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, { "character" }, { "INLIMBO" })
         if invader ~= nil and
             not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader)) and
             not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(invader)) then
@@ -322,7 +297,6 @@ local function guard()
     ------------------------------------------
 
     inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("newcombattarget", OnNewTarget)
 
     -- boat hopping setup
     inst.components.locomotor:SetAllowPlatformHopping(true)
@@ -336,7 +310,7 @@ local function guard()
     inst.components.combat:SetDefaultDamage(TUNING.PIG_GUARD_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.PIG_GUARD_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(GuardKeepTargetFn)
-    inst.components.combat:SetRetargetFunction(1, GuardRetargetFn)
+    inst.components.combat:SetRetargetFunction(1, RetargetFn)
     inst.components.combat:SetTarget(nil)
     inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED * 0.7
     inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED * 0.7

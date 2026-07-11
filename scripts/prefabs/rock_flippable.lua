@@ -50,7 +50,7 @@ end
 
 local function getregentimefn(inst)
     if inst.components.pickable then
-        local num_cycles_passed = math.min(inst.components.pickable.max_cycles - inst.components.pickable.cycles_left, 0)
+        local num_cycles_passed = math.max(inst.components.pickable.max_cycles - inst.components.pickable.cycles_left, 0)
         return FLIPPABLE_ROCK_REPOPULATE_TIME + FLIPPABLE_ROCK_REPOPULATE_INCREASE * num_cycles_passed +
             math.random() * FLIPPABLE_ROCK_REPOPULATE_VARIANCE
     else

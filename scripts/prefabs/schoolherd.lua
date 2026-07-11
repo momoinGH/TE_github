@@ -1,16 +1,12 @@
 local FISH_DATA = require("prefabs/oceanfishdef")
 
 local function AddMember(inst, member)
-    inst:ListenForEvent("entitysleep", function() inst.checkforremoval(inst) end, member)
+    inst:ListenForEvent("entitysleep", inst.checkforremoval_fn, member)
 end
 
 
 local function RemoveMember(inst, member)
-    inst:RemoveEventCallback("entitysleep", function() inst.checkforremoval(inst) end, member)
-end
-
-local function _OnUpdate(inst, self)
-    inst.components.herd:OnUpdate()
+    inst:RemoveEventCallback("entitysleep",inst.checkforremoval_fn, member)
 end
 
 local function updateposfn(inst)
@@ -138,6 +134,8 @@ local function fn(data)
 
     inst.components.herd:SetMemberTag("herd_" .. data.prefab)
 
+    inst.checkforremoval_fn = function(src) checkforremoval(inst) end
+
     inst.components.herd:SetGatherRange(10)
     inst.components.herd:SetUpdateRange(20)
     inst.components.herd:SetOnEmptyFn(inst.Remove)
@@ -150,13 +148,10 @@ local function fn(data)
 
     inst:AddComponent("timer")
 
-    inst.checkforremoval = checkforremoval
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
 
     inst.fishprefab = data.prefab
-
-    -- inst:DoPeriodicTask(10, function(inst) checkforremoval(inst) end)
 
     inst:DoTaskInTime(0, function(inst) setupnavs(inst) end)
 

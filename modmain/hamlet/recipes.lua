@@ -25,7 +25,7 @@ TroAddRecipe("corkchest", { Ig("cork", 2), Ig("rope", 1) }, TECH.SCIENCE_ONE, { 
 TroAddRecipe("roottrunk_child", { Ig("bramble_bulb", 1), Ig("venus_stalk", 2), Ig("boards", 2) }, TECH.SCIENCE_ONE, { min_spacing = 1, placer = "roottrunk_child_placer" }, { "CONTAINERS", "STRUCTURES" })
 TroAddRecipe("basefan", { Ig("alloy", 2), Ig("transistor", 2), Ig("gears", 1) }, TECH.SCIENCE_TWO, { placer = "basefan_placer" }, { "STRUCTURES", "SUMMER" })
 TroAddRecipe("sprinkler", { Ig("alloy", 2), Ig("bluegem", 1), Ig("ice", 6) }, TECH.SCIENCE_TWO, { placer = "sprinkler_placer" }, { "GARDENING" })
-TroAddRecipe("smelter", { Ig("cutstone", 6), Ig("boards", 4), Ig("redgem", 1) }, TECH.SCIENCE_TWO, { placer = "smetler_placer" }, { "STRUCTURES", "PROTOTYPERS" })
+TroAddRecipe("smelter", { Ig("cutstone", 6), Ig("boards", 4), Ig("redgem", 1) }, TECH.SCIENCE_TWO, { placer = "smelter_placer" }, { "STRUCTURES", "PROTOTYPERS" })
 TroAddRecipe("disguisehat", { Ig("twigs", 2), Ig("pigskin", 1), Ig("beardhair", 1) }, TECH.SCIENCE_TWO, nil, { "CLOTHING" })
 TroAddRecipe("pithhat", { Ig("fabric", 1), Ig("vine", 3), Ig("cork", 6) }, TECH.SCIENCE_TWO, nil, { "CLOTHING" })
 TroAddRecipe("thunderhat", { Ig("feather_thunder", 1), Ig("goldnugget", 1), Ig("cork", 2) }, TECH.SCIENCE_TWO, nil, { "CLOTHING" })

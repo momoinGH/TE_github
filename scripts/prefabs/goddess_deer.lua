@@ -41,14 +41,6 @@ local brain = require("brains/goddessdeerbrain")
 
 SetSharedLootTable('goddess_deer',
     {
-        { 'meat',      1.00 },
-        { 'smallmeat', 1.00 },
-        { 'smallmeat', 0.50 },
-        { 'peach',     0.50 },
-    })
-
-SetSharedLootTable('goddess_deer',
-    {
         { 'meat',                   1.00 },
         { 'smallmeat',              1.00 },
         { 'smallmeat',              0.50 },
@@ -128,7 +120,7 @@ end
 
 local function done(inst)
     SpawnPrefab("goddess_deer_gem").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    if inst.magic == nil then
+    if inst.magic then
         inst.magic:Remove()
         inst.magic = nil
     end
@@ -239,10 +231,14 @@ local function OnGetItemFromPlayer(inst, giver, item)
     elseif inst.components.eater:CanEat(item) and item:HasTag("peachy") then
         inst.components.hunger:SetPercent(1)
         inst.components.eater:Eat(item)
-        inst:DoTaskInTime(3, SpawnPrefab("poop").Transform:SetPosition(inst.Transform:GetWorldPosition()))
+        inst:DoTaskInTime(3, function(inst)
+            SpawnAt("poop", inst)
+        end)
     elseif inst.components.eater:CanEat(item) then
         inst.components.eater:Eat(item)
-        inst:DoTaskInTime(3, SpawnPrefab("poop").Transform:SetPosition(inst.Transform:GetWorldPosition()))
+        inst:DoTaskInTime(3, function(inst)
+            SpawnAt("poop", inst)
+        end)
     elseif item:HasTag("ribbon") then
         inst:AddTag("windy4")
         inst:AddTag("companion")
@@ -291,7 +287,7 @@ local function onload(inst, data)
             inst.AnimState:OverrideSymbol("swap_antler_red", "goddess_deer_build", "swap_antler_red")
             inst.components.lootdropper:SetChanceLootTable('goddess_deer')
         end
-        if data.windy4 ~= nil then
+        if data.milked ~= nil then
             inst:AddTag("milked")
         end
     end

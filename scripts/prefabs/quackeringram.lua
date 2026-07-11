@@ -27,22 +27,20 @@ local function onfinished(inst)
 end
 
 local function spawnWake(boat)
-    if boat then
-        local wake = SpawnPrefab("quackering_wake")
-        wake.entity:AddFollower()
-        if boat and boat.wakeLeft == true then
-            wake.idleanimation = "idle"
-            boat.wakeLeft = false
-        else
-            wake.idleanimation = "idle_2"
-            boat.wakeLeft = true
-        end
-        if wake.Follower then
-            wake.Follower:FollowSymbol(boat.GUID, "torso", 0, 0, 0)
-        end
-        wake.Transform:SetRotation(boat.Transform:GetRotation())
-        boat.wakeTask = boat:DoTaskInTime(5 * FRAMES, function() spawnWake(boat) end)
+    local wake = SpawnPrefab("quackering_wake")
+    wake.entity:AddFollower()
+    if boat and boat.wakeLeft == true then
+        wake.idleanimation = "idle"
+        boat.wakeLeft = false
+    else
+        wake.idleanimation = "idle_2"
+        boat.wakeLeft = true
     end
+    if wake.Follower then
+        wake.Follower:FollowSymbol(boat.GUID, "torso", 0, 0, 0)
+    end
+    wake.Transform:SetRotation(boat.Transform:GetRotation())
+    boat.wakeTask = boat:DoTaskInTime(5 * FRAMES, function(boat) spawnWake(boat) end)
 end
 
 local function performRamFX(inst, target)
@@ -63,7 +61,7 @@ local function performRamFX(inst, target)
         inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/quackering_ram/impact")
         driver.Physics:SetMotorVel(currentSpeed + boost, 0, 0)
         boat.wakeLeft = true
-        boat.wakeTask = spawnWake(boat)
+        spawnWake(boat)
         boat:DoTaskInTime(40 * FRAMES, function()
             if boat and boat.wakeTask then
                 boat.wakeTask:Cancel()

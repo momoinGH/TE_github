@@ -138,15 +138,15 @@ local function CleanupAllOrphans(inst)
 end
 
 local function ReturnToInteriorScene(inst)
-    for i, v in pairs(inst.children) do
-        i:RemoveTag("INTERIOR_LIMBO")
+    for v, _ in pairs(inst.children) do
+        v:RemoveTag("INTERIOR_LIMBO")
     end
 end
 
 local function RemoveFromInteriorScene(inst)
     -- put all my children in interior limbo
-    for i, v in pairs(inst.children) do
-        i:AddTag("INTERIOR_LIMBO")
+    for v, _ in pairs(inst.children) do
+        v:AddTag("INTERIOR_LIMBO")
     end
 end
 

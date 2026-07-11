@@ -204,7 +204,7 @@ local function CanInteract(inst)
 end
 
 
-local function OnFuelSectionChange(old, new, inst)
+local function OnFuelSectionChange(inst)
 	local fuelAnim = 0
 	if inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.01 then
 		fuelAnim = "0"
@@ -325,7 +325,9 @@ local function fn(Sim)
 	inst.components.fueled.accepting = true
 	inst.components.fueled:SetSections(10)
 	inst.components.fueled.ontakefuelfn = ontakefuelfn
-	inst.components.fueled:SetSectionCallback(OnFuelSectionChange)
+	inst.components.fueled:SetSectionCallback(function(newsection, oldsection, inst)
+		OnFuelSectionChange(inst)
+	end)
 	inst.components.fueled:InitializeFuelLevel(TAR_EXTRACTOR_MAX_FUEL_TIME)
 	inst.components.fueled.bonusmult = 5
 	inst.components.fueled.secondaryfueltype = "CHEMICAL"
@@ -334,7 +336,7 @@ local function fn(Sim)
 	--MakeLargePropagator(inst)
 	inst.OnSave = onsave
 	inst.OnLoad = onload
-    --[[
+	--[[
 	inst:ListenForEvent("onbuilt", function()
 		onBuilt(inst)
 	end)]]

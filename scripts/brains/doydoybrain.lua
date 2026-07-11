@@ -47,6 +47,7 @@ local function EatFoodAction(inst) --Look for food to eat
         function(item)
             return item:GetTimeAlive() >= 5
                 and item.prefab ~= "mandrake"
+                and inst.prefab ~= "doydoyegg" and inst.prefab ~= "doydoyegg_cooked" and inst.prefab ~= "doydoyegg_cracked"
                 and item.components.edible ~= nil
                 and item:IsOnPassablePoint()
                 and inst.components.eater:CanEat(item)

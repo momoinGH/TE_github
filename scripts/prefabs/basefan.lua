@@ -108,11 +108,6 @@ local function onload(inst, data)
 	end
 end
 
-local function OnLoadPostPass(inst, data)
-	if not inst.components.fueled:IsEmpty() then
-	end
-end
-
 local function onbuilt(inst)
 	inst.AnimState:PlayAnimation("place")
 	inst.AnimState:PushAnimation("off")
@@ -180,7 +175,6 @@ local function fn()
 
 	inst.OnSave = onsave
 	inst.OnLoad = onload
-	inst.OnLoadPostPass = OnLoadPostPass
 	inst.OnEntitySleep = OnEntitySleep
 
 	inst:ListenForEvent("onbuilt", onbuilt)

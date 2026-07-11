@@ -8,8 +8,6 @@ local prefabs =
 }
 
 local function walls(inst)
-    local tipodemuro = "wall_limestone"
-    local x, y, z = inst.Transform:GetWorldPosition()
     local POS = {}
     local POS2 = {}
     for x = -42, 42 do
@@ -20,9 +18,6 @@ local function walls(inst)
                         table.insert(POS, { x = x, z = z })
                     end
                 end
-
-
-
                 if x == -2 or x == -1 or x == 0 or x == 1 or x == 2
                     or z == -2 or z == -1 or z == 0 or z == 1 or z == 2 then
                     table.insert(POS2, { x = x, z = z })
@@ -32,6 +27,8 @@ local function walls(inst)
     end
 
     local count = 0
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local tipodemuro = "wall_limestone"
     for _, v in pairs(POS) do
         count = count + 1
         local part = SpawnPrefab(tipodemuro)

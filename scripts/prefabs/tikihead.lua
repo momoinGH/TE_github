@@ -18,12 +18,11 @@ local function shake2(inst)
 	inst.AnimState:PushAnimation("idle")
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/monkey/barrel_rattle")
 
-	local pt = inst:GetPosition()
-	local x, y, z = pt:Get()
-	local y1 = y + 3
-	local ponto = Vector3(x, y1, z)
-
-	inst:DoTaskInTime(6, inst.components.lootdropper:DropLoot(ponto))
+	inst:DoTaskInTime(6, function(inst)
+		local pt = inst:GetPosition()
+		pt.y = pt.y + 3
+		inst.components.lootdropper:DropLoot(pt)
+	end)
 end
 
 local function shake(inst)

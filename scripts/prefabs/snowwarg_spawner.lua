@@ -17,6 +17,7 @@ end
 
 local function fn()
     local inst = CreateEntity()
+    inst.entity:AddTransform()
     inst.entity:AddNetwork()
 
     inst.entity:SetPristine()
@@ -25,7 +26,6 @@ local function fn()
         return inst
     end
 
-    inst.entity:AddTransform()
     --[[Non-networked entity]]
 
     inst:AddTag("CLASSIFIED")

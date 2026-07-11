@@ -71,16 +71,16 @@ local function onsleeptick(inst, sleeper)
         end
     end
 
+    if isstarving then
+        inst.components.sleepingbag:DoWakeUp()
+    end
+
     if inst.components.finiteuses then
+        inst.components.finiteuses.current = inst.components.finiteuses.current - 0.02
         if inst.components.finiteuses.current <= 0 then
             inst.components.sleepingbag:DoWakeUp()
             onfinished(inst)
         end
-        inst.components.finiteuses.current = inst.components.finiteuses.current - 0.02
-    end
-
-    if isstarving then
-        inst.components.sleepingbag:DoWakeUp()
     end
 end
 

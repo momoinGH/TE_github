@@ -40,7 +40,15 @@ end
 
 local function HearBell(inst, musician, instrument)
 	if not inst:HasTag("player") then
-		if inst:HasTag("hostile") or inst:HasTag("monster") or inst:HasTag("largecreature") or inst:HasTag("animal") or inst:HasTag("merm") or inst:HasTag("walrus") or inst:HasTag("smallcreatue") or inst:HasTag("epic") then
+		if inst:HasTag("hostile")
+			or inst:HasTag("monster")
+			or inst:HasTag("largecreature")
+			or inst:HasTag("animal")
+			or inst:HasTag("merm")
+			or inst:HasTag("walrus")
+			or inst:HasTag("smallcreature")
+			or inst:HasTag("epic")
+		then
 			if inst.components.combat:HasTarget() then
 				inst.components.combat:DropTarget()
 				if inst.spell == nil then
@@ -81,12 +89,9 @@ end
 local function OnGetItem(inst, giver, item)
 	local finiteuses = inst.components.finiteuses:GetPercent()
 	if giver:HasTag("windy1") and giver:HasTag("windy2") then
-		inst.components.finiteuses:SetPercent(finiteuses + 0.40)
+		inst.components.finiteuses:SetPercent(math.min(finiteuses + 0.40, 1))
 	else
-		inst.components.finiteuses:SetPercent(finiteuses + 0.10)
-	end
-	if finiteuses >= 1 then
-		inst.components.finiteuses:SetPercent(1)
+		inst.components.finiteuses:SetPercent(math.min(finiteuses + 0.10, 1))
 	end
 end
 
@@ -105,7 +110,7 @@ local function fn()
 	inst.AnimState:SetBuild("goddess_bell")
 	inst.AnimState:PlayAnimation("idle")
 
-    inst:AddTag("bell")
+	inst:AddTag("bell")
 	inst:AddTag("goddess_item")
 
 	local s = 1
@@ -121,8 +126,8 @@ local function fn()
 
 	inst:AddComponent("instrument")
 	inst.components.instrument.range = 30
-    inst.components.instrument:SetOnHeardFn(HearBell)
-    inst.components.instrument:SetAssetOverrides("goddess_bell")
+	inst.components.instrument:SetOnHeardFn(HearBell)
+	inst.components.instrument:SetAssetOverrides("goddess_bell")
 
 	inst:AddComponent("tool")
 	inst.components.tool:SetAction(ACTIONS.PLAY)

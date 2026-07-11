@@ -58,13 +58,13 @@ SetSharedLootTable('rock1',
 
 SetSharedLootTable('rock2',
     {
-        { 'rocks', 1.00 },
-        { 'rocks', 1.00 },
-        { 'rocks', 1.00 },
+        { 'rocks',      1.00 },
+        { 'rocks',      1.00 },
+        { 'rocks',      1.00 },
         { 'goldnugget', 1.00 },
-        { 'flint', 1.00 },
+        { 'flint',      1.00 },
         { 'goldnugget', 0.25 },
-        { 'flint', 0.60 },
+        { 'flint',      0.60 },
     })
 
 SetSharedLootTable('rock_flintless',
@@ -94,60 +94,60 @@ SetSharedLootTable('rock_flintless_low',
 
 SetSharedLootTable('ruins_artichoke',
     {
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'nitre', 0.25 },
-        { 'nitre', 0.25 },
-        { 'flint', 0.60 },
-        { 'flint', 0.60 },
+        { 'rocks',     1.0 },
+        { 'rocks',     1.0 },
+        { 'nitre',     0.25 },
+        { 'nitre',     0.25 },
+        { 'flint',     0.60 },
+        { 'flint',     0.60 },
         { 'gold_dust', 0.60 },
     })
 
 SetSharedLootTable('ruins_pig',
     {
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'nitre', 0.25 },
-        { 'flint', 0.60 },
+        { 'rocks',     1.0 },
+        { 'rocks',     1.0 },
+        { 'nitre',     0.25 },
+        { 'flint',     0.60 },
         { 'gold_dust', 0.60 },
-        { 'ghost', 0.2 },
+        { 'ghost',     0.2 },
     })
 
 SetSharedLootTable('ruins_gianthead',
     {
         { 'gold_dust', 0.2 },
         { 'gold_dust', 0.2 },
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'nitre', 0.25 },
-        { 'nitre', 0.25 },
-        { 'flint', 0.60 },
-        { 'flint', 0.60 },
-        { 'ghost', 0.2 },
+        { 'rocks',     1.0 },
+        { 'rocks',     1.0 },
+        { 'nitre',     0.25 },
+        { 'nitre',     0.25 },
+        { 'flint',     0.60 },
+        { 'flint',     0.60 },
+        { 'ghost',     0.2 },
     })
 
 SetSharedLootTable('antqueen_throne',
     {
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
-        { 'rocks', 1.0 },
+        { 'rocks',      1.0 },
+        { 'rocks',      1.0 },
+        { 'rocks',      1.0 },
+        { 'rocks',      1.0 },
+        { 'rocks',      1.0 },
+        { 'rocks',      1.0 },
+        { 'rocks',      1.0 },
+        { 'rocks',      1.0 },
 
-        { 'flint', 1.0 },
-        { 'flint', 1.0 },
-        { 'flint', 0.8 },
-        { 'flint', 0.8 },
-        { 'flint', 0.8 },
-        { 'flint', 0.8 },
+        { 'flint',      1.0 },
+        { 'flint',      1.0 },
+        { 'flint',      0.8 },
+        { 'flint',      0.8 },
+        { 'flint',      0.8 },
+        { 'flint',      0.8 },
 
-        { 'nitre', 0.8 },
-        { 'nitre', 0.8 },
-        { 'nitre', 0.8 },
-        { 'nitre', 0.8 },
+        { 'nitre',      0.8 },
+        { 'nitre',      0.8 },
+        { 'nitre',      0.8 },
+        { 'nitre',      0.8 },
 
         --    {'gold_dust', 0.6},
         --    {'gold_dust', 0.6},
@@ -157,8 +157,8 @@ SetSharedLootTable('antqueen_throne',
         { 'goldnugget', 0.3 },
         { 'goldnugget', 0.3 },
 
-        { 'bluegem', 0.5 },
-        { 'bluegem', 0.5 },
+        { 'bluegem',    0.5 },
+        { 'bluegem',    0.5 },
     })
 
 
@@ -172,6 +172,7 @@ local function triggerdarts(inst)
         end
     end
 end
+
 local function setdislodged(inst)
     inst.dislodged = true
     inst:RemoveTag("dislodgeable")

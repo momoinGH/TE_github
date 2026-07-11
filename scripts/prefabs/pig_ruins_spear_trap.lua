@@ -91,7 +91,7 @@ local function onload(inst, data)
             inst:AddTag("delay_6")
         end
         if data.delay_9 then
-            inst:HasTag("delay_9")
+            inst:AddTag("delay_9")
         end
     end
 end

@@ -5,15 +5,11 @@ local assets =
 
 local prefabs =
 {
-    "grass_water",
+    "grass",
 }
 
-local VALID_TILES = table.invert(
-    {
-        WORLD_TILES.MARSH,
-    })
 local function SpawnGrassWater(spawn_point)
-    local plant = SpawnPrefab("grass_water")
+    local plant = SpawnPrefab("grass")
     plant.Transform:SetPosition(spawn_point.x, spawn_point.y, spawn_point.z)
     return plant
 end
@@ -70,8 +66,8 @@ local function GetSpawnPoint(pt)
     local function TestSpawnPoint(offset)
         local spawnpoint = pt + offset
         return not TheWorld.Map:IsAboveGroundAtPoint(spawnpoint:Get())
-            and not VALID_TILES[TheWorld.Map:GetTileAtPoint(spawnpoint:Get())] ~= nil and
-            not TheWorld.Map:IsPassableAtPoint(spawnpoint:Get()) and IsNotNextToLand(spawnpoint)
+            and not TheWorld.Map:IsPassableAtPoint(spawnpoint:Get())
+            and IsNotNextToLand(spawnpoint)
     end
 
     local theta = math.random() * TWOPI
@@ -106,8 +102,6 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
-    --inst:AddTag("CLASSIFIED")
 
     inst.entity:SetPristine()
 

@@ -90,11 +90,9 @@ end
 local function GetSpawnPoint(pt)
     local function TestSpawnPoint(offset)
         local spawnpoint = pt + offset
-        local spawnpoint_x, spawnpoint_y, spawnpoint_z = (pt + offset):Get()
         return not TheWorld.Map:IsAboveGroundAtPoint(spawnpoint:Get())
-            and not VALID_TILES[TheWorld.Map:GetTileAtPoint(spawnpoint:Get())] ~= nil and
-            not VALID_TILES2[TheWorld.Map:GetTileAtPoint(spawnpoint:Get())] ~= nil and
-            not TheWorld.Map:IsPassableAtPoint(spawnpoint:Get()) and IsNotNextToLand(spawnpoint)
+            and not VALID_TILES2[TheWorld.Map:GetTileAtPoint(spawnpoint:Get())] ~= nil
+            and not TheWorld.Map:IsPassableAtPoint(spawnpoint:Get()) and IsNotNextToLand(spawnpoint)
     end
 
     local theta = math.random() * TWOPI

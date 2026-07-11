@@ -90,43 +90,37 @@ local function OnGetItem(inst, giver, item)
         inst:DoTaskInTime(0.75, stargone)
     end
     if item:HasTag("magicpowder") then
+        inst:AddComponent("heater")
+        inst:AddComponent("fueled")
+        inst.components.fueled:InitializeFuelLevel(60)
+        inst.components.fueled:SetDepletedFn(depleted)
+        inst.components.fueled:StartConsuming()
+
         if TheWorld.state.iswinter then
-            giver.components.talker:Say("It seems to be a lot warmer now, bet I could cook on it.")
-            inst:AddComponent("heater")
+            if giver and giver.components.talker then
+                giver.components.talker:Say("It seems to be a lot warmer now, bet I could cook on it.")
+            end
             inst.components.heater.heat = 100
-            inst:AddComponent("fueled")
-            inst.components.fueled:InitializeFuelLevel(60)
-            inst.components.fueled:SetDepletedFn(depleted)
-            inst.components.fueled:StartConsuming()
             inst:AddComponent("cooker")
         elseif TheWorld.state.issummer then
-            giver.components.talker:Say("It seems to be a lot cooler now.")
-            inst:AddComponent("heater")
+            if giver and giver.components.talker then
+                giver.components.talker:Say("It seems to be a lot cooler now.")
+            end
             inst.components.heater.heat = -100
             inst.components.heater:SetThermics(false, true)
-            inst:AddComponent("fueled")
-            inst.components.fueled:InitializeFuelLevel(60)
-            inst.components.fueled:SetDepletedFn(depleted)
-            inst.components.fueled:StartConsuming()
         else
             local a = math.random()
             if a > 0.50 then
-                giver.components.talker:Say("It seems to be a lot cooler now.")
-                inst:AddComponent("heater")
+                if giver and giver.components.talker then
+                    giver.components.talker:Say("It seems to be a lot cooler now.")
+                end
                 inst.components.heater.heat = -100
                 inst.components.heater:SetThermics(false, true)
-                inst:AddComponent("fueled")
-                inst.components.fueled:InitializeFuelLevel(60)
-                inst.components.fueled:SetDepletedFn(depleted)
-                inst.components.fueled:StartConsuming()
             else
-                giver.components.talker:Say("It seems to be warmer now, bet I could cook on it.")
-                inst:AddComponent("heater")
+                if giver and giver.components.talker then
+                    giver.components.talker:Say("It seems to be warmer now, bet I could cook on it.")
+                end
                 inst.components.heater.heat = 100
-                inst:AddComponent("fueled")
-                inst.components.fueled:InitializeFuelLevel(60)
-                inst.components.fueled:SetDepletedFn(depleted)
-                inst.components.fueled:StartConsuming()
                 inst:AddComponent("cooker")
             end
         end

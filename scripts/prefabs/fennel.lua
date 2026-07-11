@@ -40,7 +40,7 @@ local function fn()
 	inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
 	inst.components.pickable:SetUp("fennel", 10)
 	inst.components.pickable.onpickedfn = onpicked
-    inst.components.pickable.remove_when_picked = true
+	inst.components.pickable.remove_when_picked = true
 	inst.components.pickable.quickpick = true
 
 	MakeSmallBurnable(inst)
@@ -67,11 +67,11 @@ local function fn1(Sim)
 	inst:AddTag("aquatic")
 	inst.Transform:SetScale(0.7, 0.7, 0.7)
 
+	inst.entity:SetPristine()
+
 	if not TheWorld.ismastersim then
 		return inst
 	end
-
-	inst.entity:SetPristine()
 
 	inst:AddComponent("edible")
 	inst.components.edible.foodtype = FOODTYPE.VEGGIE

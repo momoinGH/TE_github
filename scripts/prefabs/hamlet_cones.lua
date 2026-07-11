@@ -49,7 +49,7 @@ local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
         Asset("ANIM", "anim/" .. build .. ".zip"),
     }
     if bank ~= build then
-        table.insert("ANIM", "anim/" .. bank .. ".zip")
+        table.insert(assets, "anim/" .. bank .. ".zip")
     end
 
     local prefabs =

@@ -20,7 +20,6 @@ PrefabFiles = {
     "pinkman",                 --粉猪人
     "tidalpoolnew",            --雨林积水池
     "tree_forest_rot",         --阴森丛林树
-    "tree_forest_rot_seed",    --阴森丛林树种子
     "tro_treasurechest",       --一堆箱子
     "topiary",                 --灌木
     "lawnornaments",           --景观小树

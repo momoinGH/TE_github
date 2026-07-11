@@ -89,9 +89,7 @@ end
 local function hail_startfalling(inst, x, y, z)
     inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
     inst.Physics:ClearCollisionMask()
-    inst.Physics:SetCollisionMask(COLLISION.GROUND)
-    inst.Physics:SetCollisionMask(COLLISION.OBSTACLES)
-    inst.Physics:SetCollisionMask(COLLISION.CHARACTERS)
+    inst.Physics:SetCollisionMask(COLLISION.GROUND, COLLISION.OBSTACLES, COLLISION.CHARACTERS)
     inst.Physics:Teleport(x, 35, z)
     inst:ListenForEvent("on_landed", onhitground_haildrop)
 end

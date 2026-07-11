@@ -42,9 +42,6 @@ end
 local function OnGetItem(inst, giver, item)
     local uses = inst.components.fueled:GetPercent()
     inst.components.fueled:SetPercent(uses + 0.1)
-    if uses >= 1 then
-        inst.components.armor:SetPercent(1)
-    end
 end
 
 local function fn()

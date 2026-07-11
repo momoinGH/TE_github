@@ -17,22 +17,6 @@ local function HearPanFlute(inst, musician, instrument)
     end
 end
 
-local function ShouldAcceptItem(inst, item)
-    return item:HasTag("magicpowder")
-end
-
-local function OnGetItem(inst, giver, item)
-    local finiteuses = inst.components.finiteuses:GetPercent()
-    if giver:HasTag("windy1") and giver:HasTag("windy2") then
-        inst.components.finiteuses:SetPercent(finiteuses + 0.40)
-    else
-        inst.components.finiteuses:SetPercent(finiteuses + 0.10)
-    end
-    if finiteuses >= 1 then
-        inst.components.finiteuses:SetPercent(1)
-    end
-end
-
 local function fn()
     local inst = CreateEntity()
 

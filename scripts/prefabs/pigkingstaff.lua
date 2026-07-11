@@ -125,7 +125,7 @@ local function UseStaff(inst, Target, pos)
 
 
         if nut.components.follower:GetLeader() == nil then
-            local comida = SpawnPrefab("Meat")
+            local comida = SpawnPrefab("meat")
             nut.components.trader:AcceptGift(caster, comida)
         end
     end

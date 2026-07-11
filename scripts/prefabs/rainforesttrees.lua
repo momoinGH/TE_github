@@ -48,8 +48,8 @@ local JUNGLETREESEED_GROWTIME = { base = 4.5 * day_time, random = 0.75 * day_tim
 local JUNGLETREE_GROW_TIME =
 {
     { base = 4.5 * day_time, random = 0.5 * day_time }, --tall to short
-    { base = 8 * day_time, random = 5 * day_time },     --short to normal
-    { base = 8 * day_time, random = 5 * day_time },     --normal to tall
+    { base = 8 * day_time,   random = 5 * day_time },   --short to normal
+    { base = 8 * day_time,   random = 5 * day_time },   --normal to tall
 }
 
 local SNAKE_JUNGLETREE_AMOUNT_TALL = 2 -- num of times to try and spawn a snake from a tall tree
@@ -363,14 +363,10 @@ local function SetTall(inst)
 
     if math.random() < 0.5 then
         for i = 1, SNAKE_JUNGLETREE_AMOUNT_TALL do
-            if math.random() and TheWorld.state.cycles >= SNAKE_POISON_START_DAY then
+            if TheWorld.state.cycles >= SNAKE_POISON_START_DAY then
                 inst.components.lootdropper:AddChanceLoot("scorpion", SNAKE_JUNGLETREE_CHANCE)
             else
-                --			if math.random() < 0.5 and TheWorld.state.cycles >= SNAKE_POISON_START_DAY then
-                --			inst.components.lootdropper:AddChanceLoot("snake_poison", SNAKE_JUNGLETREE_POISON_CHANCE)
-                --	else
                 inst.components.lootdropper:AddChanceLoot("snake_amphibious", SNAKE_JUNGLETREE_CHANCE)
-                --			end
             end
         end
     else
@@ -980,7 +976,7 @@ local function tree(name, build, stage, data)
 end
 
 return tree("rainforesttree", "normal", 0),
-    tree("rainforestree_normal", "normal", 2),
+    tree("rainforesttree_normal", "normal", 2),
     tree("rainforesttree_tall", "normal", 3),
     tree("rainforesttree_short", "normal", 1),
     tree("rainforesttree_burnt", "normal", 0, "burnt"),
@@ -988,7 +984,7 @@ return tree("rainforesttree", "normal", 0),
 
 
     tree("rainforesttree_rot", "rot", 0),
-    tree("rainforestree_rot_normal", "rot", 2),
+    tree("rainforesttree_rot_normal", "rot", 2),
     tree("rainforesttree_rot_tall", "rot", 3),
     tree("rainforesttree_rot_short", "rot", 1),
     tree("rainforesttree_rot_burnt", "rot", 0, "burnt"),

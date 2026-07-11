@@ -22,7 +22,6 @@ local function onhammered(inst, worker)
     --	inst.components.lootdropper:DropLoot()
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst:Remove()
-    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_straw")
 end
 
 local function onhit(inst, worker)

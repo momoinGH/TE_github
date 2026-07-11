@@ -4,7 +4,6 @@ PrefabFiles =
     "chicken",                        --鸡
     "quagmire_merm_house",            --破烂的小屋
     -- "quagmire_foods2",             --食物 (已移除，使用基础游戏的 quagmire_foods)
-    "quagmire_salt_rack",             --盐架
     "quagmire_slaughtertool",         --屠宰工具
     "quagmire_seedpackets",           --种子包
     "quagmire_sugarwoodtree_sapling", --棉树苗
@@ -15,7 +14,6 @@ PrefabFiles =
     "quagmire_smallmeat",             --肉碎
     "quagmire_mushroomstump",         --蘑菇
     "quagmire_mushrooms",             --蘑菇
-    "quagmire_pebblecrab",            --石蟹
     "quagmire_safe",                  --保险箱
     "quagmire_parkspike",             --铁栅栏
 
@@ -28,7 +26,6 @@ PrefabFiles =
     "quagmiregoatherd",             --沼地山羊生成器
     "quagmire_swampig",             --沼泽猪
     "quagmire_swampig_house",       --沼泽猪舍
-    "quagmire_pond_salt",           --盐池
     "quagmire_pigeon",              --鸽子
     "quagmire_spiceshrub",          --带斑点的小灌木
     "dug_quagmire_spotspice_shrub", --带斑点的小灌木丛

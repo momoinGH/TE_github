@@ -93,7 +93,7 @@ local function EquipBlowdart(inst)
         blowdart.components.weapon:SetProjectile("blowdart_walrus")
         blowdart:AddComponent("inventoryitem")
         blowdart.persists = false
-        blowdart.components.inventoryitem:SetOnDroppedFn(inst.Remove)
+        blowdart.components.inventoryitem:SetOnDroppedFn(blowdart.Remove)
         blowdart:AddComponent("equippable")
 
         inst.components.inventory:Equip(blowdart)

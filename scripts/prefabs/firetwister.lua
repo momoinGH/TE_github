@@ -14,12 +14,6 @@ local prefabs =
 }
 local TARGET_DIST = 60
 
---local function OnEntitySleep(inst)
---    if inst.shouldGoAway then
---        inst:Remove()
---    end
---end
-
 local function CalcSanityAura(inst, observer)
     if inst.components.combat.target then
         return -TUNING.SANITYAURA_HUGE
@@ -133,7 +127,6 @@ local function validatesack(inst)
 end
 local function OnInit(inst)
     inst.OnEntityWake = validatesack
-    inst.OnEntitySleep = validatesack
     if inst:IsAsleep() then
         validatesack(inst)
     end
@@ -246,9 +239,7 @@ local function fn()
     ------------------
 
     inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("entitysleep", OnEntitySleep)
     inst:ListenForEvent("timerdone", ontimerdone)
-    --    inst:ListenForEvent("killed", OnKill)
 
     ------------------
 

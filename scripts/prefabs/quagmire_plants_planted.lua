@@ -16,7 +16,7 @@ local prefabs =
 	"onion",
 	"wheat",
 	"turnip",
-	"phtato",
+	"potato",
 	"tomato",
 	"garlic",
 }

@@ -14,6 +14,10 @@ local foods =
         cookingtime = 11,
         burningtime = 6,
         override_symbol = "bread",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 02 Potato Chips
     quagmire_food_002 =
@@ -32,6 +36,10 @@ local foods =
         cookingtime = 23,
         burningtime = 6,
         override_symbol = "chips",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 2,
+        health = 1,
     },
     -- 03 Vegetable Soup
     quagmire_food_003 =
@@ -62,6 +70,10 @@ local foods =
         cookingtime = 19,
         burningtime = 7,
         override_symbol = "veggie_soup",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 1,
+        sanity = 5,
+        health = 10,
     },
     -- 04 Jelly Sandwich
     quagmire_food_004 =
@@ -82,6 +94,10 @@ local foods =
         cookingtime = 12,
         burningtime = 5,
         override_symbol = "jelly_sandwich",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 0,
+        health = 2,
     },
     -- 05 Fish Stew
     quagmire_food_005 =
@@ -99,6 +115,10 @@ local foods =
         cookingtime = 21,
         burningtime = 7,
         override_symbol = "fish_stew",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 35,
+        sanity = 5,
+        health = 10,
     },
     -- 06 Turnip Cake
     quagmire_food_006 =
@@ -121,6 +141,10 @@ local foods =
         cookingtime = 23,
         burningtime = 6,
         override_symbol = "turnip_cake",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 30,
+        sanity = 3,
+        health = 20,
     },
     -- 07 Potato Pancakes
     quagmire_food_007 =
@@ -139,6 +163,10 @@ local foods =
         cookingtime = 13,
         burningtime = 5,
         override_symbol = "potato_pancakes",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 50,
+        sanity = 10,
+        health = 50,
     },
     -- 08 Potato Soup
     quagmire_food_008 =
@@ -157,6 +185,10 @@ local foods =
         cookingtime = 17,
         burningtime = 7,
         override_symbol = "potato_soup",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 35,
+        sanity = 5,
+        health = 15,
     },
     -- 09 Fishball Skewers
     quagmire_food_009 =
@@ -175,6 +207,10 @@ local foods =
         cookingtime = 14,
         burningtime = 5,
         override_symbol = "fishball_skewers",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 35,
+        sanity = 3,
+        health = 25,
     },
     -- 10 Meatballs
     quagmire_food_010 =
@@ -193,6 +229,10 @@ local foods =
         cookingtime = 26,
         burningtime = 7,
         override_symbol = "gorge_meatballs",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 62.5,
+        sanity = 5,
+        health = 3,
     },
     -- 11 Meat Skewers
     quagmire_food_011 =
@@ -215,6 +255,10 @@ local foods =
         cookingtime = 13,
         burningtime = 5,
         override_symbol = "meat_skewers",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 40,
+        sanity = 3,
+        health = 15,
     },
     -- 12 Stone Soup
     quagmire_food_012 =
@@ -249,6 +293,10 @@ local foods =
         cookingtime = 19,
         burningtime = 7,
         override_symbol = "stone_soup",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 15,
+        sanity = -10,
+        health = -2,
     },
     -- 13 Croquette
     quagmire_food_013 =
@@ -275,6 +323,10 @@ local foods =
         cookingtime = 13,
         burningtime = 6,
         override_symbol = "croquette",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 30,
+        sanity = 5,
+        health = 10,
     },
     -- 14 Roast Vegetables
     quagmire_food_014 =
@@ -303,6 +355,10 @@ local foods =
         cookingtime = {oven = 23, grill = 13},
         burningtime = {oven = 6, grill = 5},
         override_symbol = "roasted_veggies",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 25,
+        sanity = 10,
+        health = 3,
     },
     -- 15 Meatloaf
     quagmire_food_015 =
@@ -327,6 +383,10 @@ local foods =
         cookingtime = 26,
         burningtime = 6,
         override_symbol = "meatloaf",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 45,
+        sanity = 5,
+        health = 3,
     },
     -- 16 Carrot Soup
     quagmire_food_016 =
@@ -346,6 +406,10 @@ local foods =
         cookingtime = 17,
         burningtime = 7,
         override_symbol = "carrot_soup",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 35,
+        sanity = 3,
+        health = 15,
     },
     -- 17 Fish Pie
     quagmire_food_017 =
@@ -369,6 +433,10 @@ local foods =
         cookingtime = 26,
         burningtime = 6,
         override_symbol = "fish_pie",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 35,
+        sanity = 5,
+        health = 10,
     },
     -- 18 Fish and Chips
     quagmire_food_018 =
@@ -388,6 +456,10 @@ local foods =
         cookingtime = 26,
         burningtime = 6,
         override_symbol = "fish_and_chips",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 25,
+        sanity = -3,
+        health = 0,
     },
     -- 19 Meat Pie
     quagmire_food_019 =
@@ -406,6 +478,10 @@ local foods =
         cookingtime = 26,
         burningtime = 6,
         override_symbol = "meat_pie",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 55,
+        sanity = 3,
+        health = 10,
     },
     -- 20 Sliders
     quagmire_food_020 =
@@ -427,6 +503,10 @@ local foods =
         cookingtime = 16,
         burningtime = 5,
         override_symbol = "slider",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 21 Fist Full of Jam
     quagmire_food_021 =
@@ -444,6 +524,10 @@ local foods =
         cookingtime = 21,
         burningtime = 7,
         override_symbol = "gorge_jam",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 22 Jelly Roll
     quagmire_food_022 =
@@ -462,6 +546,10 @@ local foods =
         cookingtime = 23,
         burningtime = 6,
         override_symbol = "jelly_roll",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 25,
+        sanity = 5,
+        health = 3,
     },
     -- 23 Carrot Cake
     quagmire_food_023 =
@@ -482,6 +570,10 @@ local foods =
         cookingtime = 23,
         burningtime = 6,
         override_symbol = "carrot_cake",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 30,
+        sanity = 10,
+        health = 8,
     },
     -- 24 Garlic Mashed Potatoes
     quagmire_food_024 =
@@ -500,6 +592,10 @@ local foods =
         cookingtime = 19,
         burningtime = 7,
         override_symbol = "mashed_potatoes",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 45,
+        sanity = 0,
+        health = 0,
     },
     -- 25 Garlic Bread
     quagmire_food_025 =
@@ -518,6 +614,10 @@ local foods =
         cookingtime = 23,
         burningtime = 6,
         override_symbol = "garlic_bread",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 25,
+        sanity = -5,
+        health = 20,
     },
     -- 26 Tomato Soup
     quagmire_food_026 =
@@ -536,6 +636,10 @@ local foods =
         cookingtime = 16,
         burningtime = 7,
         override_symbol = "tomato_soup",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 35,
+        sanity = 5,
+        health = 15,
     },
     -- 27 Sausage
     quagmire_food_027 =
@@ -558,6 +662,10 @@ local foods =
         cookingtime = 13,
         burningtime = 5,
         override_symbol = "sausage",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 48,
+        sanity = 3,
+        health = 5,
     },
     -- 28 Candied Fish
     quagmire_food_028 =
@@ -576,6 +684,10 @@ local foods =
         cookingtime = 26,
         burningtime = 6,
         override_symbol = "candied_fish",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 25,
+        sanity = 25,
+        health = -4,
     },
     -- 29 Stuffed Mushroom
     quagmire_food_029 =
@@ -589,6 +701,10 @@ local foods =
         cookingtime = 23,
         burningtime = 6,
         override_symbol = "stuffed_mushroom",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 30,
+        sanity = -2,
+        health = -2,
     },
     -- 30 Ratatouille
     quagmire_food_030 =
@@ -616,6 +732,10 @@ local foods =
         cookingtime = 28,
         burningtime = 6,
         override_symbol = "gorge_ratatouille",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 31 Bruschetta
     quagmire_food_031 =
@@ -639,6 +759,10 @@ local foods =
         cookingtime = 13,
         burningtime = 5,
         override_symbol = "bruschetta",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 2,
+        health = 0,
     },
     -- 32 Meat Stew
     quagmire_food_032 =
@@ -667,6 +791,10 @@ local foods =
         cookingtime = 21,
         burningtime = 7,
         override_symbol = "meat_stew",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 55,
+        sanity = 3,
+        health = 10,
     },
     -- 33 Hamburger
     quagmire_food_033 =
@@ -689,6 +817,10 @@ local foods =
         cookingtime = 16,
         burningtime = 5,
         override_symbol = "hamburger",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 120,
+        sanity = -4,
+        health = -2,
     },
     -- 34 Fish Burger
     quagmire_food_034 =
@@ -711,6 +843,10 @@ local foods =
         cookingtime = 16,
         burningtime = 5,
         override_symbol = "fish_burger",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 100,
+        sanity = -2,
+        health = 0,
     },
     -- 35 Mushroom Burger
     quagmire_food_035 =
@@ -730,6 +866,10 @@ local foods =
         cookingtime = 13,
         burningtime = 5,
         override_symbol = "mushroom_burger",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 80,
+        sanity = -6,
+        health = 0,
     },
     -- 36 Fish Steak
     quagmire_food_036 =
@@ -745,6 +885,10 @@ local foods =
         cookingtime = 17,
         burningtime = 5,
         override_symbol = "fish_steak",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 35,
+        sanity = 5,
+        health = 10,
     },
     -- 37 Curry
     quagmire_food_037 =
@@ -759,6 +903,10 @@ local foods =
         cookingtime = 23,
         burningtime = 7,
         override_symbol = "curry",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 15,
+        sanity = 0,
+        health = 30,
     },
     -- 38 Spaghetti and Meatball
     quagmire_food_038 =
@@ -778,6 +926,10 @@ local foods =
         cookingtime = 19,
         burningtime = 7,
         override_symbol = "spaghetti_and_meatballs",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 150,
+        sanity = 3,
+        health = 3,
     },
     -- 39 Lasagna
     quagmire_food_039 =
@@ -797,6 +949,10 @@ local foods =
         cookingtime = 28,
         burningtime = 6,
         override_symbol = "lasagna",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 40 Poached Fish
     quagmire_food_040 =
@@ -817,6 +973,10 @@ local foods =
         cookingtime = 24,
         burningtime = 7,
         override_symbol = "poached_fish",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 35,
+        sanity = 10,
+        health = 5,
     },
     -- 41 Shepherd's Pie
     quagmire_food_041 =
@@ -839,6 +999,10 @@ local foods =
         cookingtime = 29,
         burningtime = 6,
         override_symbol = "shepherds_pie",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 50,
+        sanity = 2,
+        health = 2,
     },
     -- 42 Candy
     quagmire_food_042 =
@@ -852,6 +1016,10 @@ local foods =
         cookingtime = 5,
         burningtime = 7,
         override_symbol = "candy",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 15,
+        sanity = 0,
+        health = 30,
     },
     -- 43 Bread Pudding
     quagmire_food_043 =
@@ -870,6 +1038,10 @@ local foods =
         cookingtime = 11,
         burningtime = 6,
         override_symbol = "pudding",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 25,
+        sanity = 20,
+        health = -5,
     },
     -- 44 Waffles
     quagmire_food_044 =
@@ -883,6 +1055,10 @@ local foods =
         cookingtime = 5,
         burningtime = 5,
         override_symbol = "waffles",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 45 Berry Tart
     quagmire_food_045 =
@@ -901,6 +1077,10 @@ local foods =
         cookingtime = 24,
         burningtime = 6,
         override_symbol = "berry_tart",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 15,
+        sanity = 5,
+        health = -1,
     },
     -- 46 Macaroni and Cheese
     quagmire_food_046 =
@@ -920,6 +1100,10 @@ local foods =
         cookingtime = 9,
         burningtime = 7,
         override_symbol = "mac_n_cheese",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 30,
+        sanity = -5,
+        health = 0,
     },
     -- 47 Bagel and Fish
     quagmire_food_047 =
@@ -933,6 +1117,10 @@ local foods =
         cookingtime = 14,
         burningtime = 5,
         override_symbol = "bagel_n_fish",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 38,
+        sanity = -2,
+        health = 2,
     },
     -- 48 grilled Cheese
     quagmire_food_048 =
@@ -951,6 +1139,10 @@ local foods =
         cookingtime = 5,
         burningtime = 5,
         override_symbol = "grilled_cheese",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 25,
+        sanity = 0,
+        health = -8,
     },
     -- 49 Cream Of Mushroom Soup
     quagmire_food_049 =
@@ -970,6 +1162,10 @@ local foods =
         cookingtime = 16,
         burningtime = 7,
         override_symbol = "cream_of_mushroom",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = -7,
+        health = 7,
     },
     -- 50 Pierogi
     quagmire_food_050 =
@@ -984,6 +1180,10 @@ local foods =
         cookingtime = 16,
         burningtime = 7,
         override_symbol = "pierogies",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 51 Manicotti
     quagmire_food_051 =
@@ -1003,6 +1203,10 @@ local foods =
         cookingtime = 26,
         burningtime = 6,
         override_symbol = "manicotti",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 35,
+        sanity = 10,
+        health = 10,
     },
     -- 52 Cheeseburger
     quagmire_food_052 =
@@ -1021,6 +1225,10 @@ local foods =
         cookingtime = 17,
         burningtime = 5,
         override_symbol = "cheeseburger",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 60,
+        sanity = -2,
+        health = -8,
     },
     -- 53 Creamy Fettuccine
     quagmire_food_053 =
@@ -1034,6 +1242,10 @@ local foods =
         cookingtime = 19,
         burningtime = 7,
         override_symbol = "fettuccine",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 45,
+        sanity = 5,
+        health = 10,
     },
     -- 54 Onion Soup
     quagmire_food_054 =
@@ -1048,6 +1260,10 @@ local foods =
         cookingtime = 17,
         burningtime = 7,
         override_symbol = "onion_soup",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 25,
+        sanity = -5,
+        health = 5,
     },
     -- 55 Breaded Cutlet
     quagmire_food_055 =
@@ -1061,6 +1277,10 @@ local foods =
         cookingtime = 29,
         burningtime = 6,
         override_symbol = "breaded_cutlet",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 55,
+        sanity = 0,
+        health = 0,
     },
     -- 56 Creamy Fish
     quagmire_food_056 =
@@ -1074,6 +1294,10 @@ local foods =
         cookingtime = 29,
         burningtime = 6,
         override_symbol = "creamy_fish",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 50,
+        sanity = 2,
+        health = 0,
     },
     -- 57 Pizza
     quagmire_food_057 =
@@ -1087,6 +1311,10 @@ local foods =
         cookingtime = 29,
         burningtime = 6,
         override_symbol = "pizza",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 140,
+        sanity = 2,
+        health = -10,
     },
     -- 58 Pot Roast
     quagmire_food_058 =
@@ -1113,6 +1341,10 @@ local foods =
         cookingtime = 32,
         burningtime = 6,
         override_symbol = "pot_roast",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 150,
+        sanity = 0,
+        health = -6,
     },
     -- 59 Crab Cake
     quagmire_food_059 =
@@ -1136,6 +1368,10 @@ local foods =
         cookingtime = 29,
         burningtime = 6,
         override_symbol = "crab_cake",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 30,
+        sanity = 30,
+        health = 5,
     },
     -- 60 Steak Frites
     quagmire_food_060 =
@@ -1155,6 +1391,10 @@ local foods =
         cookingtime = 21,
         burningtime = 5,
         override_symbol = "steak_frites",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 150,
+        sanity = 0,
+        health = 0,
     },
     -- 61 Shooter Sandwich
     quagmire_food_061 =
@@ -1175,6 +1415,10 @@ local foods =
         cookingtime = 19,
         burningtime = 5,
         override_symbol = "shooter_sandwich",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 70,
+        sanity = 0,
+        health = 5,
     },
     -- 62 Bacon Wrapped Meat
     quagmire_food_062 =
@@ -1194,6 +1438,10 @@ local foods =
         cookingtime = 23,
         burningtime = 6,
         override_symbol = "bacon_wrapped_meat",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 160,
+        sanity = -5,
+        health = -10,
     },
     -- 63 Crab Roll
     quagmire_food_063 =
@@ -1221,6 +1469,10 @@ local foods =
         cookingtime = 21,
         burningtime = 5,
         override_symbol = "crab_roll",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 64 Meat Wellington
     quagmire_food_064 =
@@ -1241,6 +1493,10 @@ local foods =
         cookingtime = 23,
         burningtime = 6,
         override_symbol = "meat_wellington",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 65 Crab Ravioli
     quagmire_food_065 =
@@ -1259,6 +1515,10 @@ local foods =
         cookingtime = 21,
         burningtime = 7,
         override_symbol = "crab_ravioli",
+        foodtype = FOODTYPE.MEAT,
+        hunger = 60,
+        sanity = 15,
+        health = 6,
     },
     -- 66 Caramel Cube
     quagmire_food_066 =
@@ -1277,6 +1537,10 @@ local foods =
         cookingtime = 5,
         burningtime = 7,
         override_symbol = "caramel_cube",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 25,
+        sanity = 30,
+        health = -5,
     },
     -- 67 Scone
     quagmire_food_067 =
@@ -1290,6 +1554,10 @@ local foods =
         cookingtime = 13,
         burningtime = 5,
         override_symbol = "scone",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 5,
+        health = 5,
     },
     -- 68 Trifle
     quagmire_food_068 =
@@ -1303,6 +1571,10 @@ local foods =
         cookingtime = 27,
         burningtime = 6,
         override_symbol = "trifle",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 20,
+        sanity = 35,
+        health = -6,
     },
     -- 69 Cheesecake
     quagmire_food_069 =
@@ -1316,6 +1588,10 @@ local foods =
         cookingtime = 27,
         burningtime = 6,
         override_symbol = "cheesecake",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 25,
+        sanity = 35,
+        health = -8,
     },
     -- 70 Syrup
     quagmire_syrup =
@@ -1328,6 +1604,10 @@ local foods =
         cookingtime = 11,
         burningtime = 7,
         override_symbol = "syrup",
+        foodtype = FOODTYPE.VEGGIE,
+        hunger = 0,
+        sanity = 0,
+        health = 0,
     },
 }
 

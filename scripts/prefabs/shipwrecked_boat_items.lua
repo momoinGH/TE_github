@@ -39,12 +39,11 @@ end
 
 local function ondeploywoodlegsboat(inst, pt, deployer)
     local boat = SpawnPrefab(inst.boat)
-    local velaw = SpawnPrefab("woodlegssail")
-    local canhao = SpawnPrefab("boatcannon")
-    boat.components.container:GiveItem(velaw, 1)
-    boat.components.container:GiveItem(canhao, 2)
-
     if boat ~= nil then
+        local velaw = SpawnPrefab("woodlegssail")
+        local canhao = SpawnPrefab("boatcannon")
+        boat.components.container:GiveItem(velaw, 1)
+        boat.components.container:GiveItem(canhao, 2)
         boat.Physics:SetCollides(false)
         boat.Physics:Teleport(pt.x, 0, pt.z)
         boat.Physics:SetCollides(true)

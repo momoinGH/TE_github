@@ -104,20 +104,6 @@ local function SetupEquippable(inst)
     end
 end
 
-local function OnBroken(inst)
-    local owner = inst.components.inventoryitem.owner
-    if owner ~= nil and owner:HasTag("not_hit_stunned") ~= nil then
-        owner:RemoveTag("not_hit_stunned")
-    end
-end
-
-local function OnRepaired(inst)
-    local owner = inst.components.inventoryitem.owner
-    if owner ~= nil and owner:HasTag("not_hit_stunned") == nil then
-        owner:AddTag("not_hit_stunned")
-    end
-end
-
 local function OnTakeDamage(inst, damage_amount)
     local owner = inst.components.inventoryitem.owner
     if owner then

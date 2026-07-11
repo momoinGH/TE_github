@@ -4,35 +4,35 @@ require "behaviours/doaction"
 require "behaviours/panic"
 require "behaviours/follow"
 
-local BrainCommon              = require "brains/braincommon"
+local BrainCommon         = require "brains/braincommon"
 
-local SEE_PLAYER_DIST          = 5
-local SEE_FOOD_DIST            = 10
-local MAX_WANDER_DIST          = 15
-local MAX_CHASE_TIME           = 10
-local MAX_CHASE_DIST           = 20
-local RUN_AWAY_DIST            = 5
-local STOP_RUN_AWAY_DIST       = 8
+local SEE_PLAYER_DIST     = 5
+local SEE_FOOD_DIST       = 10
+local MAX_WANDER_DIST     = 15
+local MAX_CHASE_TIME      = 10
+local MAX_CHASE_DIST      = 20
+local RUN_AWAY_DIST       = 5
+local STOP_RUN_AWAY_DIST  = 8
 
-local MIN_FOLLOW_DIST          = 1
-local TARGET_FOLLOW_DIST       = 5
-local MAX_FOLLOW_DIST          = 9
+local MIN_FOLLOW_DIST     = 1
+local TARGET_FOLLOW_DIST  = 5
+local MAX_FOLLOW_DIST     = 9
 
-local SEE_TREE_DIST            = 15
-local KEEP_CHOPPING_DIST       = 10
+local SEE_TREE_DIST       = 15
+local KEEP_CHOPPING_DIST  = 10
 
-local SEE_ROCK_DIST            = 15
-local KEEP_MINING_DIST         = 10
+local SEE_ROCK_DIST       = 15
+local KEEP_MINING_DIST    = 10
 
-local SEE_HAMMER_DIST          = 15
-local KEEP_HAMMERING_DIST      = 10
+local SEE_HAMMER_DIST     = 15
+local KEEP_HAMMERING_DIST = 10
 
-local SEE_THRONE_DISTANCE      = 50
+local SEE_THRONE_DISTANCE = 50
 
-local FACETIME_BASE            = 2
-local FACETIME_RAND            = 2
+local FACETIME_BASE       = 2
+local FACETIME_RAND       = 2
 
-local MermBrain                = Class(Brain, function(self, inst)
+local MermBrain           = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
@@ -52,7 +52,7 @@ local function KeepFaceTargetFn(inst, target)
         return nil
     end
     local keepface = (inst.components.follower.leader and inst.components.follower.leader == target) or
-    (target:IsValid() and inst:IsNear(target, SEE_PLAYER_DIST))
+        (target:IsValid() and inst:IsNear(target, SEE_PLAYER_DIST))
     if not keepface then
         inst.components.timer:StopTimer("facetime")
     end
@@ -178,8 +178,10 @@ local function EatFoodAction(inst)
     end
     if target ~= nil then
         local act = BufferedAction(inst, target, ACTIONS.EAT)
-        act.validfn = function() return target.components.inventoryitem == nil or
-            target.components.inventoryitem.owner == nil or target.components.inventoryitem.owner == inst end
+        act.validfn = function()
+            return target.components.inventoryitem == nil or
+                target.components.inventoryitem.owner == nil or target.components.inventoryitem.owner == inst
+        end
         return act
     end
 end
@@ -272,16 +274,17 @@ function MermBrain:OnStart()
                 "panic with king",
                 BrainCommon.PanicWhenScared(self.inst, .25, "MERM_TALK_PANICBOSS")),
             IfNode(
-                function() return not TheWorld.components.mermkingmanager or not TheWorld.components.mermkingmanager
-                    .king end, "panic with no king",
+                function() return not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager.king) end, "panic with no king",
                 BrainCommon.PanicWhenScared(self.inst, .25, "MERM_TALK_PANICBOSS")),
             WhileNode(
-            function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end,
+                function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end,
                 "PanicHaunted", Panic(self.inst)),
             WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
             WhileNode(
-                function() return self.inst.components.combat.target == nil or
-                    not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+            function()
+                    return self.inst.components.combat.target == nil or
+                        not self.inst.components.combat:InCooldown()
+                end, "AttackMomentarily",
                 ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST))),
             WhileNode(
                 function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end,

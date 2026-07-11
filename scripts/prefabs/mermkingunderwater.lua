@@ -66,7 +66,7 @@ end
 local function ShouldAcceptItem(inst, item, giver)
     if giver:HasTag("player") then
         local can_eat = (item.components.edible and inst.components.eater:CanEat(item)) and
-        (inst.components.hunger and inst.components.hunger:GetPercent() < 1)
+            (inst.components.hunger and inst.components.hunger:GetPercent() < 1)
         return can_eat or item:HasTag("fish")
     end
     return false
@@ -323,60 +323,6 @@ end
 
 local function OnGiveUpTarget(inst, data)
     ReturnMerms(inst)
-end
-
-local function OnSave(inst, data)
-    local ents = {}
-
-    if inst.guards_available ~= nil then
-        data.guards_available = inst.guards_available
-    end
-
-    if inst.guards and #inst.guards then
-        data.guards = {}
-        for i, v in ipairs(inst.guards) do
-            table.insert(data.guards, v.GUID)
-            table.insert(ents, v.GUID)
-        end
-    end
-
-    if inst.call_guard_task then
-        data.task_remaining = GetTaskRemaining(inst.call_guard_task)
-    end
-
-    return ents
-end
-
-local function OnLoadPostPass(inst, newents, savedata)
-    if savedata.guards_available then
-        inst.guards_available = savedata.guards_available
-    end
-
-    inst.guards = {}
-    if savedata.guards then
-        for i, v in ipairs(savedata.guards) do
-            local guard = newents[v].entity
-            if guard then
-                table.insert(inst.guards, guard)
-                guard.king = inst
-                guard.return_to_king = true
-
-                inst:ListenForEvent("death", OnGuardDeath, guard)
-                inst:ListenForEvent("onremove", OnGuardRemoved, guard)
-                inst:ListenForEvent("enterlimbo", OnGuardEnterLimbo, guard)
-            else
-                print("ERROR, COULD NOT FIND GUARD WITH PROVIDED GUID")
-            end
-        end
-    end
-
-    if savedata.task_remaining then
-        inst.call_guard_task = inst:DoTaskInTime(savedata.task_remaining,
-            function()
-                inst.guards_available = 4
-                inst.call_guard_task = nil
-            end)
-    end
 end
 
 local function OnEntityWake(inst)

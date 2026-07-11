@@ -10,11 +10,11 @@ local function getrevealtargetpos(inst, doer)
     if pos then
         local empty_bottle = SpawnPrefab("messagebottleempty")
         empty_bottle.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst:Remove()
         local inventory = inst.components.inventoryitem:GetContainer()
         if inventory ~= nil then
             inventory:GiveItem(empty_bottle)
         end
+        inst:Remove()
         return pos
     end
 

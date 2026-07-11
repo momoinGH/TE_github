@@ -166,7 +166,7 @@ local function makebird(name, sounds, feather_name)
         inst.components.locomotor:SetTriggersCreep(false)
 
         inst:AddComponent("lootdropper")
-        inst.components.lootdropper:AddRandomLoot("feather_" .. feather_name, 1)
+        inst.components.lootdropper:AddRandomLoot("feather_" .. featherpostfix, 1)
         inst.components.lootdropper:AddRandomLoot("smallmeat", 1)
         inst.components.lootdropper.numrandomloot = 1
 

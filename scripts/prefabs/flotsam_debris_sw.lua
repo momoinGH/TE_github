@@ -61,7 +61,7 @@ local function MakeFlotsamDebris(name, build, loots)
         inst.components.workable:SetOnFinishCallback(onhammered)
 
         inst:AddComponent("lootdropper")
-        inst.components.lootdropper:SetLoot({ "boards" })
+        inst.components.lootdropper:SetLoot(loots)
 
         return inst
     end

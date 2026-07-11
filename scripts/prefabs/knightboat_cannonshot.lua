@@ -55,33 +55,6 @@ local function onthrown(inst, thrower, pt, time_to_target)
     end)
 end
 
-
-
-
-
-local function Explode(inst)
-    local prefab = "mushroombomb"
-    local fx = SpawnPrefab(prefab)
-    fx.Transform:SetPosition(x, y, z)
-    fx.AnimState:PlayAnimation("explode")
-    fx.Transform:SetScale(2.5, 2.5, 2.5)
-    fx:DoTaskInTime(fx.AnimState:GetCurrentAnimationLength(), fx.Remove)
-    fx.persists = false
-
-    fx._explode:push()
-    FadeOut(fx)
-
-    if not TheNet:IsDedicated() then
-        CreateGroundFX(fx)
-    end
-
-    inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/spore_explode")
-    inst.SoundEmitter:KillSound("hiss")
-    inst.components.explosive:OnBurnt()
-end
-
-
-
 local function onremove(inst)
     inst.SoundEmitter:KillSound("hiss")
     if inst.UpdateTask then
@@ -133,7 +106,7 @@ local function fn(Sim)
     return inst
 end
 
-local function onthrowncannon(inst, attacker, target)
+local function onthrowncannon(inst)
     inst._fx = SpawnPrefab("torchfire")
     inst._fx.entity:SetParent(inst.entity)
     inst._fx.entity:AddFollower()

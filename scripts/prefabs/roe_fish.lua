@@ -520,7 +520,7 @@ local function MakeFish(name, has_cooked, has_seeds)
         inst:AddTag("packimfood")
         inst:AddTag("cru")
 
-        local dryablefish = name == "fish2" or "fish3" or "fish4" or "fish5" or "coi" or "salmon"
+        local dryablefish = name == "fish2" or name == "fish3" or name == "fish4" or name == "fish5" or name == "coi" or name == "salmon"
 
         if dryablefish then
             inst:AddTag("dryable")

@@ -315,7 +315,7 @@ local function CreateQueenChambers()
             builder:AddRoomProp(idx, { name = "throne_wall", x_offset = -1, z_offset = 6 })
 
             builder:AddRoomProp(idx, { name = "throne_wall", x_offset = -3.25, z_offset = 1 })
-            builder:AddRoomProp(idx, { name = "throne_wall", x_offset = -3.25, .5 })
+            builder:AddRoomProp(idx, { name = "throne_wall", x_offset = -3.25, z_offset = .5 })
             builder:AddRoomProp(idx, { name = "throne_wall", x_offset = -3.25, z_offset = -0 })
             builder:AddRoomProp(idx, { name = "throne_wall", x_offset = -3.25, z_offset = -0.5 })
             builder:AddRoomProp(idx, { name = "throne_wall", x_offset = -3.25, z_offset = -1 })
@@ -399,9 +399,9 @@ local function CreateMaze(entrance_num)
         if room.isChamberEntrance then
             local antqueen_chamber_pts =
             {
-                { x = (depth / 2) - 3.5, z = (width / 2) - 5.5 },
+                { x = (depth / 2) - 3.5,  z = (width / 2) - 5.5 },
                 { x = -(depth / 2) + 3.5, z = (width / 2) - 5.5 },
-                { x = (depth / 2) - 3.5, z = -(width / 2) + 5.5 },
+                { x = (depth / 2) - 3.5,  z = -(width / 2) + 5.5 },
                 { x = -(depth / 2) + 3.5, z = -(width / 2) + 5.5 },
             }
             local spawn_pt = antqueen_chamber_pts[math.random(1, #antqueen_chamber_pts)]

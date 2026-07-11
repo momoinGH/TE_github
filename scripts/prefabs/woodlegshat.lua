@@ -37,7 +37,7 @@ local function treasure(_, _, inst)
 
     if player == owner and player.player_classified ~= nil then
         -- 如果玩家正在装备，就打开地图提示一下
-        if self.open_map_on_reveal then
+        if inst.components.equippable:IsEquipped() then
             player.player_classified.revealmapspot_worldx:set(x)
             player.player_classified.revealmapspot_worldz:set(z)
             player.player_classified.revealmapspotevent:push()

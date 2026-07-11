@@ -14,34 +14,13 @@ local itemprefabs =
     "tar_trap",
 }
 
-local function findFloodGridNum(num)
-    -- the flood grid is is the center of a 2x2 tile pattern. So 1,3,5,7..
-    if math.mod(num, 2) == 0 then
-        num = num + 1
-    end
-    return num
-end
-
-local function quantizepos(pt)
-    local x, y, z = pt:Get()
-    y = 0
-
-    local nx = findFloodGridNum(math.floor(x))
-    local ny = 0
-    local nz = findFloodGridNum(math.floor(z))
-
-    return Vector3(nx, ny, nz)
-end
-
-local function onRemove(inst)
-    for i, slowedinst in pairs(inst.slowed_objects) do
-        i.slowing_objects[inst] = nil
-    end
-end
-
 local function updateAnim(inst)
+    if inst.components.fueled.currentfuel <= 0 then
+        inst:Remove()
+        return
+    end
+
     local fuelAnim = 0
-    if inst.components.fueled.currentfuel <= 0 then inst:Remove() end
     if inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.25 then
         fuelAnim = "idle_25"
     elseif inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.50 then
@@ -56,7 +35,6 @@ end
 
 
 local function updateslowdowners(inst)
-    local ground = TheWorld
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 1, { "locomotor" })
 
@@ -83,7 +61,7 @@ local function updateslowdowners(inst)
         end
     end
 
-    inst:DoTaskInTime(2 / 30, function(inst) updateslowdowners(inst) end)
+    inst:DoTaskInTime(2 / 30, updateslowdowners)
     updateAnim(inst)
 end
 
@@ -143,24 +121,22 @@ local function fn(Sim)
     inst.components.fueled:SetSections(4)
     inst.components.fueled:InitializeFuelLevel(TAR_TRAP_TIME / 2)
     inst.components.fueled:SetDepletedFn(function(inst) inst:Remove() end)
-    inst.components.fueled:SetSectionCallback(
-        function(section)
-            if section == 0 then
-                --when we burn out
-                if inst.components.burnable then
-                    inst.components.burnable:Extinguish()
-                end
-            else
-                updateAnim(inst, section)
+    inst.components.fueled:SetSectionCallback(function(section)
+        if section == 0 then
+            --when we burn out
+            if inst.components.burnable then
+                inst.components.burnable:Extinguish()
             end
-        end)
+        else
+            updateAnim(inst)
+        end
+    end)
     inst.components.fueled.fueltype = FUELTYPE.TAR
 
     onBuilt(inst)
 
     inst.slowed_objects = {}
-    inst.OnRemoveEntity = onRemove
-    inst:DoTaskInTime(1 / 30, function(inst) updateslowdowners(inst) end)
+    inst:DoTaskInTime(1 / 30, updateslowdowners)
 
     return inst
 end
@@ -171,7 +147,6 @@ local function ondeploy(inst, pt, deployer)
     wall.AnimState:PushAnimation("idle_full")
 
     if wall then
-        --     pt = quantizepos(pt)
         wall.Transform:SetPosition(pt.x, 0, pt.z)
     end
     inst:Remove()

@@ -81,7 +81,7 @@ local function fn(Sim)
 
 	-- Since they are so similiar, we don't bother remembering which type it is and just re-roll every time
 	if math.random() < .5 then
-		inst.animnum = "idle_2"
+		inst.animnum = "idle_1"
 	else
 		inst.animnum = "idle_2"
 	end

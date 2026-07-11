@@ -57,14 +57,12 @@ end
 local function fadeout(inst)
     if inst.components.fader then
         inst.components.fader:StopAll()
-    end
-    if inst:IsAsleep() then
-        if inst.components.fader then
+        if inst:IsAsleep() then
             inst.Light:SetIntensity(0)
+        else
+            inst.components.fader:Fade(INTENSITY, 0, .75 + math.random() * 1, function(v) inst.Light:SetIntensity(v) end,
+                function() inst.Light:Enable(false) end)
         end
-    else
-        inst.components.fader:Fade(INTENSITY, 0, .75 + math.random() * 1, function(v) inst.Light:SetIntensity(v) end,
-            function() inst.Light:Enable(false) end)
     end
 end
 
@@ -219,18 +217,6 @@ local function ShouldSleep(inst)
         and (not TheWorld:HasTag("cave") and TheWorld.state.isnight
             -- in caves, sleep at night if we have a lightwatcher and are in the dark
             or (TheWorld:HasTag("cave") and TheWorld.state.iscavenight and (not watchlight or not inst:IsInLight())))
-end
-
-local function fn()
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-
-
-    return inst
 end
 
 local function spawnRabidBeetle(inst)

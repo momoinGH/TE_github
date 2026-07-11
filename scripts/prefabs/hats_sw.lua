@@ -14,7 +14,7 @@ local function MakeHat(name, bankparam, prefabnameparam)
 
     local function onequip(inst, owner, symbol_override)
         local skin_build = inst:GetSkinBuild()
-        local symbol_override = symbol_override and "swap_hat" or "swap_hat"
+        symbol_override = "swap_hat"
 
         if skin_build ~= nil then
             owner:PushEvent("equipskinneditem", inst:GetSkinName())

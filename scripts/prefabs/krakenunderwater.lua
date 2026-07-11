@@ -209,14 +209,8 @@ local function SpawnChest(inst)
             chest.components.container:GiveItem(single5)
         end
 
-
-        if math.random() > 0.5 then
-            local single6 = SpawnPrefab("ruinshat")
-            chest.components.container:GiveItem(single6)
-        else
-            local single6 = SpawnPrefab("ruinshat")
-            chest.components.container:GiveItem(single6)
-        end
+        local single6 = SpawnPrefab("ruinshat")
+        chest.components.container:GiveItem(single6)
 
         if math.random() > 0.5 then
             local single7 = SpawnPrefab("flare")

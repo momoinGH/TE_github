@@ -138,9 +138,9 @@ local DECIDROOTTARGET_CANT_TAGS = { "INLIMBO" }
 
 local function OnAttackedByDecidRoot(inst, attacker)
     local share_target_dist = inst:HasTag("mermguard") and TUNING.MERM_GUARD_SHARE_TARGET_DIST or
-    TUNING.MERM_SHARE_TARGET_DIST
+        TUNING.MERM_SHARE_TARGET_DIST
     local max_target_shares = inst:HasTag("mermguard") and TUNING.MERM_GUARD_MAX_TARGET_SHARES or
-    TUNING.MERM_MAX_TARGET_SHARES
+        TUNING.MERM_MAX_TARGET_SHARES
 
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(share_target_dist) * .5, DECIDROOTTARGET_MUST_TAGS,
@@ -164,9 +164,9 @@ local function OnAttacked(inst, data)
         OnAttackedByDecidRoot(inst, attacker.owner)
     elseif attacker and inst.components.combat:CanTarget(attacker) and attacker.prefab ~= "deciduous_root" then
         local share_target_dist = inst:HasTag("mermguard") and TUNING.MERM_GUARD_SHARE_TARGET_DIST or
-        TUNING.MERM_SHARE_TARGET_DIST
+            TUNING.MERM_SHARE_TARGET_DIST
         local max_target_shares = inst:HasTag("mermguard") and TUNING.MERM_GUARD_MAX_TARGET_SHARES or
-        TUNING.MERM_MAX_TARGET_SHARES
+            TUNING.MERM_MAX_TARGET_SHARES
 
         inst.components.combat:SetTarget(attacker)
 
@@ -217,7 +217,7 @@ end
 local function OnGetItemFromPlayer(inst, giver, item)
     local loyalty_max = inst:HasTag("mermguard") and TUNING.MERM_GUARD_LOYALTY_MAXTIME or TUNING.MERM_LOYALTY_MAXTIME
     local loyalty_per_hunger = inst:HasTag("mermguard") and TUNING.MERM_GUARD_LOYALTY_PER_HUNGER or
-    TUNING.MERM_LOYALTY_PER_HUNGER
+        TUNING.MERM_LOYALTY_PER_HUNGER
 
     if item.components.edible ~= nil then
         if inst.components.combat:TargetIs(giver) then
@@ -336,12 +336,12 @@ end
 local function ShouldSleep(inst)
     return NocturnalSleepTest(inst)
         and ((inst.components.follower == nil or inst.components.follower.leader) == nil and
-            not TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
+            not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst)))
 end
 
 local function ShouldWakeUp(inst)
     return NocturnalWakeTest(inst) or
-    (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
+        (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
 end
 
 local function OnTimerDone(inst, data)

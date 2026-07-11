@@ -42,11 +42,11 @@ local room = {
     addprops = {
         { name = "interior_wall_wood" },
         { name = "deco_roomglow" },
-        { name = "deco_antiquities_cornerbeam", x_offset = -5.5, z_offset = -8.3, },
-        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 8.3, scale = { -1, 1 } },
-        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = -15 / 2 - 0.3, },
-        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, scale = { -1, 1 } },
-        { name = "swinging_light_rope_1", x_offset = -2, y_offset = 1, addtags = { "playercrafted" } },
+        { name = "deco_antiquities_cornerbeam",  x_offset = -5.5, z_offset = -8.3, },
+        { name = "deco_antiquities_cornerbeam",  x_offset = -5,   z_offset = 8.3,           scale = { -1, 1 } },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,  z_offset = -15 / 2 - 0.3, },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,  z_offset = 15 / 2 + 0.3,  scale = { -1, 1 } },
+        { name = "swinging_light_rope_1",        x_offset = -2,   y_offset = 1,             addtags = { "playercrafted" } },
         { name = "interior_floor_wood" },
     }
 }
@@ -120,7 +120,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 local function PlacerOnUpdateTransform(inst)
-    local door_orientation, minDis = RoomUtils.TestWallOrnamentPos(inst, true, true)  --门可建造范围，太靠墙会导致玩家过不去
+    local door_orientation, minDis = RoomUtils.TestWallOrnamentPos(inst, true, true) --门可建造范围，太靠墙会导致玩家过不去
     local anim
     if door_orientation and minDis < 4 then
         anim = "_close_" .. door_orientation
@@ -184,7 +184,6 @@ end
 
 local function MakeExitDoor(name, anim)
     local function CommonPost(inst)
-
         inst:SetPrefabNameOverride("city_exit_old_door")
 
         inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
@@ -195,13 +194,11 @@ local function MakeExitDoor(name, anim)
         inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
         inst.components.trader.onaccept = onaccept
 
-        inst.components.teleporter.onActivate = OnActivate
+        inst.components.teleporter.onActivate = OnTeleporting
 
         inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
 
         inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-        inst.components.teleporter.onActivate = OnTeleporting
 
         inst.usesound = "dontstarve_DLC003/common/objects/store/door_close"
     end

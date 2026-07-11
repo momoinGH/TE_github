@@ -9,13 +9,6 @@ local prefabs =
 	"green_rain",
 }
 
-local function getspawnlocation(inst, target)
-	local x1, y1, z1 = inst.Transform:GetWorldPosition()
-	local x2, y2, z2 = target.Transform:GetWorldPosition()
-	return x1 + .15 * (x2 - x1), 0, z1 + .15 * (z2 - z1)
-end
-
-
 local function unslow(inst)
 	inst.components.locomotor.externalspeedmultiplier = 1
 	inst:RemoveTag("slowed")
@@ -146,12 +139,9 @@ end
 local function OnGetItem(inst, giver, item)
 	local finiteuses = inst.components.finiteuses:GetPercent()
 	if giver:HasTag("windy1") and giver:HasTag("windy2") then
-		inst.components.finiteuses:SetPercent(finiteuses + 0.40)
+		inst.components.finiteuses:SetPercent(math.min(finiteuses + 0.40, 1))
 	else
-		inst.components.finiteuses:SetPercent(finiteuses + 0.10)
-	end
-	if finiteuses >= 1 then
-		inst.components.finiteuses:SetPercent(1)
+		inst.components.finiteuses:SetPercent(math.min(finiteuses + 0.10, 1))
 	end
 end
 

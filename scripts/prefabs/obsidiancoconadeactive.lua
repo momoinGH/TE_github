@@ -98,9 +98,7 @@ local function Explode(inst)
     if inst:IsOnOcean() then
         TroSpawnAttackWavesForEnt(inst, nil, nil, 8, 360, 6, "rogue_wave")
     end
-    local prefab = "mushroombomb"
-    local fx = SpawnPrefab(prefab)
-    fx.Transform:SetPosition(x, y, z)
+    local fx = SpawnAt("mushroombomb", inst)
     fx.AnimState:PlayAnimation("explode")
     fx.Transform:SetScale(2.5, 2.5, 2.5)
     fx:DoTaskInTime(fx.AnimState:GetCurrentAnimationLength(), fx.Remove)
@@ -133,7 +131,6 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
     inst:AddTag("explosive")
     inst:AddTag("SCARYTOPREY")
-
 
     inst.entity:SetPristine()
 

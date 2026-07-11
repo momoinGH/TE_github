@@ -123,7 +123,7 @@ local function SetStage(inst, stage, source, snap_to_stage)
 
     if STAGES[targetstage].isdriedup then
         if inst.remove_on_dryup then
-            inst.presists = false
+            inst.persists = false
             if inst:IsAsleep() then
                 inst:Remove()
             else
@@ -154,7 +154,7 @@ local function SetStage(inst, stage, source, snap_to_stage)
         if source == "work" then
             for i = currentstage, targetstage + 1, -1 do
                 local pt = inst:GetPosition()
-                for i = 1, math.random(STAGES[i].icecount) do
+                for _ = 1, math.random(STAGES[i].icecount) do
                     inst.components.lootdropper:SpawnLootPrefab("ice", pt)
                 end
             end

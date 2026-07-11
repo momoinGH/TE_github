@@ -28,11 +28,11 @@ end
 
 return {
     master_postinit = function(inst)
+        inst.AnimState:OverrideSymbol("shell", "quagmire_pebble_crab", "shell")
+
         inst.sounds = sounds
 
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
-
         inst:AddComponent("inspectable")
 
         inst:AddComponent("finiteuses")
@@ -41,6 +41,7 @@ return {
         inst.components.finiteuses:SetOnFinished(on_usedup)
 
         inst:AddComponent("trap")
+        -- inst.components.trap.targettag = "crab"
         inst.components.trap.targettag = "canbetrapped"
         inst.components.trap:SetOnHarvestFn(onharvested)
         inst.components.trap.baitsortorder = 1

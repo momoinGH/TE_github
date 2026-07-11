@@ -38,19 +38,6 @@ local prefabs =
 
 local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, 20, function(dude)
-        return dude:HasTag("commonfish") and not dude.components.health:IsDead()
-    end, 5)
-end
-
-local function KeepTarget(inst, target)
-    local homePos = inst.components.knownlocations:GetLocation("herd")
-    local targetPos = Vector3(target.Transform:GetWorldPosition())
-    return homePos and distsq(homePos, targetPos) < MAX_CHASEAWAY_DIST * MAX_CHASEAWAY_DIST
-end
-
-local function OnAttacked(inst, data)
-    inst.components.combat:SetTarget(data.attacker)
 end
 
 local function OnTimerDone(inst, data)

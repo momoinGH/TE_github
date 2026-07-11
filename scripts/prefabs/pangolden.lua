@@ -93,13 +93,15 @@ local function fn(Sim)
     inst:AddTag("animal")
     inst:AddTag("largecreature")
 
+    inst.entity:SetPristine()
+
     if not TheWorld.ismastersim then
         return inst
     end
 
     inst:AddComponent("eater")
     inst.components.eater.foodprefs = { "GOLDDUST" }
-    inst.components.eater.ablefoods = { "GOLDUST" }
+    inst.components.eater.ablefoods = { "GOLDDUST" }
     inst.components.eater.oneatfn = function()
         inst.goldlevel = inst.goldlevel + EATEN_GOLD
     end
@@ -117,7 +119,6 @@ local function fn(Sim)
     inst.components.lootdropper:SetChanceLootTable('pangolden')
 
     inst:AddComponent("inspectable")
-    inst.entity:SetPristine()
 
     inst:AddComponent("knownlocations")
 

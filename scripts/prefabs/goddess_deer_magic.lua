@@ -17,14 +17,11 @@ local function TriggerFX(inst)
     end
     inst.fx = {}
     inst.fxcount = 0
-    local function onremovefx(fx)
-        OnFXKilled(inst)
-    end
     for i, v in ipairs(inst.fxprefabs) do
         local fx = SpawnPrefab(v)
         fx.entity:SetParent(inst.entity)
         inst.fxcount = inst.fxcount + 1
-        inst:ListenForEvent("onremove", onremovefx, fx)
+        -- inst:ListenForEvent("onremove", onremovefx, fx)
         table.insert(inst.fx, fx)
     end
 end

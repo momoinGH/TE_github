@@ -439,10 +439,10 @@ local function chop_down_tree_leif(inst, chopper)
 	if days_survived >= LEIF_MIN_DAY then
 		if math.random() <= LEIF_PERCENT_CHANCE then
 			local numleifs = 1
-			if days_survived > 60 then
-				numleifs = math.random(1, 3)
-			elseif days_survived > 120 then
+			if days_survived > 120 then
 				numleifs = math.random(2, 4)
+			elseif days_survived > 60 then
+				numleifs = math.random(1, 3)
 			end
 
 			local notags = { "FX", "NOCLICK", "INLIMBO", "stump", "burnt" }
@@ -461,31 +461,31 @@ local function chop_down_tree_leif(inst, chopper)
 					target.noleif = true
 					target.leifscale = growth_stages[target.components.growable.stage].leifscale or 1
 					target:DoTaskInTime(1 + math.random() * 3, function()
-						if target and not target:HasTag("stump") and not target:HasTag("burnt") and
-							target.components.growable and target.components.growable.stage <= 3 then
-							local target = target
-							if builds[target.build] and builds[target.build].leif then
-								local leif = SpawnPrefab("jungletreeguard")
-								if leif then
-									local scale = target.leifscale
-									local r, g, b, a = target.AnimState:GetMultColour()
-									leif.AnimState:SetMultColour(r, g, b, a)
+						if target
+							and not target:HasTag("stump")
+							and not target:HasTag("burnt")
+							and target.components.growable and target.components.growable.stage <= 3
+							and builds[target.build] and builds[target.build].leif
+						then
+							local leif = SpawnPrefab("jungletreeguard")
+							if leif then
+								local scale = target.leifscale
+								local r, g, b, a = target.AnimState:GetMultColour()
+								leif.AnimState:SetMultColour(r, g, b, a)
 
-									--we should serialize this?
-									leif.components.locomotor.walkspeed = leif.components.locomotor.walkspeed * scale
-									leif.components.combat.defaultdamage = leif.components.combat.defaultdamage * scale
-									leif.components.health.maxhealth = leif.components.health.maxhealth * scale
-									leif.components.health.currenthealth = leif.components.health.currenthealth * scale
-									leif.components.combat.hitrange = leif.components.combat.hitrange * scale
-									leif.components.combat.attackrange = leif.components.combat.attackrange * scale
+								--we should serialize this?
+								leif.components.locomotor.walkspeed = leif.components.locomotor.walkspeed * scale
+								leif.components.combat.defaultdamage = leif.components.combat.defaultdamage * scale
+								leif.components.health.maxhealth = leif.components.health.maxhealth * scale
+								leif.components.health.currenthealth = leif.components.health.currenthealth * scale
+								leif.components.combat.hitrange = leif.components.combat.hitrange * scale
+								leif.components.combat.attackrange = leif.components.combat.attackrange * scale
 
-									leif.Transform:SetScale(scale, scale, scale)
-									leif.components.combat:SuggestTarget(chopper)
-									leif.sg:GoToState("spawn")
-									target:Remove()
-
-									leif.Transform:SetPosition(target.Transform:GetWorldPosition())
-								end
+								leif.Transform:SetScale(scale, scale, scale)
+								leif.components.combat:SuggestTarget(chopper)
+								leif.sg:GoToState("spawn")
+								leif.Transform:SetPosition(target.Transform:GetWorldPosition())
+								target:Remove()
 							end
 						end
 					end)
@@ -627,14 +627,14 @@ local function makefn(build, stage, data)
 
 		minimap:SetPriority(-1)
 
-        inst:SetPrefabName(GetBuild(inst).prefab_name)
+		inst:SetPrefabName(GetBuild(inst).prefab_name)
 
 		inst:AddTag("tree")
 		inst:AddTag("workable")
 		inst:AddTag("shelter")
 		inst:AddTag("gustable")
 		inst:AddTag("plant")
-        inst:AddTag("jungletree")
+		inst:AddTag("jungletree")
 
 		inst.build = build
 		anim:SetBuild(GetBuild(inst).file)
@@ -678,8 +678,8 @@ local function makefn(build, stage, data)
 
 		inst.growfromseed = handler_growfromseed
 
-        inst:AddComponent("plantregrowth")
-        inst.components.plantregrowth:SetRegrowthRate(TUNING.EVERGREEN_REGROWTH.OFFSPRING_TIME)
+		inst:AddComponent("plantregrowth")
+		inst.components.plantregrowth:SetRegrowthRate(TUNING.EVERGREEN_REGROWTH.OFFSPRING_TIME)
 
 		---------------------
 		--PushSway(inst)

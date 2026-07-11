@@ -8,10 +8,6 @@ local prefabs =
     "ox",
 }
 
-local VALID_TILES = table.invert(
-    {
-        GROUND.MARSH,
-    })
 local function SpawnOx(spawn_point)
     local plant = SpawnPrefab("ox")
     plant.Transform:SetPosition(spawn_point.x, spawn_point.y, spawn_point.z)
@@ -19,9 +15,7 @@ local function SpawnOx(spawn_point)
 end
 local LAND_CHECK_RADIUS = 6
 local function FindLandNextToWater(playerpos, waterpos)
-    --print("FindWalkableOffset:")
     local radius = 12
-    local ground = TheWorld
 
     local test = function(offset)
         local run_point = waterpos + offset
@@ -34,7 +28,6 @@ local function FindLandNextToWater(playerpos, waterpos)
     -- returns offset, check_angle, deflected
     local loc, landAngle, deflected = FindValidPositionByFan(0, radius, 8, test)
     if loc then
-        --print("Fan angle=",landAngle)
         return waterpos + loc, landAngle, deflected
     end
 end
@@ -61,7 +54,6 @@ local function IsNotNextToLand(pt)
     end
 
     local cang = (math.random() * 360) * DEGREES
-    --print("cang:",cang)
     local loc, landAngle, deflected = FindValidPositionByFan(cang, radius, 7, test)
     if loc ~= nil then
         return landPos, tmpAng, deflected
@@ -72,8 +64,7 @@ local function GetSpawnPoint(pt)
         local spawnpoint = pt + offset
         local spawnpoint_x, spawnpoint_y, spawnpoint_z = (pt + offset):Get()
         return not TheWorld.Map:IsAboveGroundAtPoint(spawnpoint:Get())
-            and not VALID_TILES[TheWorld.Map:GetTileAtPoint(spawnpoint:Get())] ~= nil and
-            not TheWorld.Map:IsPassableAtPoint(spawnpoint:Get()) and IsNotNextToLand(spawnpoint)
+            and not TheWorld.Map:IsPassableAtPoint(spawnpoint:Get()) and IsNotNextToLand(spawnpoint)
     end
 
     local theta = math.random() * 2 * PI
@@ -117,7 +108,6 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
-    --inst:AddTag("CLASSIFIED")
 
     inst:DoTaskInTime(1, SpawnOxPre)
 

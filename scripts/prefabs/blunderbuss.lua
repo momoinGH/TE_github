@@ -134,8 +134,8 @@ local function fn()
 end
 
 local function OnHit(inst, attacker, target, weapon)
-    local impactfx = SpawnPrefab("impact")
-    if impactfx and attacker then
+    if attacker and target.components.combat and target.components.combat.hiteffectsymbol then
+        local impactfx = SpawnPrefab("impact")
         local follower = impactfx.entity:AddFollower()
         follower:FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, 0, 0)
         impactfx:FacePoint(attacker.Transform:GetWorldPosition())

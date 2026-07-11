@@ -41,74 +41,6 @@ local function onthrown(inst, data)
     --inst.components.inventoryitem.pushlandedevents = false
 end
 
-local function common(anim, tags, removephysicscolliders)
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-    inst.AnimState:SetBank("blow_dart_sw")
-    inst.AnimState:SetBuild("blow_dart_sw")
-    inst.AnimState:PlayAnimation(anim)
-    inst.scrapbook_anim = anim
-
-    inst:AddTag("blowdart")
-    inst:AddTag("sharp")
-
-    --weapon (from weapon component) added to pristine state for optimization
-    inst:AddTag("weapon")
-
-    --projectile (from projectile component) added to pristine state for optimization
-    inst:AddTag("projectile")
-
-    if tags ~= nil then
-        for i, v in ipairs(tags) do
-            inst:AddTag(v)
-        end
-    end
-
-    if removephysicscolliders then
-        RemovePhysicsColliders(inst)
-    end
-
-    MakeInventoryFloatable(inst, "small", 0.05, { 0.75, 0.5, 0.75 })
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(0)
-    inst.components.weapon:SetRange(8, 10)
-
-    inst:AddComponent("projectile")
-    inst.components.projectile:SetSpeed(60)
-    inst.components.projectile:SetOnHitFn(onhit)
-    inst:ListenForEvent("onthrown", onthrown)
-    -------
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("stackable")
-
-    inst:AddComponent("equippable")
-    inst.components.equippable:SetOnEquip(onequip)
-    inst.components.equippable:SetOnUnequip(onunequip)
-    inst.components.equippable.equipstack = true
-
-    MakeHauntableLaunch(inst)
-
-    return inst
-end
-
-
 ---------------------------------------------------------------------------
 local function poisonthrown(inst)
     inst.AnimState:PlayAnimation("dart_poison")
@@ -243,12 +175,13 @@ local function flup()
     inst.components.floater:SetBankSwapOnFloat(true, -4, { sym_build = "swap_blowdart_flup" })
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(0)
     inst.components.weapon:SetRange(8, 10)
+    inst.components.weapon:SetDamage(20)
 
     inst:AddComponent("projectile")
     inst.components.projectile:SetSpeed(60)
     inst.components.projectile:SetOnHitFn(onhit)
+    inst.components.projectile:SetOnThrownFn(flupthrown)
     inst:ListenForEvent("onthrown", onthrown)
     -------
 
@@ -258,16 +191,12 @@ local function flup()
 
 
     inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
     inst.components.equippable.equipstack = true
-
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
-    inst.components.equippable:SetOnEquip(flupequip)
-    inst.components.weapon:SetDamage(20)
-    inst.components.projectile:SetOnThrownFn(flupthrown)
 
     MakeHauntableLaunch(inst)
 

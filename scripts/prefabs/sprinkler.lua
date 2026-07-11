@@ -84,7 +84,7 @@ local function OnFuelEmpty(inst)
     inst.components.machine:TurnOff()
 end
 
-local function OnFuelSectionChange(old, new, inst)
+local function OnFuelSectionChange(newsection, oldsection, inst)
     local fuelAnim = 0
     if inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.01 then
         fuelAnim = "0"
@@ -184,7 +184,7 @@ local function OnBuilt(inst)
 end
 
 local function UpdateSpray(inst)
-    OnFuelSectionChange(inst)
+    OnFuelSectionChange(nil, nil, inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     --    local ents = TheSim:FindEntities(x, y, z, RANGE)
     local GARDENING_CANT_TAGS = { "pickable", "stump", "withered", "barren", "INLIMBO" }

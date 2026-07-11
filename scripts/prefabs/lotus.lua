@@ -87,8 +87,6 @@ local function fn()
     inst.components.pickable.makeemptyfn = makeemptyfn
     inst.components.pickable.product = "lotus_flower"
 
-    inst.components.pickable.SetRegenTime = 120
-
     inst:AddComponent("inspectable")
     --[[
     inst:AddComponent("blowinwindgust")

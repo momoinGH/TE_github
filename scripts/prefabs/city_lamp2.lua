@@ -139,15 +139,12 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
-    local sound = inst.entity:AddSoundEmitter()
-    local inst = CreateEntity()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst:AddTag("CITY_LAMP")
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-
     inst.entity:AddPhysics()
 
     MakeObstaclePhysics(inst, 0.25)
@@ -160,14 +157,11 @@ local function fn(Sim)
     inst.Light:Enable(false)
 
     --inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
-
     inst.AnimState:SetBank("lamp_post")
     inst.AnimState:SetBuild("lamp_post2_yotp_build")
     inst.AnimState:PlayAnimation("idle", true)
-
     inst.AnimState:Hide("FIRE")
     inst.AnimState:Hide("GLOW")
-
     inst.AnimState:SetRayTestOnBB(true);
 
     inst.entity:SetPristine()

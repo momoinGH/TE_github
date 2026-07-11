@@ -195,7 +195,7 @@ local function ChangeAntChestSymbol(inst) -- 切换通道
 end
 
 local function stopConvert(inst, owner)
-    if owner == nil or owner.prefab ~= "antchest" or owner.prefab ~= "honeychest" then
+    if owner == nil or owner.prefab ~= "antchest" and owner.prefab ~= "honeychest" then
         if inst._convertTask_tro then
             inst._convertTask_tro:Cancel()
         end

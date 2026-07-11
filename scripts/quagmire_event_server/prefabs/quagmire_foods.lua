@@ -52,6 +52,17 @@ return {
         inst.components.perishable:StartPerishing()
         inst.components.perishable.onperishreplacement = "spoiled_food"
 
+        inst:AddComponent("edible")
+        inst.components.edible.healthvalue = food_data.health or 0
+        inst.components.edible.hungervalue = food_data.hunger or 0
+        inst.components.edible.sanityvalue = food_data.sanity or 0
+        inst.components.edible.foodtype = food_data.foodtype or FOODTYPE.GENERIC
+        -- inst.components.edible.temperaturedelta = food_data.temperature or 0
+        -- inst.components.edible.temperatureduration = food_data.temperatureduration or 0
+        -- if food_data.oneat then
+        --     inst.components.edible:SetOnEatenFn(food_data.oneat)
+        -- end
+
         inst:AddComponent("quagmire_saltable")
         inst:AddComponent("quagmire_stewable")
 

@@ -1,5 +1,5 @@
 modimport "modmain/quagmire/prefabs/firepit"
-
+modimport "modmain/quagmire/prefabs/fishingrod.lua"
 
 AddPrefabPostInit("saltrock", function(inst)
     if not TheWorld.ismastersim then return end

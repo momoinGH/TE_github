@@ -9,14 +9,23 @@ local prefabs =
 
 }
 
-SetSharedLootTable('basalt',
-	{
-		{ 'rocks', 1.00 },
-		{ 'rocks', 1.00 },
-		{ 'rocks', 0.50 },
-		{ 'flint', 1.00 },
-		{ 'flint', 0.30 },
-	})
+SetSharedLootTable('basalt', {
+	{ 'rocks', 1.00 },
+	{ 'rocks', 1.00 },
+	{ 'rocks', 0.50 },
+	{ 'flint', 1.00 },
+	{ 'flint', 0.30 },
+})
+
+local function triggerdarts(inst)
+	local pt = inst:GetPosition()
+	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "dartthrower" }, { "INTERIOR_LIMBO" })
+	for i, ent in ipairs(ents) do
+		if ent.shoot then
+			ent.shoot(ent)
+		end
+	end
+end
 
 local function basalt_fn(Sim)
 	local inst = CreateEntity()

@@ -191,21 +191,6 @@ local function SetShort(inst)
 
     inst.components.lootdropper:SetLoot(GetBuild(inst).short_loot)
 
-    --[[
-	if math.random() < 0.5 then
-		for i = 1, TUNING.SNAKE_JUNGLETREE_AMOUNT_SMALL do
-			if math.random() < 0.5 and TheWorld.state.cycles >= TUNING.SNAKE_POISON_START_DAY then
-				inst.components.lootdropper:AddChanceLoot("scorpion", TUNING.SNAKE_JUNGLETREE_CHANCE)
-			else
-			--	if math.random() < 0.5 and TheWorld.state.cycles >= TUNING.SNAKE_POISON_START_DAY then
-		--			inst.components.lootdropper:AddChanceLoot("snake_poison", TUNING.SNAKE_JUNGLETREE_POISON_CHANCE)
-	--			else
-					inst.components.lootdropper:AddChanceLoot("snake_amphibious", TUNING.SNAKE_JUNGLETREE_CHANCE)
-	--			end
-			end
-		end
-	end
-]]
     Sway(inst)
 end
 

@@ -261,13 +261,13 @@ local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("lantern_overlay")
     owner.AnimState:Hide("LANTERN_OVERLAY")
 
-    if inst.components.machine.ison then
+    if inst.components.machine and inst.components.machine.ison then
         starttrackingowner(inst, owner)
     end
 end
 
 local function onequiptomodel(inst, owner, from_ground)
-    if inst.components.machine.ison then
+    if inst.components.machine and inst.components.machine.ison then
         starttrackingowner(inst, owner)
     end
 

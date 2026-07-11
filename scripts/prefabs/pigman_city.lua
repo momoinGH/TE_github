@@ -353,7 +353,7 @@ local function ShouldAcceptItem(inst, item)
                     inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_RELIC_GIFT))
                 end
             else
-                if item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3" and inst:HasTag("city1") then
+                if (item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3") and inst:HasTag("city1") then
                     inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_TRINKET_GIFT))
                 else
                     --HUGO
@@ -428,7 +428,7 @@ local function OnAccept(inst, doer, item)
         local desc = economy:GetTradeItemDesc(econprefab)
 
         for item in pairs(Items) do
-            if not inst:HasTag("pigqueen") and (item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3" and inst:HasTag("city1")) then
+            if not inst:HasTag("pigqueen") and ((item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3") and inst:HasTag("city1")) then
                 inst:AddTag("recieved_trinket")
                 inst:sayline(getSpeechType(inst, STRINGS.CITY_PIG_TALK_GIVE_TRINKET_REWARD))
                 local reward = Trinkets[math.random(1, #Trinkets)]

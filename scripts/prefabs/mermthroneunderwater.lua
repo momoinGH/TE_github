@@ -8,7 +8,7 @@ local assets =
 
 local prefabs =
 {
-    "mermkingunderwter"
+    "mermkingunderwater"
 }
 
 local respawndays = 5 --revive em no maximo 20 dias mas pode reviver antes
@@ -32,8 +32,6 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
-    inst.Transform:SetScale(2, 2, 2)
 
     inst.MiniMapEntity:SetIcon("merm_king_carpet.png")
 

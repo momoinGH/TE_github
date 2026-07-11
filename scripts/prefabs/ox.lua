@@ -50,7 +50,7 @@ SetSharedLootTable('oxbaby',
     {
         { 'smallmeat', 1.00 },
         { 'smallmeat', 1.00 },
-        { 'smallmeatt', 1.00 },
+        { 'smallmeat', 1.00 },
         { 'ox_horn', 0.13 },
     })
 

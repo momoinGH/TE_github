@@ -110,29 +110,42 @@ local function removecanopyshadow(inst)
     end
 end
 
-local function removecanopy(inst)
-    print("REMOVING CANOPU")
-    if inst.roots then
-        inst.roots:Remove()
-    end
-    if inst._ripples then
-        inst._ripples:Remove()
-    end
 
-    if inst.players ~= nil then
-        for k, v in pairs(inst.players) do
-            if k:IsValid() then
-                if k.canopytrees ~= nil then
-                    k.canopytrees = k.canopytrees - 1
-                    if k.canopytrees <= 0 then
-                        k:PushEvent("onchangecanopyzone", false)
-                    end
-                end
+local NUM_DROP_SMALL_ITEMS_MIN_LIGHTNING = 3
+local NUM_DROP_SMALL_ITEMS_MAX_LIGHTNING = 5
+local small_ram_products =
+{
+    "twigs",
+    "cutgrass",
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",
+}
+
+local DROP_ITEMS_DIST_MIN = 6
+local DROP_ITEMS_DIST_VARIANCE = 10
+
+local function DropLightningItems(inst, items)
+    local x, _, z = inst.Transform:GetWorldPosition()
+    local num_items = #items
+
+    for i, item_prefab in ipairs(items) do
+        local dist = DROP_ITEMS_DIST_MIN + DROP_ITEMS_DIST_VARIANCE * math.random()
+        local theta = TWOPI * math.random()
+
+        inst:DoTaskInTime(i * 5 * FRAMES, function(inst2)
+            local item = SpawnPrefab(item_prefab)
+            item.Transform:SetPosition(x + dist * math.cos(theta), 20, z + dist * math.sin(theta))
+
+            if i == num_items then
+                inst._lightning_drop_task:Cancel()
+                inst._lightning_drop_task = nil
             end
-        end
+        end)
     end
-    inst._hascanopy:set(false)
-    inst._hascanopy:set(false)
 end
 
 local function OnLightningStrike(inst)
@@ -150,7 +163,7 @@ local function OnLightningStrike(inst)
     inst._lightning_drop_task = inst:DoTaskInTime(20 * FRAMES, DropLightningItems, items_to_drop)
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()

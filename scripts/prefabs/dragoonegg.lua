@@ -116,6 +116,7 @@ local function DoStep(inst)
     inst.components.groundpounder.numRings = 2
     inst.components.groundpounder.burner = true
     inst.components.groundpounder.onfinished = function(inst)
+        local x, y, z = inst.Transform:GetWorldPosition()
         if inst:IsPosSurroundedByLand(x, y, z, 2) then
             local lava = SpawnPrefab("dragoonegg")
             lava.AnimState:PlayAnimation("egg_crash")

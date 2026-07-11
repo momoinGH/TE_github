@@ -49,7 +49,7 @@ local function OnSpawned(inst, child)
     if inst.components.childspawner ~= nil and
         inst.components.childspawner:CountChildrenOutside() >= 1 and
         child.components.combat.target == nil then
-        StartSpawning(inst)
+        StopSpawning(inst)
     end
 end
 

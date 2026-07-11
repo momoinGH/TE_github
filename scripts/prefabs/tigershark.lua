@@ -111,8 +111,7 @@ local function ontimerdone(inst, data)
 end
 
 local function OnSave(inst, data)
-    data.CanRun = inst.CanRun
-    data.NextFeedTime = GetTime() - inst.NextFeedTime
+    data.NextFeedTime = inst.NextFeedTime - GetTime()
     data.entrada = inst.entrada
 end
 
@@ -120,7 +119,6 @@ local function OnLoad(inst, data)
     if not data then return end
     if data.entrada then inst.entrada = data.entrada end
     if data then
-        inst.CanRun = data.CanRun or true
         inst.NextFeedTime = data.NextFeedTime or 0
     end
 end

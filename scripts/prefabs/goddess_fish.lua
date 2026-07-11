@@ -1,26 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/fish.zip"),
-}
-
-local prefabs =
-{
-    "spoiled_food",
-}
-
-local function pouch(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    SpawnPrefab("goddess_pouch").Transform:SetPosition(x, y, z)
-    inst:DoTaskInTime(0.1, inst:Remove())
-end
-
-local function prepouch(inst)
-    inst:SpawnChild("goddess_sparklefx")
-    inst:DoTaskInTime(0.35, pouch)
-end
-local assets =
-{
-    Asset("ANIM", "anim/fish.zip"),
     Asset("ANIM", "anim/fish01.zip"),
 }
 
@@ -29,6 +9,17 @@ local prefabs =
     "fish_cooked",
     "spoiled_food",
 }
+
+local function pouch(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    SpawnPrefab("goddess_pouch").Transform:SetPosition(x, y, z)
+    inst:DoTaskInTime(0.1, inst.Remove)
+end
+
+local function prepouch(inst)
+    inst:SpawnChild("goddess_sparklefx")
+    inst:DoTaskInTime(0.35, pouch)
+end
 
 local function stopkicking(inst)
     inst.AnimState:PlayAnimation("dead")

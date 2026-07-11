@@ -8,7 +8,7 @@ local ARMORCACTUS_DMG = 34 / 2
 local function OnBlocked(owner, data)
     if (data.weapon == nil or (not data.weapon:HasTag("projectile") and data.weapon.projectile == nil))
         and data.attacker and data.attacker.components.combat and data.stimuli ~= "thorns" and not data.attacker:HasTag("thorny")
-        and (data.attacker.components.combat == nil or (data.attacker.components.combat.defaultdamage > 0))
+        and data.attacker.components.combat.defaultdamage > 0
     then
         data.attacker.components.combat:GetAttacked(owner, ARMORCACTUS_DMG, nil, "thorns")
         if owner.SoundEmitter ~= nil then

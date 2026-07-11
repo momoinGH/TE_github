@@ -129,21 +129,20 @@ local function fn(Sim)
 	inst.components.heater.equippedheat = 5
 
 	inst:AddComponent("fueled")
-	inst.components.fueled:SetSectionCallback(
-		function(section)
-			if section == 0 then
-				--when we burn out
+	inst.components.fueled:SetSectionCallback(function(section)
+		if section == 0 then
+			--when we burn out
 
-				if inst.components.inventoryitem and inst.components.inventoryitem:IsHeld() then
-					local owner = inst.components.inventoryitem.owner
-					inst:Remove()
+			if inst.components.inventoryitem and inst.components.inventoryitem:IsHeld() then
+				local owner = inst.components.inventoryitem.owner
+				inst:Remove()
 
-					if owner then
-						owner:PushEvent("torchranout", { torch = inst })
-					end
+				if owner then
+					owner:PushEvent("torchranout", { torch = inst })
 				end
 			end
-		end)
+		end
+	end)
 	inst.components.fueled:InitializeFuelLevel(TUNING.TORCH_FUEL * 10)
 	inst.components.fueled:SetDepletedFn(function(inst) inst:Remove() end)
 
