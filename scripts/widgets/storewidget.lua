@@ -50,8 +50,8 @@ local StoreWidget = Class(Widget, function(self, owner, goods)
         prefabname = goods.goodsprefab.Prefab
     end
 
-    for _, v in ipairs({"quagmire_casseroledish", "quagmire_crate_grill", "quagmire_crate_pot_hanger", "quagmire_crate_oven",
-        "quagmire_crate_grill_small" }) do
+    for _, v in ipairs({"casseroledish", "crate_grill", "crate_pot_hanger", "crate_oven",
+        "crate_grill_small" }) do
         if prefabname == v then
             prefabname = "quagmire_" .. prefabname
             break
@@ -161,7 +161,7 @@ end
 function StoreWidget:ShowConfirmWindow(index, info)
     local confirm = PopupDialogScreen("title", info,
         {
-            { text = "button1", cb = self:SendPurchaseCommand() },
+            { text = "button1", cb = function() self:SendPurchaseCommand() end },
             { text = "button2", cb = function() TheFrontEnd:PopScreen() end }
         })
     TheFrontEnd:PushScreen(confirm)

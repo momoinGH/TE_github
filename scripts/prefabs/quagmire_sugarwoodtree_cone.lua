@@ -1,10 +1,10 @@
 local assets =
 {
     Asset("ANIM", "anim/sugarwoodtree_cone.zip"),
-    Asset("ATLAS", "images/inventoryimages/quagmire_cottontree_cone.xml")
+    Asset("ATLAS", "images/inventoryimages/quagmire_sugarwoodtree_cone.xml")
 }
 
-RegisterInventoryItemAtlas("images/inventoryimages/quagmire_cottontree_cone.xml", "quagmire_cottontree_cone.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmire_sugarwoodtree_cone.xml", "quagmire_sugarwoodtree_cone.tex")
 
 
 local function plant(inst, growtime)
@@ -123,6 +123,6 @@ local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
     table.insert(cones, MakePlacer(name .. "_placer", bank, build, anim))
 end
 
-addcone("quagmire_cottontree_cone", "quagmire_cottontree_sapling", "sugarwoodtree_cone", "sugarwoodtree_cone", "idle_planted")
+addcone("quagmire_sugarwoodtree_cone", "quagmire_sugarwoodtree_sapling", "sugarwoodtree_cone", "sugarwoodtree_cone", "idle_planted")
 
 return unpack(cones)

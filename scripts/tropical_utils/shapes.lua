@@ -493,7 +493,7 @@ function FN.SmallCircleCentersWithSpacing(bigRadius, smallRadius, initAngle)
     local estimateCircles = math.floor((2 * math.pi * bigRadius) / smallDiameter)
     -- 通过二分查找法来确定实际能放置的小圆数量
     local left, right = 1, estimateCircles
-    local n
+    local n = 1
     while left <= right do
         local mid = math.floor((left + right) / 2)
         local angle = (2 * math.pi) / mid

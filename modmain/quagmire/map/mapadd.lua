@@ -1,12 +1,12 @@
 local tasks = {
-    -- "gorgeisland",
-    -- "quagmireblue",
-    -- "quagmirepink",
-    -- "gorgeislandchicken",
-    -- "gorgeislandforest",
+    "gorgeisland",
+    "quagmireblue",
+    "quagmirepink",
+    "gorgeislandchicken",
+    "gorgeislandforest",
 
-    -- 这里使用科雷的静态布局作为暴食地形
-    "Quagmire_KitchenTask"
+    -- 使用科雷的静态布局作为暴食地形
+    -- "Quagmire_KitchenTask"
 }
 
 AddTaskPreInit("Quagmire_KitchenTask", function(task)

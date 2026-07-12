@@ -91,4 +91,4 @@ local function sapling_fn(build, anim, growprefab, tag, fireproof, overrideloot)
     return fn
 end
 
-return Prefab("quagmire_cottontree_sapling", sapling_fn("sugarwoodtree_cone", "idle_planted", "quagmire_sugarwoodtree_small", "sugarwood", false), pinecone_assets, pinecone_prefabs)
+return Prefab("quagmire_sugarwoodtree_sapling", sapling_fn("sugarwoodtree_cone", "idle_planted", "quagmire_sugarwoodtree_small", "sugarwood", false), pinecone_assets, pinecone_prefabs)

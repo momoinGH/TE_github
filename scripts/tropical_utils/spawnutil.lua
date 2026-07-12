@@ -111,9 +111,6 @@ local commonspawnfn = {
     mangrovetree = function(x, y, ents)
         return SpawnUtil.IsSurroundedByTile(x, y, 1, WORLD_TILES.MANGROVE)
     end,
-    grass = function(x, y, ents)
-        return SpawnUtil.IsSurroundedByTile(x, y, 1, WORLD_TILES.MANGROVE)
-    end,
 }
 
 function SpawnUtil.SpawntestFn(prefab, x, y, ents)
@@ -218,6 +215,7 @@ end
 
 function SpawnUtil.NodeHasGlobalTag(topology_save, tag)
     local d = topology_save.GlobalTags[tag]
+    return d
 end
 
 return SpawnUtil

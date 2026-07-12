@@ -1076,7 +1076,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 331,
                     y = 406,
@@ -1087,7 +1087,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 711,
                     y = 719,
@@ -1099,7 +1099,7 @@ return {
 
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 333,
                     y = 641,
@@ -1110,7 +1110,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 604,
                     y = 419,
@@ -1121,7 +1121,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 459,
                     y = 335,
@@ -1132,7 +1132,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 342,
                     y = 481,
@@ -1143,7 +1143,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 394,
                     y = 577,
@@ -1154,7 +1154,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 450,
                     y = 716,
@@ -1165,7 +1165,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 717,
                     y = 386,
@@ -1176,7 +1176,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 637,
                     y = 326,
@@ -1187,7 +1187,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 391,
                     y = 383,
@@ -1198,7 +1198,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 521,
                     y = 348,
@@ -1209,7 +1209,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 679,
                     y = 457,
@@ -1220,7 +1220,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 324,
                     y = 718,
@@ -1231,7 +1231,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "quagmire_cottontree",
+                    type = "quagmire_sugarwoodtree",
                     shape = "rectangle",
                     x = 330,
                     y = 330,

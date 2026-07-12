@@ -328,7 +328,7 @@ local foods_tro = {
         -- californiaroll_sw = {}
 
         caviar = {
-            test = function(cooker, names, tags) return (names.roe or names.roe_cooked == 3) and tags.veggie end,
+            test = function(cooker, names, tags) return (names.roe == 3 or names.roe_cooked == 3) and tags.veggie end,
             priority = 20,
             weight = 1,
             foodtype = FOODTYPE.MEAT,
@@ -643,7 +643,7 @@ local foods_tro = {
         peach_smoothie = {
             test = function(cooker, names, tags)
                 return
-                    (names.peach or names.grilled_peach) and (names.peach or names.grilled_peach) >= 2 and tags.dairy and
+                    ((names.peach or 0) + (names.grilled_peach or 0)) >= 2 and tags.dairy and
                     tags.sweetener and not tags.meat and not tags.egg and not tags.inedible and not tags.monster
             end,
             priority = 100,
@@ -679,7 +679,7 @@ local foods_tro = {
         peachy_meatloaf = {
             test = function(cooker, names, tags)
                 return
-                    (names.peach or names.grilled_peach) and (names.peach or names.grilled_peach) >= 2 and tags.meat and
+                    ((names.peach or 0) + (names.grilled_peach or 0)) >= 2 and tags.meat and
                     tags.meat >= 2 and not tags.egg
             end,
             priority = 100,
@@ -745,9 +745,8 @@ local foods_tro = {
 
         peach_custard = {
             test = function(cooker, names, tags)
-                return (names.peach or names.grilled_peach) and tags.egg and tags.sweetener and
-                    (names.peach or names.grilled_peach) >= 2 and not names.twigs and not tags.meat and
-                    not tags.monster
+                return ((names.peach or 0) + (names.grilled_peach or 0)) >= 2 and tags.egg and tags.sweetener and
+                    not names.twigs and not tags.meat and not tags.monster
             end,
             priority = 100,
             weight = 1,

@@ -1,4 +1,5 @@
 local UIAnim = require "widgets/uianim"
+local Image = require "widgets/image"
 
 --- 花粉症
 local PollenOver = Class(UIAnim, function(self, owner)

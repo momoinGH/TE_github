@@ -27,13 +27,13 @@ local BloodmoonBadge = Class(Widget, function(self, owner)
     self._face:SetClickable(false)
     self._face:SetScale(1.1)
 
-    self._text = self:AddChild(Text(BODYTEXTFONT, 33 / 1))
-    self._text:SetPosition(5, 16, 0)
-    self._text:SetString("Red")
+    self._textRed = self:AddChild(Text(BODYTEXTFONT, 33 / 1))
+    self._textRed:SetPosition(5, 16, 0)
+    self._textRed:SetString("Red")
 
-    self._text = self:AddChild(Text(BODYTEXTFONT, 33 / 1))
-    self._text:SetPosition(5, -16, 0)
-    self._text:SetString("Moon")
+    self._textMoon = self:AddChild(Text(BODYTEXTFONT, 33 / 1))
+    self._textMoon:SetPosition(5, -16, 0)
+    self._textMoon:SetString("Moon")
 
     self:Hide()
     self:SetScale(1)
@@ -48,16 +48,19 @@ function BloodmoonBadge:OnUpdate(dt)
     self.contador = self.contador + 1
     if self.contador > 50 then
         self.contador = 0
-        for k, player in pairs(AllPlayers) do
-            if player:TroIsAporkalypse() and self.aporkalypse == false then
-                self.aporkalypse = true
-                self:Show()
+        local any_aporkalypse = false
+        for _, player in pairs(AllPlayers) do
+            if player:TroIsAporkalypse() then
+                any_aporkalypse = true
+                break
             end
-
-            if self.aporkalypse == true and not player:TroIsAporkalypse() then
-                self.aporkalypse = false
-                self:Hide()
-            end
+        end
+        if any_aporkalypse and not self.aporkalypse then
+            self.aporkalypse = true
+            self:Show()
+        elseif not any_aporkalypse and self.aporkalypse then
+            self.aporkalypse = false
+            self:Hide()
         end
     end
 end

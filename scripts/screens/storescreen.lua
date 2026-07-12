@@ -100,6 +100,7 @@ function StoreScreen:CreatGoods(goodsinfo)
     self.maxpage = math.ceil(#self.goodsinfo / self.perpage)
     local startpoint = 1 + self.perpage * (self.page - 1)
     for var = startpoint, startpoint + self.perpage - 1, 1 do
+        if self.goodsinfo[var] == nil then break end
         self.goodsinfo[var].start = ((var - 1) % self.perpage) + 1
         self.slots:AddChild(StoreWidget(self.owner, self.goodsinfo[var]))
     end

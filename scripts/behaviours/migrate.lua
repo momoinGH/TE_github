@@ -11,12 +11,6 @@ function Migrate:Visit()
 
     local distanceToHome = self:GetDistFromHomeSq()
 
-    if distanceToHome and distanceToHome < MIGRATION_HOME_RADIUS_SQ then
-        --print("RJL arrived at migration home!")
-        --        self.inst.components.locomotor:RemoveSpeedModifier_Mult("migration")
-        self.status = FAILED
-    end
-
     if self.status == READY then
         local homePos = self:GetHomePos()
         -- run true, but rainbowjellyfish runspeed is purposefully slower than walking to take advantage of that mode for migration

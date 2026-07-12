@@ -47,7 +47,6 @@ local function GetUpValueImpl(fn, upvalueName, level)
     -- 先找第一层函数里有没有
     while true do
         local name, value = debug.getupvalue(fn, i)
-        print("find", name, value)
         if not name then break end -- 没有更多的upvalue了
         if name == upvalueName then
             return value, i

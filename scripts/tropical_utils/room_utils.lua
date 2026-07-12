@@ -216,7 +216,7 @@ function FN.InterioHasPlayer(door)
         if v:HasTag("player") then
             return true
         else
-            table.insert(door, v)
+            table.insert(doors, v)
         end
     end
 

@@ -1,0 +1,54 @@
+未使用的预制件文件 (19 个)
+文件名	说明
+bird_swarm.lua	鸟群生成器，定义了 pigeon_swarm 等 prefab，但未被加载
+devtool.lua	开发者调试工具
+frog_poison2.lua	黄色毒蛙变体，击中偷取物品
+goddess_goggles.lua	女神护目镜装备
+goddess_hound.lua	女神猎犬宠物
+goddess_tori.lua	女神之门可部署物品
+lavaarena_creature_spawn_fx.lua	熔炉生物生成特效
+levelx_vest.lua	Level X 背心护甲（带背包容器）
+maxwellinside.lua	麦克斯韦室内房间
+maxwellportal.lua	麦克斯韦传送门动画
+oxwaterspawner.lua	水牛水中生成器
+palmconetree.lua	棕榈锥树
+peachy_treat.lua	桃子零食食物
+porkland_sw_entrance.lua	DLC 世界旅行传送门
+schoolherd.lua	鱼群行为系统
+tfwp_hats.lua	熔炉头盔/皇冠装备
+wargboar.lua	座狼-野猪混合生物
+windyturf.lua	风之地皮
+yeti.lua	雪人蜘蛛猴变体
+---
+未使用的状态机文件 (17 个)
+文件名	说明
+SGant2.lua	蚂蚁重复状态机，内部名与 SGant 相同
+SGballphinocean.lua	海洋海豚变体
+SGboatraft.lua	木筏，注册为 "boat" 但未加载
+SGdeciduoustree1.lua	落叶树变体
+SGdogfishocean.lua	海洋狗鱼变体
+SGdoydoyegg.lua	渡渡鸟蛋状态机
+SGespec.lua	注册为 "goat" 但未加载
+SGironlord.lua	铁领主状态机
+SGjellyfishkraken.lua	海怪水母变体
+SGoceanfish_medium_underwater.lua	中型水下鱼
+SGparrotintro.lua	鹦鹉介绍过场
+SGqBeefalo.lua	暴食牛变体
+SGsharxocean.lua	海洋鲨鱼变体
+SGswordfishocean.lua	海洋剑鱼变体
+SGundersolofish.lua	水下独鱼，内部名与 SGsolofish 重复
+SGwildbeaverguard.lua	狂暴海狸守卫变体
+SGwobsterlandsw.lua	陆地龙虾变体
+---
+未使用的 Brain 文件 (10 个)
+文件名	说明
+babycrabbrain.lua	小螃蟹 Brain
+boarkingbrain.lua	野猪王 Brain
+crabkingclawbrain.lua	蟹王爪 Brain
+mermbrainold.lua	鱼人旧版 Brain（已弃用）
+nightmareprimeapebrain.lua	噩梦猿猴 Brain
+peagawkbushbrain.lua	孔雀灌木变体 Brain
+shadowcreaturebrainsea.lua	海洋暗影生物 Brain
+shadowwaxwellbrain_old.lua	暗影麦克斯韦旧版 Brain（已弃用）
+undersolofishbrain.lua	水下独鱼 Brain
+wobsterbrain.lua	龙虾 Brain

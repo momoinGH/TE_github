@@ -62,7 +62,7 @@ AddRoom("gorgeislandcity", {
         distributepercent = .2,
         distributeprefabs =
         {
-            --quagmire_cottontree = 0.5, --nitre
+            --quagmire_sugarwoodtree = 0.5, --nitre
             --					                    quagmire_pond_salt = .15,
             quagmire_spotspice_shrub = 0.1,
             rock1 = 0.3,
@@ -91,7 +91,7 @@ AddRoom("gorgeislandcity2", {
         distributepercent = .2,
         distributeprefabs =
         {
-            --quagmire_cottontree = 0.5, --nitre
+            --quagmire_sugarwoodtree = 0.5, --nitre
             --					                    quagmire_pond_salt = .15,
             quagmire_spotspice_shrub = 0.1,
             rock1 = 0.3,
@@ -119,7 +119,7 @@ AddRoom("quagmire2", {
         distributepercent = .2,
         distributeprefabs =
         {
-            --quagmire_cottontree = 0.5, --nitre
+            --quagmire_sugarwoodtree = 0.5, --nitre
             quagmire_spotspice_shrub = 0.1,
             rock1 = 0.3,
             rock2 = 0.3,

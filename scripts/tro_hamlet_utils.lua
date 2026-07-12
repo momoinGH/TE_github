@@ -11,16 +11,15 @@ local function IsTraderWatchingItem(target)
 end
 
 local function GetGoodsInfo(target)
-    
     if target:HasTag("cost_one_oinc") then
-        -- 货柜
-        
+        return ""
     else
         local item = target.replica.container and target.replica.container:GetNumSlots() == 1
             and target.replica.container:GetItemInSlot(1)
         local payitem = item and item:GetDisplayName()
             or target.replica.named and target:GetDisplayName()
             or ""
+        return payitem
     end
 end
 
