@@ -188,4 +188,16 @@ if troisdev then
         end
         return OldSetBuild(self, build, ...)
     end
+
+    -- Hooks.FnDecorator(AnimState, "SetBank", function(self, bank)
+    --     print("调用AnimState:SetBank", bank)
+    -- end)
+
+    -- Hooks.FnDecorator(AnimState, "SetBuild", function(self, build)
+    --     print("调用AnimState:SetBuild", build)
+    -- end)
+
+    -- Hooks.FnDecorator(AnimState, "PlayAnimation", function(self, anim)
+    --     print("调用AnimState:PlayAnimation", anim)
+    -- end)
 end

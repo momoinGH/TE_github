@@ -247,7 +247,6 @@ STRINGS.NAMES.PIG_LATIN_1                                                       
 STRINGS.NAMES.QUAGMIREGOAT                                                      = "Quagmire Goat"
 STRINGS.NAMES.SUNKEN_BOAT_TRINKET_2                                             = "Toy Boat"
 STRINGS.NAMES.WALLGALLERY                                                       = "藏品室墙纸"
-STRINGS.NAMES.FROG_POISON2                                                      = "Poison Frog"
 STRINGS.NAMES.UNDERSEAROCK_MOON_SHELL                                           = "岩石"
 STRINGS.NAMES.DECO_MARBLE                                                       = "Lit Marble Column"
 STRINGS.NAMES.DECO_WALLORNAMENT_BLACK_CAT                                       = "Black Cat"
@@ -4557,12 +4556,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_GUARD_TOWER_PALACE_GENERIC              
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FABRIC                                      = "Soft cloth made from hard roots!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_MARBLE                                 = "Adds some fancy stability."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEAGAWK_BUSH                                = "Look! An iris bush."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROG_POISON2                                = {
-    DEAD = "死掉了。",
-    SLEEPING = "看起来像是冬眠了。",
-    GENERIC = "一只有毒的两栖生物。",
 
-}
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FARMPLOT_NEEDSFERTILIZER                    = "I think it needs to be fertilized."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COOKPOT_DONE                                = "Mmmmm! It's ready to eat!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANFIREPIT_GENERIC                     = "This fire pit is a conductor for even more... fire."
@@ -7297,7 +7291,6 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.SNAKESKIN = "The skin of a snake!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.MESSAGEBOTTLE1 = "Maybe there's a comic book in here!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.WOODLEGS_CAGE = "He needs our help!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.CORAL_BRAIN = "Yummy headmeats!"
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.FROG_POISON2 = "If we get licked by those we'll get sick."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.FISH5 = "You're so slimy!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.JUNGLETREE = "Not a bad tree."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.STUNGRAY = "Aren't you cute! Hey, what's that smell..."

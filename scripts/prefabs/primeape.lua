@@ -16,20 +16,16 @@ local prefabs =
 
 local brain = require "brains/primeapebrain"
 
-local SLEEP_DIST_FROMHOME = 1
-local SLEEP_DIST_FROMTHREAT = 20
-local MAX_CHASEAWAY_DIST = 80
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 40
 local PRIMEAPE_LOYALTY_PER_HUNGER = 480 / 25
 
 local LOOT = { "smallmeat", "cave_banana" }
-SetSharedLootTable('monkey',
-    {
-        { 'smallmeat',   1.0 },
-        { 'cave_banana', 1.0 },
-        { 'beardhair',   1.0 },
-    })
+SetSharedLootTable('monkey', {
+    { 'smallmeat',   1.0 },
+    { 'cave_banana', 1.0 },
+    { 'beardhair',   1.0 },
+})
 
 local function SetHarassPlayer(inst, player)
     if inst.harassplayer ~= player then
@@ -128,10 +124,6 @@ local function EquipWeapons(inst)
     end
 end
 
-local function _ForgetTarget(inst)
-    inst.components.combat:SetTarget(nil)
-end
-
 local function IsNonWerePig(dude)
     return dude:HasTag("monkey")
 end
@@ -226,36 +218,6 @@ local function OnPickup(inst, data)
             end
         end)
     end
-end
-
-local function DoFx(inst)
-    inst.SoundEmitter:PlaySound("dontstarve/common/ghost_spawn")
-
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local fx = SpawnPrefab("statue_transition_2")
-    if fx ~= nil then
-        fx.Transform:SetPosition(x, y, z)
-        fx.Transform:SetScale(.8, .8, .8)
-    end
-    fx = SpawnPrefab("statue_transition")
-    if fx ~= nil then
-        fx.Transform:SetPosition(x, y, z)
-        fx.Transform:SetScale(.8, .8, .8)
-    end
-end
-
-local function SetNormalMonkey(inst)
-    inst:SetBrain(brain)
-    inst.AnimState:SetBuild("junglekiki_build")
-    inst.AnimState:SetMultColour(1, 1, 1, 1)
-    inst.curious = true
-    inst.soundtype = ""
-    inst.components.lootdropper:SetLoot(LOOT)
-    inst.components.lootdropper:SetChanceLootTable(nil)
-
-    inst.components.combat:SetTarget(nil)
-
-    inst:ListenForEvent("entity_death", inst.listenfn, TheWorld)
 end
 
 local function OnCustomHaunt(inst)

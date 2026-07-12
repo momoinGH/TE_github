@@ -39,10 +39,10 @@ local prefabs =
 
 SetSharedLootTable('ox',
     {
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'ox_horn', 0.50 },
+        { 'meat',        1.00 },
+        { 'meat',        1.00 },
+        { 'meat',        1.00 },
+        { 'ox_horn',     0.50 },
         { 'beefalowool', 0.50 },
     })
 
@@ -51,7 +51,7 @@ SetSharedLootTable('oxbaby',
         { 'smallmeat', 1.00 },
         { 'smallmeat', 1.00 },
         { 'smallmeat', 1.00 },
-        { 'ox_horn', 0.13 },
+        { 'ox_horn',   0.13 },
     })
 
 local sounds =
@@ -114,6 +114,13 @@ local function OnLeaveMood(inst)
         inst.AnimState:SetBuild("ox_build")
         inst.AnimState:SetBank("ox")
         inst:RemoveTag("scarytoprey")
+    end
+end
+
+-- 长大
+local function OnTimerDone(inst, data)
+    if data.name == "grow" then
+        ReplacePrefab(inst, "ox")
     end
 end
 
@@ -312,18 +319,6 @@ local function fn(Sim)
     return inst
 end
 
-local function oninit(inst)
-    if inst then
-        inst.components.fueled:StartConsuming()
-    end
-end
-
-local function apaga(inst)
-    SpawnPrefab("ox").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst:Remove()
-end
-
-
 local function fnbaby()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
@@ -410,19 +405,17 @@ local function fnbaby()
     inst:AddComponent("tiletracker")
     inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)
 
-    inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = FUELTYPE.CAVE
-    inst.components.fueled:InitializeFuelLevel(math.random(1920, 5760))
-    inst.components.fueled:SetDepletedFn(apaga)
-    --    inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
-    inst.components.fueled.accepting = false
+    inst:AddComponent("timer")
+    inst.components.timer:StartTimer("grow", math.random(1920, 5760))
+
 
     inst:SetBrain(brainbaby)
     inst:SetStateGraph("SGox")
 
     inst.OnEntityWake = OnEntityWake
     inst.OnEntitySleep = OnEntitySleep
-    inst:DoTaskInTime(1, oninit)
+
+    inst:ListenForEvent("timerdone", OnTimerDone)
 
     return inst
 end

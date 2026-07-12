@@ -3,10 +3,10 @@ local Badge = require "widgets/badge"
 local IRON_LORD_DAMAGE = 68
 local IRON_LORD_SPEED_MULT = 1.35
 
-local assets = {Asset("ANIM", "anim/living_artifact.zip"), Asset("ANIM", "anim/living_suit_build.zip"),
-                Asset("ANIM", "anim/player_living_suit_morph.zip"), Asset("ANIM", "anim/player_living_suit_punch.zip"),
-                Asset("ANIM", "anim/player_living_suit_shoot.zip"),
-                Asset("ANIM", "anim/player_living_suit_destruct.zip")}
+local assets = { Asset("ANIM", "anim/living_artifact.zip"), Asset("ANIM", "anim/living_suit_build.zip"),
+    Asset("ANIM", "anim/player_living_suit_morph.zip"), Asset("ANIM", "anim/player_living_suit_punch.zip"),
+    Asset("ANIM", "anim/player_living_suit_shoot.zip"),
+    Asset("ANIM", "anim/player_living_suit_destruct.zip") }
 
 --[[
 local function BecomeIronLord(inst, instant)
@@ -22,8 +22,8 @@ end
 ]]
 local function SetNetVar(var, inst, val)
     local netvar = var == "fuel" and inst.player_classified.artifactfuel or var == "explode" and
-                       inst.player_classified.artifactexplode or var == "control" and
-                       inst.player_classified.artifactcontrol or nil
+        inst.player_classified.artifactexplode or var == "control" and
+        inst.player_classified.artifactcontrol or nil
 
     if netvar then
         netvar:set_local(val) -- Force dirty
@@ -84,8 +84,8 @@ local function ToggleVisual(inst, on)
     inst.components.playervision:ForceGoggleVision(on)
 end
 
-local IRON_LORD_TAGS = {"ironlord", "fireimmune", "laser_immune", "insomniac", "toughworker", "poisonimmune"} -- 可能导致标签溢出
-local ARTIFACT_TAGS = {"nosteal"}
+local IRON_LORD_TAGS = { "ironlord", "fireimmune", "laser_immune", "insomniac", "toughworker", "poisonimmune" } -- 可能导致标签溢出
+local ARTIFACT_TAGS = { "nosteal" }
 
 local function ToggleTags(inst, on)
     if on then
@@ -131,10 +131,10 @@ local function ToggleComponents(inst, on)
 
         if inst.prefab ~= "wanda" then
             inst.components.health:SetPercent(1)
-        end -- health:SetPercent(1) will change age (to 20?)
+        end                                                          -- health:SetPercent(1) will change age (to 20?)
         SaveData(inst, "healthredirect", inst.components.health.redirect)
         inst.components.health.redirect = function() return true end -- Avoid SetInvincible(), it removes all the "hit" reactions...
-        inst.components.health.disable_penalty = true -- Pause but not reset
+        inst.components.health.disable_penalty = true                -- Pause but not reset
 
         inst.components.sanity:SetPercent(1)
         inst.components.sanity.ignore = true
@@ -143,7 +143,7 @@ local function ToggleComponents(inst, on)
         inst.components.hunger:Pause()
 
         SaveData(inst, "caneat", inst.components.eater.caneat)
-        inst.components.eater.caneat = {} -- No eating
+        inst.components.eater.caneat = {}                         -- No eating
 
         inst.components.temperature:SetTemp(TUNING.STARTING_TEMP) -- Pause with fixed value
 
@@ -372,4 +372,5 @@ local function lightfn(Sim)
     return inst
 end
 
-return Prefab("living_artifact", fn, assets), Prefab("living_artifact_light", lightfn, assets)
+return Prefab("living_artifact", fn, assets),
+    Prefab("living_artifact_light", lightfn, assets)

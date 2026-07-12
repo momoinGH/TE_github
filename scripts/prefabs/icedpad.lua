@@ -9,7 +9,6 @@ local assets =
 
 local prefabs =
 {
-    "frog_poison",
     "mosquito",
 }
 

@@ -38,6 +38,7 @@ modimport "modmain/common/components/minionspawner.lua"        --子单位生成
 modimport "modmain/common/components/ambientsound"             --走在不同地皮上播放的音乐
 modimport "modmain/common/components/dynamicmusic.lua"         --战斗时音乐
 modimport "modmain/common/components/messagebottlemanager.lua" --瓶中信内容
+modimport "modmain/common/components/frograin.lua"             --青蛙雨的生成
 
 ----------------------------------------------------------------------------------------------------
 

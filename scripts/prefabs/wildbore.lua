@@ -446,32 +446,6 @@ local function WerepigKeepTargetFn(inst, target)
         and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
 end
 
-local function IsNearMoonBase(inst, dist)
-    local moonbase = inst.components.entitytracker:GetEntity("moonbase")
-    return moonbase == nil or inst:IsNear(moonbase, dist)
-end
-
-local function MoonpigRetargetFn(inst)
-    return IsNearMoonBase(inst, TUNING.MOONPIG_AGGRO_DIST)
-        and FindEntity(
-            inst,
-            TUNING.PIG_TARGET_DIST,
-            function(guy)
-                return inst.components.combat:CanTarget(guy)
-                    and not (guy.sg ~= nil and guy.sg:HasStateTag("transform"))
-            end,
-            { "_combat" },     --See entityreplica.lua (re: "_combat" tag)
-            { "werepig", "alwaysblock", "beaver", "moonbeast" }
-        )
-        or nil
-end
-
-local function MoonpigKeepTargetFn(inst, target)
-    return IsNearMoonBase(inst, TUNING.MOONPIG_RETURN_DIST)
-        and not target:HasTag("moonbeast")
-        and WerepigKeepTargetFn(inst, target)
-end
-
 local function WerepigSleepTest(inst)
     return false
 end
@@ -752,64 +726,6 @@ for i, v in ipairs(gargoyles) do
 end
 for i, v in ipairs(prefabs) do
     table.insert(moonpigprefabs, v)
-end
-
-local moonbeastbrain = require "brains/moonbeastbrain"
-
-local function OnMoonPetrify(inst)
-    if not inst.components.health:IsDead() and (not inst.sg:HasStateTag("busy") or inst:IsAsleep()) then
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local rot = inst.Transform:GetRotation()
-        local name = inst.components.named.name
-        inst:Remove()
-        local gargoyle = SpawnPrefab(gargoyles[math.random(#gargoyles)])
-        gargoyle.components.named:SetName(name)
-        gargoyle.Transform:SetPosition(x, y, z)
-        gargoyle.Transform:SetRotation(rot)
-        gargoyle:Petrify()
-    end
-end
-
-local function OnMoonTransformed(inst, data)
-    inst.components.named:SetName(data.old.components.named.name)
-    inst.sg:GoToState("howl")
-end
-
-local function moon()
-    local inst = common(true)
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("entitytracker")
-
-    inst:SetBrain(moonbeastbrain)
-    inst:SetStateGraph("SGmoonpig")
-
-    inst.components.sleeper:SetResistance(3)
-    inst.components.freezable:SetDefaultWearOffTime(TUNING.MOONPIG_FREEZE_WEAR_OFF_TIME)
-
-    inst.components.combat:SetDefaultDamage(TUNING.WEREPIG_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.WEREPIG_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED
-
-    inst.components.sleeper:SetSleepTest(WerepigSleepTest)
-    inst.components.sleeper:SetWakeTest(WerepigWakeTest)
-
-    inst.components.lootdropper:SetLoot({ "meat", "meat", "pigskin" })
-    inst.components.lootdropper.numrandomloot = 0
-
-    inst.components.health:SetMaxHealth(TUNING.WEREPIG_HEALTH)
-    inst.components.combat:SetTarget(nil)
-    inst.components.combat:SetRetargetFunction(3, MoonpigRetargetFn)
-    inst.components.combat:SetKeepTargetFunction(MoonpigKeepTargetFn)
-
-    inst:ListenForEvent("moonpetrify", OnMoonPetrify)
-    inst:ListenForEvent("moontransformed", OnMoonTransformed)
-
-    return inst
 end
 
 return Prefab("wildbore", normal, assets, prefabs),

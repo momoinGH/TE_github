@@ -8,6 +8,9 @@ local prefabs =
 {
 	-- "sand",
 }
+local total_day_time = 480
+local SAND_REGROW_TIME = total_day_time * 2 -- sand dune regrow time
+local SAND_REGROW_VARIANCE = total_day_time -- sand dune regrow variance
 
 local startregen
 
@@ -19,6 +22,50 @@ local anims =
 	"full"
 }
 
+local function onregen(inst)
+	if inst.components.workable.workleft < #anims - 1 then
+		inst.components.workable:SetWorkLeft(inst.components.workable.workleft + 1)
+		startregen(inst)
+	else
+		inst.targettime = nil
+	end
+end
+
+startregen = function(inst, regentime)
+	if inst.components.workable.workleft < #anims - 1 then
+		-- more to grow
+		regentime = regentime or (SAND_REGROW_TIME + math.random() * SAND_REGROW_VARIANCE)
+
+		-- TODO
+		-- if GetSeasonManager():IsWetSeason() then
+		-- 	regentime = regentime / 2
+		-- elseif GetSeasonManager():IsGreenSeason() then
+		-- 	regentime = regentime * 2
+		-- end
+
+		if inst.task then
+			inst.task:Cancel()
+		end
+		inst.task = inst:DoTaskInTime(regentime, onregen, "regen")
+		inst.targettime = GetTime() + regentime
+	else
+		-- no more to do
+		if inst.task then
+			inst.task:Cancel()
+		end
+		inst.targettime = nil
+	end
+
+	if inst.components.workable.workleft < 1 then
+		inst.AnimState:PlayAnimation(anims[1])
+	else
+		if inst.components.workable.workleft == 1 then inst.AnimState:PlayAnimation("med") end
+		if inst.components.workable.workleft == 2 then inst.AnimState:PlayAnimation("low") end
+		if inst.components.workable.workleft >= 3 then inst.AnimState:PlayAnimation("full") end
+	end
+
+	-- print('startregen', inst.components.workable.workleft, regentime, anims[inst.components.workable.workleft])
+end
 local function workcallback(inst, worker, workleft)
 	-- print('trying to spawn sand', inst, worker, workleft)
 

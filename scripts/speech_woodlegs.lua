@@ -470,7 +470,6 @@ return
 		{
 			GENERIC = "Ye won't be much use ta Woodlegs.",
 		},
-		DEVTOOL = "Aye, 'tis a truly wondrous item.",
 		DEVTOOL_NODEV = "Aye, 'tis a truly wondrous item.",
 		DIRTPILE = "Thet be lookin like a pile o'treasures.",
 		DIVININGROD =

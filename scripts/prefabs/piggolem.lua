@@ -50,7 +50,7 @@ local function ShouldAcceptItem(inst, item)
         local foodtype = item.components.edible.foodtype
         if foodtype == FOODTYPE.MEAT or foodtype == FOODTYPE.HORRIBLE then
             return inst.components.follower.leader == nil or
-            inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
+                inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
         elseif foodtype == FOODTYPE.VEGGIE or foodtype == FOODTYPE.RAW then
             local last_eat_time = inst.components.eater:TimeSinceLastEating()
             return (last_eat_time == nil or
@@ -88,7 +88,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
                     giver.components.leader:AddFollower(inst)
                 end
                 inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() *
-                TUNING.PIG_LOYALTY_PER_HUNGER)
+                    TUNING.PIG_LOYALTY_PER_HUNGER)
                 inst.components.follower.maxfollowtime =
                     giver:HasTag("polite")
                     and TUNING.PIG_LOYALTY_MAXTIME + TUNING.PIG_LOYALTY_POLITENESS_MAXTIME_BONUS
@@ -136,8 +136,7 @@ local SUGGESTTARGET_CANT_TAGS = { "werepig", "guard", "INLIMBO" }
 
 local function OnAttackedByDecidRoot(inst, attacker)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, SUGGESTTARGET_MUST_TAGS,
-        SUGGESTTARGET_CANT_TAGS)
+    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, SUGGESTTARGET_MUST_TAGS, SUGGESTTARGET_CANT_TAGS)
     local num_helpers = 0
     for i, v in ipairs(ents) do
         if v ~= inst and not v.components.health:IsDead() then

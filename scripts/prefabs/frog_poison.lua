@@ -3,6 +3,7 @@ local assets =
 	Asset("ANIM", "anim/frog.zip"),
 	Asset("ANIM", "anim/frog_water.zip"),
 	Asset("ANIM", "anim/frog_treefrog_build.zip"),
+	Asset("ANIM", "anim/frog_yellow_build.zip"),
 	Asset("SOUND", "sound/frog.fsb"),
 }
 
@@ -64,11 +65,7 @@ local function OnAttacked(inst, data)
 end
 
 local function OnGoingHome(inst)
-	local fx = SpawnPrefab("splash")
-	local pos = inst:GetPosition()
-	fx.Transform:SetPosition(pos.x, pos.y, pos.z)
-
-	--local splash = PlayFX(Vector3(inst.Transform:GetWorldPosition() ), "splash", "splash", "splash")
+	SpawnAt("splash", inst)
 	inst.SoundEmitter:PlaySound("dontstarve/frog/splash")
 end
 
@@ -80,87 +77,97 @@ local function OnEntitySleep(inst)
 	inst.components.tiletracker:Stop()
 end
 
-local function fn()
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	local physics = inst.entity:AddPhysics()
-	local sound = inst.entity:AddSoundEmitter()
-	local shadow = inst.entity:AddDynamicShadow()
-	inst.entity:AddNetwork()
 
-	shadow:SetSize(1.5, .75)
-	inst.Transform:SetFourFaced()
+local function MakeFrog(name, build)
+	local function fn()
+		local inst = CreateEntity()
 
-	inst.AnimState:SetBank("frog")
-	inst.AnimState:SetBuild("frog_treefrog_build")
-	inst.AnimState:PlayAnimation("idle")
+		inst.entity:AddTransform()
+		inst.entity:AddAnimState()
+		inst.entity:AddPhysics()
+		inst.entity:AddSoundEmitter()
+		inst.entity:AddDynamicShadow()
+		inst.entity:AddNetwork()
 
-	inst.Physics:ClearCollidesWith(COLLISION.BOAT_LIMITS)
+		inst.DynamicShadow:SetSize(1.5, .75)
 
-	MakeCharacterPhysics(inst, 1, .3)
+		inst.Transform:SetFourFaced()
 
-	inst:AddTag("animal")
-	inst:AddTag("prey")
-	inst:AddTag("smallcreature")
-	inst:AddTag("frog")
-	inst:AddTag("canbetrapped")
-	inst:AddTag("duskok")
-	inst:AddTag("eatsbait")
-	inst:AddTag("scarytoprey")
+		inst.AnimState:SetBank("frog")
+		inst.AnimState:SetBuild(build)
+		inst.AnimState:PlayAnimation("idle")
 
-	inst.entity:SetPristine()
+		inst.Physics:ClearCollidesWith(COLLISION.BOAT_LIMITS)
 
-	if not TheWorld.ismastersim then
+		MakeCharacterPhysics(inst, 1, .3)
+
+		inst:SetPrefabNameOverride("frog_poison")
+
+		inst:AddTag("animal")
+		inst:AddTag("prey")
+		inst:AddTag("smallcreature")
+		inst:AddTag("frog")
+		inst:AddTag("canbetrapped")
+		inst:AddTag("duskok")
+		inst:AddTag("eatsbait")
+		inst:AddTag("scarytoprey")
+
+		inst.entity:SetPristine()
+
+		if not TheWorld.ismastersim then
+			return inst
+		end
+
+		inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+		inst.components.locomotor.walkspeed = 4
+		inst.components.locomotor.runspeed = 8
+
+		inst:AddComponent("sleeper")
+		inst.components.sleeper:SetSleepTest(ShouldSleep)
+
+		inst:AddComponent("health")
+		inst.components.health:SetMaxHealth(TUNING.FROG_HEALTH)
+
+		inst:AddComponent("lootdropper")
+		inst.components.lootdropper:AddChanceLoot("froglegs_poison", 1)
+		inst.components.lootdropper:AddChanceLoot("venomgland", 0.5)
+
+		inst:AddComponent("eater")
+		inst:AddComponent("tiletracker")
+		inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)
+
+		inst:AddComponent("combat")
+		inst.components.combat:SetDefaultDamage(TUNING.FROG_DAMAGE)
+		inst.components.combat:SetAttackPeriod(TUNING.FROG_ATTACK_PERIOD)
+		inst.components.combat:SetRetargetFunction(3, retargetfn)
+
+		inst.components.combat.onhitotherfn = function(inst, other, damage) inst.components.thief:StealItem(other) end
+
+		inst:AddComponent("thief")
+		--inst:AddComponent("poisonous")
+		MakeTinyFreezableCharacter(inst, "frogsack")
+		MakeSmallBurnableCharacter(inst, "frogsack")
+
+		inst.sounds = sounds.poison
+
+		inst:AddComponent("knownlocations")
+		inst:AddComponent("inspectable")
+
+
+		inst:SetBrain(brain)
+		inst:SetStateGraph("SGfrog_poison")
+
+		inst:ListenForEvent("attacked", OnAttacked)
+		inst:ListenForEvent("goinghome", OnGoingHome)
+
+		inst.OnEntityWake = OnEntityWake
+		inst.OnEntitySleep = OnEntitySleep
+
 		return inst
 	end
 
-	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-	inst.components.locomotor.walkspeed = 4
-	inst.components.locomotor.runspeed = 8
-
-	inst:AddComponent("sleeper")
-	inst.components.sleeper:SetSleepTest(ShouldSleep)
-
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(TUNING.FROG_HEALTH)
-
-	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:AddChanceLoot("froglegs_poison", 1)
-	--inst.components.lootdropper:AddChanceLoot("venomgland", 0.5)
-
-	inst:AddComponent("eater")
-	inst:AddComponent("tiletracker")
-	inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)
-
-	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(TUNING.FROG_DAMAGE)
-	inst.components.combat:SetAttackPeriod(TUNING.FROG_ATTACK_PERIOD)
-	inst.components.combat:SetRetargetFunction(3, retargetfn)
-
-	inst.components.combat.onhitotherfn = function(inst, other, damage) inst.components.thief:StealItem(other) end
-
-	inst:AddComponent("thief")
-	--inst:AddComponent("poisonous")
-	MakeTinyFreezableCharacter(inst, "frogsack")
-	MakeSmallBurnableCharacter(inst, "frogsack")
-
-	inst.sounds = sounds.poison
-
-	inst:AddComponent("knownlocations")
-	inst:AddComponent("inspectable")
-
-
-	inst:SetBrain(brain)
-	inst:SetStateGraph("SGfrog2")
-
-	inst:ListenForEvent("attacked", OnAttacked)
-	inst:ListenForEvent("goinghome", OnGoingHome)
-
-	inst.OnEntityWake = OnEntityWake
-	inst.OnEntitySleep = OnEntitySleep
-
-	return inst
+	return Prefab(name, fn, assets, prefabs)
 end
 
-return Prefab("frog_poison", fn, assets, prefabs)
+return MakeFrog("frog_poison_ham", "frog_treefrog_build"),
+	MakeFrog("frog_poison_sw", "frog_yellow_build")

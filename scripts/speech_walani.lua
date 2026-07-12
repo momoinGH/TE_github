@@ -403,7 +403,6 @@ return {
 		{
 			GENERIC = "That grass looks pretty dead.",
 		},
-		DEVTOOL = "Useful!",
 		DIRTPILE = "Well, would you look at that. A pile of dirt.",
 		DIVININGROD =
 		{

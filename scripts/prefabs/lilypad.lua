@@ -21,7 +21,6 @@ local prefabs =
     "boat_player_collision",
     "boat_item_collision",
     "walkingplank",
-    "frog_poison",
     "mosquito",
 }
 
@@ -233,7 +232,7 @@ local function DoReleaseAllChildren(inst)
     if math.random() < 0.5 then
         inst.components.childspawner.childname = "mosquito"
     else
-        inst.components.childspawner.childname = "frog_poison"
+        inst.components.childspawner.childname = "frog_poison_ham"
     end
 
     inst:DoTaskInTime(math.random() * 30, function(inst)
@@ -373,7 +372,7 @@ local function fn()
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:StartRegen()
     inst.components.childspawner.spawnradius = { min = 0, max = 0 }
-    inst.components.childspawner.childname = "frog_poison"
+    inst.components.childspawner.childname = "frog_poison_ham"
     inst.components.childspawner.wateronly = true
     inst.components.childspawner:StartSpawning()
 

@@ -218,21 +218,6 @@ local function FindDeciduousTreeMonster(inst)
 	return FindEntity(inst, SEE_TREE_DIST / 3, IsDeciduousTreeMonster, { "CHOP_workable" })
 end
 
-local function KeepChoppingAction(inst)
-	return inst.tree_target ~= nil
-		or (inst.components.follower.leader ~= nil and
-			inst:IsNear(inst.components.follower.leader, KEEP_CHOPPING_DIST))
-		or FindDeciduousTreeMonster(inst) ~= nil
-end
-
-local function StartChoppingCondition(inst)
-	return inst.tree_target ~= nil
-		or (inst.components.follower.leader ~= nil and
-			inst.components.follower.leader.sg ~= nil and
-			inst.components.follower.leader.sg:HasStateTag("chopping"))
-		or FindDeciduousTreeMonster(inst) ~= nil
-end
-
 local function FindTreeToChopAction(inst)
 	local target = FindEntity(inst, SEE_TREE_DIST, nil, { "CHOP_workable" })
 	if target ~= nil and target.components.growable ~= nil and target.components.growable.stage > 1 then

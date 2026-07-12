@@ -489,7 +489,6 @@ return {
 		{
 			GENERIC = "Well past its expiry date.",
 		},
-		DEVTOOL = "Efficient, oui?",
 		DEVTOOL_NODEV = "No, I am a traditionalist.",
 		DIRTPILE = "It's making a bit of a mess, isn't it?",
 		DIVININGROD =

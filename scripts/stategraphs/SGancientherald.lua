@@ -88,7 +88,7 @@ local function SpawnFrogRain(inst)
     local max = 5
 
     inst.frograintask = inst:DoPeriodicTask(0.2, function()
-        local objs = SpawnRandomInRange(inst, "frog_poison", 1, 4, 8, 35)
+        local objs = SpawnRandomInRange(inst, "frog_poison_ham", 1, 4, 8, 35)
 
         for k, v in pairs(objs) do
             v.sg:GoToState("fall")

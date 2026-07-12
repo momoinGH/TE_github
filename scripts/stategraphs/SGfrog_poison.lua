@@ -445,4 +445,4 @@ CommonStates.AddSleepStates(states,
 CommonStates.AddFrozenStates(states)
 CommonStates.AddHopStates(states, true, { loop = "jump" }) --, { pre = "boat_jump_pre", loop = "boat_jump_loop", pst = "boat_jump_pst"})
 
-return StateGraph("frog2", states, events, "idle", actionhandlers)
+return StateGraph("frog_poison", states, events, "idle", actionhandlers)

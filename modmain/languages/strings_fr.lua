@@ -1212,9 +1212,6 @@ STRINGS.RECIPE_DESC.ARMORCACTUS = "Pour vaincre l'ennemi d'une embrassade piquan
 STRINGS.NAMES.BRAINJELLYHAT = "Cerveau de la Pensée"
 STRINGS.RECIPE_DESC.BRAINJELLYHAT = "Ah, ça donne pas l'air intelligent ça ?"
 
-STRINGS.NAMES.FROG_POISON2 = "Grenouille venimeuse"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROG_POISON2 = "Ça a l'air plus méchant que d'habitude."
-
 STRINGS.NAMES.WALL_LIMESTONE_ITEM = "Mur de calcaire"
 STRINGS.NAMES.WALL_LIMESTONE = "Mur de calcaire"
 STRINGS.RECIPE_DESC.WALL_LIMESTONE_ITEM = "Des segments de mur solide."
