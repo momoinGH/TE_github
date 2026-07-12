@@ -1,6 +1,8 @@
 local tro_pig_defs = require("prefabs/tro_pig_defs")
 
 
+pigman_minion
+pigguard_minion
 wanawanatiki
 quagmire_trader_merm
 quagmire_trader_merm2

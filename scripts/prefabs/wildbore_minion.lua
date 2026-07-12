@@ -237,7 +237,7 @@ local function SetGuardPig(inst)
     inst:RemoveTag("werepig")
     inst:AddTag("guard")
     inst:SetBrain(normalbrain)
-    inst:SetStateGraph("SGpig")
+    inst:SetStateGraph("SGpigminion")
     inst.AnimState:SetBuild(inst.build)
 
     inst.components.werebeast:SetOnNormalFn(SetGuardPig)
