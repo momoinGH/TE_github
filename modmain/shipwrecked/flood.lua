@@ -1,4 +1,4 @@
-local Utils = require("tropical_utils/utils")
+local Utils = require("tro_utils/utils")
 
 table.insert(PrefabFiles, "shipwrecked_flood")
 

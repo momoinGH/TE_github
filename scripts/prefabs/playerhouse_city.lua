@@ -1,4 +1,4 @@
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 local assets =
 {
@@ -38,28 +38,28 @@ end
 
 local room = {
     addprops = {
-        { name = "city_exit_old_door", x_offset = 4.7, key = "exit", },
+        { name = "city_exit_old_door",           x_offset = 4.7,    key = "exit", },
         { name = "interior_wall_wood" },
         { name = "interior_floor_wood" },
         { name = "deco_roomglow" },
-        { name = "shelves_cinderblocks", x_offset = -4.5, z_offset = -15 / 3.5 + 0.7, init = AddCraftTag },
-        { name = "deco_antiquities_wallfish", x_offset = -5, z_offset = 3.9, init = AddCraftTag },
-        { name = "deco_antiquities_cornerbeam", x_offset = -5.5, z_offset = -8.3, },
-        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 8.3, scale = { -1, 1 } },
-        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = -15 / 2 - 0.3, },
-        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, scale = { -1, 1 } },
-        { name = "swinging_light_rope_1", x_offset = -2, y_offset = 1, init = AddCraftTag },
-        { name = "charcoal", x_offset = -3, z_offset = -2 },
-        { name = "charcoal", x_offset = 2, z_offset = 3 },
+        { name = "shelves_cinderblocks",         x_offset = -4.5,   z_offset = -15 / 3.5 + 0.7, init = AddCraftTag },
+        { name = "deco_antiquities_wallfish",    x_offset = -5,     z_offset = 3.9,             init = AddCraftTag },
+        { name = "deco_antiquities_cornerbeam",  x_offset = -5.5,   z_offset = -8.3, },
+        { name = "deco_antiquities_cornerbeam",  x_offset = -5,     z_offset = 8.3,             scale = { -1, 1 } },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,    z_offset = -15 / 2 - 0.3, },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,    z_offset = 15 / 2 + 0.3,    scale = { -1, 1 } },
+        { name = "swinging_light_rope_1",        x_offset = -2,     y_offset = 1,               init = AddCraftTag },
+        { name = "charcoal",                     x_offset = -3,     z_offset = -2 },
+        { name = "charcoal",                     x_offset = 2,      z_offset = 3 },
 
         -- { name = "window_round_curtains_nails_backwall",  z_offset = 15 / 2, init = AddCraftTag, children = { "window_round_light" } },
-        { name = "window_round", z_offset = 15 / 2, scale = { -1, 1 }, init = AddCraftTag },
-        { name = "wallrenovation", x_offset = -2.5, z_offset = -5 },
-        { name = "wallrenovation", x_offset = -2.5 },
-        { name = "wallrenovation", x_offset = -2.5, z_offset = 5 },
-        { name = "wallrenovation", x_offset = 2.5, z_offset = -5 },
-        { name = "wallrenovation", x_offset = 2.5 },
-        { name = "wallrenovation", x_offset = 2.5, z_offset = 5 },
+        { name = "window_round",                 z_offset = 15 / 2, scale = { -1, 1 },          init = AddCraftTag },
+        { name = "wallrenovation",               x_offset = -2.5,   z_offset = -5 },
+        { name = "wallrenovation",               x_offset = -2.5 },
+        { name = "wallrenovation",               x_offset = -2.5,   z_offset = 5 },
+        { name = "wallrenovation",               x_offset = 2.5,    z_offset = -5 },
+        { name = "wallrenovation",               x_offset = 2.5 },
+        { name = "wallrenovation",               x_offset = 2.5,    z_offset = 5 },
     }
 }
 

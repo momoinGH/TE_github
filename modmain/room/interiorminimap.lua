@@ -16,7 +16,7 @@ end
 
 
 ----------------------------------------------------------------------------------------------------
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 local function UpdateTextureBefore(self)
     if not ThePlayer then return end

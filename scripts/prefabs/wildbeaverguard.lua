@@ -17,19 +17,13 @@ local prefabs =
     "strawhat",
     "pigskin",
 }
+local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
 
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
 
 local function ontalk(inst, script)
     inst.SoundEmitter:PlaySound("dontstarve/pig/grunt")
-end
-
-local function OnRefuseItem(inst, item)
-    inst.sg:GoToState("refuse")
-    if inst.components.sleeper:IsAsleep() then
-        inst.components.sleeper:WakeUp()
-    end
 end
 
 local function OnEat(inst, food)
@@ -41,22 +35,6 @@ local function OnEat(inst, food)
             not inst.components.werebeast:IsInWereState() and
             food.components.edible:GetHealth(inst) < 0 then
             inst.components.werebeast:TriggerDelta(1)
-        end
-    end
-end
-
-local function OnAttackedByDecidRoot(inst, attacker)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" },
-        { "werepig", "wildbeaverguard", "INLIMBO" })
-    local num_helpers = 0
-    for i, v in ipairs(ents) do
-        if v ~= inst and not v.components.health:IsDead() then
-            v:PushEvent("suggest_tree_target", { tree = attacker })
-            num_helpers = num_helpers + 1
-            if num_helpers >= MAX_TARGET_SHARES then
-                break
-            end
         end
     end
 end
@@ -82,8 +60,8 @@ local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
-        OnAttackedByDecidRoot(inst, attacker.owner)
+    if deciduoustree_utils.OnAttackedByDecidRoot(inst, attacker, { "wildbeaver" }) then
+        --
     elseif attacker.prefab ~= "deciduous_root" then
         inst.components.combat:SetTarget(attacker)
 
@@ -95,12 +73,6 @@ local function OnAttacked(inst, data)
         elseif not (attacker:HasTag("wildbeaver") and attacker:HasTag("wildbeaverguard")) then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsNonWerePig, MAX_TARGET_SHARES)
         end
-    end
-end
-
-local function SuggestTreeTarget(inst, data)
-    if data ~= nil and data.tree ~= nil and inst:GetBufferedAction() ~= ACTIONS.CHOP then
-        inst.tree_target = data.tree
     end
 end
 

@@ -1,3 +1,4 @@
+-- 从存档中读取世界自定义预设配置
 ---这个函数在modmain运行正常，thesim只在modmain存在
 function ModGetLevelDataOverride()
     print("TA Mod Loading Custom Presets Manager33333")

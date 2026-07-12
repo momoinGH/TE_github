@@ -3,7 +3,7 @@ print("加载小地图文件")
 
 local Widget = require "widgets/widget"
 local Image = require "widgets/image"
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 -- 拟定的房子大小
 local WORLD_TO_MAP_SCALE = 15
@@ -45,7 +45,7 @@ local function AppendRoomTexture(self, start_room, room_offset_x, room_offset_y)
     for grid_x, row in ipairs(room_grid) do
         for grid_y, room_data in ipairs(row) do
             if room_data
-            and room_data.ent:HasTag("room_explored") --没去过的房间不显示
+                and room_data.ent:HasTag("room_explored") --没去过的房间不显示
             then
                 local cell_width = width * WORLD_TO_MAP_SCALE * ratio + room_gap
                 local cell_depth = depth * WORLD_TO_MAP_SCALE + 60 * depth_ratio + room_gap --多加一点儿，保证gap为0时上下左右房间都贴合

@@ -6,38 +6,14 @@ local assets =
 
 local brain = require "brains/grottogrubbrain"
 
-local function ShouldWakeUp(inst)
-    return DefaultWakeTest(inst)
-end
-
-local function ShouldSleep(inst)
-    return DefaultSleepTest(inst)
-end
-
-local function gosleep(inst)
-    inst:PushEvent("gotosleep")
-end
-
-local function wakeup(inst)
-    inst:PushEvent("onwakeup")
-end
-
-local function OnIsDay(inst)
-    if not TheWorld.state.isday then
-        inst:DoTaskInTime(2.5 + 2 * math.random(), gosleep)
-        --	inst:PushEvent("gotosleep")
-    else
-        inst:DoTaskInTime(0, wakeup)
-        --	inst:PushEvent("onwakeup")
-    end
-end
-
 local function NormalRetargetFn(inst)
     return FindEntity(inst, TUNING.PIG_TARGET_DIST,
         function(guy)
             if guy.components.health and not guy.components.health:IsDead() and inst.components.combat:CanTarget(guy) then
-                if guy:HasTag("player") and guy.components.inventory and guy:GetDistanceSqToInst(inst) < 25 then return
-                    guy end
+                if guy:HasTag("player") and guy.components.inventory and guy:GetDistanceSqToInst(inst) < 25 then
+                    return true
+                end
+                return false
             end
         end)
 end
@@ -51,12 +27,7 @@ local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner then
-        OnAttackedByDecidRoot(inst, attacker.owner)
-    elseif attacker.prefab ~= "deciduous_root" then
-        inst.components.combat:SetTarget(attacker)
-        inst.components.combat:ShareTarget(attacker, 30, function(dude) return dude:HasTag("ant") end, 5)
-    end
+    inst.components.combat:SetTarget(attacker)
 end
 
 local function crab()

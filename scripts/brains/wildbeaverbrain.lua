@@ -9,6 +9,7 @@ require "behaviours/findlight"
 require "behaviours/panic"
 require "behaviours/chattynode"
 require "behaviours/leash"
+local BrainCommon = require "brains/braincommon"
 
 local MIN_FOLLOW_DIST = 2
 local TARGET_FOLLOW_DIST = 5
@@ -25,21 +26,12 @@ local MAX_CHASE_DIST = 30
 local SEE_LIGHT_DIST = 20
 local TRADE_DIST = 20
 local SEE_TREE_DIST = 15
-local SEE_TARGET_DIST = 20
 local SEE_FOOD_DIST = 10
 
 local SEE_BURNING_HOME_DIST_SQ = 20 * 20
 
-local COMFORT_LIGHT_LEVEL = 0.3
-
-local KEEP_CHOPPING_DIST = 10
-
 local RUN_AWAY_DIST = 5
 local STOP_RUN_AWAY_DIST = 8
-
-local function ShouldRunAway(inst, target)
-	return not inst.components.trader:IsTryingToTradeWithMe(target)
-end
 
 local function GetTraderFn(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -57,63 +49,6 @@ end
 
 local function IsWood(inst, item)
 	return item ~= nil and item.components.edible and item.components.edible.foodtype == FOODTYPE.WOOD
-end
-
-local function HasWood(inst)
-	return inst.components.inventory and
-		inst.components.inventory:FindItem(function(x) return IsWood(inst, x) end)
-end
-
-local function WoodIsNear(inst)
-	if HasWood(inst) then
-		return true
-	end
-	return FindEntity(inst, SEE_FOOD_DIST, function(x) return IsWood(inst, x) end)
-end
-
-local function CanDeployWall(pt, item)
-	return TheWorld.Map:CanDeployWallAtPoint(pt, item)
-end
-
-local WALL_RADIUS = 20
-
-local function GetDirections()
-	return {
-		{ x = 1, z = 0 },
-		{ x = 0, z = 1 },
-		{ x = -1, z = 0 },
-		{ x = 0, z = -1 },
-		{ x = 1, z = -1 },
-		{ x = -1, z = 1 },
-		{ x = -1, z = -1 },
-		{ x = 1, z = 1 },
-	}
-end
-
-local function FindPosToWall(inst)
-	local item = inst.components.inventory:FindItem(function(x) return x.prefab == "wall_wood_item" end)
-	if item ~= nil then
-		local wall = FindEntity(inst, WALL_RADIUS, function(x) return x.prefab == "wall_wood" end, { "wall" })
-		if wall ~= nil then
-			local x, y, z = inst.Transform:GetWorldPosition()
-			local dirs = GetDirections()
-			for i, dir in ipairs(dirs) do
-				local xOffset = dir.x * 0.25
-				local zOffset = dir.z * 0.25
-				local newpt = Vector3(x + xOffset, y, z + zOffset)
-				if CanDeployWall(newpt, item) then
-					return BufferedAction(inst, nil, ACTIONS.DEPLOY, item, newpt)
-				end
-			end
-		end
-		-- local x, y, z = inst.Transform:GetWorldPosition()
-		-- local ents = TheSim:FindEntities(x, y, z, WALL_RADIUS, {"wall"}, {"INLIMBO"})
-		-- for i,wall in ipairs(ents) do
-		-- 	for j,wall in ipairs(ents) do
-
-		-- 	end
-		-- end
-	end
 end
 
 local function FindStumpToDigAction(inst)
@@ -210,27 +145,6 @@ local function FindFoodAction(inst)
 	end
 end
 
-local function IsDeciduousTreeMonster(guy)
-	return guy.monster and guy.prefab == "deciduoustree"
-end
-
-local function FindDeciduousTreeMonster(inst)
-	return FindEntity(inst, SEE_TREE_DIST / 3, IsDeciduousTreeMonster, { "CHOP_workable" })
-end
-
-local function FindTreeToChopAction(inst)
-	local target = FindEntity(inst, SEE_TREE_DIST, nil, { "CHOP_workable" })
-	if target ~= nil and target.components.growable ~= nil and target.components.growable.stage > 1 then
-		if inst.tree_target ~= nil then
-			target = inst.tree_target
-			inst.tree_target = nil
-		else
-			target = FindDeciduousTreeMonster(inst) or target
-		end
-		return BufferedAction(inst, target, ACTIONS.CHOP)
-	end
-end
-
 local function HasValidHome(inst)
 	local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
 	return home ~= nil
@@ -262,39 +176,8 @@ local function GetNoLeaderHomePos(inst)
 	return GetHomePos(inst)
 end
 
-local function GetNearestLightPos(inst)
-	local light = GetClosestInstWithTag("lightsource", inst, SEE_LIGHT_DIST)
-	if light then
-		return Vector3(light.Transform:GetWorldPosition())
-	end
-	return nil
-end
-
-local function GetNearestLightRadius(inst)
-	local light = GetClosestInstWithTag("lightsource", inst, SEE_LIGHT_DIST)
-	if light then
-		return light.Light:GetCalculatedRadius()
-	end
-	return 1
-end
-
 local function RescueLeaderAction(inst)
 	return BufferedAction(inst, inst, ACTIONS.UNPIN)
-end
-
-local function GetFaceTargetFn(inst)
-	return inst.components.follower.leader
-end
-
-local function KeepFaceTargetFn(inst, target)
-	return inst.components.follower.leader == target
-end
-
-local function SafeLightDist(inst, target)
-	return (target:HasTag("player") or target:HasTag("playerlight")
-			or (target.inventoryitem and target.inventoryitem:GetGrandOwner() and target.inventoryitem:GetGrandOwner():HasTag("player")))
-		and 4
-		or target.Light:GetCalculatedRadius() / 3
 end
 
 local function IsHomeOnFire(inst)
@@ -324,50 +207,52 @@ function WildbeaverBrain:OnStart()
 					Panic(self.inst)),
 				ChattyNode(self.inst, "WILDBEAVER_TALK_FIGHT",
 					WhileNode(
-						function() return self.inst.components.combat.target == nil or
-							not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+						function()
+							return self.inst.components.combat.target == nil or
+								not self.inst.components.combat:InCooldown()
+						end, "AttackMomentarily",
 						ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST))),
 				WhileNode(
-					function() return GetLeader(self.inst) and GetLeader(self.inst).components.pinnable and
-						GetLeader(self.inst).components.pinnable:IsStuck() end, "Leader Phlegmed",
+					function()
+						return GetLeader(self.inst) and GetLeader(self.inst).components.pinnable and
+							GetLeader(self.inst).components.pinnable:IsStuck()
+					end, "Leader Phlegmed",
 					DoAction(self.inst, RescueLeaderAction, "Rescue Leader", true)),
 				WhileNode(
-					function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
-						math.random(1, 4) > 1 end, "Dodge",
+					function()
+						return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
+							math.random(1, 4) > 1
+					end, "Dodge",
 					RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST,
 						STOP_RUN_AWAY_DIST)),
 
-
 				WhileNode(
-					function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
-						math.random(1, 10) == 1 end, "Mind",
+					function()
+						return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
+							math.random(1, 10) == 1
+					end, "Mind",
 					DoAction(self.inst, function() return MindcontrolAction(self.inst) end)),
-
-
-
 
 				WhileNode(function() return IsHomeOnFire(self.inst) end, "OnFire",
 					Panic(self.inst)),
 				FaceEntity(self.inst, GetTraderFn, KeepTraderFn),
 				DoAction(self.inst, FindFoodAction),
-				-- IfNode(function() return self.inst.components.inventory:FindItem(function(x) return x.prefab == "wall_wood_item" end) end, "find walls to deploy",
-				-- 	DoAction(self.inst, FindPosToWall)),
 				IfNode(function() return self.inst.treesdue > 0 end, "find and plant trees",
 					DoAction(self.inst, FindTreeSeeds)),
-				--			IfNode(function() return StartChoppingCondition(self.inst) end, "chop",
-				--			IfNode(function() return 1 > 0 end, "chop", 			
-				--				WhileNode(function() return KeepChoppingAction(self.inst) end, "keep chopping",
-				--					LoopNode{
-				--						DoAction(self.inst, FindTreeToChopAction )})),
+
 				ChattyNode(self.inst, "WILDBEAVER_TALK_FOLLOW",
 					Follow(self.inst, GetLeader, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
 				ChattyNode(self.inst, "WILDBEAVER_TALK_GOHOME",
 					WhileNode(function() return not TheWorld.state.iscaveday end, "IsNight",
 						DoAction(self.inst, GoHomeAction, "go home", true))),
-				IfNode(function() return self.inst.WantsToChop(self.inst) end, "wants to chop",
-					WhileNode(function() return self.inst.WantsToChop(self.inst) end, "keep chopping",
-						LoopNode {
-							DoAction(self.inst, FindTreeToChopAction) })),
+
+				BrainCommon.NodeAssistLeaderDoAction(self, {
+					action = "CHOP", -- Required.
+					finder_finddist = 15,
+					keepgoing_leaderdist = 10,
+					chatterstring = "ANT_TALK_HELP_CHOP_WOOD",
+				}),
+
 				DoAction(self.inst, FindStumpToDigAction),
 				Leash(self.inst, GetNoLeaderHomePos, LEASH_MAX_DIST, LEASH_RETURN_DIST),
 				Wander(self.inst, GetNoLeaderHomePos, MAX_WANDER_DIST),

@@ -31,9 +31,8 @@ local function callGuards(inst, attacker)
 
     local ents = TheSim:FindEntities(x, y, z, 30, { "hamletteleport" }) --TODO 没有这个标签，重新实现逻辑
     if #ents > 0 then
-        local guardprefab = "piggolem"
         local spawnpt = Vector3(ents[math.random(#ents)].Transform:GetWorldPosition())
-        local guard = SpawnPrefab(guardprefab)
+        local guard = SpawnPrefab("piggolem")
         guard.Transform:SetPosition(spawnpt.x, spawnpt.y, spawnpt.z)
         guard:PushEvent("attacked", { attacker = attacker, damage = 0, weapon = nil })
 

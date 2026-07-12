@@ -22,6 +22,7 @@ local prefabs =
 }
 
 local brain = require "brains/antwarriorbrain"
+local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
 
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
@@ -39,26 +40,17 @@ local function ontalk(inst, script)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/abandon")
 end
 
-local SUGGEST_MUST_TAGS = { "_health", "_combat", "antman" }
-local function OnAttackedByDecidRoot(inst, attacker)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    for k, v in pairs(TheSim:FindEntities(x, y, z, SHARE_TARGET_DIST / 2, SUGGEST_MUST_TAGS)) do
-        if v ~= inst and not IsEntityDead(v) then
-            v:PushEvent("suggest_tree_target", { tree = attacker })
-        end
-    end
-end
-
 local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner then
-        OnAttackedByDecidRoot(inst, attacker.owner)
-    elseif attacker.prefab ~= "deciduous_root" then
+    if deciduoustree_utils.OnAttackedByDecidRoot(inst,attacker,{"antman"}) then
+        return
+    end
+
+    if attacker.prefab ~= "deciduous_root" then
         inst.components.combat:SetTarget(attacker)
-        inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("ant") end,
-            MAX_TARGET_SHARES)
+        inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("ant") end,MAX_TARGET_SHARES)
     end
 end
 

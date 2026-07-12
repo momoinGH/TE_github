@@ -467,6 +467,7 @@ AddRoom("FrostIsland_icelake_beager", {
         {
             icerockbearger = 1,
             ice_deer = 3,
+            icerockpigman = 2
         }
     }
 })

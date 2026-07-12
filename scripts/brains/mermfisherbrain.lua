@@ -5,26 +5,26 @@ require "behaviours/panic"
 require "behaviours/chattynode"
 require "behaviours/follow"
 
-local BrainCommon         = require "brains/braincommon"
+local BrainCommon        = require "brains/braincommon"
 
-local SEE_PLAYER_DIST     = 5
-local SEE_FOOD_DIST       = 10
-local MAX_WANDER_DIST     = 15
-local MAX_CHASE_TIME      = 10
-local MAX_CHASE_DIST      = 20
-local RUN_AWAY_DIST       = 5
-local STOP_RUN_AWAY_DIST  = 8
-local fishtime            = 1000
+local SEE_PLAYER_DIST    = 5
+local SEE_FOOD_DIST      = 10
+local MAX_WANDER_DIST    = 15
+local MAX_CHASE_TIME     = 10
+local MAX_CHASE_DIST     = 20
+local RUN_AWAY_DIST      = 5
+local STOP_RUN_AWAY_DIST = 8
+local fishtime           = 1000
 
-local MIN_FOLLOW_DIST     = 1
-local TARGET_FOLLOW_DIST  = 5
-local MAX_FOLLOW_DIST     = 9
+local MIN_FOLLOW_DIST    = 1
+local TARGET_FOLLOW_DIST = 5
+local MAX_FOLLOW_DIST    = 9
 
-local AVOID_PLAYER_DIST   = 3
-local AVOID_PLAYER_STOP   = 6
-local STOP_RUN_DIST       = 10
+local AVOID_PLAYER_DIST  = 3
+local AVOID_PLAYER_STOP  = 6
+local STOP_RUN_DIST      = 10
 
-local MermFisherBrain     = Class(Brain, function(self, inst)
+local MermFisherBrain    = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
@@ -159,90 +159,56 @@ local function Fish(inst)
 end
 
 function MermFisherBrain:OnStart(inst)
-    local IsThreatened = --When the fisherman has a combat target
-        PriorityNode(
-            {
-                --            ChattyNode(self.inst, "PIG_TALK_FIND_MEAT",
-                --            DoAction(self.inst, FindFoodAction )),
-                WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
-                    ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC,
-                        Panic(self.inst)
-                    )),
-                ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
-                    RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP)
-                ),
-                ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
-                    RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true)
-                ),
-                -- RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
-                -- RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true),
-
-
-                WhileNode(
-                    function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end,
-                    "PanicHaunted", ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC,
-                        Panic(self.inst)
-                    )),
-                WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
-                    ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC,
-                        Panic(self.inst)
-                    )),
-                --        WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
-                --        ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST))),
-                --        WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
-                --        RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
-                WhileNode(function() return IsHomeOnFire(self.inst) end, "HomeOnFire",
-                    ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC,
-                        Panic(self.inst)
-                    )),
-                WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
-                    DoAction(self.inst, GoHomeAction, "Go Home", true)),
-                DoAction(self.inst, EatFoodAction, "Eat Food"),
-                ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
-                    Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST,
-                        TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
-                --        IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
-                --        ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
-                --        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn ))),		
-                --        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-                ChattyNode(self.inst, STRINGS.MERM_TALK_FISH,
-                    DoAction(self.inst, Fish, "Fish Action")),
-                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
-                    MAX_WANDER_DIST),
-            }, 0.25)
+    --When the fisherman has a combat target
+    local IsThreatened = PriorityNode(
+        {
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
+                ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC, Panic(self.inst))),
+            ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
+                RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP)),
+            ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
+                RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true)),
+            WhileNode(
+                function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end,
+                "PanicHaunted", ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC, Panic(self.inst))),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
+                ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC, Panic(self.inst))),
+            WhileNode(function() return IsHomeOnFire(self.inst) end, "HomeOnFire",
+                ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC, Panic(self.inst))),
+            WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
+                DoAction(self.inst, GoHomeAction, "Go Home", true)),
+            DoAction(self.inst, EatFoodAction, "Eat Food"),
+            ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
+                Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST,
+                    TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
+            ChattyNode(self.inst, STRINGS.MERM_TALK_FISH,
+                DoAction(self.inst, Fish, "Fish Action")),
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                MAX_WANDER_DIST),
+        }, 0.25)
 
     local IsIdle =
-        PriorityNode(
-            {
-                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
-                    MAX_WANDER_DIST),
-            }, 0.25)
+        PriorityNode({
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                MAX_WANDER_DIST),
+        }, 0.25)
 
     local root = PriorityNode(
         {
-
             WhileNode(
                 function() return self.inst.components.combat.target ~= nil and not self.inst.sg:HasStateTag("fishing") end,
                 "Is Threatened", IsThreatened),
             ChattyNode(self.inst, STRINGS.MERM_TALK_RUNAWAY,
-                RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST,
-                    STOP_RUN_AWAY_DIST)),
+                RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
 
             ChattyNode(self.inst, "MERM_TALK_FIND_FOOD",
                 DoAction(self.inst, FindFoodAction)),
 
             ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
-                Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST,
-                    TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
-            --        IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
-            --        ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
-            --        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn ))),				
-            ChattyNode(self.inst, STRINGS.MERM_TALK_FISH,
-                DoAction(self.inst, Fish, "Fish Action")),
+                Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
+            ChattyNode(self.inst, STRINGS.MERM_TALK_FISH, DoAction(self.inst, Fish, "Fish Action")),
             WhileNode(function() return ShouldGoHome(self.inst) end, "go home sleep",
-                ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
-                    DoAction(self.inst, GoHomeAction)
-                )),
+                ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME, DoAction(self.inst, GoHomeAction))),
             WhileNode(function() return not self.inst.sg:HasStateTag("fishing") end, "Is Idle", IsIdle),
         }, 0.25)
 

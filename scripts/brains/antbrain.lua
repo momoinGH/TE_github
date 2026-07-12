@@ -9,7 +9,7 @@ require "behaviours/findlight"
 require "behaviours/panic"
 require "behaviours/chattynode"
 require "behaviours/leash"
-
+local BrainCommon = require "brains/braincommon"
 
 local MIN_FOLLOW_DIST = 2
 local TARGET_FOLLOW_DIST = 5
@@ -24,14 +24,9 @@ local KEEP_FACE_DIST_FRIENDLY = 5
 
 local START_FACE_DIST = 10
 local KEEP_FACE_DIST = 10.5
-local START_RUN_DIST = 3
-local STOP_RUN_DIST = 5
 local MAX_CHASE_TIME = 10
 local MAX_CHASE_DIST = 30
-local SEE_LIGHT_DIST = 20
-local TRADE_DIST = 20
 local SEE_TREE_DIST = 15
-local SEE_TARGET_DIST = 20
 local SEE_FOOD_DIST = 10
 
 local KEEP_CHOPPING_DIST = 10
@@ -61,21 +56,7 @@ end
 
 local function KeepFaceTargetKeepAwayFn(inst, target)
     return inst:IsNear(target, KEEP_FACE_DIST) and not target:HasTag("notarget") and
-    not inst.is_complete_disguise(target)
-end
-
-
-local function ShouldRunAway(inst, target)
-    return not inst.components.trader:IsTryingToTradeWithMe(target)
-end
-
-local function GetTraderFn(inst)
-    return FindEntity(inst, TRADE_DIST, function(target) return inst.components.trader:IsTryingToTradeWithMe(target) end,
-        { "player" })
-end
-
-local function KeepTraderFn(inst, target)
-    return inst.components.trader:IsTryingToTradeWithMe(target)
+        not inst.is_complete_disguise(target)
 end
 
 local function FindFoodAction(inst)
@@ -128,65 +109,12 @@ local function FindFoodAction(inst)
     end
 end
 
-
-local function KeepChoppingAction(inst)
-    local keep_chop = inst.components.follower.leader and
-    inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
-    local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
-        return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-        item.components.workable.action == ACTIONS.CHOP
-    end)
-    if inst.tree_target ~= nil then target = inst.tree_target end
-
-    return (keep_chop or target ~= nil)
-end
-
-local function StartChoppingCondition(inst)
-    local start_chop = inst.components.follower.leader and inst.components.follower.leader.sg and
-    inst.components.follower.leader.sg:HasStateTag("chopping")
-    local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
-        return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-        item.components.workable.action == ACTIONS.CHOP
-    end)
-    if inst.tree_target ~= nil then target = inst.tree_target end
-
-    return (start_chop or target ~= nil)
-end
-
-
-local function FindTreeToChopAction(inst)
-    local target = FindEntity(inst, SEE_TREE_DIST,
-        function(item) return item.components.workable and item.components.workable.action == ACTIONS.CHOP end)
-    if target then
-        local decid_monst_target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
-            return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-            item.components.workable.action == ACTIONS.CHOP
-        end)
-        if decid_monst_target ~= nil then
-            target = decid_monst_target
-        end
-        if inst.tree_target then
-            target = inst.tree_target
-            inst.tree_target = nil
-        end
-        return BufferedAction(inst, target, ACTIONS.CHOP)
-    end
-end
-
 local function HasValidHome(inst)
     return inst.components.homeseeker and
         inst.components.homeseeker.home and
         not inst.components.homeseeker.home:HasTag("fire") and
         not inst.components.homeseeker.home:HasTag("burnt") and
         inst.components.homeseeker.home:IsValid()
-end
-
-local function GoHomeAction(inst)
-    if not inst.components.follower.leader and
-        HasValidHome(inst) and
-        not inst.components.combat.target then
-        return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
-    end
 end
 
 local function GetLeader(inst)
@@ -208,24 +136,9 @@ local function GetFaceTargetLeaderFn(inst)
     return inst.components.follower.leader
 end
 
-local function KeepFaceTargetLeaderFn(inst, target)
-    return inst.components.follower.leader == target
-end
-
 local AntBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
-
-
-
-local function translationfn(inst)
-    local player = GetClosestInstWithTag("player", inst, 30)
-    if player and player:HasTag("antlingual") then
-        return true
-    else
-        return false
-    end
-end
 
 local function getFoodStrings(inst)
     if inst.eattype == 1 then
@@ -262,52 +175,42 @@ local function shouldPanic(inst)
     return false
 end
 
-local function RescueLeaderAction(inst)
-    return BufferedAction(inst, GetLeader(inst), ACTIONS.UNPIN)
-end
-
 function AntBrain:OnStart()
     --print(self.inst, "PigBrain:OnStart")
     local root =
         PriorityNode(
             {
-
                 WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
-                    ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_PANICFIRE),
-                        Panic(self.inst))),
+                    ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_PANICFIRE), Panic(self.inst))),
 
                 ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_PANIC),
-                    WhileNode(function() return shouldPanic(self.inst) end, "Threat Panic",
-                        Panic(self.inst))),
+                    WhileNode(function() return shouldPanic(self.inst) end, "Threat Panic", Panic(self.inst))),
 
                 ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_FIGHT),
-                    WhileNode(
-                        function() return self.inst.components.combat.target == nil or
-                            not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+                    WhileNode(function()
+                            return self.inst.components.combat.target == nil or
+                                not self.inst.components.combat:InCooldown()
+                        end, "AttackMomentarily",
                         ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST))),
 
                 ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_FIGHT),
-                    WhileNode(
-                        function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end,
+                    WhileNode(function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end,
                         "Dodge",
-                        RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST,
-                            STOP_RUN_AWAY_DIST))),
+                        RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST))),
 
-                RunAway(self.inst,
-                    function(guy) return guy:HasTag("ant") and guy.components.combat and
-                        guy.components.combat.target == self.inst end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST),
+                RunAway(self.inst, function(guy)
+                    return guy:HasTag("ant") and guy.components.combat and
+                        guy.components.combat.target == self.inst
+                end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST),
 
-                --ChattyNode(self.inst, STRINGS.PIG_TALK_ATTEMPT_TRADE,
-                --    FaceEntity(self.inst, GetTraderFn, KeepTraderFn)),
+                ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_FIND_MEAT), DoAction(self.inst, FindFoodAction)),
 
-                ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_FIND_MEAT),
-                    DoAction(self.inst, FindFoodAction)),
-
-                IfNode(function() return StartChoppingCondition(self.inst) end, "chop",
-                    WhileNode(function() return KeepChoppingAction(self.inst) end, "keep chopping",
-                        LoopNode {
-                            ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_HELP_CHOP_WOOD),
-                                DoAction(self.inst, FindTreeToChopAction)) })),
+                BrainCommon.NodeAssistLeaderDoAction(self, {
+                    action = "CHOP", -- Required.
+                    finder_finddist = 15,
+                    keepgoing_leaderdist = 10,
+                    chatterstring = "ANT_TALK_HELP_CHOP_WOOD",
+                }),
 
                 ChattyNode(self.inst, makechatpackage(self.inst, STRINGS.ANT_TALK_FOLLOWWILSON),
                     Follow(self.inst, GetLeader, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),

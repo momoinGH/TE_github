@@ -87,7 +87,6 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.DOYDOYNEST                    = "Can grow baby 
 STRINGS.CHARACTERS.WURT.DESCRIBE.WILDBOREHOUSE                 = "Want to burn it, flort!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.WILDBOREHEAD                  = "He better like that."
 STRINGS.CHARACTERS.WURT.DESCRIBE.WILDBORE                      = "Grr! Extra-mean pigfolk!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.WILDBOREGUARD                 = "Glargh! Extra-extra-mean pigfolk!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.DOUBLE_UMBRELLAHAT            = "Why keep dry? Wet is good!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.VENOMGLAND                    = "Supposed to eat this if it bite you, flurt!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.OCTOPUSKING                   = "Big squiddy! Want a pet fish?"

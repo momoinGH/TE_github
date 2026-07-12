@@ -58,15 +58,9 @@ local sounds_guard = {
 
 local merm_brain = require "brains/mermbrain"
 local merm_guard_brain = require "brains/mermguardbrain"
-
-local MAX_TARGET_SHARES = 5
-local SHARE_TARGET_DIST = 40
+local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
 
 local function FindInvaderFn(guy, inst)
-    local function test_disguise(test_guy)
-        return test_guy.components.inventory and test_guy.components.inventory:EquipHasTag("merm")
-    end
-
     local leader = inst.components.follower and inst.components.follower.leader
 
     local leader_guy = guy.components.follower and guy.components.follower.leader
@@ -133,36 +127,13 @@ local function KeepTargetpirateFn(inst, target)
     return inst.components.combat:CanTarget(target)
 end
 
-local DECIDROOTTARGET_MUST_TAGS = { "_combat", "_health", "merm" }
-local DECIDROOTTARGET_CANT_TAGS = { "INLIMBO" }
-
-local function OnAttackedByDecidRoot(inst, attacker)
-    local share_target_dist = inst:HasTag("mermguard") and TUNING.MERM_GUARD_SHARE_TARGET_DIST or
-        TUNING.MERM_SHARE_TARGET_DIST
-    local max_target_shares = inst:HasTag("mermguard") and TUNING.MERM_GUARD_MAX_TARGET_SHARES or
-        TUNING.MERM_MAX_TARGET_SHARES
-
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(share_target_dist) * .5, DECIDROOTTARGET_MUST_TAGS,
-        DECIDROOTTARGET_CANT_TAGS)
-    local num_helpers = 0
-
-    for i, v in ipairs(ents) do
-        if v ~= inst and not v.components.health:IsDead() then
-            v:PushEvent("suggest_tree_target", { tree = attacker })
-            num_helpers = num_helpers + 1
-            if num_helpers >= max_target_shares then
-                break
-            end
-        end
-    end
-end
-
 local function OnAttacked(inst, data)
     local attacker = data and data.attacker
-    if attacker and attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
-        OnAttackedByDecidRoot(inst, attacker.owner)
-    elseif attacker and inst.components.combat:CanTarget(attacker) and attacker.prefab ~= "deciduous_root" then
+    if deciduoustree_utils.OnAttackedByDecidRoot(inst, attacker, { "merm" }) then
+        return
+    end
+
+    if attacker and inst.components.combat:CanTarget(attacker) and attacker.prefab ~= "deciduous_root" then
         local share_target_dist = inst:HasTag("mermguard") and TUNING.MERM_GUARD_SHARE_TARGET_DIST or
             TUNING.MERM_SHARE_TARGET_DIST
         local max_target_shares = inst:HasTag("mermguard") and TUNING.MERM_GUARD_MAX_TARGET_SHARES or
@@ -726,5 +697,4 @@ end
 return MakeMerm("merm1", assets, prefabs, common_common, common_master),
     MakeMerm("merm2", assets, prefabs, common_common2, common_master),
     MakeMerm("mermfisher", assets, prefabs, common_common3, common_master2),
-    MakeMerm("mermfisherpirate", assets, prefabs, common_pirate, common_masterpirate),
-    MakeMerm("mermfisherguard", assets, prefabs, guard_common, guard_master)
+    MakeMerm("mermfisherpirate", assets, prefabs, common_pirate, common_masterpirate)

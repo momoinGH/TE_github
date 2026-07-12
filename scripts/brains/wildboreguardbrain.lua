@@ -45,7 +45,7 @@ local WildboreGuardBrain = Class(Brain, function(self, inst)
     self.diveitem = nil
     self.seekitem = nil
     self.matchovertime = nil
-    self.canpanic = true	
+    self.canpanic = true
 end)
 
 local function HasProp(inst)
@@ -201,7 +201,7 @@ end
 
 local function TrySetNewTarget(inst)
     local target = FindClosestPlayerToInst(inst, START_FACE_DIST, true)
-    if target then        
+    if target then
         inst.components.combat:EngageTarget(target)
     end
     return target
@@ -212,103 +212,96 @@ function WildboreGuardBrain:IsPlayerNearby()
         FindEntity(self.inst, SEE_PLAYER_DIST, nil, { "player" }, { "notarget", "INLIMBO", "playerghost" }) ~= nil
 end
 
-
 function WildboreGuardBrain:NeedToRunAway()
-   local PK = self.inst.PigKing
-   if PK == nil then
-       return false
-   end
-   if PK.__brain:CanJump() then
-       print("Minion is running away!");
-   end
-   return PK.__brain:CanJump()
+    local PK = self.inst.PigKing
+    if PK == nil then
+        return false
+    end
+    if PK.__brain:CanJump() then
+        print("Minion is running away!");
+    end
+    return PK.__brain:CanJump()
 end
 
 function WildboreGuardBrain:OnStart()
     local root = PriorityNode(
-    {
-	
-        WhileNode(function() return self.inst.sg:HasStateTag("jumping") end, "Standby",
-            ActionNode(function() --[[do nothing]] end)),
-        WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted",
-            ChattyNode(self.inst, "PIG_TALK_PANICHAUNT",
-                PanicAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST))),
-        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
-            ChattyNode(self.inst, "PIG_TALK_PANICFIRE",
-                PanicAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST))),
-        ChattyNode(self.inst, "PIG_ELITE_SMACK",
-            WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
-                ParallelNode{
-                    ChaseAndAttackAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST),
-                    ActionNode(function()
-                        self.pickprop = nil
-                        self.seekprop = nil
-                        self.diveitem = nil
-                        self.seekitem = nil
-                    end),
-                })),			
-        --Dive for gold
-        WhileNode(function() return ShouldDiveItem(self) end, "Dive",
-            ActionNode(function()
-                self.pickprop = nil
-                self.seekprop = nil
-                self.inst:PushEvent("diveitem", { item = self.diveitem })
-            end)),
-        ChattyNode(self.inst, "PIG_ELITE_GOLD",
-            ParallelNode{
-                LeashAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST, function() return GetSeekItemPos(self) end, DIVE_ITEM_DIST, 0, true),
+        {
+
+            WhileNode(function() return self.inst.sg:HasStateTag("jumping") end, "Standby",
+                ActionNode(function() --[[do nothing]] end)),
+            WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted",
+                ChattyNode(self.inst, "PIG_TALK_PANICHAUNT",
+                    PanicAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST))),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
+                ChattyNode(self.inst, "PIG_TALK_PANICFIRE",
+                    PanicAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST))),
+            ChattyNode(self.inst, "PIG_ELITE_SMACK",
+                WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+                    ParallelNode {
+                        ChaseAndAttackAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST),
+                        ActionNode(function()
+                            self.pickprop = nil
+                            self.seekprop = nil
+                            self.diveitem = nil
+                            self.seekitem = nil
+                        end),
+                    })),
+            --Dive for gold
+            WhileNode(function() return ShouldDiveItem(self) end, "Dive",
                 ActionNode(function()
                     self.pickprop = nil
                     self.seekprop = nil
-                end),
-            }),
-        --Pick up prop
-        WhileNode(function()
-                self.diveitem = nil
-                self.seekitem = nil
-                return ShouldPickProp(self)
-            end,
-            "PickProp",
-            ActionNode(function() self.inst:PushEvent("pickprop", { prop = self.pickprop }) end)),
-        LeashAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST, function() return GetSeekPropPos(self) end, PICK_PROP_DIST, 0, true),
-
-
-
-		
-			
-			
-
-        -- If there are no players around then - Despawn!
-        WhileNode(function() return not (self.ChekingForPlayers==true) and not self:IsPlayerNearby() end, "Despawn", 
-            ActionNode(
-                function () 
-                    self.ChekingForPlayers = true                    
-                    self.inst:DoTaskInTime(4, function ()
-                        if not self:IsPlayerNearby() then 
-						self.inst.sg:GoToState("caifora")
---                            self.inst:Remove() 
-                            print("Minion lost players. Despawn!") 
-                        else
-                            self.ChekingForPlayers = false
-                        end
-                    end)
+                    self.inst:PushEvent("diveitem", { item = self.diveitem })
                 end)),
+            ChattyNode(self.inst, "PIG_ELITE_GOLD",
+                ParallelNode {
+                    LeashAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST, function() return GetSeekItemPos(self) end, DIVE_ITEM_DIST, 0, true),
+                    ActionNode(function()
+                        self.pickprop = nil
+                        self.seekprop = nil
+                    end),
+                }),
+            --Pick up prop
+            WhileNode(function()
+                    self.diveitem = nil
+                    self.seekitem = nil
+                    return ShouldPickProp(self)
+                end,
+                "PickProp",
+                ActionNode(function() self.inst:PushEvent("pickprop", { prop = self.pickprop }) end)),
+            LeashAndAvoid(self.inst, GetPigKing, AVOID_KING_DIST, function() return GetSeekPropPos(self) end, PICK_PROP_DIST, 0, true),
 
-        WhileNode(function() return self:NeedToRunAway() end, "RunAway", 
-            RunAway(self.inst, {tags={"pigking"}}, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
+            -- If there are no players around then - Despawn!
+            WhileNode(function() return not (self.ChekingForPlayers == true) and not self:IsPlayerNearby() end, "Despawn",
+                ActionNode(
+                    function()
+                        self.ChekingForPlayers = true
+                        self.inst:DoTaskInTime(4, function()
+                            if not self:IsPlayerNearby() then
+                                self.inst.sg:GoToState("caifora")
+                                --                            self.inst:Remove()
+                                print("Minion lost players. Despawn!")
+                            else
+                                self.ChekingForPlayers = false
+                            end
+                        end)
+                    end)),
 
-        ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
-            WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
-                 ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST)))),
+            WhileNode(function() return self:NeedToRunAway() end, "RunAway",
+                RunAway(self.inst, { tags = { "pigking" } }, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
 
-        ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
-            WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
-                RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST))),        
+            ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
+                WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+                    ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST)))),
 
-        WhileNode(function() return self.inst.components.combat.target == nil and TrySetNewTarget(self.inst) == nil end, "Wander if no targets",
-            Wander(self.inst))
+            ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
+                WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
+                    RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST))),
 
-    }, .25)
+            WhileNode(function() return self.inst.components.combat.target == nil and TrySetNewTarget(self.inst) == nil end, "Wander if no targets",
+                Wander(self.inst))
+
+        }, .25)
 
     self.bt = BT(self.inst, root)
 end

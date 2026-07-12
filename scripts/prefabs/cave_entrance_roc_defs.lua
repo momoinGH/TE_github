@@ -1,4 +1,4 @@
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 local function GetDoorProp(room, dir, exit)
     return {

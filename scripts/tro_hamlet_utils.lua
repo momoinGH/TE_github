@@ -1,4 +1,4 @@
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 --- 是否有老板在看着，如果为false表示玩家可以偷
 local function IsTraderWatchingItem(target)

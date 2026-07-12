@@ -1,5 +1,5 @@
 local DecoCreator = require "prefabs/deco_util"
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 -- 这次不替换了，直接移除并重新生成
 local function OnBuilt(inst)

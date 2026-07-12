@@ -269,7 +269,7 @@ AddPrefabPostInit("wormwood", function(inst)
 end)
 
 AddPrefabPostInit("player_classified", function(inst)
-    local ArtifactControls = require "tropical_utils/ArtifactControls"
+    local ArtifactControls = require "tro_utils/ArtifactControls"
 
     local function OnArtifactexplodeDirty(inst)
         if inst._parent and inst._parent.sg and not inst._parent.sg:HasStateTag("explode") then

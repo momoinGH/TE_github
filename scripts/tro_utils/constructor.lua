@@ -1,6 +1,6 @@
 local FN = {}
 
-local Utils = require("tropical_utils/utils")
+local Utils = require("tro_utils/utils")
 
 local env --环境变量，需要手动赋值
 function FN.SetEnv(newEnv)

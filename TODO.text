@@ -1,8 +1,16 @@
-未使用的预制件文件
-porkland_sw_entrance.lua	DLC 世界旅行传送门
-wargboar.lua	座狼-野猪混合生物
-yeti.lua	雪人蜘蛛猴变体
+local tro_pig_defs = require("prefabs/tro_pig_defs")
 
 
-未使用的 Brain 文件
-nightmareprimeapebrain.lua	噩梦猿猴 Brain
+wanawanatiki
+quagmire_trader_merm
+quagmire_trader_merm2
+quagmire_swampig
+piggolem
+merm1
+merm2
+mermfisher
+mermfisherpirate
+mermfisherguardunderwater
+mermb1
+mermb2
+icerockpigman

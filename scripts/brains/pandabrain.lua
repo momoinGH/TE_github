@@ -37,9 +37,7 @@ local KEEP_CHOPPING_DIST = 10
 local RUN_AWAY_DIST = 5
 local STOP_RUN_AWAY_DIST = 8
 
-local function ShouldRunAway(inst, target)
-	return not inst.components.trader:IsTryingToTradeWithMe(target)
-end
+local BrainCommon = require "brains/braincommon"
 
 local function GetTraderFn(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -57,68 +55,6 @@ end
 
 local function IsWood(inst, item)
 	return item ~= nil and item.components.edible and item.components.edible.foodtype == FOODTYPE.WOOD
-end
-
-local function IsBamboo(inst, item)
-	return item ~= nil and item:HasTag("bambootree") and item:HasTag("machetecut")
-end
-
-
-local function HasWood(inst)
-	return inst.components.inventory and
-		inst.components.inventory:FindItem(function(x) return IsWood(inst, x) end)
-end
-
-local function WoodIsNear(inst)
-	if HasWood(inst) then
-		return true
-	end
-	return FindEntity(inst, SEE_FOOD_DIST, function(x) return IsWood(inst, x) end)
-end
-
-local function CanDeployWall(pt, item)
-	return TheWorld.Map:CanDeployWallAtPoint(pt, item)
-end
-
-local WALL_RADIUS = 20
-
-local function GetDirections()
-	return {
-		{ x = 1,  z = 0 },
-		{ x = 0,  z = 1 },
-		{ x = -1, z = 0 },
-		{ x = 0,  z = -1 },
-		{ x = 1,  z = -1 },
-		{ x = -1, z = 1 },
-		{ x = -1, z = -1 },
-		{ x = 1,  z = 1 },
-	}
-end
-
-local function FindPosToWall(inst)
-	local item = inst.components.inventory:FindItem(function(x) return x.prefab == "wall_wood_item" end)
-	if item ~= nil then
-		local wall = FindEntity(inst, WALL_RADIUS, function(x) return x.prefab == "wall_wood" end, { "wall" })
-		if wall ~= nil then
-			local x, y, z = inst.Transform:GetWorldPosition()
-			local dirs = GetDirections()
-			for i, dir in ipairs(dirs) do
-				local xOffset = dir.x * 0.25
-				local zOffset = dir.z * 0.25
-				local newpt = Vector3(x + xOffset, y, z + zOffset)
-				if CanDeployWall(newpt, item) then
-					return BufferedAction(inst, nil, ACTIONS.DEPLOY, item, newpt)
-				end
-			end
-		end
-		-- local x, y, z = inst.Transform:GetWorldPosition()
-		-- local ents = TheSim:FindEntities(x, y, z, WALL_RADIUS, {"wall"}, {"INLIMBO"})
-		-- for i,wall in ipairs(ents) do
-		-- 	for j,wall in ipairs(ents) do
-
-		-- 	end
-		-- end
-	end
 end
 
 local function FindStumpToDigAction(inst)
@@ -191,9 +127,6 @@ local function FindFoodAction(inst)
 			return inst.components.eater:CanEat(item)
 		end)
 	end
-	--	if target then
-	--		return BufferedAction(inst, target, ACTIONS.EAT)
-	--	end
 
 	if not target and (not time_since_eat or time_since_eat > TUNING.PIG_MIN_POOP_PERIOD * 2) then
 		target = FindEntity(inst, SEE_FOOD_DIST, function(item)
@@ -214,40 +147,6 @@ local function FindFoodAction(inst)
 		return BufferedAction(inst, target, ACTIONS.PICKUP)
 	end
 end
-
-local function IsDeciduousTreeMonster(guy)
-	return guy.monster and guy.prefab == "deciduoustree"
-end
-
-local function FindDeciduousTreeMonster(inst)
-	return FindEntity(inst, SEE_TREE_DIST / 3, IsDeciduousTreeMonster, { "CHOP_workable" })
-end
-
-local function KeepChoppingAction(inst)
-	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
-	local keep_chop = inst.components.follower.leader and
-		inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
-	local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
-		return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-			item.components.workable.action == ACTIONS.CHOP
-	end, nil, notags)
-	if inst.tree_target ~= nil then target = inst.tree_target end
-
-	return (keep_chop or target ~= nil)
-end
-
-local function StartChoppingCondition(inst)
-	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
-	local start_chop = inst.components.follower.leader and inst.components.follower.leader.sg and
-		inst.components.follower.leader.sg:HasStateTag("chopping")
-	local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
-		return item.components.workable and item.components.workable.action == ACTIONS.CHOP
-	end, nil, notags)
-	if inst.tree_target ~= nil then target = inst.tree_target end
-
-	return (start_chop and target ~= nil)
-end
-
 
 local function FindTreeToChopAction(inst)
 	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
@@ -333,22 +232,6 @@ local function GetNoLeaderHomePos(inst)
 	return GetHomePos(inst)
 end
 
-local function GetNearestLightPos(inst)
-	local light = GetClosestInstWithTag("lightsource", inst, SEE_LIGHT_DIST)
-	if light then
-		return Vector3(light.Transform:GetWorldPosition())
-	end
-	return nil
-end
-
-local function GetNearestLightRadius(inst)
-	local light = GetClosestInstWithTag("lightsource", inst, SEE_LIGHT_DIST)
-	if light then
-		return light.Light:GetCalculatedRadius()
-	end
-	return 1
-end
-
 local function RescueLeaderAction(inst)
 	return BufferedAction(inst, inst, ACTIONS.UNPIN)
 end
@@ -359,13 +242,6 @@ end
 
 local function KeepFaceTargetFn(inst, target)
 	return inst.components.follower.leader == target
-end
-
-local function SafeLightDist(inst, target)
-	return (target:HasTag("player") or target:HasTag("playerlight")
-			or (target.inventoryitem and target.inventoryitem:GetGrandOwner() and target.inventoryitem:GetGrandOwner():HasTag("player")))
-		and 4
-		or target.Light:GetCalculatedRadius() / 3
 end
 
 local function IsHomeOnFire(inst)
@@ -422,9 +298,6 @@ function PandaBrain:OnStart()
 					end, "Mind",
 					DoAction(self.inst, function() return MindcontrolAction(self.inst) end)),
 
-
-
-
 				WhileNode(function() return IsHomeOnFire(self.inst) end, "OnFire",
 					Panic(self.inst)),
 				FaceEntity(self.inst, GetTraderFn, KeepTraderFn),
@@ -434,11 +307,13 @@ function PandaBrain:OnStart()
 				IfNode(function() return self.inst.treesdue > 0 end, "find and plant trees",
 					DoAction(self.inst, FindTreeSeeds)),
 
-				IfNode(function() return StartChoppingCondition(self.inst) end, "chop",
-					WhileNode(function() return KeepChoppingAction(self.inst) end, "keep chopping",
-						LoopNode {
-							ChattyNode(self.inst, STRINGS.BORE_TALK_HELP_CHOP_WOOD,
-								DoAction(self.inst, FindTreeToChopAction)) })),
+				BrainCommon.NodeAssistLeaderDoAction(self, {
+					action = "CHOP", -- Required.
+					finder_finddist = 15,
+					keepgoing_leaderdist = 10,
+					chatterstring = "BORE_TALK_HELP_CHOP_WOOD",
+				}),
+
 				IfNode(function() return StartHackingCondition(self.inst) end, "hack",
 					WhileNode(function() return KeepHackingAction(self.inst) end, "keep hacking",
 						LoopNode {
@@ -454,10 +329,12 @@ function PandaBrain:OnStart()
 				ChattyNode(self.inst, "WILDBEAVER_TALK_GOHOME",
 					WhileNode(function() return not TheWorld.state.iscaveday end, "IsNight",
 						DoAction(self.inst, GoHomeAction, "go home", true))),
+
 				IfNode(function() return self.inst.WantsToChop(self.inst) end, "wants to chop",
 					WhileNode(function() return self.inst.WantsToChop(self.inst) end, "keep chopping",
 						LoopNode {
 							DoAction(self.inst, FindTreeToChopAction) })),
+
 				DoAction(self.inst, FindStumpToDigAction),
 				Leash(self.inst, GetNoLeaderHomePos, LEASH_MAX_DIST, LEASH_RETURN_DIST),
 				Wander(self.inst, GetNoLeaderHomePos, MAX_WANDER_DIST),

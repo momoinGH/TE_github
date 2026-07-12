@@ -17,6 +17,7 @@ local assets =
 }
 
 local PIG_TOKEN_PREFAB = "pig_token"
+local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
 
 local prefabs =
 {
@@ -55,7 +56,7 @@ local function ShouldAcceptItem(inst, item)
         local foodtype = item.components.edible.foodtype
         if foodtype == FOODTYPE.MEAT or foodtype == FOODTYPE.HORRIBLE then
             return inst.components.follower.leader == nil or
-            inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
+                inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
         elseif foodtype == FOODTYPE.VEGGIE or foodtype == FOODTYPE.RAW then
             local last_eat_time = inst.components.eater:TimeSinceLastEating()
             return (last_eat_time == nil or
@@ -94,7 +95,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
                     giver.components.leader:AddFollower(inst)
                 end
                 inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() *
-                TUNING.PIG_LOYALTY_PER_HUNGER)
+                    TUNING.PIG_LOYALTY_PER_HUNGER)
                 inst.components.follower.maxfollowtime =
                     giver:HasTag("polite")
                     and TUNING.PIG_LOYALTY_MAXTIME + TUNING.PIG_LOYALTY_POLITENESS_MAXTIME_BONUS
@@ -137,22 +138,6 @@ local function OnEat(inst, food)
     end
 end
 
-local function OnAttackedByDecidRoot(inst, attacker)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" },
-        { "werepig", "guard", "INLIMBO" })
-    local num_helpers = 0
-    for i, v in ipairs(ents) do
-        if v ~= inst and not v.components.health:IsDead() then
-            v:PushEvent("suggest_tree_target", { tree = attacker })
-            num_helpers = num_helpers + 1
-            if num_helpers >= MAX_TARGET_SHARES then
-                break
-            end
-        end
-    end
-end
-
 local function IsPig(dude)
     return dude:HasTag("pig")
 end
@@ -174,8 +159,8 @@ local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
-        OnAttackedByDecidRoot(inst, attacker.owner)
+    if deciduoustree_utils.OnAttackedByDecidRoot(inst, attacker, { "pig" }) then
+        --
     elseif attacker.prefab ~= "deciduous_root" and not attacker:HasTag("pigelite") then
         inst.components.combat:SetTarget(attacker)
 
@@ -199,57 +184,6 @@ end
 local builds = { "pig_build", "pigspotted_build" }
 local guardbuilds = { "wanawana_build" }
 
-local function NormalRetargetFn(inst)
-    local exclude_tags = { "playerghost", "INLIMBO", "tiki" }
-    if inst.components.follower.leader ~= nil then
-        table.insert(exclude_tags, "abigail")
-    end
-    if inst.components.minigame_spectator ~= nil then
-        table.insert(exclude_tags, "player") -- prevent spectators from auto-targeting webber
-    end
-
-    local must_tags = { "monster" }
-    if not inst.components.inventory:EquipHasTag("merm") then
-        table.insert(must_tags, "merm")
-    end
-
-    return not inst:IsInLimbo()
-        and FindEntity(
-            inst,
-            TUNING.PIG_TARGET_DIST,
-            function(guy)
-                return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
-                    and inst.components.combat:CanTarget(guy)
-            end,
-            { "_combat" },     -- see entityreplica.lua
-            exclude_tags,
-            must_tags
-        )
-        or nil
-end
-
-local function NormalKeepTargetFn(inst, target)
-    --give up on dead guys, or guys in the dark, or werepigs
-    return inst.components.combat:CanTarget(target)
-        and (target.LightWatcher == nil or target.LightWatcher:IsInLight())
-        and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
-end
-
-local function NormalShouldSleep(inst)
-    return DefaultSleepTest(inst)
-        and (inst.components.follower == nil or inst.components.follower.leader == nil
-            or (FindEntity(inst, 6, nil, { "campfire", "fire" }) ~= nil and
-                (inst.LightWatcher == nil or inst.LightWatcher:IsInLight())))
-end
-
-local normalbrain = require "brains/pigbrain"
-
-local function SuggestTreeTarget(inst, data)
-    if data ~= nil and data.tree ~= nil and inst:GetBufferedAction() ~= ACTIONS.CHOP then
-        inst.tree_target = data.tree
-    end
-end
-
 local function OnItemGet(inst, data)
     if data.item ~= nil and data.item.prefab == PIG_TOKEN_PREFAB then
         inst.AnimState:OverrideSymbol("pig_belt", "pig_token", "pig_belt")
@@ -264,19 +198,6 @@ local function OnItemLose(inst, data)
     end
 end
 
-local function SetupPigToken(inst)
-    if not IsSpecialEventActive(SPECIAL_EVENTS.YOTP) then
-        return -- todo: remove this once post-yotp gameplay is done
-    end
-
-    if not inst._pigtokeninitialized then
-        inst._pigtokeninitialized = true
-        if math.random() <= (IsSpecialEventActive(SPECIAL_EVENTS.YOTP) and TUNING.PIG_TOKEN_CHANCE_YOTP or TUNING.PIG_TOKEN_CHANCE) then
-            inst.components.inventory:GiveItem(SpawnPrefab(PIG_TOKEN_PREFAB))
-        end
-    end
-end
-
 local function ReplacePigToken(inst)
     if not IsSpecialEventActive(SPECIAL_EVENTS.YOTP) then
         return -- todo: remove this once post-yotp gameplay is done
@@ -285,7 +206,7 @@ local function ReplacePigToken(inst)
     if inst._pigtokeninitialized then
         local item = GetPigToken(inst)
         local should_get_item = math.random() <=
-        (IsSpecialEventActive(SPECIAL_EVENTS.YOTP) and TUNING.PIG_TOKEN_CHANCE_YOTP or TUNING.PIG_TOKEN_CHANCE)
+            (IsSpecialEventActive(SPECIAL_EVENTS.YOTP) and TUNING.PIG_TOKEN_CHANCE_YOTP or TUNING.PIG_TOKEN_CHANCE)
         if item ~= nil and not should_get_item then
             inst.components.inventory:RemoveItem(item, true)
             item:Remove()
@@ -293,38 +214,6 @@ local function ReplacePigToken(inst)
             inst.components.inventory:GiveItem(SpawnPrefab(PIG_TOKEN_PREFAB))
         end
     end
-end
-
-local function SetNormalPig(inst)
-    inst:RemoveTag("werepig")
-    inst:RemoveTag("guard")
-    inst:SetBrain(normalbrain)
-    inst:SetStateGraph("SGpig")
-    inst.AnimState:SetBuild(inst.build)
-
-    inst.components.sleeper:SetResistance(2)
-
-    inst.components.combat:SetDefaultDamage(TUNING.PIG_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.PIG_ATTACK_PERIOD)
-    inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
-    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED
-
-    inst.components.sleeper:SetSleepTest(NormalShouldSleep)
-    inst.components.sleeper:SetWakeTest(DefaultWakeTest)
-
-    inst.components.lootdropper:SetLoot({})
-    inst.components.lootdropper:AddRandomLoot("meat", 3)
-    inst.components.lootdropper:AddRandomLoot("pigskin", 1)
-    inst.components.lootdropper.numrandomloot = 1
-
-    inst.components.health:SetMaxHealth(TUNING.PIG_HEALTH)
-    inst.components.combat:SetRetargetFunction(3, NormalRetargetFn)
-    inst.components.combat:SetTarget(nil)
-    inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
-
-    inst.components.trader:Enable()
-    inst.components.talker:StopIgnoringAll("becamewerepig")
 end
 
 local function GuardRetargetFn(inst)
@@ -450,32 +339,6 @@ local function WerepigKeepTargetFn(inst, target)
         and not target:HasTag("werepig")
         and not target:HasTag("wereplayer")
         and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
-end
-
-local function IsNearMoonBase(inst, dist)
-    local moonbase = inst.components.entitytracker:GetEntity("moonbase")
-    return moonbase == nil or inst:IsNear(moonbase, dist)
-end
-
-local function MoonpigRetargetFn(inst)
-    return IsNearMoonBase(inst, TUNING.MOONPIG_AGGRO_DIST)
-        and FindEntity(
-            inst,
-            TUNING.PIG_TARGET_DIST,
-            function(guy)
-                return inst.components.combat:CanTarget(guy)
-                    and not (guy.sg ~= nil and guy.sg:HasStateTag("transform"))
-            end,
-            { "_combat" },     --See entityreplica.lua (re: "_combat" tag)
-            { "werepig", "alwaysblock", "wereplayer", "moonbeast" }
-        )
-        or nil
-end
-
-local function MoonpigKeepTargetFn(inst, target)
-    return IsNearMoonBase(inst, TUNING.MOONPIG_RETURN_DIST)
-        and not target:HasTag("moonbeast")
-        and WerepigKeepTargetFn(inst, target)
 end
 
 local function WerepigSleepTest(inst)
@@ -709,28 +572,6 @@ local function common(moonbeast)
     return inst
 end
 
-
-
-local function normal()
-    local inst = common(false)
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    -- boat hopping setup
-    inst.components.locomotor:SetAllowPlatformHopping(true)
-    inst:AddComponent("embarker")
-
-    inst.build = builds[math.random(#builds)]
-    inst.AnimState:SetBuild(inst.build)
-    inst.components.werebeast:SetOnNormalFn(SetNormalPig)
-    SetNormalPig(inst)
-
-    inst:DoTaskInTime(0, SetupPigToken)
-    return inst
-end
-
 local function guard()
     local inst = common(false)
     inst:AddTag("tiki")
@@ -765,64 +606,6 @@ for i, v in ipairs(gargoyles) do
 end
 for i, v in ipairs(prefabs) do
     table.insert(moonpigprefabs, v)
-end
-
-local moonbeastbrain = require "brains/moonbeastbrain"
-
-local function OnMoonPetrify(inst)
-    if not inst.components.health:IsDead() and (not inst.sg:HasStateTag("busy") or inst:IsAsleep()) then
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local rot = inst.Transform:GetRotation()
-        local name = inst.components.named.name
-        inst:Remove()
-        local gargoyle = SpawnPrefab(gargoyles[math.random(#gargoyles)])
-        gargoyle.components.named:SetName(name)
-        gargoyle.Transform:SetPosition(x, y, z)
-        gargoyle.Transform:SetRotation(rot)
-        gargoyle:Petrify()
-    end
-end
-
-local function OnMoonTransformed(inst, data)
-    inst.components.named:SetName(data.old.components.named.name)
-    inst.sg:GoToState("howl")
-end
-
-local function moon()
-    local inst = common(true)
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("entitytracker")
-
-    inst:SetBrain(moonbeastbrain)
-    inst:SetStateGraph("SGmoonpig")
-
-    inst.components.sleeper:SetResistance(3)
-    inst.components.freezable:SetDefaultWearOffTime(TUNING.MOONPIG_FREEZE_WEAR_OFF_TIME)
-
-    inst.components.combat:SetDefaultDamage(TUNING.WEREPIG_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.WEREPIG_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED
-
-    inst.components.sleeper:SetSleepTest(WerepigSleepTest)
-    inst.components.sleeper:SetWakeTest(WerepigWakeTest)
-
-    inst.components.lootdropper:SetLoot({ "meat", "meat", "pigskin" })
-    inst.components.lootdropper.numrandomloot = 0
-
-    inst.components.health:SetMaxHealth(TUNING.WEREPIG_HEALTH)
-    inst.components.combat:SetTarget(nil)
-    inst.components.combat:SetRetargetFunction(3, MoonpigRetargetFn)
-    inst.components.combat:SetKeepTargetFunction(MoonpigKeepTargetFn)
-
-    inst:ListenForEvent("moonpetrify", OnMoonPetrify)
-    inst:ListenForEvent("moontransformed", OnMoonTransformed)
-
-    return inst
 end
 
 return Prefab("wanawanatiki", guard, assets, prefabs)

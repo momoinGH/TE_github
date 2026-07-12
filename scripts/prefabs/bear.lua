@@ -20,6 +20,7 @@ local prefabs =
     "strawhat",
     "pigskin",
 }
+local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
 
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
@@ -78,21 +79,6 @@ local function OnEat(inst, food)
     end
 end
 
-local function OnAttackedByDecidRoot(inst, attacker)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" }, { "INLIMBO" })
-    local num_helpers = 0
-    for i, v in ipairs(ents) do
-        if v ~= inst and not v.components.health:IsDead() then
-            v:PushEvent("suggest_tree_target", { tree = attacker })
-            num_helpers = num_helpers + 1
-            if num_helpers >= MAX_TARGET_SHARES then
-                break
-            end
-        end
-    end
-end
-
 local function IsNonWerePig(dude)
     return dude:HasTag("walrus")
 end
@@ -102,11 +88,12 @@ local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
-        OnAttackedByDecidRoot(inst, attacker.owner)
-    elseif attacker.prefab ~= "deciduous_root" and not attacker:HasTag("pigelite") then
-        inst.components.combat:SetTarget(attacker)
+    if deciduoustree_utils.OnAttackedByDecidRoot(inst, attacker, { "walrus" }) then
+        return
+    end
 
+    if attacker.prefab ~= "deciduous_root" and not attacker:HasTag("pigelite") then
+        inst.components.combat:SetTarget(attacker)
         if not attacker:HasTag("walrus") then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsNonWerePig, MAX_TARGET_SHARES)
         end
@@ -194,21 +181,17 @@ local function guard()
     inst.Transform:SetFourFaced()
 
     inst:AddTag("character")
-    inst:AddTag("pig")
     inst:AddTag("scarytoprey")
-    inst:AddTag("guard")
-
-    inst.AnimState:SetBank("werebeaver")
-    inst.AnimState:SetBuild("polar_bear_guard")
-
-    inst.AnimState:PlayAnimation("idle_loop", true)
-    inst.AnimState:Hide("hat")
-
-    --Sneak these into pristine state for optimization
     inst:AddTag("_named")
     inst:AddTag("trader")
     inst:AddTag("walrus")
     inst:AddTag("houndfriend")
+
+    inst.AnimState:SetBank("werebeaver")
+    inst.AnimState:SetBuild("polar_bear_guard")
+    inst.AnimState:PlayAnimation("idle_loop", true)
+    inst.AnimState:Hide("hat")
+
 
     inst:AddComponent("talker")
     inst.components.talker.fontsize = 35

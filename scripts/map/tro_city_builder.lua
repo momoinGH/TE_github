@@ -1,13 +1,13 @@
 -- 引入地图布局模块，用于加载预设的建筑结构
 local obj_layout = require("map/object_layout")
-local SpawnUtil = require("tropical_utils/spawnutil")
+local SpawnUtil = require("tro_utils/spawnutil")
 
 -- 定义四个方向的步进值，用于在网格中进行坐标偏移
 local DIR_STEP = {
-    { x = 1, z = 0 },
-    { x = 0, z = 1 },
+    { x = 1,  z = 0 },
+    { x = 0,  z = 1 },
     { x = -1, z = 0 },
-    { x = 0, z = -1 },
+    { x = 0,  z = -1 },
 }
 
 -- 标记重要唯一建筑是否已经生成，确保每个城市/世界只有一个
@@ -54,26 +54,26 @@ local FARM_FILLER_CHOICES = {
 
 -- 城市1（通常是主城）的建筑配额，定义了各种商店和民居的数量
 local BUILDING_QUOTAS = {
-    { prefab = "pig_shop_deli", num = 1 },
+    { prefab = "pig_shop_deli",    num = 1 },
     { prefab = "pig_shop_academy", num = 1 },
     { prefab = "pig_shop_florist", num = 1 },
     { prefab = "pig_shop_general", num = 1 },
     { prefab = "pig_shop_hoofspa", num = 1 },
     { prefab = "pig_shop_produce", num = 1 },
-    { prefab = "pig_shop_bank", num = 1 },
-    { prefab = "pig_guard_tower", num = 15 },
-    { prefab = "pighouse_city", num = 50 }
+    { prefab = "pig_shop_bank",    num = 1 },
+    { prefab = "pig_guard_tower",  num = 15 },
+    { prefab = "pighouse_city",    num = 50 }
 }
 
 -- 城市2（通常是副城/高级城）的建筑配额，包含武器店、奥术店等
 local BUILDING_QUOTAS_2 = {
     { prefab = "pig_shop_antiquities", num = 1 },
-    { prefab = "pig_shop_hatshop", num = 1 },
-    { prefab = "pig_shop_weapons", num = 1 },
-    { prefab = "pig_shop_arcane", num = 1 },
-    { prefab = "pig_shop_tinker", num = 1 },
-    { prefab = "pig_guard_tower", num = 15 },
-    { prefab = "pighouse_city", num = 50 }
+    { prefab = "pig_shop_hatshop",     num = 1 },
+    { prefab = "pig_shop_weapons",     num = 1 },
+    { prefab = "pig_shop_arcane",      num = 1 },
+    { prefab = "pig_shop_tinker",      num = 1 },
+    { prefab = "pig_guard_tower",      num = 15 },
+    { prefab = "pighouse_city",        num = 50 }
 }
 
 -- 定义允许放置城市建筑的合法地皮类型

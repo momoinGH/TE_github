@@ -51,9 +51,7 @@ local function FindFoodAction(inst)
 end
 
 local function MindcontrolAction(inst)
- 
-return BufferedAction(inst, nil, ACTIONS.DIG) or nil
-
+    return BufferedAction(inst, nil, ACTIONS.DIG) or nil
 end
 
 local function GetFaceTargetFn(inst)
@@ -76,35 +74,32 @@ end)
 
 function wildbeaverguardbrain:OnStart()
     local root = PriorityNode(
-    {
-        BrainCommon.PanicWhenScared(self.inst, .2, "PIG_TALK_PANICBOSS"),
-        WhileNode(function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-        ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
-            WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
-                ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST)))),
-        ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
-            WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() and math.random(1,4) > 1 end, "Dodge",
-                RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST))),
-				
-				
-        ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
-            WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() and math.random(1,10) == 1 end, "Mind",
-				DoAction(self.inst, function() return MindcontrolAction(self.inst) end))),				
-				
-				
-				
-        WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
-        ChattyNode(self.inst, "PIG_GUARD_TALK_GOHOME",
-            DoAction(self.inst, GoHomeAction, "Go Home", true))),
-        ChattyNode(self.inst, "PIG_TALK_FIND_MEAT",
-            DoAction(self.inst, function() return FindFoodAction(self.inst) end)),
-        ChattyNode(self.inst, "PIG_GUARD_TALK_TORCH",
-            DoAction(self.inst, AddFuelAction, "Add Fuel", true)),
-        ChattyNode(self.inst, "PIG_GUARD_TALK_LOOKATWILSON",
-            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)),
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
-    }, .25)
+        {
+            BrainCommon.PanicWhenScared(self.inst, .2, "PIG_TALK_PANICBOSS"),
+            WhileNode(function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
+                WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+                    ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST)))),
+            ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
+                WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() and math.random(1, 4) > 1 end, "Dodge",
+                    RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST))),
+
+            ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
+                WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() and math.random(1, 10) == 1 end, "Mind",
+                    DoAction(self.inst, function() return MindcontrolAction(self.inst) end))),
+
+            WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
+                ChattyNode(self.inst, "PIG_GUARD_TALK_GOHOME",
+                    DoAction(self.inst, GoHomeAction, "Go Home", true))),
+            ChattyNode(self.inst, "PIG_TALK_FIND_MEAT",
+                DoAction(self.inst, function() return FindFoodAction(self.inst) end)),
+            ChattyNode(self.inst, "PIG_GUARD_TALK_TORCH",
+                DoAction(self.inst, AddFuelAction, "Add Fuel", true)),
+            ChattyNode(self.inst, "PIG_GUARD_TALK_LOOKATWILSON",
+                FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)),
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
+        }, .25)
 
     self.bt = BT(self.inst, root)
 end

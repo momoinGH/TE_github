@@ -1,4 +1,4 @@
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 local BASE_OFF = RoomUtils.BASE_OFF + 100
 local ROOM_GAP = RoomUtils.ROOM_GAP

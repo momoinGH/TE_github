@@ -1,4 +1,4 @@
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 local assets =
 {
@@ -503,24 +503,6 @@ local function OnEat(inst, food)
     end
 end
 
-local function OnAttackedByDecidRoot(inst, attacker)
-    local fn = function(dude) return dude:HasTag("pig") and not dude:HasTag("werepig") and not dude:HasTag("guard") end
-
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local radius = TheWorld.state.isspring and ((SHARE_TARGET_DIST * TUNING.SPRING_COMBAT_MOD) / 2) or (SHARE_TARGET_DIST / 2)
-    local num_helpers = 0
-    for k, v in pairs(TheSim:FindEntities(x, y, z, radius)) do
-        if v ~= inst and v.components.combat and not (v.components.health and v.components.health:IsDead()) and fn(v) then
-            if v:PushEvent("suggest_tree_target", { tree = attacker }) then
-                num_helpers = num_helpers + 1
-            end
-        end
-        if num_helpers >= MAX_TARGET_SHARES then
-            break
-        end
-    end
-end
-
 local function callGuards(inst, attacker, id)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, RoomUtils.RADIUS, { "interior_door" })
@@ -543,9 +525,7 @@ local function OnAttacked(inst, data)
     if not attacker then return end
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner then
-        OnAttackedByDecidRoot(inst, attacker.owner)
-    elseif attacker.prefab ~= "deciduous_root" then
+    if attacker.prefab ~= "deciduous_root" then
         inst.components.combat:SetTarget(attacker)
 
         if inst:HasTag("guard") then

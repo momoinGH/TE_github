@@ -1,4 +1,4 @@
-local Constructor = require("tropical_utils/constructor")
+local Constructor = require("tro_utils/constructor")
 
 local assets = {}
 

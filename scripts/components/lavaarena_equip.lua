@@ -1,4 +1,4 @@
-local GetPrefab = require("tropical_utils/getprefab")
+local GetPrefab = require("tro_utils/getprefab")
 
 local function OnPlayerEquip(owner, data)
     if data.eslot == EQUIPSLOTS.HANDS and data.item and data.item.components.rechargeable then
@@ -44,7 +44,7 @@ local function OnUnequipped(inst, data)
     if self.max_health and owner.components.health then
         GetPrefab.SetMaxHealth(owner, owner.components.health.maxhealth - self.max_health)
     end
-    
+
     if self.cooldown_mult then
         local weapon = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) --只减免手部武器
         if weapon and weapon.components.rechargeable then

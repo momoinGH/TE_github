@@ -92,7 +92,7 @@ local sounds_guard = {
 }
 
 local merm_guard_brain = require "brains/mermguardbrain"
-
+local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
 
 local SLIGHTDELAY = 1
 
@@ -169,38 +169,16 @@ local function KeepTargetFn(inst, target)
     end
 end
 
-local DECIDROOTTARGET_MUST_TAGS = { "_combat", "_health", "merm" }
-local DECIDROOTTARGET_CANT_TAGS = { "INLIMBO" }
-
-local function OnAttackedByDecidRoot(inst, attacker)
-    local isguard = inst:HasTag("mermguard")
-    local share_target_dist = (isguard and TUNING.MERM_GUARD_SHARE_TARGET_DIST) or TUNING.MERM_SHARE_TARGET_DIST
-    local max_target_shares = (isguard and TUNING.MERM_GUARD_MAX_TARGET_SHARES) or TUNING.MERM_MAX_TARGET_SHARES
-
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local combat_helpers = TheSim:FindEntities(x, y, z, SpringCombatMod(share_target_dist) * .5,
-        DECIDROOTTARGET_MUST_TAGS, DECIDROOTTARGET_CANT_TAGS)
-    local num_helpers = 0
-
-    for _, helper in ipairs(combat_helpers) do
-        if helper ~= inst and not helper.components.health:IsDead() then
-            helper:PushEvent("suggest_tree_target", { tree = attacker })
-            num_helpers = num_helpers + 1
-            if num_helpers >= max_target_shares then
-                break
-            end
-        end
-    end
-end
-
 local function IsNonPlayerMerm(this)
     return not this.isplayer and this:HasTag("merm")
 end
 
 local function resolve_on_attacked(inst, attacker)
-    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
-        OnAttackedByDecidRoot(inst, attacker.owner)
-    elseif attacker.prefab ~= "deciduous_root" and inst.components.combat:CanTarget(attacker) then
+    if deciduoustree_utils.OnAttackedByDecidRoot(inst, attacker, { "merm" }) then
+        return
+    end
+
+    if attacker.prefab ~= "deciduous_root" and inst.components.combat:CanTarget(attacker) then
         local isguard = inst:HasTag("mermguard")
 
         local share_target_dist = (isguard and TUNING.MERM_GUARD_SHARE_TARGET_DIST) or TUNING.MERM_SHARE_TARGET_DIST
@@ -1077,75 +1055,4 @@ local function guard_master(inst)
     inst:DoTaskInTime(0, on_guard_initialize)
 end
 
-local function common_common3(inst)
-    inst.sounds = sounds
-    inst.AnimState:SetBuild("merm_fisherman_build")
-    inst.build = "merm_fisherman_build"
-end
-
--------------------------------------------------------------------------------
--- LUNAR MERM DEFS
-local function ontimerdone(inst, data)
-    if data.name == "fish" then
-        inst.CanFish = true
-    end
-end
-
-local function oncollect(inst)
-    inst.CanFish = false
-
-    if inst.components.timer:TimerExists("fish") then
-        inst.components.timer:StopTimer("fish")
-    end
-
-    inst.components.timer:StartTimer("fish", TUNING.SEG_TIME * 2)
-end
-
-local function common_master2(inst)
-    inst.components.locomotor.runspeed = TUNING.MERM_RUN_SPEED * 0.7
-    inst.components.locomotor.walkspeed = TUNING.MERM_WALK_SPEED * 0.7
-
-    inst:SetStateGraph("SGmermfisher")
-    local brain = require "brains/mermfisherbrain"
-    inst:SetBrain(brain)
-
-    inst.components.sleeper:SetNocturnal(true)
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-    inst.components.sleeper:SetWakeTest(ShouldWakeUp)
-
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-    inst.components.combat:SetRetargetFunction(1, RetargetFn)
-    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH)
-    inst.components.combat:SetDefaultDamage(TUNING.MERM_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-
-    MakeHauntablePanic(inst)
-
-    inst.components.lootdropper:SetLoot(merm_loot)
-
-    inst.components.follower.maxfollowtime = TUNING.MERM_LOYALTY_MAXTIME
-
-    inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
-
-    inst:AddComponent("fishingrod")
-    inst.components.fishingrod:SetWaitTimes(4, 40)
-    inst.components.fishingrod:SetStrainTimes(0, 5)
-
-    inst:ListenForEvent("timerdone", ontimerdone)
-
-    inst:ListenForEvent("fishingcollect", oncollect)
-
-    inst:AddComponent("named")
-    inst.components.named.possiblenames = STRINGS.MERMNAMES
-    inst.components.named:PickNewName()
-
-    inst.CanFish = true
-end
-
-return --MakeMerm("merm1", assets, prefabs, common_common, common_master),
---MakeMerm("merm2", assets, prefabs, common_common2, common_master),
-    MakeMerm("mermfisherunderwater", assets, prefabs, common_common3, common_master2),
-    MakeMerm("mermfisherguardunderwater", assets, prefabs, guard_common, guard_master)
+return MakeMerm("mermfisherguardunderwater", assets, prefabs, guard_common, guard_master)

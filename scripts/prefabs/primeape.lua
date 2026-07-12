@@ -133,11 +133,8 @@ local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker and attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
-        OnAttackedByDecidRoot(inst, attacker.owner)
-    elseif attacker and attacker.prefab ~= "deciduous_root" then
+    if attacker then
         inst.components.combat:SetTarget(attacker)
-
         if not (attacker:HasTag("monkey")) then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsNonWerePig, MAX_TARGET_SHARES)
         end

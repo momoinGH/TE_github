@@ -1,4 +1,4 @@
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 local assets =
 {
@@ -29,12 +29,12 @@ local function creatInterior(inst)
     local width = TUNING.ROOM_LARGE_WIDTH
     local addprops = {
         { name = "interior_floor_batcave" },
-        { name = "interior_wall_batcave_wall_rock", x_offset = -4.6, scale = { 4.62, 4.8 } },
-        { name = "vamp_bat_cave_exit_door", x_offset = -depth / 2, key = "exit" },
-        { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = -width / 2 },
-        { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } },
-        { name = "deco_cave_pillar_side", x_offset = depth / 2, z_offset = -width / 2 },
-        { name = "deco_cave_pillar_side", x_offset = depth / 2, z_offset = width / 2, scale = { -1, 1 } },
+        { name = "interior_wall_batcave_wall_rock", x_offset = -4.6,       scale = { 4.62, 4.8 } },
+        { name = "vamp_bat_cave_exit_door",         x_offset = -depth / 2, key = "exit" },
+        { name = "deco_cave_cornerbeam",            x_offset = -depth / 2, z_offset = -width / 2 },
+        { name = "deco_cave_cornerbeam",            x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } },
+        { name = "deco_cave_pillar_side",           x_offset = depth / 2,  z_offset = -width / 2 },
+        { name = "deco_cave_pillar_side",           x_offset = depth / 2,  z_offset = width / 2, scale = { -1, 1 } },
         { name = "deco_cave_bat_burrow" },
     }
     for i = 1, math.random(1, 3) do

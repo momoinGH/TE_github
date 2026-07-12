@@ -1,5 +1,5 @@
 require("map/network")
-local SpawnUtil = require("tropical_utils/spawnutil")
+local SpawnUtil = require("tro_utils/spawnutil")
 local MAPEDGE_PADDING = OCEAN_MAPWRAPPER_WARN_RANGE + 10
 
 -- 生成百慕大三角

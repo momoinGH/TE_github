@@ -1,4 +1,4 @@
-local GetPrefab = require("tropical_utils/getprefab")
+local GetPrefab = require("tro_utils/getprefab")
 
 local assets =
 {

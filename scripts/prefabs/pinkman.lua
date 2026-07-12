@@ -20,6 +20,7 @@ local prefabs =
 
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
+local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
 
 local function ontalk(inst, script)
     inst.SoundEmitter:PlaySound("dontstarve/pig/grunt")
@@ -39,7 +40,7 @@ local function ShouldAcceptItem(inst, item)
         local foodtype = item.components.edible.foodtype
         if foodtype == FOODTYPE.MEAT or foodtype == FOODTYPE.HORRIBLE then
             return inst.components.follower.leader == nil or
-            inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
+                inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
         elseif foodtype == FOODTYPE.VEGGIE or foodtype == FOODTYPE.RAW then
             local last_eat_time = inst.components.eater:TimeSinceLastEating()
             return (last_eat_time == nil or
@@ -77,7 +78,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
                     giver.components.leader:AddFollower(inst)
                 end
                 inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() *
-                TUNING.PIG_LOYALTY_PER_HUNGER)
+                    TUNING.PIG_LOYALTY_PER_HUNGER)
                 inst.components.follower.maxfollowtime =
                     giver:HasTag("polite")
                     and TUNING.PIG_LOYALTY_MAXTIME + TUNING.PIG_LOYALTY_POLITENESS_MAXTIME_BONUS
@@ -120,25 +121,6 @@ local function OnEat(inst, food)
     end
 end
 
-local SUGGESTTARGET_MUST_TAGS = { "_combat", "_health", "pig" }
-local SUGGESTTARGET_CANT_TAGS = { "werepig", "guard", "INLIMBO" }
-
-local function OnAttackedByDecidRoot(inst, attacker)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, SUGGESTTARGET_MUST_TAGS,
-        SUGGESTTARGET_CANT_TAGS)
-    local num_helpers = 0
-    for i, v in ipairs(ents) do
-        if v ~= inst and not v.components.health:IsDead() then
-            v:PushEvent("suggest_tree_target", { tree = attacker })
-            num_helpers = num_helpers + 1
-            if num_helpers >= MAX_TARGET_SHARES then
-                break
-            end
-        end
-    end
-end
-
 local function IsPig(dude)
     return dude:HasTag("pig")
 end
@@ -161,8 +143,8 @@ local function OnAttacked(inst, data)
     inst:ClearBufferedAction()
 
     if attacker ~= nil then
-        if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
-            OnAttackedByDecidRoot(inst, attacker.owner)
+        if deciduoustree_utils.OnAttackedByDecidRoot(inst, attacker, { "pig" }) then
+            --
         elseif attacker.prefab ~= "deciduous_root" and not attacker:HasTag("pigelite") then
             inst.components.combat:SetTarget(attacker)
 

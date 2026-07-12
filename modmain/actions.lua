@@ -1,4 +1,4 @@
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 local HamletUtils = require("tro_hamlet_utils")
 
 local function TroAddAction(data, id, str, fn)

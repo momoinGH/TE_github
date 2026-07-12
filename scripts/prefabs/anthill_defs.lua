@@ -4,7 +4,7 @@ local NUM_COLS  = 5
 local width     = TUNING.ROOM_LARGE_WIDTH
 local depth     = TUNING.ROOM_LARGE_DEPTH
 
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 local DIR       = RoomUtils.DIR
 
 -- The camera is setup in the interiors such that it looks along the x axis.

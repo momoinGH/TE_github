@@ -9,8 +9,11 @@ require "behaviours/findlight"
 require "behaviours/panic"
 require "behaviours/chattynode"
 require "behaviours/leash"
+local BrainCommon = require "brains/braincommon"
 
 local MAX_CHASE_TIME = 40
+local SEE_TREE_DIST = 15
+local KEEP_CHOPPING_DIST = 10
 
 local function HasValidHome(inst)
     return inst.components.homeseeker and
@@ -29,37 +32,6 @@ local function GetWanderPoint(inst)
     return GetHomePos(inst) or (player and player:GetPosition())
 end
 
-local function translationfn(inst)
-    local player = GetClosestInstWithTag("player", inst, 30)
-    if player and player:HasTag("antlingual") then
-        return true
-    else
-        return false
-    end
-end
-
-local function makechatpackage(speech)
-    return {
-        chatlines = speech,
-        untranslated = STRINGS.ANT_TALK_UNTRANSLATED,
-        translationfn = translationfn
-    }
-end
-
-local function shouldPanic(inst)
-    if inst.components.combat.target then
-        local threat = inst.components.combat.target
-        if threat then
-            if threat.components.inventory then
-                local equipped = threat.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-                return equipped and equipped.prefab == "magnifying_glass"
-            end
-        end
-    end
-
-    return false
-end
-
 local AntWarriorBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
@@ -68,9 +40,17 @@ function AntWarriorBrain:OnStart()
     local root = PriorityNode(
         {
             WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
-            Wander(self.inst, GetWanderPoint, 20),
 
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+
+            BrainCommon.NodeAssistLeaderDoAction(self, {
+                action = "CHOP", -- Required.
+                finder_finddist = SEE_TREE_DIST,
+                keepgoing_leaderdist = KEEP_CHOPPING_DIST,
+                chatterstring = "PIG_TALK_HELP_CHOP_WOOD",
+            }),
+
+            Wander(self.inst, GetWanderPoint, 20),
         }, .1)
 
     self.bt = BT(self.inst, root)

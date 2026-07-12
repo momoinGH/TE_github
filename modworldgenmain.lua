@@ -13,7 +13,7 @@ tro_languages = {
 }
 modimport "modmain/util.lua"              --一些表相关的工具函数
 modimport "modmain/dev_utils"             --开发环境下辅助用的函数，与游戏无关
-Hooks = require "tropical_utils/hooks"    --用来hook的一些函数
+Hooks = require "tro_utils/hooks"         --用来hook的一些函数
 if TheFrontEnd then
     modimport "modmain/map/customize.lua" --世界生成选项
 end

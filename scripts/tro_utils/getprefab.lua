@@ -4,7 +4,7 @@ local _source = debug.getinfo(1, 'S').source
 local KEY = "_" .. _source:match(".*scripts[/\\](.*)%.lua"):gsub("[/\\]", "_") .. "_"
 
 local Utils = require(_source:match(".*scripts[/\\](.*[/\\])") .. "utils")
-local Hooks = require("tropical_utils/hooks")
+local Hooks = require("tro_utils/hooks")
 
 
 ---攻击对象检测，会攻击monster标签生物和当前仇恨对象，不会误伤其他单位

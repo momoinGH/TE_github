@@ -329,7 +329,7 @@ local function spawnFixer(inst)
     end
 end
 
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 -- 销毁同时把室内销毁掉
 local function OnRemove(inst)

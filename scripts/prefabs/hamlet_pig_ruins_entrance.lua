@@ -1,7 +1,7 @@
 local mazemaker = require("prefabs/hamlet_pig_ruins_entrance_defs")
 local MakeDoor  = require("prefabs/tro_interior_door_defs").MakeDoor
 
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 local assets    =
 {

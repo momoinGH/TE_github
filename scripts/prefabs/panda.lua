@@ -21,8 +21,6 @@ local prefabs = {
 
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
-local CHOP_WAIT_DURATION = 20
-local TREESDUE_THRESHOLD = 3
 
 local SEED_TYPES = {
     "jungletreeseed",
@@ -33,6 +31,9 @@ local SEED_TYPES = {
     "coconut",
     "tree_forestseed",
 }
+
+local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
+
 
 local function IsTreeSeed(item)
     for i, seedtype in ipairs(SEED_TYPES) do
@@ -121,16 +122,6 @@ local function OnRefuseItem(inst, item)
     end
 end
 
-local WALL_WOOD_COST = 20
-
-local function CraftWall(inst)
-    if inst.woodmeter >= WALL_WOOD_COST then
-        local item = SpawnPrefab("wall_wood_item")
-        inst.components.inventory:GiveItem(item)
-        inst.woodmeter = inst.woodmeter - WALL_WOOD_COST
-    end
-end
-
 local function OnDeployItem(inst, data)
     local prefab = data.prefab
     if IsTreeSeed(prefab) then
@@ -151,29 +142,14 @@ local function OnEat(inst, food)
     end
 end
 
-local function OnAttackedByDecidRoot(inst, attacker)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5,
-        { "_combat", "_health", "wildbeaver" }, { "INLIMBO" })
-    local num_helpers = 0
-    for i, v in ipairs(ents) do
-        if v ~= inst and not v.components.health:IsDead() then
-            v:PushEvent("suggest_tree_target", { tree = attacker })
-            num_helpers = num_helpers + 1
-            if num_helpers >= MAX_TARGET_SHARES then
-                break
-            end
-        end
-    end
-end
-
 local function OnAttacked(inst, data)
     --print(inst, "OnAttacked")
     local attacker = data.attacker
+    inst:ClearBufferedAction()
+
     if attacker ~= nil then
-        inst:ClearBufferedAction()
-        if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
-            OnAttackedByDecidRoot(inst, attacker.owner)
+        if deciduoustree_utils.OnAttackedByDecidRoot(inst, attacker, { "wildbeaver" }) then
+            --
         else
             inst.components.combat:SetTarget(attacker)
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(x) x:HasTag("wildbeaver") end,

@@ -1,4 +1,4 @@
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 local function OnSave(inst, data)
     data.room_width = inst.room_width:value() ~= 0 and inst.room_width:value() or nil

@@ -1,4 +1,4 @@
-local Shapes = require("tropical_utils/shapes")
+local Shapes = require("tro_utils/shapes")
 
 local function GetSpawnPos(ent)
     if not ent:IsInShipwreckedArea() then

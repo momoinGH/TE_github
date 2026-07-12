@@ -1,5 +1,5 @@
 local DecoCreator = require "prefabs/deco_util"
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tro_utils/room_utils")
 
 -- 构建后我需要根据所在墙面初始化bank和旋转方向
 local function OnBuilt(inst)
@@ -72,6 +72,5 @@ return
         { loopanim = true, decal = true, light = true, dayevents = true, followlight = "natural", windowlight = true, dustzmod = 1.3, tags = { "NOBLOCK", "NOCLICK" }, persists = false }),
     DecoCreator:Create("window_round_light_backwall", "interior_window", "interior_window_light", "day_loop",
         { loopanim = true, decal = true, light = true, dayevents = true, followlight = "natural", windowlight = true, dustxmod = 1.3, tags = { "NOBLOCK", "NOCLICK" }, persists = false }),
-
     MakeWindow("window_greenhouse", "interior_window_greenhouse_build", "interior_window_greenhouse_side", "day_loop"),
     MakeWindow("window_greenhouse_backwall", "interior_window_greenhouse_build", "interior_window_greenhouse", "day_loop")

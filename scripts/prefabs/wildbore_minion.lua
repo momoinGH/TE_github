@@ -174,11 +174,6 @@ local function NormalKeepTargetFn(inst, target)
         and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
 end
 
-local function NormalShouldSleep(inst)
-    return false
-end
-
-
 local function SetNormalPig(inst)
     inst:RemoveTag("werepig")
     inst:RemoveTag("guard")
@@ -193,8 +188,6 @@ local function SetNormalPig(inst)
 
     if inst.variation == 1 then
         inst.AnimState:OverrideSymbol("pig_arm", "wildbore_elite_build", "pig_arm_3")
-        --	inst.AnimState:OverrideSymbol("pig_ear", "wildbore_elite_build", "pig_ear_1")
-        --	inst.AnimState:OverrideSymbol("pig_head", "wildbore_elite_build", "pig_head_1")
         inst.AnimState:OverrideSymbol("pig_skirt", "wildbore_elite_build", "pig_skirt_1")
         inst.AnimState:OverrideSymbol("pig_torso", "wildbore_elite_build", "pig_torso_1")
         inst.AnimState:OverrideSymbol("spin_bod", "wildbore_elite_build", "spin_bod_1")
@@ -202,16 +195,12 @@ local function SetNormalPig(inst)
 
     if inst.variation == 2 then
         inst.AnimState:OverrideSymbol("pig_arm", "wildbore_elite_build", "pig_arm_2")
-        --	inst.AnimState:OverrideSymbol("pig_ear", "wildbore_elite_build", "pig_ear_2")
-        --	inst.AnimState:OverrideSymbol("pig_head", "wildbore_elite_build", "pig_head_2")
         inst.AnimState:OverrideSymbol("pig_skirt", "wildbore_elite_build", "pig_skirt_2")
         inst.AnimState:OverrideSymbol("pig_torso", "wildbore_elite_build", "pig_torso_2")
         inst.AnimState:OverrideSymbol("spin_bod", "wildbore_elite_build", "spin_bod_2")
     end
 
     if inst.variation == 3 then
-        --	inst.AnimState:OverrideSymbol("pig_ear", "wildbore_elite_build", "pig_ear_3")
-        --	inst.AnimState:OverrideSymbol("pig_head", "wildbore_elite_build", "pig_head_3")
         inst.AnimState:OverrideSymbol("pig_skirt", "wildbore_elite_build", "pig_skirt_3")
         inst.AnimState:OverrideSymbol("pig_torso", "wildbore_elite_build", "pig_torso_3")
         inst.AnimState:OverrideSymbol("spin_bod", "wildbore_elite_build", "spin_bod_3")
@@ -271,20 +260,6 @@ local function SetGuardPig(inst)
     inst.components.follower:SetLeader(nil)
 end
 
-local function IsNearMoonBase(inst, dist)
-    local moonbase = inst.components.entitytracker:GetEntity("moonbase")
-    return moonbase == nil or inst:IsNear(moonbase, dist)
-end
-
-local function WerepigSleepTest(inst)
-    return false
-end
-
-local function WerepigWakeTest(inst)
-    return true
-end
-
-
 local function SetWerePig(inst)
     inst:AddTag("werepig")
     inst:RemoveTag("guard")
@@ -325,10 +300,6 @@ local function GetStatus(inst)
         or nil
 end
 
-local function displaynamefn(inst)
-    return inst.name
-end
-
 local function OnSave(inst, data)
     data.build = inst.build
     data.variation = inst.variation
@@ -342,7 +313,6 @@ local function OnLoad(inst, data)
         if inst.build == "pig_guard_build" then
             SetNormalPig(inst)
         end
-
 
         if not inst.components.werebeast:IsInWereState() then
             inst.AnimState:SetBuild(inst.build)
