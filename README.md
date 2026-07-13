@@ -12,3 +12,15 @@ yeti.lua	雪人蜘蛛猴变体
 
 未使用的 Brain 文件
 nightmareprimeapebrain.lua	噩梦猿猴 Brain
+
+
+未引用文件完整清单（156个）
+tfwp武器系列（10个）
+- tfwp_book_freeze.zip, tfwp_heavy_sword.zip, tfwp_hypno_armor.zip
+- tfwp_infernalstaff.zip, tfwp_tusk_armor.zip
+- swap_tfwp_book_freeze.zip, swap_tfwp_heavy_sword.zip
+- swap_tfwp_infernalstaff.zip, swap_tfwp_tusk_armor.zip
+- infernalstaff.zip, swap_infernalstaff.zip
+
+
+surf_n_turf.zip 鱼肉、鸡腿、萝卜、浆果混合物，什么料理？

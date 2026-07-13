@@ -1,7 +1,8 @@
 local RoomUtils = require("tro_utils/room_utils")
 
 local assets = {
-    Asset("ANIM", "anim/pisohamlet.zip")
+    Asset("ANIM", "anim/pisohamlet.zip"),
+    -- Asset("ANIM", "anim/permit_demolition.zip") --一些地板物品，现在是直接制造替换的，暂时没什么用
 }
 
 local prefabs = {

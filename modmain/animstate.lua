@@ -175,29 +175,25 @@ end
 if troisdev then
     -- 调用SetBuild时检查是否有同名动画文件，用来解决动画不显示又不知道哪里调用的问题
     -- 并不是很准确，因为build不一定非得和压缩包名一样，所以可以偶尔检查一次
-    -- TUNING.TEST_CHECK_ANIM_HAS_BUILD = true
-    local memoizedFilePaths = Hooks.GetUpValue(resolvefilepath, "memoizedFilePaths")
-    local OldSetBuild = AnimState.SetBuild
-    function AnimState:SetBuild(build, ...)
-        local inst = _GetEntity(self)
-        if inst and
-            not memoizedFilePaths["anim/" .. build .. ".zip"]
-            and TUNING.TEST_CHECK_ANIM_HAS_BUILD --在控制台设置这个值为true就开始打印
-        then
-            TroErrorHandle(string.trofmt("{} 调用了SetBuild但是没有 {}.zip 动画文件，注意检查动画是否正常显示", inst, build), false, "warn")
-        end
-        return OldSetBuild(self, build, ...)
-    end
+    -- local memoizedFilePaths = Hooks.GetUpValue(resolvefilepath, "memoizedFilePaths")
+    -- local OldSetBuild = AnimState.SetBuild
+    -- function AnimState:SetBuild(build, ...)
+    --     local inst = _GetEntity(self)
+    --     if inst and not memoizedFilePaths["anim/" .. build .. ".zip"] then
+    --         TroErrorHandle(string.trofmt("{} 调用了SetBuild但是没有 {}.zip 动画文件，注意检查动画是否正常显示", inst, build), false, "warn")
+    --     end
+    --     return OldSetBuild(self, build, ...)
+    -- end
 
-    -- Hooks.FnDecorator(AnimState, "SetBank", function(self, bank)
-    --     print("调用AnimState:SetBank", bank)
-    -- end)
+    Hooks.FnDecorator(AnimState, "SetBank", function(self, bank)
+        print("调用AnimState:SetBank", _GetEntity(self), bank)
+    end)
 
-    -- Hooks.FnDecorator(AnimState, "SetBuild", function(self, build)
-    --     print("调用AnimState:SetBuild", build)
-    -- end)
+    Hooks.FnDecorator(AnimState, "SetBuild", function(self, build)
+        print("调用AnimState:SetBuild", _GetEntity(self), build)
+    end)
 
-    -- Hooks.FnDecorator(AnimState, "PlayAnimation", function(self, anim)
-    --     print("调用AnimState:PlayAnimation", anim)
-    -- end)
+    Hooks.FnDecorator(AnimState, "PlayAnimation", function(self, anim)
+        print("调用AnimState:PlayAnimation", _GetEntity(self), anim)
+    end)
 end

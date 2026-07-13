@@ -2,9 +2,15 @@ local PIGHOUSE_CITY_RESPAWNTIME = 480 * 3
 
 local assets =
 {
+    -- 只有动画
     Asset("ANIM", "anim/pig_townhouse1.zip"),
     Asset("ANIM", "anim/pig_townhouse5.zip"),
     Asset("ANIM", "anim/pig_townhouse6.zip"),
+    
+    --TODO 科雷没使用过的，有贴图，不过动画只有idle、lit，和其他房子不适配
+    -- Asset("ANIM", "anim/pig_townhouse2.zip"),
+    -- Asset("ANIM", "anim/pig_townhouse3.zip"),
+    -- Asset("ANIM", "anim/pig_townhouse4.zip"),
 
     Asset("ANIM", "anim/pig_townhouse1_pink_build.zip"),
     Asset("ANIM", "anim/pig_townhouse1_green_build.zip"),
