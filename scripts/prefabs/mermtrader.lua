@@ -32,12 +32,6 @@ local merm_loot =
     "froglegs",
 }
 
-local merm_guard_loot =
-{
-    "pondfish",
-    "froglegs",
-}
-
 local sounds = {
     attack = "dontstarve/creatures/merm/attack",
     hit = "dontstarve/creatures/merm/hurt",
@@ -47,17 +41,6 @@ local sounds = {
     --debuff = "dontstarve/characters/wurt/merm/warrior/yell",
 }
 
-local sounds_guard = {
-    attack = "dontstarve/characters/wurt/merm/warrior/attack",
-    hit = "dontstarve/characters/wurt/merm/warrior/hit",
-    death = "dontstarve/characters/wurt/merm/warrior/death",
-    talk = "dontstarve/characters/wurt/merm/warrior/talk",
-    buff = "dontstarve/characters/wurt/merm/warrior/yell",
-    --debuff = ,
-}
-
-local merm_brain = require "brains/mermbrain"
-local merm_guard_brain = require "brains/mermguardbrain"
 local deciduoustree_utils = require "tro_utils/deciduoustree_utils"
 
 local function FindInvaderFn(guy, inst)
@@ -248,41 +231,6 @@ local function RoyalDowngrade(inst)
     inst.Transform:SetScale(1, 1, 1)
 end
 
-local function RoyalGuardDowngrade(inst)
-    if inst.components.health:IsDead() then
-        return
-    end
-
-    inst.components.health:SetMaxHealth(TUNING.PUNY_MERM_HEALTH)
-    inst.components.combat:SetDefaultDamage(TUNING.PUNY_MERM_DAMAGE)
-    inst.AnimState:SetBuild("merm_fisherman_build")
-    inst.AnimState:OverrideSymbol("pig_torso", "merm_guard_small_build", "pig_torso")
-    inst.AnimState:OverrideSymbol("pig_arm", "merm_guard_small_build", "pig_arm")
-    inst.AnimState:OverrideSymbol("pig_cheeks", "merm_guard_small_build", "pig_cheeks")
-    inst.AnimState:OverrideSymbol("pig_head", "merm_guard_small_build", "pig_head")
-    inst.AnimState:OverrideSymbol("pig_leg", "merm_guard_small_build", "pig_leg")
-    inst.AnimState:SetMultColour(255 / 255, 150 / 255, 0 / 255, 1)
-    inst.Transform:SetScale(0.9, 0.9, 0.9)
-end
-
-local function RoyalGuardUpgrade(inst)
-    if inst.components.health:IsDead() then
-        return
-    end
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_GUARD_HEALTH)
-    inst.components.combat:SetDefaultDamage(TUNING.MERM_GUARD_DAMAGE)
-    inst.AnimState:SetBuild("merm_fisherman_build")
-    inst.AnimState:OverrideSymbol("pig_torso", "merm_guard_build", "pig_torso")
-    inst.AnimState:OverrideSymbol("pig_arm", "merm_guard_build", "pig_arm")
-    inst.AnimState:OverrideSymbol("pig_cheeks", "merm_guard_build", "pig_cheeks")
-    inst.AnimState:OverrideSymbol("pig_head", "merm_guard_build", "pig_head")
-    inst.AnimState:OverrideSymbol("pig_leg", "merm_guard_build", "pig_leg")
-    inst.AnimState:SetMultColour(255 / 255, 150 / 255, 0 / 255, 1)
-    inst.Transform:SetScale(1, 1, 1)
-    --inst.Transform:SetScale(1.15, 1.15, 1.15)
-end
-
 local function ResolveMermChatter(inst, strid, strtbl)
     local stringtable = STRINGS[strtbl:value()]
     if stringtable then
@@ -294,14 +242,6 @@ local function ResolveMermChatter(inst, strid, strtbl)
             end
         end
     end
-end
-
-local function ShouldGuardSleep(inst)
-    return false
-end
-
-local function ShouldGuardWakeUp(inst)
-    return true
 end
 
 local function ShouldSleep(inst)
@@ -318,6 +258,8 @@ end
 local function OnTimerDone(inst, data)
     if data.name == "facetime" then
         inst.components.timer:StartTimer("dontfacetime", 10)
+    elseif data.name == "fish" then
+        inst.CanFish = true
     end
 end
 
@@ -329,7 +271,7 @@ local function battlecry(combatcmp, target)
     return strtbl, math.random(#STRINGS[strtbl])
 end
 
-local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit)
+local function MakeMerm(name, common_postinit, master_postinit)
     local function fn()
         local inst = CreateEntity()
 
@@ -358,6 +300,7 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit)
         inst.components.talker.resolvechatterfn = ResolveMermChatter
         inst.components.talker:MakeChatter()
 
+
         if common_postinit ~= nil then
             common_postinit(inst)
         end
@@ -368,7 +311,11 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit)
             return inst
         end
 
+        inst.sounds = sounds
+
         inst:AddComponent("locomotor")
+        inst.components.locomotor.runspeed = TUNING.MERM_RUN_SPEED
+        inst.components.locomotor.walkspeed = TUNING.MERM_WALK_SPEED
         -- boat hopping setup
         inst.components.locomotor:SetAllowPlatformHopping(true)
         inst:AddComponent("embarker")
@@ -378,16 +325,27 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit)
         inst.components.eater:SetDiet({ FOODGROUP.VEGETARIAN }, { FOODGROUP.VEGETARIAN })
 
         inst:AddComponent("health")
+        inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH)
         inst:AddComponent("combat")
+        inst.components.combat:SetDefaultDamage(TUNING.MERM_DAMAGE)
         inst.components.combat.GetBattleCryString = battlecry
         inst.components.combat.hiteffectsymbol = "pig_torso"
+        inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
 
         inst:AddComponent("lootdropper")
+        inst.components.lootdropper:SetLoot(merm_loot)
+
         inst:AddComponent("inventory")
         inst:AddComponent("inspectable")
         inst:AddComponent("knownlocations")
         inst:AddComponent("follower")
+        inst.components.follower.maxfollowtime = TUNING.MERM_LOYALTY_MAXTIME
+
         inst:AddComponent("sleeper")
+        inst.components.sleeper:SetNocturnal(true)
+        inst.components.sleeper:SetSleepTest(ShouldSleep)
+        inst.components.sleeper:SetWakeTest(ShouldWakeUp)
+
         inst:AddComponent("mermcandidate")
 
         inst:AddComponent("timer")
@@ -401,6 +359,7 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit)
 
         MakeMediumBurnableCharacter(inst, "pig_torso")
         MakeMediumFreezableCharacter(inst, "pig_torso")
+        MakeHauntablePanic(inst)
 
         inst:ListenForEvent("timerdone", OnTimerDone)
         inst:ListenForEvent("attacked", OnAttacked)
@@ -418,86 +377,6 @@ end
 
 local SLIGHTDELAY = 1
 
-local function guard_common(inst)
-    inst.AnimState:SetBuild("merm_fisherman_build")
-    inst.AnimState:OverrideSymbol("pig_ear", "merm_guard_build", "pig_ear")
-    inst:AddTag("mermguard")
-    inst.Transform:SetScale(1, 1, 1)
-    inst:AddTag("guard")
-
-    inst.sounds = sounds_guard
-end
-
-local function guard_master(inst)
-    inst.components.locomotor.runspeed = TUNING.MERM_GUARD_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.MERM_GUARD_WALK_SPEED
-
-    inst:SetStateGraph("SGmermfisher")
-    inst:SetBrain(merm_guard_brain)
-
-    inst.components.sleeper:SetSleepTest(ShouldGuardSleep)
-    inst.components.sleeper:SetWakeTest(ShouldGuardWakeUp)
-
-    inst.components.combat:SetRetargetFunction(1, RetargetFn)
-    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
-
-    inst.components.health:SetMaxHealth(TUNING.MERM_GUARD_HEALTH)
-    inst.components.combat:SetDefaultDamage(TUNING.MERM_GUARD_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_GUARD_ATTACK_PERIOD)
-
-    inst.components.lootdropper:SetLoot(merm_guard_loot)
-
-    inst.components.follower.maxfollowtime = TUNING.MERM_GUARD_LOYALTY_MAXTIME
-
-    inst:ListenForEvent("onmermkingcreated", function()
-        inst:DoTaskInTime(math.random() * SLIGHTDELAY, function()
-            RoyalGuardUpgrade(inst)
-            inst:PushEvent("onmermkingcreated")
-        end)
-    end, TheWorld)
-    inst:ListenForEvent("onmermkingdestroyed", function()
-        inst:DoTaskInTime(math.random() * SLIGHTDELAY, function()
-            RoyalGuardDowngrade(inst)
-            inst:PushEvent("onmermkingdestroyed")
-        end)
-    end, TheWorld)
-
-    inst:DoTaskInTime(0, function()
-        if not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:HasKing()) then
-            RoyalGuardDowngrade(inst)
-        end
-    end)
-end
-
-local function common_common(inst)
-    inst.sounds = sounds
-    inst.AnimState:SetBuild("merm_trader1_build")
-    inst.build = "merm_trader1_build"
-end
-
-local function common_common2(inst)
-    inst.sounds = sounds
-    inst.AnimState:SetBuild("merm_trader2_build")
-    inst.build = "merm_trader2_build"
-end
-
-local function common_common3(inst)
-    inst.sounds = sounds
-    inst.AnimState:SetBuild("merm_fisherman_build")
-    inst.build = "merm_fisherman_build"
-end
-
-local function common_pirate(inst)
-    inst.sounds = sounds
-    inst.AnimState:SetBuild("merm_fisherman_build")
-    inst.build = "merm_fisherman_build"
-    inst.AnimState:OverrideSymbol("pig_torso", "mermpirate", "pig_torso")
-    inst.AnimState:OverrideSymbol("pig_arm", "mermpirate", "pig_arm")
-    inst.AnimState:OverrideSymbol("pig_cheeks", "mermpirate", "pig_cheeks")
-    inst.AnimState:OverrideSymbol("pig_head", "mermpirate", "pig_head")
-    inst.AnimState:OverrideSymbol("pig_leg", "mermpirate", "pig_leg")
-    inst.AnimState:OverrideSymbol("pig_ear", "mermpirate", "pig_ear")
-end
 
 local function OnEat(inst, data)
     if TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst) then
@@ -507,34 +386,15 @@ local function OnEat(inst, data)
     end
 end
 
-local function common_master(inst)
-    inst.components.locomotor.runspeed = TUNING.MERM_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.MERM_WALK_SPEED
-
+local function master_post(inst)
     inst:SetStateGraph("SGmermtrader")
+    local merm_brain = require "brains/mermbrain"
     inst:SetBrain(merm_brain)
 
-    inst.components.sleeper:SetNocturnal(true)
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-    inst.components.sleeper:SetWakeTest(ShouldWakeUp)
-
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(1, RetargetFn)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 
-    inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH)
-    inst.components.combat:SetDefaultDamage(TUNING.MERM_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-
-    MakeHauntablePanic(inst)
-
-    inst.components.lootdropper:SetLoot(merm_loot)
-
-    inst.components.follower.maxfollowtime = TUNING.MERM_LOYALTY_MAXTIME
-
-    inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
-
+    -- 国王升级系统
     inst:ListenForEvent("onmermkingcreated", function()
         inst:DoTaskInTime(math.random() * SLIGHTDELAY, function()
             RoyalUpgrade(inst)
@@ -555,11 +415,7 @@ local function common_master(inst)
     end
 end
 
-local function ontimerdone(inst, data)
-    if data.name == "fish" then
-        inst.CanFish = true
-    end
-end
+
 
 local function oncollect(inst)
     inst.CanFish = false
@@ -571,42 +427,20 @@ local function oncollect(inst)
     inst.components.timer:StartTimer("fish", TUNING.SEG_TIME * 2)
 end
 
-local function common_master2(inst)
-    inst.components.locomotor.runspeed = TUNING.MERM_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.MERM_WALK_SPEED
-
+local function master_post2(inst)
     inst:SetStateGraph("SGmermfisher")
     local brain = require "brains/mermfisherbrain"
     inst:SetBrain(brain)
 
-    inst.components.sleeper:SetNocturnal(true)
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-    inst.components.sleeper:SetWakeTest(ShouldWakeUp)
-
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(1, RetargetFn)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 
-    inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH)
-    inst.components.combat:SetDefaultDamage(TUNING.MERM_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
-
-    MakeHauntablePanic(inst)
-
-    inst.components.lootdropper:SetLoot(merm_loot)
-
-    inst.components.follower.maxfollowtime = TUNING.MERM_LOYALTY_MAXTIME
-
-    inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
-
+    -- 钓鱼系统
     inst:AddComponent("fishingrod")
     inst.components.fishingrod:SetWaitTimes(4, 40)
     inst.components.fishingrod:SetStrainTimes(0, 5)
 
     inst:AddComponent("finiteuses")
-
-    inst:ListenForEvent("timerdone", ontimerdone)
 
     inst:ListenForEvent("fishingcollect", oncollect)
 
@@ -615,28 +449,6 @@ local function common_master2(inst)
     inst.components.named:PickNewName()
 
     inst.CanFish = true
-
-    --[[	
-    inst:ListenForEvent("onmermkingcreated",   function()
-        inst:DoTaskInTime(math.random()*SLIGHTDELAY,function()
-            RoyalUpgrade(inst)
-            inst:PushEvent("onmermkingcreated")
-        end)
-    end, TheWorld)
-    inst:ListenForEvent("onmermkingdestroyed", function()
-        inst:DoTaskInTime(math.random()*SLIGHTDELAY,function()
-            RoyalDowngrade(inst)
-            inst:PushEvent("onmermkingdestroyed")
-        end)
-    end, TheWorld)
-
-    inst:ListenForEvent("oneat", OnEat)
-
-    if TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:HasKing() then
-        RoyalUpgrade(inst)
-    end
-	
-]]
 end
 
 local function oneatfish(inst, data)
@@ -645,42 +457,23 @@ local function oneatfish(inst, data)
     end
 end
 
-local function common_masterpirate(inst)
-    inst.components.locomotor.runspeed = TUNING.MERM_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.MERM_WALK_SPEED
-
+local function master_post_pirate(inst)
     inst:SetStateGraph("SGmermfisher")
     local brain = require "brains/mermpiratebrain"
     inst:SetBrain(brain)
 
-    inst.components.sleeper:SetNocturnal(true)
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-    inst.components.sleeper:SetWakeTest(ShouldWakeUp)
-
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(1, RetargetpirateFn)
     inst.components.combat:SetKeepTargetFunction(KeepTargetpirateFn)
 
+    -- 覆盖血量
     inst.components.health:SetMaxHealth(TUNING.MERM_HEALTH + 100)
-    inst.components.combat:SetDefaultDamage(TUNING.MERM_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
 
-    MakeHauntablePanic(inst)
-
-    inst.components.lootdropper:SetLoot(merm_loot)
-
-    inst.components.follower.maxfollowtime = TUNING.MERM_LOYALTY_MAXTIME
-
-    inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
-
+    -- 钓鱼系统
     inst:AddComponent("fishingrod")
     inst.components.fishingrod:SetWaitTimes(4, 40)
     inst.components.fishingrod:SetStrainTimes(0, 5)
 
     inst:AddComponent("finiteuses")
-
-    inst:ListenForEvent("timerdone", ontimerdone)
 
     inst:ListenForEvent("fishingcollect", oncollect)
     inst:ListenForEvent("oneat", oneatfish)
@@ -694,7 +487,34 @@ local function common_masterpirate(inst)
     inst.CanFish = true
 end
 
-return MakeMerm("merm1", assets, prefabs, common_common, common_master),
-    MakeMerm("merm2", assets, prefabs, common_common2, common_master),
-    MakeMerm("mermfisher", assets, prefabs, common_common3, common_master2),
-    MakeMerm("mermfisherpirate", assets, prefabs, common_pirate, common_masterpirate)
+
+local function common_common(inst)
+    inst.AnimState:SetBuild("merm_trader1_build")
+    inst.build = "merm_trader1_build"
+end
+
+local function common_common2(inst)
+    inst.AnimState:SetBuild("merm_trader2_build")
+    inst.build = "merm_trader2_build"
+end
+
+local function common_common3(inst)
+    inst.AnimState:SetBuild("merm_fisherman_build")
+    inst.build = "merm_fisherman_build"
+end
+
+local function common_pirate(inst)
+    inst.AnimState:SetBuild("merm_fisherman_build")
+    inst.build = "merm_fisherman_build"
+    inst.AnimState:OverrideSymbol("pig_torso", "mermpirate", "pig_torso")
+    inst.AnimState:OverrideSymbol("pig_arm", "mermpirate", "pig_arm")
+    inst.AnimState:OverrideSymbol("pig_cheeks", "mermpirate", "pig_cheeks")
+    inst.AnimState:OverrideSymbol("pig_head", "mermpirate", "pig_head")
+    inst.AnimState:OverrideSymbol("pig_leg", "mermpirate", "pig_leg")
+    inst.AnimState:OverrideSymbol("pig_ear", "mermpirate", "pig_ear")
+end
+
+return MakeMerm("merm1", common_common, master_post),
+    MakeMerm("merm2", common_common2, master_post),
+    MakeMerm("mermfisher", common_common3, master_post2),
+    MakeMerm("mermfisherpirate", common_pirate, master_post_pirate)
