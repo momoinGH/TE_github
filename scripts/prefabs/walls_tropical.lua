@@ -141,7 +141,7 @@ end
 local function MakeWallType(data)
     local assets =
     {
-        Asset("ANIM", "anim/wall.zip"),
+        Asset("ANIM", "anim/wall.zip"), --有一些水里动画
         Asset("ANIM", "anim/wall_" .. data.name .. ".zip"),
         Asset("ANIM", "anim/wall_enforcedlimestone.zip"),
         Asset("ANIM", "anim/wall_limestone.zip"),

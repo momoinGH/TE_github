@@ -2,7 +2,6 @@ local RoomUtils = require("tro_utils/room_utils")
 local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 
 local assets = {
-    Asset("ANIM", "anim/acorn.zip"),
     Asset("ANIM", "anim/pig_shop_doormats.zip"), --出口地毯
     Asset("ANIM", "anim/new_player_house_doors.zip"),
 }

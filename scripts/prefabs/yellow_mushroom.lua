@@ -1,6 +1,6 @@
 local mushassets =
 {
-    Asset("ANIM", "anim/mushrooms.zip"),
+    Asset("ANIM", "anim/mushrooms.zip"), --添加了黄蘑菇
 }
 
 local cookedassets =
@@ -12,18 +12,6 @@ local capassets =
 {
     Asset("ANIM", "anim/mushrooms.zip"),
 }
-
-local function onsave(inst, data)
-    if inst.rain > 0 then
-        data.rain = inst.rain
-    end
-end
-
-local function onload(inst, data)
-    if data and data.rain then
-        inst.rain = data.rain or inst.rain
-    end
-end
 
 local function onpickedfn(inst)
     if inst.growtask ~= nil then

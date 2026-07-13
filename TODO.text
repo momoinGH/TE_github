@@ -1,0 +1,71 @@
+这些文件在mod的anim目录和游戏的anim目录都存在，会覆盖原版：
+ walrus_tusk.zip
+
+
+未引用文件完整清单（156个）
+鸟类build（5个）
+- cormorant_build.zip
+- kingfisher_build.zip
+- parrot_blue_build.zip, parrot_build.zip, parrot_pirate_build.zip
+- pigeon_build.zip, seagull_build.zip, toucan_build.zip, toucan_hamlet_build.zip
+帽子类（20个）
+- hat_bandit.zip, hat_bat.zip, hat_brainjelly.zip, hat_candle.zip
+- hat_disguise.zip, hat_feathercrown_alt.zip, hat_gasmask.zip
+- hat_gogglesarmor.zip, hat_gogglesheat.zip, hat_gogglesnormal.zip, hat_gogglesshoot.zip
+- hat_healinggarland_alt.zip, hat_lightdamager_alt.zip, hat_metalplate.zip
+- hat_ox.zip, hat_pigcrown.zip, hat_pith.zip, hat_thunder.zip
+goddess系列（12个）
+- goddess_bar.zip, goddess_envoy.zip, goddess_goggles.zip, goddess_tea.zip
+- goddess_hound_basic.zip, goddess_hound_build.zip, goddess_hound_emote.zip
+- goddess_hound_emotes.zip, goddess_hound_traits.zip
+tfwp武器系列（10个）
+- tfwp_book_freeze.zip, tfwp_heavy_sword.zip, tfwp_hypno_armor.zip
+- tfwp_infernalstaff.zip, tfwp_tusk_armor.zip
+- swap_tfwp_book_freeze.zip, swap_tfwp_heavy_sword.zip
+- swap_tfwp_infernalstaff.zip, swap_tfwp_tusk_armor.zip
+- infernalstaff.zip, swap_infernalstaff.zip
+玩家动画（15个）
+- player_actions_cropdust.zip, player_actions_hand_lens.zip
+- player_actions_machete.zip, player_actions_panning.zip
+- player_actions_shear.zip, player_actions_speargun.zip
+- player_actions_tap.zip, player_actions_telescope.zip
+- player_boat_death.zip, player_lifeplant.zip
+- player_mount_actions_speargun.zip, player_mount_sneeze.zip
+- player_mount_wagstaff.zip, player_sneeze.zip, player_wagstaff.zip
+建筑/装饰（10个）
+- bishopboat.zip, bishopboat_build.zip, bishopboat_death.zip
+- pig_townhouse2.zip, pig_townhouse3.zip, pig_townhouse4.zip
+- topiary01-07.zip（7个）
+- bundled_structure.zip, permit_demolition.zip
+食物（10个）
+- asparagussoup.zip, peachy_nuggets.zip, peachy_steak.zip
+- peach_eggs.zip, peach_pie.zip, peach_pop.zip
+- spicyvegstinger.zip, surf_n_turf.zip, dried_quagmire.zip
+其他（54个）
+- bauagua.zip, bearger_ground_fx.zip, blow_dartsw.zip
+- boat_death_shadows.zip, boat_inspect_*.zip（4个）
+- book_freeze.zip, cactus_volcano_active.zip
+- cave_exit_ham.zip, cave_exit_rope_build.zip
+- chop_jungle.zip, chop_mangrove_pink_build.zip
+- cutgrassgreen.zip, des_sail.zip, dung_ball.zip
+- eyebush_missing.zip, fishaa.zip, fishing_spot.zip
+- flower_bottle.zip, frog_lime_build.zip
+- grass_blown.zip, greentumbleweed.zip
+- krampus_hawaiian_basic.zip, lakes_tile.zip
+- laser_burntground_lg.zip, living_suit_explode_fx.zip
+- lobster_home.zip, log_teatree.zip, mango_tree.zip
+- maparuina.zip, max_fx.zip, metal_spider_dormant.zip
+- mushroom_farm_*.zip（5个）, koalefant_mamoth_build2.zip
+- pigman_tribe.zip, poison_meter_overlay.zip
+- polarb_den.zip, portal_adventure.zip, portas.zip
+- quagmire_blue_cotton_build.zip, robot_spark_fx.zip
+- rock_batcave.zip, ruins_stairs.zip
+- sapling_blown.zip, shadow_insanity_water1.zip
+- slurtle_slime.zip, spider_gland.zip, spider_gland_salve.zip
+- sponges.zip, squirrel_orange_build.zip
+- squirrel_orange_cheeks_build.zip, sugarwood_seed.zip
+- swap_book_elemental.zip, tiki_build.zip
+- tree_mangrovebee_build.zip, turf_ham.zip
+- ui_honeychest_7x.zip, vines_rainforest_border.zip
+- volcano_cloud.zip, vulcano_exit.zip, vulcano_floor.zip
+- walani_paddle.zip, wilba.zip, windyturf.zip
