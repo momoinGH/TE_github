@@ -45,7 +45,7 @@ PrefabFiles = {
     "tro_treasurechest",     --一堆箱子
     "volcano_altar_pillar",  --火山灰石柱
     "sw_porto",              --一堆套装
-    "sw_birds",              --鸟
+    "birds_sw",              --鸟
     "obsidianaxe",           --黑曜石斧
     "armorobsidian",         --黑曜石甲
     "meteor_impact",         --地上坑洞特效
