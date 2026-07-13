@@ -246,7 +246,7 @@ end
 
 local function ShouldSleep(inst)
     return NocturnalSleepTest(inst)
-        and ((inst.components.follower == nil or inst.components.follower.leader) == nil and
+        and ((inst.components.follower == nil or inst.components.follower.leader == nil) and
             not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst)))
 end
 

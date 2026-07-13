@@ -44,18 +44,13 @@ local function common_post(inst)
     inst.annoyance = 0
 end
 
--- master_post：覆盖OnSave/OnLoad、设置大脑
-local function master_post(inst)
-    inst:SetBrain(normalbrain)
-end
-
 return tro_pig_defs.MakePig("wildbore", {
         assets = extra_assets,
         builds = { "wildbore_build" },
         sg = "SGwildbore",
         brain = normalbrain,
         were_brain = werepigbrain,
-    }, common_post, master_post),
+    }, common_post),
     tro_pig_defs.MakePig("wildboreguard", {
         assets = extra_assets,
         builds = { "wildbore_build" },
@@ -63,4 +58,4 @@ return tro_pig_defs.MakePig("wildbore", {
         sg = "SGwildbore",
         brain = guardbrain,
         SetNormalPigPost = SetGuardPigPost,
-    }, common_post, master_post)
+    }, common_post)

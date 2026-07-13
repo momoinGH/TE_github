@@ -33,7 +33,6 @@ local prefabs =
     "fish7",
     "goldnugget",
     "gears",
-    "salmom",
 }
 
 local function OnAttacked(inst, data)

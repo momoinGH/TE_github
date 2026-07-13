@@ -39,31 +39,6 @@ local function OnWingDown(inst)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/flap")
 end
 
-local function OnWingDownShadow(inst)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/distant_flap")
-end
-
-local function ShouldSleep(inst)
-    if 1 == 1 then return false end
-    if (inst.components.combat and inst.components.combat.target)
-        or (inst.components.burnable and inst.components.burnable:IsBurning())
-        or (inst.components.freezable and inst.components.freezable:IsFrozen()) then
-        return false
-    end
-    local nearestEnt = GetClosestInstWithTag("character", inst, SLEEP_DIST_FROMTHREAT)
-    return nearestEnt == nil
-end
-
-local function ShouldWake(inst)
-    if (inst.components.combat and inst.components.combat.target)
-        or (inst.components.burnable and inst.components.burnable:IsBurning())
-        or (inst.components.freezable and inst.components.freezable:IsFrozen()) then
-        return true
-    end
-    local nearestEnt = GetClosestInstWithTag("character", inst, SLEEP_DIST_FROMTHREAT)
-    return nearestEnt
-end
-
 local function ShouldWakeUp(inst)
     if (inst.components.combat and inst.components.combat.target)
         or (inst.components.burnable and inst.components.burnable:IsBurning())

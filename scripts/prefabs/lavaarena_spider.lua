@@ -549,59 +549,6 @@ local function create_common(build, tag)
     return inst
 end
 
-local function create_spider()
-    local inst = create_common("spider_build")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.health:SetMaxHealth(TUNING.SPIDER_HEALTH)
-
-    inst.components.combat:SetDefaultDamage(TUNING.SPIDER_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.SPIDER_ATTACK_PERIOD)
-    inst.components.combat:SetRetargetFunction(1, NormalRetarget)
-
-    inst.components.locomotor.walkspeed = TUNING.SPIDER_WALK_SPEED
-    inst.components.locomotor.runspeed = TUNING.SPIDER_RUN_SPEED
-
-    inst.components.sanityaura.aura = -TUNING.SANITYAURA_SMALL
-
-    inst:AddComponent("halloweenmoonmutable")
-    inst.components.halloweenmoonmutable:SetPrefabMutated("spider_moon")
-    inst.components.halloweenmoonmutable:SetOnMutateFn(HalloweenMoonMutate)
-
-    return inst
-end
-
-local function create_warrior()
-    local inst = create_common("spider_warrior_build", "spider_warrior")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.health:SetMaxHealth(TUNING.SPIDER_WARRIOR_HEALTH)
-
-    inst.components.combat:SetDefaultDamage(TUNING.SPIDER_WARRIOR_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.SPIDER_WARRIOR_ATTACK_PERIOD + math.random() * 2)
-    inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
-    inst.components.combat:SetRetargetFunction(2, WarriorRetarget)
-
-    inst.components.locomotor.walkspeed = TUNING.SPIDER_WARRIOR_WALK_SPEED
-    inst.components.locomotor.runspeed = TUNING.SPIDER_WARRIOR_RUN_SPEED
-
-    inst.components.sanityaura.aura = -TUNING.SANITYAURA_MED
-
-    inst:AddComponent("halloweenmoonmutable")
-    inst.components.halloweenmoonmutable:SetPrefabMutated("spider_moon")
-    inst.components.halloweenmoonmutable:SetOnMutateFn(HalloweenMoonMutate)
-
-    inst.recipe = "mutator_warrior"
-
-    return inst
-end
-
 local function create_tropical()
     local inst = create_common("spider_tropical_build", "spider_warrior")
 
