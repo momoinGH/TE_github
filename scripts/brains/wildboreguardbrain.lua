@@ -146,57 +146,8 @@ local function GetSeekItemPos(self)
     return self.seekitem ~= nil and self.seekitem:GetPosition() or nil
 end
 
-local function GetHome(inst)
-    return inst.components.knownlocations:GetLocation("home")
-end
-
 local function GetPigKing(inst)
     return inst.components.entitytracker:GetEntity("king")
-end
-
-local function ShouldPanic(self)
-    if self.canpanic then
-        if self.inst:GetDistanceSqToPoint(GetHome(self.inst)) < MAX_PANIC_DIST_SQ then
-            return true
-        end
-        self.canpanic = false
-    elseif self.inst:GetDistanceSqToPoint(GetHome(self.inst)) < MIN_PANIC_DIST_SQ then
-        self.canpanic = true
-        return true
-    end
-    return false
-end
-
-local function IsMatchOver(inst)
-    if inst.flagmatchover then
-        return true
-    end
-    local king = GetPigKing(inst)
-    return king == nil or not king:IsMinigameActive()
-end
-
-local function ShouldMatchOverPose(self)
-    if self.matchovertime == nil then
-        if IsMatchOver(self.inst) then
-            self.matchovertime = GetTime()
-        end
-        return false
-    elseif self.matchovertime + 2 > GetTime() then
-        return false
-    end
-    local king = GetPigKing(self.inst)
-    if king ~= nil then
-        for k, v in pairs(king._minigame_elites) do
-            if k ~= self.inst and not (k.sg:HasStateTag("idle") or k.sg:HasStateTag("endpose")) then
-                return false
-            end
-        end
-    end
-    return true
-end
-
-local function GetMatchOverPos(inst)
-    return IsMatchOver(inst) and GetHome(inst) or nil
 end
 
 local function TrySetNewTarget(inst)

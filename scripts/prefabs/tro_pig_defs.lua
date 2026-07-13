@@ -531,6 +531,9 @@ end
 local function OnSave(inst, data)
     data.build = inst.build
     data._pigtokeninitialized = inst._pigtokeninitialized
+    if inst._OnSave then
+        inst:_OnSave(data)
+    end
 end
 
 local function OnLoad(inst, data)
@@ -540,6 +543,9 @@ local function OnLoad(inst, data)
             inst.AnimState:SetBuild(inst.build)
         end
         inst._pigtokeninitialized = data._pigtokeninitialized
+    end
+    if inst._OnLoad then
+        inst:_OnLoad(data)
     end
 end
 
@@ -637,8 +643,10 @@ local function common(data)
     MakeMediumBurnableCharacter(inst, "pig_torso")
 
     inst:AddComponent("named")
-    inst.components.named.possiblenames = STRINGS.PIGNAMES
-    inst.components.named:PickNewName()
+    if not data.no_random_name then
+        inst.components.named.possiblenames = STRINGS.PIGNAMES
+        inst.components.named:PickNewName()
+    end
 
     ------------------------------------------
     MakeHauntablePanic(inst)
@@ -691,9 +699,6 @@ local function common(data)
     inst.components.inspectable.getstatus = GetStatus
     ------------------------------------------
 
-    inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
-
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("newcombattarget", OnNewTarget)
 
@@ -710,6 +715,7 @@ end
 ---were_sg
 ---brain
 ---were_brain
+---no_random_name
 ---SetNormalPigPost
 ---SetWerePigPost
 local function MakePig(name, data, common_post, master_post)
@@ -752,6 +758,12 @@ local function MakePig(name, data, common_post, master_post)
         if master_post then
             master_post(inst)
         end
+
+        -- 保存master_post设置的，然后用基础函数
+        inst._OnSave = inst.OnSave
+        inst._OnLoad = inst.OnLoad
+        inst.OnSave = OnSave
+        inst.OnLoad = OnLoad
 
         return inst
     end
