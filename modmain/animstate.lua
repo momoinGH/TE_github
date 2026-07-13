@@ -185,15 +185,15 @@ if troisdev then
     --     return OldSetBuild(self, build, ...)
     -- end
 
-    Hooks.FnDecorator(AnimState, "SetBank", function(self, bank)
-        print("调用AnimState:SetBank", _GetEntity(self), bank)
-    end)
+    -- Hooks.FnDecorator(AnimState, "SetBank", function(self, bank)
+    --     print("调用AnimState:SetBank", _GetEntity(self), bank)
+    -- end)
 
-    Hooks.FnDecorator(AnimState, "SetBuild", function(self, build)
-        print("调用AnimState:SetBuild", _GetEntity(self), build)
-    end)
+    -- Hooks.FnDecorator(AnimState, "SetBuild", function(self, build)
+    --     print("调用AnimState:SetBuild", _GetEntity(self), build)
+    -- end)
 
-    Hooks.FnDecorator(AnimState, "PlayAnimation", function(self, anim)
-        print("调用AnimState:PlayAnimation", _GetEntity(self), anim)
-    end)
+    -- Hooks.FnDecorator(AnimState, "PlayAnimation", function(self, anim)
+    --     print("调用AnimState:PlayAnimation", _GetEntity(self), anim)
+    -- end)
 end

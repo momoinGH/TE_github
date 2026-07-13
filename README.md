@@ -16,11 +16,21 @@ nightmareprimeapebrain.lua	噩梦猿猴 Brain
 
 未引用文件完整清单（156个）
 tfwp武器系列（10个）
-- tfwp_book_freeze.zip, tfwp_heavy_sword.zip, tfwp_hypno_armor.zip
-- tfwp_infernalstaff.zip, tfwp_tusk_armor.zip
-- swap_tfwp_book_freeze.zip, swap_tfwp_heavy_sword.zip
-- swap_tfwp_infernalstaff.zip, swap_tfwp_tusk_armor.zip
-- infernalstaff.zip, swap_infernalstaff.zip
+tfwp_book_freeze.zip, tfwp_heavy_sword.zip, tfwp_hypno_armor.zip
+tfwp_infernalstaff.zip, tfwp_tusk_armor.zip
+swap_tfwp_book_freeze.zip, swap_tfwp_heavy_sword.zip
+swap_tfwp_infernalstaff.zip, swap_tfwp_tusk_armor.zip
+infernalstaff.zip, swap_infernalstaff.zip
 
 
+未引用文件完整清单（156个）
+bauagua.zip 水中宝箱，有水草海星
+eyebush_missing.zip --哈姆雷特孔雀其他动画
+lakes_tile.zip --海难洪水
+mango_tree.zip --芒果树
+koalefant_mamoth_build2.zip --换皮象
+quagmire_blue_cotton_build.zip
+rock_batcave.zip --洞穴可开采岩石
+sponges.zip --海底世界珊瑚
+tiki_build.zip --长得有点儿恐怖的猴子
 surf_n_turf.zip 鱼肉、鸡腿、萝卜、浆果混合物，什么料理？

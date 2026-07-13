@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/waterforest_vines.zip"),
+    Asset("ANIM", "anim/vines_rainforest_border.zip"),
 }
 
 
@@ -28,7 +28,7 @@ local function plantfn(Sim)
     inst.entity:AddAnimState()
     inst.AnimState:SetBank("vine_rainforest_border")
     inst:AddTag("NOCLICK")
-    inst.AnimState:SetBuild("waterforest_vines")
+    inst.AnimState:SetBuild("vines_rainforest_border")
 
     local color = 0.7 + math.random() * 0.3
     inst.AnimState:SetMultColour(color, color, color, 1)
