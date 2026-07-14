@@ -142,10 +142,16 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-AddPrefabPostInit("grass", function(inst)
-    if not TheWorld.ismastersim then return end
-    MakePickableBlowInWindGust(inst, 0.2, 0.01)
-end)
+for _, v in ipairs({
+    "grass",
+    "nettle"
+}) do
+    AddPrefabPostInit(v, function(inst)
+        if not TheWorld.ismastersim then return end
+        MakePickableBlowInWindGust(inst, 0.2, 0.01)
+    end)
+end
+
 AddPrefabPostInit("sapling", function(inst)
     if not TheWorld.ismastersim then return end
     MakePickableBlowInWindGust(inst, 0.2, 0.1, "sway")

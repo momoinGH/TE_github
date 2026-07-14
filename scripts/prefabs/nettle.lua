@@ -97,7 +97,6 @@ local function fn()
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)
     MakeNoGrowInWinter(inst)
-    MakePickableBlowInWindGust(inst, 0.2, 0.01)
 
     inst:WatchWorldState("season", testForGrowth)
 
