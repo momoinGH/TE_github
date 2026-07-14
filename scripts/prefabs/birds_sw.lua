@@ -59,8 +59,7 @@ local function parrot_pirate_master(inst)
     inst.components.sanityaura.aura = TUNING.SANITYAURA_SMALL
 
     -- 覆盖掉落物
-    inst.components.lootdropper:RemoveRandomLoot("feather_robin")
-    inst.components.lootdropper:RemoveRandomLoot("smallmeat")
+    inst.components.lootdropper:SetLoot({})
     inst.components.lootdropper:AddRandomLoot("feather_robin", 1)
     inst.components.lootdropper:AddRandomLoot("smallmeat", 1)
     inst.components.lootdropper.numrandomloot = 1
@@ -70,9 +69,9 @@ local function parrot_pirate_master(inst)
 end
 
 return MakeBird("parrot", {
-    sounds = parrot_sounds,
-    feather_name = "robin",
-}),
+        sounds = parrot_sounds,
+        feather_name = "robin",
+    }),
     MakeBird("parrot_pirate", {
         sounds = parrot_pirate_sounds,
         feather_name = "robin",

@@ -341,7 +341,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -352,7 +352,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -363,7 +363,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -374,7 +374,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -385,7 +385,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -396,7 +396,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -407,7 +407,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -418,7 +418,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -429,7 +429,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -440,7 +440,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -451,7 +451,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -462,7 +462,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -473,7 +473,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -484,7 +484,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -495,7 +495,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -506,7 +506,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -518,7 +518,7 @@ return {
                 --quinas		
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -529,7 +529,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "Grasswaterspawner",
+                    type = "grass",
                     shape = "rectangle",
                     x = 100,
                     y = 90,

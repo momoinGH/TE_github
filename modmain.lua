@@ -99,9 +99,9 @@ modimport("modmain/componentactions")            --componentactions相关
 
 troimportmodulefile("tuning") --定义的常量
 
---PrefabFiles
+--PrefabFiles 这里直接选择加载全部预制件，因为布局里掺杂其他模块的预制件很常见
 local all_prefab_files = PrefabFiles or {}
-troimportmodulefile("prefablist", false, function()
+troimportmodulefile("prefablist", true, function()
     PrefabFiles = {}
 end, function()
     all_prefab_files = ArrayUnion(all_prefab_files, PrefabFiles)
