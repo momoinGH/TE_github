@@ -458,8 +458,10 @@ function FN.CreateSimpleInterior(inst, room)
     if inst.components.teleporter:GetTarget() then return end
 
     local doors = FN.CreateRoom(room)
-    inst.components.teleporter:Target(doors.exit)
-    doors.exit.components.teleporter:Target(inst)
+    if doors.exit then
+        inst.components.teleporter:Target(doors.exit)
+        doors.exit.components.teleporter:Target(inst)
+    end
 end
 
 -- 获取该房间内的实体

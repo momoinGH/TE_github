@@ -60,5 +60,7 @@ PrefabFiles = {
     "trapslugspawner",
     "bottlelantern",          --水瓶灯
     "whale",                  --蓝鲸、白鲸
+    "dubloon",                --金币
+    "roc_nest",               --大鹏巢
 
 }
