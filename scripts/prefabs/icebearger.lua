@@ -20,19 +20,30 @@ local prefabs =
 
 local brain = require("brains/beargerbrain")
 
-SetSharedLootTable('bearger',
-    {
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'meat', 1.00 },
-        { 'bearger_fur', 1.00 },
-        { 'chesspiece_bearger_sketch', 1.00 },
-    })
+SetSharedLootTable('bearger', {
+    { 'meat',                      1.00 },
+    { 'meat',                      1.00 },
+    { 'meat',                      1.00 },
+    { 'meat',                      1.00 },
+    { 'meat',                      1.00 },
+    { 'meat',                      1.00 },
+    { 'meat',                      1.00 },
+    { 'meat',                      1.00 },
+    { 'bearger_fur',               1.00 },
+    { 'chesspiece_bearger_sketch', 1.00 },
+})
+
+local normal_sounds =
+{
+    attack = "dontstarve_DLC001/creatures/bearger/attack",
+    death = "dontstarve_DLC001/creatures/bearger/death",
+    idle = "dontstarve_DLC001/creatures/bearger/idle",
+    sleep = "dontstarve_DLC001/creatures/bearger/sleep",
+    taunt = "dontstarve_DLC001/creatures/bearger/taunt",
+    taunt_short = "dontstarve_DLC001/creatures/bearger/taunt_short",
+    growl = "dontstarve_DLC001/creatures/bearger/grrrr",
+    yawn = "dontstarve_DLC001/creatures/bearger/yawn",
+}
 
 local TARGET_DIST = 7.5
 
@@ -373,6 +384,8 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.sounds = normal_sounds
 
     inst.recentlycharged = {}
     inst.Physics:SetCollisionCallback(OnCollide)

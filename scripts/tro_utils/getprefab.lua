@@ -171,8 +171,6 @@ function FN.FindClosestEntity(inst, radius, ignoreheight, musttags, canttags, mu
     return closestEntity, closestEntity ~= nil and rangesq or nil
 end
 
-
-
 --- 判断单位是否死亡或正在死亡
 --- 好像比IsEntityDeadOrGhost更好点，用IsEntityDeadOrGhost判断有时候还是会有"Left death state."的崩溃，我怀疑是有mod在玩家在death的
 --- 状态下给玩家回血导致health:IsDead返回了false，判断玩家没有死，后来就调用了GoToState
@@ -233,6 +231,31 @@ function FN.FindClosestEnt(ents, pos)
         end
     end
     return closestEnt, closestEnt ~= nil and rangesq or nil
+end
+
+----------------------------------------------------------------------------------------------------
+local function CanRemoveEnt(ent)
+    if ent.prefab
+        and not ent.widget
+        and not ent.isplayer
+        and not ent.entity:GetParent()
+        and ent.Network
+        and not ent:HasTag("CLASSIFIED")
+        and not ent:HasTag("INLIMBO")
+        and not ent:HasTag("irreplaceable")
+    then
+        return true
+    end
+end
+
+-- 清除周围不重要的东西
+function FN.ClearNearbyPrefabs(inst, radius)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    for _, v in ipairs(TheSim:FindEntities(x, y, z, radius, nil, { "FX" })) do
+        if v.prefab and v.prefab ~= inst.prefab and CanRemoveEnt(v) then
+            v:Remove()
+        end
+    end
 end
 
 return FN

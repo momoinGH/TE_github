@@ -8,15 +8,6 @@ local prefabs =
     "rock_ice_frost",
 }
 
-local VALID_TILES = table.invert({
-    WORLD_TILES.SNOWLAND,
-})
-
-local VALID_TILES2 = table.invert({
-    WORLD_TILES.OCEAN_COASTAL_SHORE,
-})
-
-
 -- 海里生成迷你冰川和冰面、鲸鱼
 local objetos =
 {
@@ -41,6 +32,7 @@ local function GetSpawnPoint(pt)
     local function TestSpawnPoint(offset)
         local spawnpoint = pt + offset
         return TheWorld.Map:IsOceanAtPoint(spawnpoint.x, 0, spawnpoint.z)
+            and #TheSim:FindEntities(spawnpoint.x, 0, spawnpoint.z, 7, nil, { "FX" }) <= 0 --防止重叠
     end
 
     local theta = math.random() * TWOPI

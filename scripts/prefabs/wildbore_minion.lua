@@ -53,7 +53,8 @@ end
 -- 设置外观变体（4种）
 local function SetVariation(inst)
     inst.variation = inst.variation or math.random(1, 4)
-    if inst.sg and inst.sg.mem then
+    if inst.sg then
+        inst.sg.mem = inst.sg.mem or {}
         inst.sg.mem.variation = inst.variation
     end
 
@@ -106,6 +107,7 @@ local function SetGuardPigPost(inst)
     inst.components.sleeper:SetSleepTest(function() return false end)
     inst.components.sleeper:SetWakeTest(function() return true end)
     inst.components.combat:SetRetargetFunction(3, NormalRetargetFn)
+    SetVariation(inst)
 end
 
 local function common_post(inst)

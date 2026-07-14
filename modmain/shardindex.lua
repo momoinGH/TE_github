@@ -5,6 +5,7 @@
 
 local skin_nature_defs = require("datadefs/skin_nature_defs")
 local skin_item_defs = require("datadefs/skin_item_defs")
+local GetPrefab = require("tro_utils/getprefab")
 
 -- 条件检查，根据skintype使用对应的检查函数
 local testfns = {
@@ -24,7 +25,6 @@ local testfns = {
         return tile_id == WORLD_TILES.RAINFOREST or tile_id == WORLD_TILES.DEEPRAINFOREST
     end
 }
-
 
 local function OnWorldEntsSpawned()
     -- if TUNING.tropical.sea then
@@ -62,6 +62,14 @@ local function OnWorldEntsSpawned()
             elseif TheWorld.Map:FindVisualNodeAtPoint(x, y, z, "City2") then
                 ent:TroAddSaveTag("city2")
             end
+        end
+    end
+
+    -- 火杀体积太大,现在又在陆地生成,清除周围物品
+    print("删除火山附近生成物...")
+    for guid, ent in pairs(Ents) do
+        if ent.prefab and ent.prefab == "volcano" then
+            GetPrefab.ClearNearbyPrefabs(ent, 11)
         end
     end
 end
