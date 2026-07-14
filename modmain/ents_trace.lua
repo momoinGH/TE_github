@@ -2,6 +2,7 @@
 
 -- 要追踪的所有实体
 local trace_prefabs = {
+    multiplayer_portal = true,               --绚丽之门
     pigking = true,                          --猪王
     sharkittenspawner = true,                --虎鲨生成器
     cave_exit_roc = true,                    --洞穴出口

@@ -59,3 +59,4 @@ modimport "modmain/common/prefabs/rock_ice.lua"
 modimport "modmain/common/prefabs/heatrock.lua"
 modimport "modmain/common/prefabs/grass.lua"
 modimport "modmain/common/prefabs/forest.lua"
+modimport "modmain/common/prefabs/player_common_extensions.lua" --开局送玩家点东西

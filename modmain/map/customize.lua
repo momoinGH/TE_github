@@ -102,7 +102,7 @@ local function SetOptionValue(name, value)
         }) do
             local widget = tab[w]
             local optionitems = widget.settingslist.optionitems
-            for i, item in ipairs(optionitems) do
+            for i, item in ipairs(optionitems or {}) do
                 if item.option and item.option.name == name and table.contains(tro_modules, item.option.group) then
                     local widgets = widget.settingslist.scroll_list:GetListWidgets()
                     local opt = widgets and widgets[i] and widgets[i].opt_spinner

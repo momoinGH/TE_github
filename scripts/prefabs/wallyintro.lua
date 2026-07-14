@@ -157,7 +157,7 @@ local function OnRefuseItem(inst, giver, item)
     inst.AnimState:PushAnimation("idle", true)
 end
 
-local function fn()
+local function wallyintro_fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -191,7 +191,7 @@ local function fn()
     inst.components.workable:SetOnWorkCallback(onhit)
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:AddLoot("log")
+    inst.components.lootdropper:SetLoot({ "log" })
 
     inst:AddComponent("maxwelltalker")
     inst.components.maxwelltalker.speeches = SPEECH
@@ -214,9 +214,38 @@ local function fn()
     return inst
 end
 
+local function bird_fn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    inst.Transform:SetTwoFaced()
+
+    inst.AnimState:SetBank("parrot_pirate_intro")
+    inst.AnimState:SetBuild("parrot_pirate_intro")
+    inst.AnimState:PlayAnimation("takeoff_diagonal_pre")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("inspectable")
+    inst.components.inspectable.nameoverride = "wallyintro"
+
+    inst.displaynamefn = function(inst) return STRINGS.NAMES["WALLYINTRO"] end
+
+    inst.persists = false
+
+    return inst
+end
+
 ----------------------------------------------------------------------------------------------------
 
-local function MakeDebris(name, data)
+local function MakeDebris(name, data, common_post, master_post)
     assert(data.anim)
 
     local function fn()
@@ -226,13 +255,21 @@ local function MakeDebris(name, data)
         local sound = inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
 
-        MakeObstaclePhysics(inst, 0.1)
+        if data.collision then
+            MakeObstaclePhysics(inst, 0.1)
+        end
         MakeSmallBurnable(inst)
         MakeSmallPropagator(inst)
 
         inst.AnimState:SetBank("parrot_pirate")
         inst.AnimState:SetBuild("parrot_pirate")
         inst.AnimState:PlayAnimation(data.anim)
+
+        inst:SetPrefabNameOverride("wallyintro_debris")
+
+        if common_post then
+            common_post(inst)
+        end
 
         inst.entity:SetPristine()
 
@@ -242,7 +279,7 @@ local function MakeDebris(name, data)
 
         inst:AddComponent("workable")
         inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-        inst.components.workable:SetWorkLeft(1)
+        inst.components.workable:SetWorkLeft(data.work_left or 1)
         inst.components.workable:SetOnFinishCallback(onhammered)
 
         inst:AddComponent("lootdropper")
@@ -252,13 +289,24 @@ local function MakeDebris(name, data)
 
         inst:AddComponent("inspectable")
 
+        if master_post then
+            master_post(inst)
+        end
+
         return inst
     end
     return Prefab(name, fn, assets)
 end
 
-return Prefab("wallyintro", fn, assets),
-    MakeDebris("debris_1", { anim = "debris_1", loot = { "boards" } }),
-    MakeDebris("debris_2", { anim = "debris_2", loot = { "log", "log", "log" } }),
-    MakeDebris("debris_3", { anim = "debris_3", loot = { "boards", "boatrepairkit" } }),
-    MakeDebris("debris_4", { anim = "debris_4", loot = { "log", "log", "log", "boatrepairkit" } })
+return Prefab("wallyintro", wallyintro_fn, assets),
+    Prefab("wallyintro_bird", bird_fn, assets),
+    MakeDebris("wallyintro_debris_1", { anim = "debris_1", loot = { "boards" } }),
+    MakeDebris("wallyintro_debris_2", { anim = "debris_2", loot = { "log", "log", "log" } }),
+    MakeDebris("wallyintro_debris_3", { anim = "debris_3", loot = { "boards", "boatrepairkit" } }),
+    MakeDebris("wallyintro_shipmast", { anim = "idle_empty", loot = { "log", "log", "log", "boatrepairkit", work_left = 4, collision = true } },
+        nil, function(inst)
+            inst.components.workable:SetOnWorkCallback(function(inst)
+                inst.AnimState:PlayAnimation("hit")
+                inst.AnimState:PushAnimation("idle_empty")
+            end)
+        end)

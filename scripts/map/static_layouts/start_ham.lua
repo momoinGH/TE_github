@@ -51,7 +51,7 @@ return {
       objects = {
         {
           name = "",
-          type = "multiplayer_portal",
+          type = "tro_custom_startlocation",
           shape = "rectangle",
           x = 160,
           y = 160,
@@ -60,17 +60,28 @@ return {
           visible = true,
           properties = {}
         },
-        {
-          name = "",
-          type = "spawnpoint_master",
-          shape = "rectangle",
-          x = 160,
-          y = 160,
-          width = 0,
-          height = 0,
-          visible = true,
-          properties = {}
-        },
+        -- {
+        --   name = "",
+        --   type = "multiplayer_portal",
+        --   shape = "rectangle",
+        --   x = 160,
+        --   y = 160,
+        --   width = 0,
+        --   height = 0,
+        --   visible = true,
+        --   properties = {}
+        -- },
+        -- {
+        --   name = "",
+        --   type = "spawnpoint_master",
+        --   shape = "rectangle",
+        --   x = 160,
+        --   y = 160,
+        --   width = 0,
+        --   height = 0,
+        --   visible = true,
+        --   properties = {}
+        -- },
         {
           name = "",
           type = "porkland_intro_basket",

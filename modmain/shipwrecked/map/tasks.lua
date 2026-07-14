@@ -97,6 +97,7 @@ AddTask("HomeIsland", {
     locks = { LOCKS.HARD },
     keys_given = { KEYS.HARD },
     room_choices = {
+        ["Shipwrecked start"] = 1, --海难出生点
         ["JungleDenseMedHome"] = 1,
         [salasjungle[math.random(1, 24)]] = 1,
         [salasjungle[math.random(1, 24)]] = 1,

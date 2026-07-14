@@ -1049,7 +1049,6 @@ return {
 		VOLCANO_ALTAR_BROKEN = "Won't be taking any items now.",
 		VOLCANO_EXIT = "Time to split this scene.",
 		WAFFLES = "Brunch!",
-		WALLYINTRO_DEBRIS = "Boat chunks...",
 		WALL_HAY =
 		{
 			BURNT = "Not surprising... it was made out of hay...",

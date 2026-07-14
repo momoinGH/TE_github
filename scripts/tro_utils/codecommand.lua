@@ -1493,3 +1493,5 @@ Point = Vector3
 
 ----------------------------------------------------------------------------------------------------
 function GetTemperatureAtXZ(x, z) end
+
+Story = Class(function(self, id, tasks, terrain, gen_params, level) end)

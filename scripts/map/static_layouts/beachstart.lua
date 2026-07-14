@@ -95,7 +95,7 @@ return {
 
         {
           name = "",
-          type = "debris_2",
+          type = "wallyintro_debris_2",
           shape = "rectangle",
           x = 83,
           y = 75,
@@ -106,7 +106,7 @@ return {
         },
         {
           name = "",
-          type = "debris_3",
+          type = "wallyintro_debris_3",
           shape = "rectangle",
           x = 90,
           y = 55,
@@ -117,7 +117,7 @@ return {
         },
         {
           name = "",
-          type = "debris_1",
+          type = "wallyintro_debris_1",
           shape = "rectangle",
           x = 170,
           y = 139,

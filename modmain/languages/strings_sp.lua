@@ -733,17 +733,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.REDBARREL = "Qué original."
 STRINGS.NAMES.LOBSTERHOLE = "Cueva de Lanwosta"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERHOLE = "Ese desaliñado está durmiendo."
 
-STRINGS.NAMES.DEBRIS_1 = "Escombros"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_1 = "Había alguien aquí antes que yo!"
 
-STRINGS.NAMES.DEBRIS_2 = "Escombros"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_2 = "Había alguien aquí antes que yo!"
 
-STRINGS.NAMES.DEBRIS_3 = "Escombros"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_3 = "Había alguien aquí antes que yo!"
 
-STRINGS.NAMES.DEBRIS_4 = "Escombros"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_4 = "Había alguien aquí antes que yo!"
 
 STRINGS.NAMES.BOATREPAIRKIT = "Kit de Reparación para Botes"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATREPAIRKIT = "Esto agregará algo de flotabilidad a mi bote."

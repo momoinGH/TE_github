@@ -38,3 +38,6 @@ RemapSoundEvent("dontstarve/characters/woodlegs/eye_rub_vo", "dontstarve_DLC002/
 RemapSoundEvent("dontstarve/characters/woodlegs/pose", "dontstarve_DLC002/characters/woodlegs/pose")
 RemapSoundEvent("dontstarve/characters/woodlegs/carol", "sw_character/characters/woodlegs/carol")
 RemapSoundEvent("dontstarve/characters/woodlegs/sleepy", "sw_character/characters/woodlegs/sleepy")
+
+
+----------------------------------------------------------------------------------------------------

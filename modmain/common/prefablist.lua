@@ -18,4 +18,5 @@ PrefabFiles = {
     "butterfly_tropical_wings", --热带蝴蝶翅膀
     "wave_shimmer_hurricane",   --水里的小波纹
     "wilbur_poop",              --威尔伯的粑粑投射物
+    "tro_custom_startlocation", --自定义玩家出生点
 }

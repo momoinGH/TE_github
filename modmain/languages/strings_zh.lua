@@ -25,17 +25,9 @@ STRINGS.ACTIONS.OPEN_CRAFTING.STORE = "交易"
 
 
 -------------------沃丽语句wally
-STRINGS.WALLY1                                          = "傻瓜。"
-STRINGS.WALLY2                                          = "真是开得一手好船。"
+STRINGS.WALLY1 = "傻瓜。"
+STRINGS.WALLY2 = "真是开得一手好船。"
 
-STRINGS.NAMES.DEBRIS_1                                  = "船只碎片"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_1            = "遇难船只的碎片。"
-STRINGS.NAMES.DEBRIS_2                                  = "船只碎片"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_2            = "船只的一部分。"
-STRINGS.NAMES.DEBRIS_3                                  = "船只碎片"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_3            = "这还能修得好吗？"
-STRINGS.NAMES.DEBRIS_4                                  = "船只碎片"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_4            = "之前曾是我的船。"
 
 ------------------SW介绍
 STRINGS.NAMES.PORTAL_SHIPWRECKED                        = "遇到故障的新奇旅途"
@@ -7134,3 +7126,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMPETROCK = {
     GENERIC = "我可以装上一大桶帽贝。",
     PICKED = "没有帽贝我就没法装上一大桶了。"
 }
+
+
+STRINGS.NAMES.WALLYINTRO_DEBRIS = "残骸"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALLYINTRO_DEBRIS = "遇难船只的一部分。"

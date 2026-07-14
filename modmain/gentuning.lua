@@ -1,11 +1,16 @@
 local hamlet = GetModConfigData("hamlet") == 1
 local shipwrecked = GetModConfigData("shipwrecked") == 1
 
+local startlocation = GetModConfigData("startlocation")
+if (startlocation == "hamlet" and not hamlet) or (startlocation == "shipwrecked" and not shipwrecked) then
+    startlocation = "default" --没开就不能换出生点
+end
+
 TUNING.tropical = {
     common           = true,
     bosslife         = GetModConfigData("bosslife"),              --巨兽生命值
     ocean_style      = GetModConfigData("ocean_style"),           --海洋风格
-    startlocation    = GetModConfigData("startlocation"),         --出生地，就是绚丽之门在哪个地形上
+    startlocation    = startlocation,                             --出生地，就是绚丽之门在哪个地形上
 
     hamlet           = hamlet,                                    --哈姆雷特
     room             = hamlet,

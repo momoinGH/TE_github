@@ -1474,7 +1474,6 @@ return {
 		LOBSTERBISQUE = "I've truly outdone myself!",
 		JELLYOPOP = "Hmmm... An interesting flavor.",
 		WAFFLES = "Oh, brunch, I have missed you so!",
-		WALLYINTRO_DEBRIS = "This leaves a bad taste in my mouth...",
 		WALL_HAY =
 		{
 			BURNT = "That is what I expected.",

@@ -1467,7 +1467,6 @@ return
 		VOLCANO_EXIT = "'Tis nigh time me be leavin' this dread place.",
 		VOLCANO_SHRUB = "Ye look burnt out.",
 		WAFFLES = "Just like me mum used ta open from th'package.",
-		WALLYINTRO_DEBRIS = "Th'sea swallowed me boat but spit up ol'Woodlegs.",
 		WALL_HAY =
 		{
 			BURNT = "Th'hay wall burnt up, go figure.",

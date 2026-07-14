@@ -12,11 +12,11 @@ local prefabs = {
 
 local function UpdateMeter(inst)
     local vm = TheWorld.components.volcanomanager
-    if vm:IsFireRaining() then
+    if vm and vm:IsFireRaining() then
         inst.components.volcanometer.targetseg = 0
     elseif TheWorld.state.issummer then
-        inst.components.volcanometer.maxseg = vm:GetNumSegmentsOfEruption() or 67
-        inst.components.volcanometer.targetseg = vm:GetNumSegmentsUntilEruption() or inst.components.volcanometer.maxseg
+        inst.components.volcanometer.maxseg = vm and vm:GetNumSegmentsOfEruption() or 67
+        inst.components.volcanometer.targetseg = vm and vm:GetNumSegmentsUntilEruption() or inst.components.volcanometer.maxseg
     else
         inst.components.volcanometer.maxseg = 10
         inst.components.volcanometer.targetseg = 10

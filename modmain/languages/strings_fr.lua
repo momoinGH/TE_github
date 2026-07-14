@@ -753,17 +753,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.REDBARREL = "Comme c'est original."
 STRINGS.NAMES.LOBSTERHOLE = "Antre de womard"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERHOLE = "Cette petite wanaille est en train de dormir."
 
-STRINGS.NAMES.DEBRIS_1 = "Débris"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_1 = "Il y avait quelqu'un ici avant moi!"
 
-STRINGS.NAMES.DEBRIS_2 = "Débris"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_2 = "Il y avait quelqu'un ici avant moi!"
 
-STRINGS.NAMES.DEBRIS_3 = "Débris"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_3 = "Il y avait quelqu'un ici avant moi!"
 
-STRINGS.NAMES.DEBRIS_4 = "Débris"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEBRIS_4 = "Il y avait quelqu'un ici avant moi!"
 
 STRINGS.NAMES.BOATREPAIRKIT = "Kit de réparation navale"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATREPAIRKIT = "Mon bateau flottera mieux."

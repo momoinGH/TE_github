@@ -15,6 +15,7 @@ AddTask("岛一平原", {
     room_choices = {
         ["plains_tallgrass"] = math.random(2, 3),
         ["plains_pogs"] = 1,
+        ["Hamlet start"] = 1, --出生点固定生成，不管玩家选不选这个，而且我不用官方的出生点写法
     },
     room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",

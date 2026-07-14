@@ -159,7 +159,6 @@ AddLevelPreInitAny(function(level)
     level.tasks = { "OceanWorldstart" }
     level.numoptionaltasks = 0
     level.optionaltasks = {}
-    level.valid_start_tasks = nil
     level.set_pieces = {}
 
     level.ocean_population = {
@@ -175,7 +174,8 @@ AddLevelPreInitAny(function(level)
     level.ordered_story_setpieces = {}
     level.numrandom_set_pieces = 0
 
-    level.overrides.start_location = "OceanWorld"
+    -- level.valid_start_tasks = nil
+    -- level.overrides.start_location = "OceanWorld"
     level.overrides.keep_disconnected_tiles = true
     level.overrides.roads = "never"
 

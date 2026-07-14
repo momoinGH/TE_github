@@ -2,21 +2,21 @@ return {
     version = "1.1",
     luaversion = "5.1",
     orientation = "orthogonal",
-    width = 4,     --最大边界值
-    height = 4,    --最大边界值，一定要设置成正方形！
-    tilewidth = 64, --像素点，推荐64
+    width = 4,       --最大边界值
+    height = 4,      --最大边界值，一定要设置成正方形！
+    tilewidth = 64,  --像素点，推荐64
     tileheight = 64, --像素点，推荐64
     properties = {},
     tilesets = {
         {
             name = "tiles",
             firstgid = 1,
-            tilewidth = 64, --像素点，推荐64
+            tilewidth = 64,  --像素点，推荐64
             tileheight = 64, --像素点，推荐64
             spacing = 0,
             margin = 0,
             image = "../../../../tools/tiled/dont_starve/tiles.png",
-            imagewidth = 512, --不要动
+            imagewidth = 512,  --不要动
             imageheight = 384, --不要动
             properties = {},
             tiles = {}
@@ -28,7 +28,7 @@ return {
             name = "BG_TILES",
             x = 0,
             y = 0,
-            width = 4, --最大边界值
+            width = 4,  --最大边界值
             height = 4, --最大边界值
             visible = true,
             opacity = 1,
@@ -95,19 +95,8 @@ return {
                     properties = {}
                 },
                 {
-                    name = "刷新点",
-                    type = "spawnpoint_master", --刷新点
-                    shape = "rectangle",
-                    x = 160,          --横坐标，64的倍数
-                    y = 160,          --纵坐标，64的倍数
-                    width = 0,
-                    height = 0,
-                    visible = true,
-                    properties = {}
-                },
-                {
                     name = "",
-                    type = "multiplayer_portal",
+                    type = "tro_custom_startlocation", --刷新点
                     shape = "rectangle",
                     x = 160,
                     y = 160,
@@ -115,7 +104,29 @@ return {
                     height = 0,
                     visible = true,
                     properties = {}
-                }
+                },
+                -- {
+                --     name = "",
+                --     type = "spawnpoint_master", --刷新点
+                --     shape = "rectangle",
+                --     x = 160,                    --横坐标，64的倍数
+                --     y = 160,                    --纵坐标，64的倍数
+                --     width = 0,
+                --     height = 0,
+                --     visible = true,
+                --     properties = {}
+                -- },
+                -- {
+                --     name = "",
+                --     type = "multiplayer_portal",
+                --     shape = "rectangle",
+                --     x = 160,
+                --     y = 160,
+                --     width = 0,
+                --     height = 0,
+                --     visible = true,
+                --     properties = {}
+                -- }
             }
         }
     }
