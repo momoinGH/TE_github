@@ -135,7 +135,6 @@ local function fn()
         6, 1, 1, respawndays * TUNING.TOTAL_DAY_TIME,
         OnWork, OnDig, OnRespawn
     )
-    MakeHackableBlowInWindGust(inst, 0.2, 0.1)
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)
     MakeHauntableIgnite(inst)

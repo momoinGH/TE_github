@@ -153,7 +153,6 @@ local function MakeBamboo(name, data, common_post, master_post)
         MakeMediumBurnable(inst)
         MakeSmallPropagator(inst)
         MakeHauntableIgnite(inst)
-        MakeHackableBlowInWindGust(inst, 0.2, 0.1)
 
         inst.OnSave = OnSave
         inst.OnLoad = OnLoad

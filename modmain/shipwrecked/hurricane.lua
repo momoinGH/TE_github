@@ -142,20 +142,28 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-for _, v in ipairs({
-    "grass",
-    "nettle"
+for _, data in ipairs({
+    { "grass",   0.2, 0.1 },
+    { "nettle",  0.2, 0.1 },
+    { "sapling", 0.2, 0.1, "sway" }
 }) do
-    AddPrefabPostInit(v, function(inst)
+    AddPrefabPostInit(data[1], function(inst)
         if not TheWorld.ismastersim then return end
-        MakePickableBlowInWindGust(inst, 0.2, 0.01)
+        MakePickableBlowInWindGust(inst, data[2], data[3], data[4])
     end)
 end
 
-AddPrefabPostInit("sapling", function(inst)
-    if not TheWorld.ismastersim then return end
-    MakePickableBlowInWindGust(inst, 0.2, 0.1, "sway")
-end)
+for _, data in ipairs({
+    { "bamboo",        0.2, 0.1 },
+    { "bambootree",    0.2, 0.1 },
+    { "bambootreebig", 0.2, 0.1 },
+    { "bush_vine",     0.2, 0.1 },
+}) do
+    AddPrefabPostInit(data[1], function(inst)
+        if not TheWorld.ismastersim then return end
+        MakeHackableBlowInWindGust(inst, data[2], data[3])
+    end)
+end
 
 for _, v in ipairs({
     "berrybush",

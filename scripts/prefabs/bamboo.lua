@@ -41,8 +41,6 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
 
-    MakeHackableBlowInWindGust(inst, 0.2, 0.1)
-
     return inst
 end
 
