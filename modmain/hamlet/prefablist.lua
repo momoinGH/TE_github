@@ -285,5 +285,6 @@ PrefabFiles = {
     "roe_fish",           --鱼
     "giantgrubspawner",   --生物生成器
     "hamlet_plantables",  --可种植的植物，dug_
+    "dubloon",            --金币
 
 }

@@ -33,6 +33,9 @@ PrefabFiles =
     "quagmire_plants_planted",      --植物
     "pebblecrabspawner",
     "chickenhouse",                 --鸡舍
+    "rock_flippable",               --小石板
+    "roc_nest",                     --大鹏巢
+    "radish",                       --水萝卜
 }
 
 -- 把暴食依赖的预制件文件加到这里面，暴食预制件文件如果不提前声明，生成的时候会丢失动画，这里只把固定前缀的文件加进来，别的可手动写一下

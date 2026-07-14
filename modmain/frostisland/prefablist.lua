@@ -57,5 +57,8 @@ PrefabFiles = {
     "snowwarg_spawner",       --极地座狼生成器
     "snowperd",               --冰火鸡
     "snowdeciduoustrees",     --桦栗树
-    "trapslugspawner"
+    "trapslugspawner",
+    "bottlelantern",          --水瓶灯
+    "whale",                  --蓝鲸、白鲸
+
 }
