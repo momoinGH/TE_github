@@ -56,5 +56,6 @@ local function MakeEntrance(name, portal_id)
     return Prefab(name, fn, assets, prefabs)
 end
 
-return MakeEntrance("underwater_entrance", "underwater_portal"),
+return
+    MakeEntrance("underwater_entrance", "underwater_portal"),
     MakeEntrance("underwater_entrance2", "underwater_portal2") --这个给海难布局用

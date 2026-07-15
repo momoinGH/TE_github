@@ -77,5 +77,6 @@ local function MakeExit(name, portal_id)
     return Prefab(name, fn, assets)
 end
 
-return MakeExit("underwater_exit", "underwater_portal"),
+return
+    MakeExit("underwater_exit", "underwater_portal"),
     MakeExit("underwater_exit2", "underwater_portal") --入口现在就一个，这个出口也指向第一个入口吧

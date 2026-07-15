@@ -8,13 +8,14 @@ https://n77a3mjegs.feishu.cn/docx/KUN3dWUWroId8FxvfwOcXVTWnKh?from=from_copylink
 porkland_sw_entrance.lua	DLC 世界旅行传送门
 wargboar.lua	座狼-野猪混合生物
 yeti.lua	雪人蜘蛛猴变体
+grottoqueen             石窟虫皇
 
 
 未使用的 Brain 文件
 nightmareprimeapebrain.lua	噩梦猿猴 Brain
 
 
-未引用文件完整清单（156个）
+未引用文件完整清单
 tfwp武器系列（10个）
 tfwp_book_freeze.zip, tfwp_heavy_sword.zip, tfwp_hypno_armor.zip
 tfwp_infernalstaff.zip, tfwp_tusk_armor.zip
@@ -23,7 +24,6 @@ swap_tfwp_infernalstaff.zip, swap_tfwp_tusk_armor.zip
 infernalstaff.zip, swap_infernalstaff.zip
 
 
-未引用文件完整清单（156个）
 bauagua.zip 水中宝箱，有水草海星
 eyebush_missing.zip --哈姆雷特孔雀其他动画
 lakes_tile.zip --海难洪水

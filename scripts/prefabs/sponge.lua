@@ -70,7 +70,6 @@ local function fn(Sim)
 
 	inst:AddComponent("pickable")
 	inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
-
 	inst.components.pickable:SetUp("sponge_piece", TUNING.GRASS_REGROW_TIME)
 	inst.components.pickable.onregenfn = onregenfn
 	inst.components.pickable.onpickedfn = onpickedfn

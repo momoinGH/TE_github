@@ -8,7 +8,6 @@ PrefabFiles = {
     "grotto_grub_nest",        --虫穴
     "grotto_grub",             --石窟蛴螬
     "grotto_parsnip",          --防风草
-    "grottoqueen",             --石窟虫皇
     "ligamundoham",            --天空之椅
     "machetes",                --砍刀
     "marsh_tree_new",          --石窟树木

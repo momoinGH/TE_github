@@ -142,20 +142,28 @@ AddComponentPostInit("colourcube", function(self)
 
     Hooks.SetUpvalue(OnOverrideCCPhaseFn, "UpdateAmbientCCTable", UpdateAmbientCCTable)
 
+    local _lastClimateDirtyTime = 0
+    local CLIMATE_DIRTY_COOLDOWN = 2 -- 防止频繁触发的冷却时间(秒)
+
     local function onClimateDirty()
+        local now = GetTime()
+        if now - _lastClimateDirtyTime < CLIMATE_DIRTY_COOLDOWN then
+            return -- 冷却期内忽略重复触发
+        end
+        _lastClimateDirtyTime = now
         -- print("colourcube climate dirty")
-        UpdateAmbientCCTable(6)
+        UpdateAmbientCCTable(10) -- 与原版季节切换一致用10秒
     end
 
     local function onClimateDirtyfast()
-        UpdateAmbientCCTable(2)
+        UpdateAmbientCCTable(4) -- 原来2秒太短，改为4秒
     end
     self.inst:ListenForEvent("playeractivated", function(src, player)
         if player and _activatedplayer ~= player then
             player:ListenForEvent("changearea", onClimateDirty)
             player:ListenForEvent("beginaporkalypse", onClimateDirtyfast, TheWorld)
             player:ListenForEvent("endaporkalypse", onClimateDirtyfast, TheWorld)
-            player:DoTaskInTime(0, function() UpdateAmbientCCTable(.01) end) --initialise
+            player:DoTaskInTime(0, function() UpdateAmbientCCTable(2) end) --initialise，给2秒过渡
         end
         _activatedplayer = player
     end)
