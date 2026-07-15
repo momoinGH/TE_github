@@ -103,17 +103,6 @@ function FN.OnRoomDestroy(room_center, out_ent, destroyer, is_remove)
     end
 end
 
---- 当房屋被摧毁时把屋内的掉落物扔出来
---- 只针对更靠近外面的门
---- 如果是remove就移除屋内道具，如果是敲毁就返还材料，只包括lootdropper和inventoryitem
-function FN.OnHouseDestroy(house, destroyer, isRemove)
-    local inner_door = house.components.teleporter and house.components.teleporter:GetTarget()
-    local room_center = inner_door and inner_door:IsValid() and inner_door:TroGetRoomCenter()
-    if room_center then
-        FN.OnRoomDestroy(room_center, house, destroyer, isRemove)
-    end
-end
-
 --- 不可见墙，阻挡玩家移动
 function FN.SpawnWall(x, z, width, depth)
     local room_dx = depth / 2 + 0.5
@@ -411,6 +400,7 @@ end
 local function SpawnNearDoor(door, near_room)
     local pos = near_room:GetPosition()
     local new_door = SpawnPrefab(door.prefab)
+    new_door:AddTag("interior_toexitdoor") --不能用锤子锤
 
     local opp_dir = FN.DIR_OPPOSITE[door.door_orientation]
     new_door:SetDoorOrientation(opp_dir.label)

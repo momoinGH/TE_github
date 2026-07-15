@@ -94,10 +94,10 @@ local function MakeHouseDoor(name)
 
         -- 出口不能敲毁，入口可敲，出口不能敲
         inst:DoTaskInTime(0, function()
-            if not inst:HasTag("interior_houseexit") then
+            if not inst:HasTag("interior_houseexit") and not inst:HasTag("interior_toexitdoor") then
                 inst:AddComponent("workable")
                 inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-                inst.components.workable:SetWorkLeft(4)
+                inst.components.workable:SetWorkLeft(8)
                 inst.components.workable:SetOnFinishCallback(onhammered)
             end
         end)

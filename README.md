@@ -34,3 +34,6 @@ rock_batcave.zip --洞穴可开采岩石
 sponges.zip --海底世界珊瑚
 tiki_build.zip --长得有点儿恐怖的猴子
 surf_n_turf.zip 鱼肉、鸡腿、萝卜、浆果混合物，什么料理？
+
+
+同名动画文件anim/pig_coin.zip

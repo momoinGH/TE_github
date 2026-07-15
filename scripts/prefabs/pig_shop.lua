@@ -771,6 +771,7 @@ local function MakeShop(name, data)
 
     local function MasterPost(inst)
         inst.components.teleporter.onActivate = OnTeleporting
+        inst.OnDoorRemove = nil --房间是可以复原的
 
         inst:AddComponent("lootdropper")
 
@@ -823,7 +824,6 @@ local function MakeShop(name, data)
             anim = "idle",
             minimap = minimap,
             usesound = data.sounds and data.sounds[1] or nil,
-            remove_no_destroy_room = true
         }, CommonPost, MasterPost),
         MakePlacer(name .. "_placer", bank, build, "idle", false, false, true, nil, nil, nil, PlacerPost)
 end

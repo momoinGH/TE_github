@@ -25,7 +25,52 @@ local function OnDoorHaunt(inst, haunter)
 end
 
 local function OnDoorRemove(inst)
-    RoomUtils.OnHouseDestroy(inst, nil, true)
+    local cur_room = inst:TroGetRoomCenter() --可以为空，外面的门就没有这个
+    if cur_room and cur_room.destroyed then
+        return
+    end
+    local to_door = inst.components.teleporter and inst.components.teleporter:GetTarget()
+    if not to_door then
+        return
+    end
+    local to_room = to_door:TroGetRoomCenter()
+    if not to_room then
+        return --不管
+    end
+    -- 这里作简单判断，只考虑一个出口，如果目标房间除了该门没有其他出口则把里面的房间全部销毁，如果有则表示当前的房间还是更靠内的房间
+    if inst:HasTag("interior_toexitdoor") then
+        -- 更靠内的门被销毁了
+        if to_door:IsValid() then
+            if to_door.components.workable then
+                to_door.components.workable:Destroy(inst)
+            else
+                to_door:Remove()
+            end
+        end
+        return
+    end
+    -- 更靠外的门被销毁了
+    if not to_door:HasTag("interior_toexitdoor") then
+        return --不应该
+    end
+    -- 收集里面要删除的房间
+    local queue = { to_room }
+    local del_rooms = { [to_room] = true }
+    while #queue > 0 do
+        local room = table.remove(queue, 1)
+        local rooms = room:GetNearRooms()
+        for _, r in pairs(rooms) do
+            if r ~= cur_room and not del_rooms[r] then
+                del_rooms[r] = true
+                table.insert(queue, r)
+            end
+        end
+    end
+
+    for room, _ in pairs(del_rooms) do
+        room.destroyed = true
+        RoomUtils.OnRoomDestroy(room, inst,inst)
+    end
 end
 
 -- 在门生成时，根据位置自动设置方向
@@ -46,7 +91,8 @@ local function OnTeleportTargetChange(inst, target)
     end
 
     if target and not target:TroIsWorldOut() then
-        inst:AddTag("interior_houseexit") --表示这是一个出口
+        inst:AddTag("interior_houseexit")  --表示这是一个出口
+        inst:AddTag("interior_toexitdoor") --表示这是通向出口的门
     else
         inst:RemoveTag("interior_houseexit")
     end
@@ -55,6 +101,8 @@ end
 local function OnSave(inst, data)
     local refs = inst._OnSave and inst:_OnSave(data) or nil
     data.door_orientation = inst.door_orientation
+    -- data.interior_houseexit = inst:HasTag("interior_houseexit") --这个不需要，加载的时候设置目标就会恢复
+    data.interior_toexitdoor = inst:HasTag("interior_toexitdoor")
     return refs
 end
 
@@ -63,6 +111,11 @@ local function OnLoad(inst, data)
         inst:_OnLoad(data)
     end
 
+    if data then
+        if data.interior_toexitdoor then
+            inst:AddTag("interior_toexitdoor")
+        end
+    end
     if data and data.door_orientation and inst.SetDoorOrientation then
         inst:SetDoorOrientation(data.door_orientation)
     end
@@ -114,7 +167,6 @@ end
 ---@param data.is_inner boolean 是否是虚空内部的生成的门，如果是则表示需要记录中心点对象
 ---@param data.door_orientation string 门的初始方向，有值就表示这是一个有四个方向的门，在上面的门就是north，左边的门就是west
 ---@param data.usesound string 使用门时播放的音效
----@param data.remove_no_destroy_room boolean 门被移除时不销毁里面的东西，这个主要用于猪人商店自定义室内的销毁逻辑
 local function MakeDoor(name, data, common_post_fn, master_post_fn)
     local function fn()
         local inst = CreateEntity()
@@ -167,6 +219,8 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
             return inst
         end
 
+        inst.OnDoorRemove = OnDoorRemove --门被销毁时默认逻辑，清空里面所有东西，并且掉出来
+
         if data.door_orientation then
             inst.door_orientation = nil
             SetDoorOrientation(inst, data.door_orientation)
@@ -205,9 +259,11 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
 
         inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
         inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
-        if not data.remove_no_destroy_room then
-            inst:ListenForEvent("onremove", OnDoorRemove)
-        end
+        inst:ListenForEvent("onremove", function(inst)
+            if inst.OnDoorRemove then
+                inst:OnDoorRemove()
+            end
+        end)
 
         if master_post_fn then
             master_post_fn(inst)

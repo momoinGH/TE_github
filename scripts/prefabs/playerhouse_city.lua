@@ -149,7 +149,6 @@ local function onhammered(inst, worker)
 
     local pos = inst:GetPosition()
     SpawnPrefab("collapse_big").Transform:SetPosition(pos:Get())
-    RoomUtils.OnHouseDestroy(inst, worker)
     inst:Remove()
 end
 
