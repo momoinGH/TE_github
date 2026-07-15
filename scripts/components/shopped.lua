@@ -127,6 +127,7 @@ function Shopped:OnSave()
         costprefab = self.costprefab,
         cost = self.cost,
         robbed = self.robbed,
+        playercrafted = self.inst:HasTag("playercrafted")
     }
 end
 
@@ -144,6 +145,9 @@ function Shopped:OnLoad(data)
     end
     if data.disable_rob then
         self.inst:AddTag("disable_rob")
+    end
+    if data.playercrafted then
+        self.inst:AddTag("playercrafted")
     end
     self.robbed = data.robbed
 

@@ -58,6 +58,13 @@ local function setPlayerUncraftable(inst)
         inst.components.workable:SetWorkLeft(2)
         inst.components.workable:SetOnFinishCallback(onhammered)
     end
+
+    -- 给每个格子也加上标签
+    for i, v in ipairs(inst.shelves) do
+        if v:IsValid() then
+            v:AddTag("playercrafted")
+        end
+    end
 end
 
 local function RemoveShelves(inst)
