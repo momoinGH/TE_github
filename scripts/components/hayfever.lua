@@ -117,10 +117,11 @@ function Hayfever:Enable()
         return --植物人免疫
     end
 
-    if not self.enabled then
-        self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER"))
+    if self.enabled then
+        return
     end
 
+    self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER"))
     self.enabled = true
     self.update_task = self.inst:DoPeriodicTask(0.2, Update, 0.2, self, 0.2)
 end

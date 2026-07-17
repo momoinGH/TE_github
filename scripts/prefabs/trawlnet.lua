@@ -338,13 +338,11 @@ local function dodetach(inst)
 end
 
 local function onopen(inst)
-    inst.AnimState:PlayAnimation("interact_" .. getsinkstate(inst)) --TODO: uncomment this when this anim exists
     inst.AnimState:PushAnimation("idle_" .. getsinkstate(inst), true)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/trawl_net/open")
 end
 
 local function onclose(inst)
-    inst.AnimState:PlayAnimation("interact_" .. getsinkstate(inst)) --TODO: uncomment this when this anim exists
     inst.AnimState:PushAnimation("idle_" .. getsinkstate(inst), true)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/trawl_net/close")
 end

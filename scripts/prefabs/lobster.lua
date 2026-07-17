@@ -1,6 +1,3 @@
-require "stategraphs/SGwobster"
-require "stategraphs/SGwobsterland"
-
 local lobster_assets   =
 {
     Asset("ANIM", "anim/lobster_build.zip"),

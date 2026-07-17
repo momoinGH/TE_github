@@ -64,7 +64,7 @@ local function GetNoLeaderLeashPos(inst)
 end
 
 local function GetWanderPoint(inst)
-    local target = GetLeader(inst) or ThePlayer
+    local target = GetLeader(inst) or FindClosestPlayerToInst(inst, HOUSE_MAX_DIST)
 
     if target then
         return target:GetPosition()

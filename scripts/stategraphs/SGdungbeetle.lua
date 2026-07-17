@@ -583,27 +583,6 @@ local states =
 		},
 	},
 
-	State {
-		name = "hit",
-		tags = { "busy" },
-
-		onenter = function(inst)
-			print("frozen test", inst.components.freezable:IsFrozen())
-			if inst:HasTag("hasdung") then
-				inst.sg:GoToState("bumped")
-			else
-				inst.SoundEmitter:PlaySound(inst.sounds.hurt)
-				inst.AnimState:PlayAnimation("hit")
-				inst.Physics:Stop()
-			end
-		end,
-
-		events =
-		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-		},
-	},
-
 	-- SLEEP STATES
 	State {
 		name = "sleep",

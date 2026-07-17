@@ -144,8 +144,7 @@ local function fn()
 
 	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor.runspeed = 14
-	local sg = require "stategraphs/SGbossboarte"
-	inst:SetStateGraph("SGbossboarte")
+	inst:SetStateGraph("SGboarrior")
 
 	local brain = require "brains/bossboarbrainte"
 	inst:SetBrain(brain)
@@ -230,8 +229,7 @@ local function fn2()
 
 	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor.runspeed = 14
-	local sg = require "stategraphs/SGbossboarte"
-	inst:SetStateGraph("SGbossboarte")
+	inst:SetStateGraph("SGboarrior")
 
 	local brain = require "brains/bossboarbrainte"
 	inst:SetBrain(brain)

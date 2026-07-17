@@ -14,7 +14,8 @@ local assets =
 local prefabs =
 {
     "gears",
-    "bishop_charge",
+    "bishop_targeting_fx",
+    "bishop_charge2_fx",
     "purplegem",
 }
 
@@ -63,28 +64,6 @@ local function OnAttacked(inst, data)
     clockwork_common.OnAttacked(inst, data)
 end
 
-local function EquipWeapon(inst)
-    if inst.components.inventory ~= nil and not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
-        local weapon = CreateEntity()
-        --[[Non-networked entity]]
-        weapon.entity:AddTransform()
-        weapon:AddComponent("weapon")
-        weapon.components.weapon:SetDamage(inst.components.combat.defaultdamage)
-        weapon.components.weapon:SetRange(inst.components.combat.attackrange, inst.components.combat.attackrange + 4)
-        weapon.components.weapon:SetProjectile("bishop_charge")
-        weapon:AddComponent("inventoryitem")
-        weapon.persists = false
-        weapon.components.inventoryitem:SetOnDroppedFn(inst.Remove)
-        weapon:AddComponent("equippable")
-
-        inst.components.inventory:Equip(weapon)
-    end
-end
-
-local function RememberKnownLocation(inst)
-    inst.components.knownlocations:RememberLocation("home", inst:GetPosition())
-end
-
 local function common_fn(build, tag)
     local inst = CreateEntity()
 
@@ -107,6 +86,10 @@ local function common_fn(build, tag)
     inst:AddTag("chess")
     inst:AddTag("bishop")
 
+    inst.shotx = net_float(inst.GUID, "goldbishop.shotx")
+    inst.shotz = net_float(inst.GUID, "goldbishop.shotz")
+    inst.showshot = net_bool(inst.GUID, "goldbishop.showshot")
+
     if tag ~= nil then
         inst:AddTag(tag)
     end
@@ -121,14 +104,7 @@ local function common_fn(build, tag)
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = TUNING.BISHOP_WALK_SPEED
-
-    inst:SetStateGraph("SGbishop") --TODO这个预制件用bishop.lua的MakeBishop来重写一下，不然sg里容易缺方法
-    inst:SetBrain(brain)
-
-    inst:AddComponent("sleeper")
-    inst.components.sleeper:SetWakeTest(ShouldWake)
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-    inst.components.sleeper:SetResistance(3)
+    inst.components.locomotor:SetAllowPlatformHopping(true)
 
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "waist"
@@ -142,23 +118,34 @@ local function common_fn(build, tag)
     inst.components.combat:SetDefaultDamage(TUNING.BISHOP_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.BISHOP_ATTACK_PERIOD)
 
-    inst:AddComponent("inventory")
-
     inst:AddComponent("inspectable")
     inst:AddComponent("knownlocations")
 
-    inst:DoTaskInTime(0, RememberKnownLocation)
-
     inst:AddComponent("follower")
+    inst:AddComponent("embarker")
+    inst:AddComponent("drownable")
+
+    inst:AddComponent("sleeper")
+    inst.components.sleeper:SetWakeTest(ShouldWake)
+    inst.components.sleeper:SetSleepTest(ShouldSleep)
+    inst.components.sleeper:SetResistance(3)
 
     MakeMediumBurnableCharacter(inst, "waist")
     MakeMediumFreezableCharacter(inst, "waist")
 
     MakeHauntablePanic(inst)
 
-    inst:ListenForEvent("attacked", OnAttacked)
+    inst:SetStateGraph("SGbishop")
+    inst:SetBrain(brain)
 
-    EquipWeapon(inst)
+    inst:ListenForEvent("attacked", OnAttacked)
+    inst:ListenForEvent("newcombattarget", clockwork_common.OnNewCombatTarget)
+
+    clockwork_common.InitHomePosition(inst)
+    clockwork_common.MakeBefriendable(inst)
+
+    -- SGbishop calls this after firing; gold bishops do not use the beam trail effect.
+    inst.StartShotFx = function() end
 
     return inst
 end
@@ -174,6 +161,7 @@ local function bishop_fn()
     inst.kind = ""
     inst.soundpath = "dontstarve/creatures/bishop/"
     inst.effortsound = "dontstarve/creatures/bishop/idle"
+    inst.override_combat_fx_size = "med"
 
     return inst
 end

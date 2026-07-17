@@ -78,9 +78,11 @@ function ObsidianTool:Use(doer, target)
 end
 
 function ObsidianTool:OnUpdate(dt)
-    local curtemp = self.inst.components.temperature:GetCurrent()
+    local owner = self.inst.components.inventoryitem and self.inst.components.inventoryitem:GetGrandOwner() or self.inst
+    local temperature = owner.components.temperature
+    local curtemp = temperature and temperature:GetCurrent() or nil
     local worldtemp = GetLocalTemperature(self.inst)
-    self.cooltimer = self.cooltimer + dt + math.max(curtemp - worldtemp, 0) / 100 -- 调整与温差相关的失能倍率: 随温度降低，不随温度升高
+    self.cooltimer = self.cooltimer + dt + (curtemp and math.max(curtemp - worldtemp, 0) / 100 or 0)
     if self.cooltimer >= self.cooldowntime then
         self:SetCharge(math.max(self.charge - 1, 0))
         self.cooltimer = 0.0
@@ -88,9 +90,9 @@ function ObsidianTool:OnUpdate(dt)
 
     local charge, maxcharge = self:GetCharge()
     local percentage = charge / maxcharge
-    if self.inst.components.temperature then
+    if temperature then
         local heat = Lerp(0, 60, percentage)
-        self.inst.components.temperature:DoDelta(math.max((heat - curtemp) / 30, 0)) -- 调整与温差相关的失温倍率: 随充能升高，不随充能降低
+        temperature:DoDelta(math.max((heat - curtemp) / 30, 0)) -- 调整与温差相关的失温倍率: 随充能升高，不随充能降低
     end
 end
 

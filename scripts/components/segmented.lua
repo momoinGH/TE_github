@@ -82,7 +82,6 @@ end
 
 function Segmented:StopMove()
 	if self.state ~= STATES.DEAD then
-		print("STOPPING SEGMENT MOVE", self.inst:HasTag("switchToTailProp"))
 		self.state = STATES.IDLE
 	end
 end

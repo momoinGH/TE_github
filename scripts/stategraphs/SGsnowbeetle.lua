@@ -583,27 +583,6 @@ local states =
 		},
 	},
 
-	State {
-		name = "hit",
-		tags = { "busy" },
-
-		onenter = function(inst)
-			--            print("frozen test",inst.components.freezable:IsFrozen())
-			if inst:HasTag("hasdung") then
-				inst.sg:GoToState("bumped")
-			else
-				inst.SoundEmitter:PlaySound(inst.sounds.hurt)
-				inst.AnimState:PlayAnimation("hit")
-				inst.Physics:Stop()
-			end
-		end,
-
-		events =
-		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-		},
-	},
-
 	-- SLEEP STATES
 	State {
 		name = "sleep",
@@ -613,22 +592,6 @@ local states =
 			inst.components.locomotor:StopMoving()
 			inst.AnimState:PlayAnimation(processAnim(inst, "sleep_pre"))
 			inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/dungbeetle/yawn")
-		end,
-
-		events =
-		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("sleeping") end),
-			EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake") end),
-		},
-	},
-
-	State {
-		name = "sleeping",
-		tags = { "busy", "sleeping" },
-
-		onenter = function(inst)
-			inst.AnimState:PlayAnimation(processAnim(inst, "sleep_loop"))
-			inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/dungbeetle/breath_out")
 		end,
 
 		events =

@@ -25,6 +25,7 @@ function Poisonable:SetPoison(dmg, interval, duration)
     self.inst:TroSetPlayerClassifiedNetVar("tro_poisondamage")
     if not self.updating then
         self.inst:StartUpdatingComponent(self)
+        self.updating = true
     end
 end
 
@@ -108,7 +109,9 @@ function Poisonable:SetOnHitFn()
 end
 
 function Poisonable:OnLoad(data)
-    if data.dmg and data.startDuration and data.duration and data.interval then
+    if data.dmg ~= nil and data.startDuration ~= nil and data.duration ~= nil and data.interval ~= nil
+        and data.dmg < 0 and data.duration > 0
+    then
         self:SetPoison(data.dmg, data.interval, data.duration)
         self.startDuration = data.startDuration
     end

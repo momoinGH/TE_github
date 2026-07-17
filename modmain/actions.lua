@@ -43,7 +43,7 @@ end
 )
 
 TroAddAction(nil, "LAVASPIT", STRINGS.ACTIONS.LAVASPIT, function(act)
-    if act.doer and act.target and act.doer.prefab == "dragoon" then
+    if act.doer and act.target and (act.doer.prefab == "dragoon" or act.doer:HasTag("snake")) then
         local x, y, z = act.doer.Transform:GetWorldPosition()
         local downvec = TheCamera:GetDownVec()
         local offsetangle = math.atan2(downvec.z, downvec.x) * (180 / math.pi)
@@ -53,7 +53,9 @@ TroAddAction(nil, "LAVASPIT", STRINGS.ACTIONS.LAVASPIT, function(act)
         local spit = SpawnPrefab("dragoonspit")
         spit.Transform:SetPosition(x + offsetvec.x, y + offsetvec.y, z + offsetvec.z)
         spit.Transform:SetRotation(act.doer.Transform:GetRotation())
+        return true
     end
+    return false
 end)
 
 -- DEPLOY_AI Action [FIX FOR MOBS THAT PLANT TREES]
@@ -138,21 +140,30 @@ TroAddAction(nil, "SPECIAL_ACTION2", STRINGS.ACTIONS.SPECIAL_ACTION2, function(a
 end)
 
 TroAddAction(nil, "INFEST", STRINGS.ACTIONS.INFEST, function(act)
-    if not act.doer.infesting then
+    if act.doer ~= nil and act.target ~= nil and act.doer.components.infester ~= nil and not act.doer.infesting then
         act.doer.components.infester:Infest(act.target)
+        return true
     end
-    return true
+    return false
 end)
 
 
 TroAddAction(nil, "DIGDUNG", STRINGS.ACTIONS.DIGDUNG, function(act)
-    act.target.components.workable:WorkedBy(act.doer, 1)
+    if act.target ~= nil and act.target.components.workable ~= nil then
+        act.target.components.workable:WorkedBy(act.doer, 1)
+        return true
+    end
+    return false
 end)
 
 TroAddAction(nil, "MOUNTDUNG", STRINGS.ACTIONS.MOUNTDUNG, function(act)
+    if act.doer == nil or act.doer.dung_target == nil or not act.doer.dung_target:IsValid() then
+        return false
+    end
     act.doer.dung_target:Remove()
     act.doer:AddTag("hasdung")
     act.doer.dung_target = nil
+    return true
 end)
 
 TroAddAction(nil, "BARK", STRINGS.ACTIONS.BARK, function(act)
@@ -164,11 +175,13 @@ TroAddAction(nil, "RANSACK", STRINGS.ACTIONS.RANSACK, function(act)
 end)
 
 TroAddAction(nil, "FIX", STRINGS.ACTIONS.FIX, function(act)
-    if act.target then
-        local target = act.target
+    local target = act.target
+
+    if target and target.components.workable then
         local numworks = 1
         target.components.workable:WorkedBy(act.doer, numworks)
         --	return target:fix(act.doer)		
+        return true
     end
 end)
 
@@ -236,8 +249,11 @@ TroAddAction({ priority = 10, distance = 4, mount_valid = false, encumbered_vali
     "BOATMOUNT",
     STRINGS.ACTIONS.BOATMOUNT,
     function(act)
-        act.doer.components.tro_driver:StartHopBoat(act.target)
-        return true
+        if act.doer ~= nil and act.target ~= nil and act.doer.components.tro_driver ~= nil and act.target.components.shipwreckedboat ~= nil then
+            act.doer.components.tro_driver:StartHopBoat(act.target)
+            return true
+        end
+        return false
     end
 )
 
@@ -281,6 +297,9 @@ end)
 
 -- 剪，支持workable和shearable
 TroAddAction({}, "SHEAR", STRINGS.ACTIONS.SHEAR, function(act)
+    if act.target == nil then
+        return false
+    end
     if act.target.components.shearable and act.target.components.shearable:CanBeWorked() then
         act.target.components.shearable:WorkedBy(act.doer)
         return true
@@ -294,6 +313,9 @@ end)
 
 -- 劈砍
 TroAddAction({ priority = 10, mount_valid = true }, "HACK", STRINGS.ACTIONS.HACK, function(act)
+    if act.target == nil then
+        return false
+    end
     if act.target.components.hackable and act.target.components.hackable:CanBeWorked() then
         act.target.components.hackable:WorkedBy(act.doer)
         return true
@@ -425,14 +447,17 @@ end
 TroAddAction({ priority = 10, distance = 3, mount_valid = true }, "GAS", STRINGS.ACTIONS.GAS,
     function(act)
         local pos = act.target and act.target:GetPosition() or act:GetActionPoint()
-        act.invobject.components.gasser:Gas(pos)
-        return true
+        if act.invobject ~= nil and act.invobject.components.gasser ~= nil and pos ~= nil then
+            act.invobject.components.gasser:Gas(pos)
+            return true
+        end
+        return false
     end
 )
 
 TroAddAction({ priority = 10, mount_valid = true }, "PAN", STRINGS.ACTIONS.PAN,
     function(act)
-        if act.target.components.workable and act.target.components.workable.action == ACTIONS.PAN then
+        if act.target ~= nil and act.target.components.workable and act.target.components.workable.action == ACTIONS.PAN then
             local numworks = 1
 
             if act.invobject and act.invobject.components.tool then

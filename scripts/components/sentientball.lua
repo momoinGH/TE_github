@@ -11,10 +11,16 @@ local SentientBall = Class(function(self, inst)
 	self.min_say_time = 4
 
 	local dt = 5
-	self.inst:DoPeriodicTask(dt, function() self:OnUpdate(dt) end)
+	self.talktask = self.inst:DoPeriodicTask(dt, function() self:OnUpdate(dt) end)
 	self.warnlevel = 0
 end)
 
+function SentientBall:OnRemoveFromEntity()
+	if self.talktask then
+		self.talktask:Cancel()
+		self.talktask = nil
+	end
+end
 
 function SentientBall:OnDropped()
 	self:Say(STRINGS.RAWLINGon_dropped)

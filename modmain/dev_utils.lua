@@ -2,8 +2,7 @@ require "util/textcompleter"
 require "stacktrace"
 
 --用这个字段判断是不是开发模式
-troisdev = not string.starts(modname, "workshop-")
-GLOBAL.troisdev = troisdev
+_G.troisdev = not string.starts(modname, "workshop-")
 
 if troisdev then
     require("debugcommands")  --允许控制台直接调用d_xxx函数
@@ -15,7 +14,7 @@ OnTroErrorHandle = nil
 ---错误处理
 ---@param msg string 错误消息
 ---@param has_trace boolean 是否打印堆栈，默认true
-function TroErrorHandle(msg, has_trace, level)
+function _G.TroErrorHandle(msg, has_trace, level)
     if has_trace == nil then
         has_trace = true
     end
@@ -30,8 +29,6 @@ function TroErrorHandle(msg, has_trace, level)
         OnTroErrorHandle(msg, has_trace, level)
     end
 end
-
-GLOBAL.TroErrorHandle = TroErrorHandle
 
 ----------------------------------------------------------------------------------------------------
 --- 科雷modmain的定义抄过来，不过文件不存在时不会报错

@@ -41,7 +41,7 @@ end
 
 local function poisonattack(inst, attacker, target)
     if target.components.poisonable then
-        target.components.poisonable:Poison()
+        target.components.poisonable:SetPoison(-4, 5, 120)
     end
     if target.components.combat then
         target.components.combat:SuggestTarget(attacker)

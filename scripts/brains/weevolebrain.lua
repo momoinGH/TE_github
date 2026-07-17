@@ -37,7 +37,7 @@ local function GetHomePos(inst)
 end
 
 local function GetWanderPoint(inst)
-    local target = GetHome(inst) or ThePlayer
+    local target = GetHome(inst) or FindClosestPlayerToInst(inst, MAX_WANDER_DIST)
 
     if target then
         return target:GetPosition()

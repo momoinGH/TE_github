@@ -9,7 +9,7 @@ local TalkingBird = Class(function(self, inst)
     --self.inst:ListenForEvent("dismountboat", function() self:OnDismounted() end, ThePlayer)
 
     local dt = 5 + math.random()
-    self.inst:DoPeriodicTask(dt, function() self:OnUpdate(dt) end)
+    self.talktask = self.inst:DoPeriodicTask(dt, function() self:OnUpdate(dt) end)
     self.warnlevel = 0
 end)
 
