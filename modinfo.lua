@@ -17,47 +17,30 @@ local function pub_dev(pub, dev)
 end
 
 name = pub_dev(
-    en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "熱帶體驗 | 船難哈姆雷特生態：來自域外"),
-    en_zh_zht("Tropical Experience | DEV", "热带体验 | 开发版", "熱帶體驗 | 開發版"))
+    en_zh_zht(
+        "Tropical Experience | SW HAM Biomes: From Beyond [TEST]",
+        "热带体验 | 海难哈姆雷特生态：来自域外【测试版】",
+        "熱帶體驗 | 船難哈姆雷特生態：來自域外【測試版】"
+    ),
+    en_zh_zht(
+        "Tropical Experience | TEST BUILD",
+        "热带体验 | 测试版",
+        "熱帶體驗 | 測試版"
+    )
+)
 
 description = en_zh_zht([[
-version：3.83
-Attention: We added a complement to this mod.
-In it will have several changes to improve the experience of the game.
-Visit only the main mod page and download.
-Tropical Experience| Complement",
+This is the testing version of the “Three-in-One” mod. Its purpose is to collect feedback, fix bugs, and improve the overall experience before the official release.
+During testing, you may encounter incomplete features, balance changes, compatibility issues, or potential save-file risks. Using a separate save is recommended. Please report any issues you find, including reproduction steps and error messages when possible.
+Once testing is complete and the mod is stable, the content will be released again as an official version. This test mod will no longer receive updates or maintenance, so please follow and migrate to the official release.
 ]], [[
-版本：3.83
-注意：我们为此模组添加了一些内容补充
-其中包含了多项改进游戏体验的玩法变化，请访问此模组创意工坊进行下载
-多种生态群系体验 | 补充内容
-添加饥荒单机版的海难DLC、哈姆雷特DLC内容
-
-集成多个生态群系模组内容：
-冰霜岛屿与冰霜洞穴 - 灵感来源永不妥协(Uncompromising Mode)
-海底世界(Creeps in the Deeps)
-绿色世界(Green World)
-大风平原(Windy Plains)
-
-兼容樱花林(Cherry Forest)",
-]], [[
-版本：3.83
-注意：我們爲此模組添加了一些內容補充
-其中包含了多項改進遊戲體驗的玩法變化，請訪問此模組創意工坊進行下載
-多種生態羣系體驗 | 補充內容
-添加饑荒單機版的海難DLC、哈姆雷特DLC內容
-
-集成多個生態羣系模組內容：
-冰霜島嶼與冰霜洞穴 - 靈感來源永不妥協(Uncompromising Mode)
-海底世界(Creeps in the Deeps)
-綠色世界(Green World)
-大風平原(Windy Plains)
-
-兼容櫻花林(Cherry Forest)
+这是“三合一”内容的测试版本，用于在正式发布前收集问题反馈、修复 Bug，并优化游戏体验。
+测试期间可能会出现功能不完整、数值调整、兼容性问题或存档风险。建议使用独立存档进行游玩，并及时反馈遇到的问题、复现步骤和报错信息。
+测试结束并稳定后，内容将以正式版本重新发布。届时本测试 Mod 将停止更新与维护，请关注并迁移至正式版。
 ]])
 
 author = "Vagner da Rocha Santos."
-version = "3.83"
+version = "1.0"
 forumthread = ""
 api_version = 10
 priority = -20
