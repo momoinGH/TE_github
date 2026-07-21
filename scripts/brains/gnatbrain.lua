@@ -26,10 +26,7 @@ local function infestplayer(inst, brain)
 end
 
 local function findlighttarget(inst)
-    local light = FindLight(inst)
-    if light then
-        return light
-    end
+    return inst:findlight()
 end
 
 local function makenest(inst)
@@ -51,26 +48,18 @@ local GnatBrain = Class(Brain, function(self, inst)
 end)
 
 
-
 function GnatBrain:OnStart()
-    local root =
-        PriorityNode(
-            {
-                WhileNode(function() return not self.inst.components.infester.infesting end, "not infesting",
-                    PriorityNode {
-                        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
-                            Panic(self.inst)),
-                        WhileNode(function() return TheWorld.state.isdusk or TheWorld.state.isnight end, "chase light", Follow(self.inst, function() return
-                            findlighttarget(self.inst) end, 0, 1, 1)),
-                        WhileNode(function() return findinfesttarget(self.inst) end, "chase player", Follow(self.inst, function() return
-                            findinfesttarget(self.inst) end, 0, 1, 1)),
+    local root = PriorityNode({
+        WhileNode(function() return not self.inst.components.infester.infesting end, "not infesting", PriorityNode({
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            WhileNode(function() return TheWorld.state.isdusk or TheWorld.state.isnight end, "chase light", Follow(self.inst, findlighttarget, 0, 1, 1)),
+            WhileNode(function() return findinfesttarget(self.inst) end, "chase player", Follow(self.inst, findlighttarget, 0, 1, 1)),
 
-                        DoAction(self.inst, function() return infestplayer(self.inst, self) end, "infest", true),
-                        DoAction(self.inst, function() return makenest(self.inst) end, "make nest", true),
-                        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
-                    }, .5)
-            }, 1)
-
+            DoAction(self.inst, function() return infestplayer(self.inst, self) end, "infest", true),
+            DoAction(self.inst, function() return makenest(self.inst) end, "make nest", true),
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
+        }, .5))
+    }, 1)
 
     self.bt = BT(self.inst, root)
 end

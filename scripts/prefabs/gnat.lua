@@ -14,15 +14,6 @@ local prefabs =
 
 }
 
-local function didplayerseebugsdie(inst)
-    local player = GetClosestInstWithTag("player", inst, 40)
-    if inst:GetDistanceSqToInst(player) < 10 * 10 then
-        player:DoTaskInTime(0.5, function()
-            player.components.talker:Say(GetString(player.prefab, "ANNOUNCE_GNATS_DIED"))
-        end)
-    end
-end
-
 local function keeptargetfn(inst, target)
     return target
         and target.components.combat
@@ -45,16 +36,6 @@ local function NormalRetarget(inst)
         end, nil, notags)
 end
 
-local function OnGasChange(inst, onGas)
-    if onGas then
-        inst:DoTaskInTime(1, function()
-            inst.components.health:Kill()
-            didplayerseebugsdie(inst)
-        end
-        )
-    end
-end
-
 local function bite(inst)
     if inst.components.infester.target then
         inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
@@ -62,17 +43,12 @@ local function bite(inst)
     end
 end
 
+local targetDist = 15
+local notags = { "FX", "NOCLICK", "INLIMBO" }
 local function findlight(inst)
-    local targetDist = 15
-    local notags = { "FX", "NOCLICK", "INLIMBO" }
-    local light = FindEntity(inst, targetDist,
-        function(guy)
-            if guy.Light and guy.Light:IsEnabled() and guy:HasTag("lightsource") then
-                return true
-            end
-        end, nil, notags)
-
-    return light
+    return FindEntity(inst, targetDist, function(guy)
+        return guy.Light and guy.Light:IsEnabled() and guy:HasTag("lightsource")
+    end, nil, notags)
 end
 
 local function stopinfesttest(inst)
