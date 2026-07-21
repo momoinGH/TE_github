@@ -217,7 +217,7 @@ end
 function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
     local function onblownpstdone(inst)
         if inst.components.hackable and
-            inst.components.hackable:CanBeHacked() and
+            inst.components.hackable:CanBeWorked() and
             (
                 inst.AnimState:IsCurrentAnimation("blown_pst") or
                 inst.AnimState:IsCurrentAnimation("blown_loop") or
@@ -230,7 +230,7 @@ function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
     end
 
     local function ongustanimdone(inst)
-        if inst.components.hackable and inst.components.hackable:CanBeHacked() then
+        if inst.components.hackable and inst.components.hackable:CanBeWorked() then
             if inst.components.blowinwindgust:IsGusting() then
                 local anim = math.random(1, 2)
                 inst.AnimState:PlayAnimation("blown_loop" .. anim, false)
@@ -239,7 +239,7 @@ function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
                     inst:RemoveEventCallback("animover", ongustanimdone)
 
                     -- This may not be true anymore
-                    if inst.components.hackable and inst.components.hackable:CanBeHacked() then
+                    if inst.components.hackable and inst.components.hackable:CanBeWorked() then
                         inst.AnimState:PlayAnimation("blown_pst", false)
                         -- changed this from a push animation to an animover listen event so that it can be interrupted if necessary, and that a check can be made at the end to know if it should go to idle at that time.
                         --inst.AnimState:PushAnimation("idle", true)
@@ -254,7 +254,7 @@ function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
 
     local function onguststart(inst, windspeed)
         inst:DoTaskInTime(math.random() / 2, function(inst)
-            if inst.components.hackable and inst.components.hackable:CanBeHacked() then
+            if inst.components.hackable and inst.components.hackable:CanBeWorked() then
                 inst.AnimState:PlayAnimation("blown_pre", false)
                 inst:ListenForEvent("animover", ongustanimdone)
             end
@@ -262,7 +262,7 @@ function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
     end
 
     local function ongusthack(inst)
-        if inst.components.lootdropper and inst.components.hackable and inst.components.hackable:CanBeHacked() then
+        if inst.components.lootdropper and inst.components.hackable and inst.components.hackable:CanBeWorked() then
             inst.components.hackable:MakeEmpty()
             inst.components.lootdropper:SpawnLootPrefab(inst.components.hackable.product)
         end

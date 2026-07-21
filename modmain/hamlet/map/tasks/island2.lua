@@ -63,7 +63,7 @@ AddTask("岛二猪镇", {
     locks = LOCKS.OTHER_CIVILIZATION_2,
     keys_given = KEYS.ISLAND_3,
     room_choices = {
-        ["city_base_2"] = math.random(5, 7),
+        ["city_base_2"] = math.random(7, 10),
     },
     level_set_piece_blocker = true,
     room_bg = WORLD_TILES.SUBURB,

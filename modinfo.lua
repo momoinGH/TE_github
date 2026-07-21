@@ -30,17 +30,18 @@ name = pub_dev(
 )
 
 description = en_zh_zht([[
-This is the testing version of the “Three-in-One” mod. Its purpose is to collect feedback, fix bugs, and improve the overall experience before the official release.
+This is the testing version of the “Tropical Experience” mod. Its purpose is to collect feedback, fix bugs, and improve the overall experience before the official release.
 During testing, you may encounter incomplete features, balance changes, compatibility issues, or potential save-file risks. Using a separate save is recommended. Please report any issues you find, including reproduction steps and error messages when possible.
 Once testing is complete and the mod is stable, the content will be released again as an official version. This test mod will no longer receive updates or maintenance, so please follow and migrate to the official release.
 ]], [[
 这是“三合一”内容的测试版本，用于在正式发布前收集问题反馈、修复 Bug，并优化游戏体验。
 测试期间可能会出现功能不完整、数值调整、兼容性问题或存档风险。建议使用独立存档进行游玩，并及时反馈遇到的问题、复现步骤和报错信息。
 测试结束并稳定后，内容将以正式版本重新发布。届时本测试 Mod 将停止更新与维护，请关注并迁移至正式版。
+bug可在QQ群反馈：585659455
 ]])
 
 author = "Vagner da Rocha Santos."
-version = "1.0"
+version = "1.1"
 forumthread = ""
 api_version = 10
 priority = -20
