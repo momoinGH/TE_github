@@ -301,4 +301,12 @@ function TigerSharker:LoadPostPass(ents, data)
     end
 end
 
+function TigerSharker:TimeUntilCanAppear()
+    return 0 --// TODO: 不知道现在的离开倒计时是怎么设计的，可能需要修改
+end
+
+function TigerSharker:TimeUntilRespawn()
+    return TheWorld.components.worldsettingstimer:GetTimeLeft(SHARK_TIMERNAME) or 0
+end
+
 return TigerSharker
