@@ -107,7 +107,7 @@ function Boat:UpdateSpeedMult()
     local speed_mult = 1
     for i = 1, c.numslots do
         local item = c.slots[i]
-        if item ~= nil then
+        if item ~= nil and item.components.shipwreckedboatparts ~= nil then
             speed_mult = speed_mult * item.components.shipwreckedboatparts.speed_mult
         end
     end
