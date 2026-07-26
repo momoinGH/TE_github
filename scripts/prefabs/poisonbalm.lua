@@ -21,7 +21,7 @@ local function fn(Sim)
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst, "idle_water", "idle")
+    MakeInventoryFloatable(inst)
 
     inst.AnimState:SetBank("poison_salve")
     inst.AnimState:SetBuild("poison_salve")

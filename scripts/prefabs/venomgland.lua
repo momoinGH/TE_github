@@ -33,7 +33,7 @@ local function fn()
     inst.AnimState:SetBuild("venom_gland")
     inst.AnimState:PlayAnimation("idle")
 
-    MakeInventoryFloatable(inst, "idle_water", "idle")
+    MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
 

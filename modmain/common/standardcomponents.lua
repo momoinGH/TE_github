@@ -263,7 +263,6 @@ function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
 
     local function ongusthack(inst)
         if inst.components.lootdropper and inst.components.hackable and inst.components.hackable:CanBeWorked() then
-            inst.components.hackable:MakeEmpty()
             inst.components.lootdropper:SpawnLootPrefab(inst.components.hackable.product)
         end
     end
