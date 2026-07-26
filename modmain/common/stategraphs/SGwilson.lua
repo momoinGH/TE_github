@@ -346,7 +346,7 @@ AddStategraphPostInit("wilson", function(sg)
 
     -- 可以上床睡觉
     Hooks.FnDecorator(sg.actionhandlers[ACTIONS.SLEEPIN], "deststate", function(inst, action)
-        if action.target:HasTag("bed") then
+        if action.target and action.target:HasTag("bed") then --草席卷是没有target的
             local x, y, z = action.target.Transform:GetWorldPosition()
             action.doer.Transform:SetPosition(x + 0.02, y, z + 0.02)
             return { "bedroll" }, true
