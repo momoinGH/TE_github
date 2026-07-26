@@ -388,7 +388,7 @@ function CityPigBrain:OnStart()
 
             WhileNode(function() return needlight(self.inst) end, "NeedLight",
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_FIND_LIGHT),
-                    FindLight(self.inst))),
+                    FindLight(self.inst, 30))),
 
             IfNode(function()
                     return not self.inst:HasTag("guard") and
