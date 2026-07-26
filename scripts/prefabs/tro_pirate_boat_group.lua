@@ -51,7 +51,7 @@ local function createmermboat(inst)
 
 
     inst:DoTaskInTime(0.2, function()
-        local tesouro = SpawnPrefab("buriedtreasure")
+        local tesouro = SpawnPrefab("buriedtreasure_worked")
         if tesouro then tesouro.Transform:SetPosition(x, y, z) end
     end)
 

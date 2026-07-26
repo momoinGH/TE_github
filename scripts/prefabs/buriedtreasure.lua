@@ -17,23 +17,7 @@ local treasures = { "healingstaff", "purplegem", "orangegem", "yellowgem", "gree
     "cutgrass", "charcoal", "axe", "hammer", "shovel", "bugnet", "fishingrod", "spidergland",
     "silk", "flint", "coral", "earring", }
 
-local function onfinishcallback(inst, worker)
-    -- figure out which side to drop the loot
-    local pt = inst:GetPosition()
-    local hispos = Vector3(worker.Transform:GetWorldPosition())
-
-    local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)
-
-    if he_right then
-        inst.components.lootdropper:DropLoot(pt - (TheCamera:GetRightVec() * (math.random() + 1)))
-        inst.components.lootdropper:DropLoot(pt - (TheCamera:GetRightVec() * (math.random() + 1)))
-    else
-        inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec() * (math.random() + 1)))
-        inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec() * (math.random() + 1)))
-    end
-
-    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/loot_reveal")
-
+local function spawntreasure(inst)
     local chest = SpawnPrefab("treasurechest")
     local map = TheWorld.Map
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -58,6 +42,28 @@ local function onfinishcallback(inst, worker)
             end
         end
     end
+
+    inst:Remove()
+end
+
+local function onfinishcallback(inst, worker)
+    -- figure out which side to drop the loot
+    local pt = inst:GetPosition()
+    local hispos = Vector3(worker.Transform:GetWorldPosition())
+
+    local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)
+
+    if he_right then
+        inst.components.lootdropper:DropLoot(pt - (TheCamera:GetRightVec() * (math.random() + 1)))
+        inst.components.lootdropper:DropLoot(pt - (TheCamera:GetRightVec() * (math.random() + 1)))
+    else
+        inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec() * (math.random() + 1)))
+        inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec() * (math.random() + 1)))
+    end
+
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/loot_reveal")
+
+    SpawnAt("buriedtreasure_worked", inst)
 
     -----pode vir até 3 monstros----------------------
     for i = 1, 4 do
@@ -115,4 +121,14 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("buriedtreasure", fn, assets, prefabs)
+local function treasure()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+
+    inst:DoTaskInTime(0, spawntreasure)
+
+    return inst
+end
+
+return Prefab("buriedtreasure", fn, assets, prefabs),
+    Prefab("buriedtreasure_worked", treasure)
