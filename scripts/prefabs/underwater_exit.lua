@@ -27,8 +27,6 @@ local function MakeExit(name, portal_id)
         local minimap = inst.entity:AddMiniMapEntity()
         minimap:SetIcon("cave_open2.png")
 
-        inst.Transform:SetScale(2, 2, 2)
-
         MakeObstaclePhysics(inst, 1)
 
         inst.AnimState:SetBank("underwater_exit")
@@ -54,15 +52,15 @@ local function MakeExit(name, portal_id)
             return inst
         end
 
-        if TheNet:GetServerIsClientHosted() and not (TheShard:IsMaster() or TheShard:IsSecondary()) then
-            --On non-sharded servers we'll make these vanish for now, but still generate them
-            --into the world so that they can magically appear in existing saves when sharded
-            RemovePhysicsColliders(inst)
-            inst.AnimState:SetScale(0, 0)
-            inst.MiniMapEntity:SetEnabled(false)
-            inst:AddTag("NOCLICK")
-            inst:AddTag("CLASSIFIED")
-        end
+        --if TheNet:GetServerIsClientHosted() and not (TheShard:IsMaster() or TheShard:IsSecondary()) then
+        --    --On non-sharded servers we'll make these vanish for now, but still generate them
+        --    --into the world so that they can magically appear in existing saves when sharded
+        --    RemovePhysicsColliders(inst)
+        --    inst.AnimState:SetScale(0, 0)
+        --    inst.MiniMapEntity:SetEnabled(false)
+        --    inst:AddTag("NOCLICK")
+        --    inst:AddTag("CLASSIFIED")
+        --end
 
         inst:AddComponent("inspectable")
 
