@@ -1,1 +1,2 @@
-rock_ice
+简单挑几个改名的预制件，用DoTaskInTime(0,ReplacePrefab)去替换新的预制件，兼容旧档
+不再hook messagebottlemanager，海难瓶子走自己的逻辑

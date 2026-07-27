@@ -843,4 +843,5 @@ return MakeShop("pig_shop_deli", { build = "pig_shop_deli", sounds = { SHOPSOUND
     MakeShop("pig_shop_bank", { build = "pig_shop_bank", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
     MakeShop("pig_shop_tinker", { build = "pig_shop_tinker", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
     MakeShop("pig_shop_cityhall", { build = "pig_cityhall", bank = "pig_cityhall", indestructable = true, unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    MakeShop("pig_shop_cityhall_player", { bank = "pig_cityhall", build = "pig_cityhall", minimap = "pig_shop_cityhall.png", unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true })
+    MakeShop("pig_shop_cityhall_player", { bank = "pig_cityhall", build = "pig_cityhall", minimap = "pig_shop_cityhall.png", unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
+    MakePlacer("pig_shop_cityhall_player_placer", "pig_cityhall", "pig_cityhall", "idle")

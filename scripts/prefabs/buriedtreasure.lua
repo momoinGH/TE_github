@@ -64,26 +64,10 @@ local function onfinishcallback(inst, worker)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/loot_reveal")
 
     SpawnAt("buriedtreasure_worked", inst)
-
-    -----pode vir até 3 monstros----------------------
-    for i = 1, 4 do
-        if math.random() > 0.5 then
-            if math.random() > 0.5 then
-                local single = SpawnPrefab("snake_poison")
-                chest.components.container:GiveItem(single)
-            else
-                local single = SpawnPrefab("snake")
-                chest.components.container:GiveItem(single)
-            end
-        else
-
-        end
-    end
-
     inst:Remove()
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()

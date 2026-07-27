@@ -76,7 +76,7 @@ AddCityRecipe("playerhouse_city_entrance", { Ig("boards", 4), Ig("cutstone", 3),
 AddCityRecipe("pighouse_city", { Ig("boards", 4), Ig("cutstone", 3), Ig("pigskin", 4) }, { min_spacing = 1, placer = "pighouse_city_placer" })
 AddCityRecipe("pig_guard_tower", { Ig("cutstone", 3), Ig("halberd", 1), Ig("pigskin", 4) }, { min_spacing = 1, placer = "pig_guard_tower_placer" })
 AddCityRecipe("pig_guard_tower_palace", { Ig("cutstone", 5), Ig("halberd", 1), Ig("pigskin", 4) }, { min_spacing = 1, placer = "pig_guard_tower_palace_placer", image = "pig_royal_tower.png" })
-AddCityRecipe("pig_shop_cityhall_player_entrance", { Ig("boards", 4), Ig("goldnugget", 4), Ig("pigskin", 4) }, { min_spacing = 1, placer = "pig_shop_cityhall_placer", image = "pig_shop_cityhall.png" })
+AddCityRecipe("pig_shop_cityhall_player", { Ig("boards", 4), Ig("goldnugget", 4), Ig("pigskin", 4) }, { min_spacing = 1, placer = "pig_shop_cityhall_player_placer", image = "pig_shop_cityhall.png" })
 AddCityRecipe("pig_shop_deli_entrance", { Ig("boards", 4), Ig("honeyham", 1), Ig("pigskin", 4) }, { min_spacing = 1, placer = "pig_shop_deli_placer", image = "pig_shop_deli.png" })
 AddCityRecipe("pig_shop_general_entrance", { Ig("boards", 4), Ig("axe", 3), Ig("pigskin", 4) }, { min_spacing = 1, placer = "pig_shop_general_placer", image = "pig_shop_general.png" })
 AddCityRecipe("pig_shop_hoofspa_entrance", { Ig("boards", 4), Ig("bandage", 3), Ig("pigskin", 4) }, { min_spacing = 1, placer = "pig_shop_hoofspa_placer", image = "pig_shop_hoofspa.png" })
