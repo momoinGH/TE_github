@@ -3,7 +3,7 @@ local OldDoTaskInTime = EntityScript.DoTaskInTime
 function EntityScript:DoTaskInTime(...)
     local periodic = OldDoTaskInTime(self, ...)
     if self.IsValid and not self:IsValid() then
-        TroErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoTaskInTime，这可能导致游戏崩溃", true, "warn")
+        TroErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoTaskInTime，这可能导致游戏崩溃", troisdev, "warn")
         periodic:Cancel()
     end
     return periodic
@@ -13,7 +13,7 @@ local OldDoPeriodicTask = EntityScript.DoPeriodicTask
 function EntityScript:DoPeriodicTask(...)
     local periodic = OldDoPeriodicTask(self, ...)
     if self.IsValid and not self:IsValid() then
-        TroErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoPeriodicTask，这可能导致游戏崩溃", true, "warn")
+        TroErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoPeriodicTask，这可能导致游戏崩溃", troisdev, "warn")
         periodic:Cancel()
     end
     return periodic

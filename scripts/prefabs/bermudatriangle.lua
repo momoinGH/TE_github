@@ -107,40 +107,6 @@ local TELEPORTBOAT_ITEM_MUST_TAGS = { "_inventoryitem", }
 local TELEPORTBOAT_ITEM_CANT_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", }
 local TELEPORTBOAT_BLOCKER_CANT_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "_inventoryitem", "bermudatriangle", }
 
-local function DoBoatWake(boat, isfirst)
-    if boat.components.boatphysics == nil then
-        return
-    end
-
-    local speed = boat.components.boatphysics:GetVelocity()
-    if speed < BOAT_WAKE_SPEED_MIN_THRESHOLD then
-        return
-    end
-
-    local boatradius = boat:GetSafePhysicsRadius() +
-        3 -- Add a small offset so the wave does not hit the boat it came from.
-
-    local x, y, z = boat.Transform:GetWorldPosition()
-    local velx_n, velz_n = boat.components.boatphysics:GetNormalizedVelocities()
-    local direction = VecUtil_GetAngleInRads(velx_n, velz_n)
-    local dir1 = direction - 7.0 * DEGREES
-    local dir2 = direction + 7.0 * DEGREES
-    local pos1 = Vector3(x - boatradius * math.cos(dir1), 0, z - boatradius * math.sin(dir1))
-    local pos2 = Vector3(x - boatradius * math.cos(dir2), 0, z - boatradius * math.sin(dir2))
-    SpawnAttackWave(pos1, -direction * RADIANS - 65.0, BOAT_WAKE_SPEED_MIN_THRESHOLD, "wave_med", 0.5, true)
-    SpawnAttackWave(pos2, -direction * RADIANS + 65.0, BOAT_WAKE_SPEED_MIN_THRESHOLD, "wave_med", 0.5, true)
-    if isfirst then
-        -- Make it emit one out the back too.
-        boatradius = boatradius - 1.5
-        local pos3 = Vector3(x - boatradius * math.cos(direction), 0, z - boatradius * math.sin(direction))
-        SpawnAttackWave(pos3, -direction * RADIANS - 180.0, BOAT_WAKE_SPEED_MIN_THRESHOLD, "wave_med", 0.5, true)
-    end
-end
-
---[[local function SetExit(inst, exit)
-    inst.components.entitytracker:TrackEntity("exit", exit)
-end]]
-
 local function ClearAvoid(boat)
     boat._avoid_whirlportals_hack = nil
 end
@@ -167,7 +133,7 @@ local function CheckForBoatsTick(inst)
 
     local sx, sy, sz = inst.Transform:GetWorldPosition()
     local boat
-    local boats = TheSim:FindEntities(sx, sy, sz, BOAT_INTERACT_DISTANCE, BOAT_MUST_TAGS)
+    local boats = TheSim:FindEntities(sx, sy, sz, BOAT_INTERACT_DISTANCE, BOAT_MUST_TAGS, { "shipwrecked_boat" }) --把海难小船排除掉，不然船会看不见的
     for _, testboat in ipairs(boats) do
         if not testboat._avoid_whirlportals_hack then
             boat = testboat
@@ -178,7 +144,7 @@ local function CheckForBoatsTick(inst)
         return
     end
 
-    local boatradius = boat:GetSafePhysicsRadius()
+    local boatradius = boat.GetSafePhysicsRadius and boat:GetSafePhysicsRadius() or (TUNING.BOAT.RADIUS + 0.1)
 
     local ex, ey, ez = exit.Transform:GetWorldPosition()
 
@@ -187,13 +153,15 @@ local function CheckForBoatsTick(inst)
         velx_n, velz_n = boat.components.boatphysics:GetNormalizedVelocities()
     end
     local e_pt = Vector3(ex, ey, ez)
-    if boat:IsBoatEdgeOverLand(e_pt) or TheSim:FindEntities(ex, ey, ez, boatradius + MAX_PHYSICS_RADIUS, nil, TELEPORTBOAT_BLOCKER_CANT_TAGS)[1] ~= nil then
+    if (boat.IsBoatEdgeOverLand and boat:IsBoatEdgeOverLand(e_pt))
+        or TheSim:FindEntities(ex, ey, ez, boatradius + MAX_PHYSICS_RADIUS, nil, TELEPORTBOAT_BLOCKER_CANT_TAGS)[1] ~= nil
+    then
         local function ValidOffset(pt)
             if TheWorld.Map:IsPointNearHole(pt) then
                 return false
             end
 
-            if boat:IsBoatEdgeOverLand(pt) then
+            if boat.IsBoatEdgeOverLand and boat:IsBoatEdgeOverLand(pt) then
                 return false
             end
 
