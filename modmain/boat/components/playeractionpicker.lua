@@ -19,8 +19,10 @@ local function PickActions(retTab, self, position, target, right)
                 table.insert(actions, ACTIONS.BOATCANNON)
             end
         else
-            if not target and TheWorld.Map:IsPassableAtPoint(position:Get()) then
+            local is_land = TheWorld.Map:IsPassableAtPoint(position:Get())
+            if (not target or target:HasTag("boat")) and is_land then
                 -- 上岸
+                target = nil --如果是大饼船把这个target置空，因为上岸针对的是鼠标点位置不是实体
                 table.insert(actions, ACTIONS.BOATDISMOUNT)
             end
         end

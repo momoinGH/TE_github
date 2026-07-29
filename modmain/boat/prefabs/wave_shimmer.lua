@@ -6,6 +6,5 @@ for _, v in ipairs({
 }) do
     AddPrefabPostInit(v, function(inst)
         inst:AddTag("wave_shimmer")
-        if not TheWorld.ismastersim then return end
     end)
 end

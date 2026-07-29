@@ -13,59 +13,51 @@ local prefabs =
 {
 }
 
-local armasdotesouro =
-{
-    [1] = "healingstaff",
-    [2] = "book_fossil",
-    [3] = "fireballstaff",
-    [4] = "hammer_mjolnir",
-    [5] = "blowdart_lava2",
-    [6] = "spear_lance",
-    [7] = "blowdart_lava",
-    [8] = "spear_gungnir",
-    [9] = "book_elemental",
-    [10] = "lavaarena_armor_hpdamager",
-    [11] = "lavaarena_armor_hprecharger",
-    [12] = "lavaarena_armor_hppetmastery",
-    [13] = "lavaarena_armor_hpextraheavy",
-    [14] = "lavaarena_armorextraheavy",
-    [15] = "lavaarena_armorheavy",
-    [16] = "lavaarena_armormediumrecharger",
-    [17] = "lavaarena_armormediumdamager",
-    [18] = "lavaarena_armormedium",
-    [19] = "lavaarena_armorlightspeed",
-    [20] = "lavaarena_armorlight",
-    [21] = "lavaarena_lightdamagerhat",
-    [22] = "lavaarena_strongdamagerhat",
-    [23] = "lavaarena_feathercrownhat",
-    [24] = "lavaarena_rechargerhat",
-    [25] = "lavaarena_healingflowerhat",
-    [26] = "lavaarena_tiaraflowerpetalshat",
-    [27] = "lavaarena_eyecirclethat",
-    [28] = "lavaarena_crowndamagerhat",
-    [29] = "lavaarena_healinggarlandhat",
-    [30] = "lavaarena_heavyblade",
-}
+-- local armasdotesouro =
+-- {
+--     "healingstaff",
+--     "book_fossil",
+--     "fireballstaff",
+--     "hammer_mjolnir",
+--     "blowdart_lava2",
+--     "spear_lance",
+--     "blowdart_lava",
+--     "spear_gungnir",
+--     "book_elemental",
+--      "lavaarena_armor_hpdamager",
+--      "lavaarena_armor_hprecharger",
+--      "lavaarena_armor_hppetmastery",
+--      "lavaarena_armor_hpextraheavy",
+--      "lavaarena_armorextraheavy",
+--      "lavaarena_armorheavy",
+--      "lavaarena_armormediumrecharger",
+--      "lavaarena_armormediumdamager",
+--      "lavaarena_armormedium",
+--      "lavaarena_armorlightspeed",
+--      "lavaarena_armorlight",
+--      "lavaarena_lightdamagerhat",
+--      "lavaarena_strongdamagerhat",
+--      "lavaarena_feathercrownhat",
+--      "lavaarena_rechargerhat",
+--      "lavaarena_healingflowerhat",
+--      "lavaarena_tiaraflowerpetalshat",
+--      "lavaarena_eyecirclethat",
+--      "lavaarena_crowndamagerhat",
+--      "lavaarena_healinggarlandhat",
+--      "lavaarena_heavyblade",
+-- }
 
 
-SetSharedLootTable('maxwell_boss',
-    {
-        { armasdotesouro[math.random(1, 30)], 1.00 },
-        { armasdotesouro[math.random(1, 30)], 1.00 },
-        { armasdotesouro[math.random(1, 30)], 1.00 },
-        { armasdotesouro[math.random(1, 30)], 1.00 },
-        { armasdotesouro[math.random(1, 30)], 1.00 },
-        { armasdotesouro[math.random(1, 30)], 1.00 },
-        { armasdotesouro[math.random(1, 30)], 1.00 },
-        { 'armor_sanity', 1.00 },
-        { 'amulet', 1.00 },
-        { 'purpleamulet', 1.00 },
-        { 'orangestaf', 1.00 },
-        { 'telestaff', 1.00 },
-        { 'nightmarefuel', 1.00 },
-        { 'nightmarefuel', 1.00 },
-        { 'nightmarefuel', 1.00 },
-    })
+SetSharedLootTable('maxwell_boss', {
+    { 'armor_sanity',  1.00 },
+    { 'amulet',        1.00 },
+    { 'purpleamulet',  1.00 },
+    { 'orangestaff',   1.00 },
+    { 'telestaff',     1.00 },
+    { 'nightmarefuel', 1.00 },
+    { 'nightmarefuel', 1.00 },
+    { 'nightmarefuel', 1.00 },
+})
 
 local bosswelltalks = {
     "You will not win this time.",
@@ -139,14 +131,6 @@ local function MatarTropas(inst)
             minion:Remove()
         end
     end
-end
-
-local function StartTrackingPet(inst, minion)
-    inst.minions[minion] = true
-    inst.numminions = inst.numminions + 1
-    inst:ListenForEvent("onremove", inst._onstoptrackingpet, minion)
-    inst:ListenForEvent("death", inst._onstoptrackingpet, minion)
-    SpawnPrefab("shadow_despawn").Transform:SetPosition(minion.Transform:GetWorldPosition())
 end
 
 local function minionsaparecem(inst, attacker)

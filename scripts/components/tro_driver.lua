@@ -97,6 +97,7 @@ function Driver:SetBoat(boat)
     end
 
     self.boat = boat
+    self.inst.components.locomotor:SetAllowPlatformHopping(boat == nil) --上小船了就不能跳船了，不然划着靠近大船会跳上去
     if boat then
         -- boat.Physics:SetCollides(false) --需要吗？
         boat.Physics:Teleport(0, -0.2, 0)
