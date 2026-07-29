@@ -1,37 +1,91 @@
 table.insert(Assets, Asset("ANIM", "anim/oxygen_meter_player.zip")) --玩家氧气条
 
 local OxygenBadge = require "widgets/oxygenbadge"
-AddClassPostConstruct("widgets/statusdisplays", function(self)
+AddClassPostConstruct("widgets/statusdisplays", function(status)
     -- 氧气条
-    self.oxygen = self:AddChild(OxygenBadge(self.owner))
+    status.oxygen = status:AddChild(OxygenBadge(status.owner))
 
-    local badge_stomach = self.stomach:GetPosition()
-    local badge_brain = self.brain:GetPosition()
-    local badge_heart = self.heart:GetPosition()
-    self.oxygen:SetPosition(badge_brain.x + badge_stomach.x - badge_heart.x,
+    local badge_stomach = status.stomach:GetPosition()
+    local badge_brain = status.brain:GetPosition()
+    local badge_heart = status.heart:GetPosition()
+    status.oxygen:SetPosition(badge_brain.x + badge_stomach.x - badge_heart.x,
         badge_brain.y + badge_stomach.y - badge_heart.y, 0)
 
-    self.oxygen:SetPercent(self.owner.components.oxygen:GetPercent(), self.owner.components.oxygen.max)
+    local function GetOxygenReplica()
+        return status.owner.replica and status.owner.replica.oxygen or nil
+    end
+
+    do
+        local oxygen = GetOxygenReplica()
+        if oxygen ~= nil then
+            status.oxygen:SetPercent(oxygen:GetPercent(), oxygen:Max())
+        end
+    end
 
     local function OxygenDelta(data)
-        self.oxygen:SetPercent(self.owner.components.oxygen:GetPercent(), self.owner.components.oxygen.max)
+        local oxygen = GetOxygenReplica()
+        if oxygen == nil then
+            return
+        end
+        status.oxygen:SetPercent(oxygen:GetPercent(), oxygen:Max())
 
         if data.newpercent <= 0 then
-            self.oxygen:StartWarning()
+            status.oxygen:StartWarning()
         else
-            self.oxygen:StopWarning()
+            status.oxygen:StopWarning()
         end
 
         if not data.overtime then
             if data.newpercent > data.oldpercent then
-                self.oxygen:PulseGreen()
+                status.oxygen:PulseGreen()
                 TheFrontEnd:GetSound():PlaySound("citd/HUD/thirst_up")
             elseif data.newpercent < data.oldpercent then
                 TheFrontEnd:GetSound():PlaySound("citd/HUD/thirst_down")
-                self.oxygen:PulseRed()
+                status.oxygen:PulseRed()
             end
         end
     end
 
-    self.owner:ListenForEvent("oxygendelta", function(inst, data) OxygenDelta(data) end, self.owner)
+    status.inst:ListenForEvent("oxygendelta", function(_, data) OxygenDelta(data) end, status.owner)
+
+    --------------------------------------------------------------------------
+    -- 跟随 heart 的幽灵模式显隐（死亡隐藏 / 复活后按水下条件恢复）
+    --------------------------------------------------------------------------
+    Hooks.FnDecorator(status, "SetGhostMode", nil, function(retTab, self, ghostmode)
+        if self.oxygen == nil then
+            return
+        end
+
+        if ghostmode then
+            -- 与 heart:Hide() 对齐
+            self.oxygen:Hide()
+            self.oxygen:StopWarning()
+        else
+            -- 不盲目 Show：保留水下才显示的机制
+            self.oxygen:RefreshVisibility()
+        end
+        return retTab
+    end)
+
+    -- 数值常显/隐藏时与 heart.num 同步
+    Hooks.FnDecorator(status, "ShowStatusNumbers", nil, function(retTab, self)
+        if self.oxygen ~= nil and self.oxygen.num ~= nil then
+            self.oxygen.num:Show()
+        end
+        return retTab
+    end)
+
+    Hooks.FnDecorator(status, "HideStatusNumbers", nil, function(retTab, self)
+        if self.oxygen ~= nil and self.oxygen.num ~= nil then
+            self.oxygen.num:Hide()
+        end
+        return retTab
+    end)
+
+    -- 构造时若已是幽灵，立即隐藏
+    if status.isghostmode or (status.owner ~= nil and status.owner:HasTag("playerghost")) then
+        status.oxygen:Hide()
+    else
+        status.oxygen:RefreshVisibility()
+    end
 end)

@@ -20,7 +20,7 @@ local function MakeEntrance(name, portal_id)
 
         MakeObstaclePhysics(inst, 1)
         inst.Transform:SetScale(0.3, 0.3, 0.3)
-        inst.MiniMapEntity:SetIcon("cave_open2.png")
+        inst.MiniMapEntity:SetIcon("entrance_open.png")
 
         anim:SetBank("entrance_reef")
         anim:SetBuild("underwater_entrance")
