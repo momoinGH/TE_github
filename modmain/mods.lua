@@ -7,3 +7,9 @@ AddComponentPostInit("actionqueuer", function(self)
         self.AddActionList("noworkdelay", "HACK")
     end
 end)
+
+---覆盖Insight海上气泡提醒
+local st, whalehunter = pcall(require, "descriptors/whalehunter")
+if st and whalehunter ~= nil and whalehunter.OnServerLoad ~= nil then
+    whalehunter.OnServerLoad = function () end
+end

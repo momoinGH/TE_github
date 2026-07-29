@@ -1,3 +1,15 @@
+local function onmax(self, max)
+    self.inst.replica.oxygen:SetMax(max)
+end
+
+local function oncurrent(self, current)
+    self.inst.replica.oxygen:SetCurrent(current)
+end
+
+local function onrate(self, rate)
+    self.inst.replica.oxygen:SetRate(rate)
+end
+
 local Oxygen = Class(function(self, inst)
     self.inst = inst
 
@@ -7,8 +19,23 @@ local Oxygen = Class(function(self, inst)
     self.hurtrate = 5
     self.burning = true
 
+    -- self.oxygen_supply = nil -- 额外固定供氧（外部可写）
+    -- self.redirect = nil
+    -- self.ignore = nil
+    -- self.custom_rate_fn = nil
+
     self.inst:StartUpdatingComponent(self)
-end)
+end,
+nil,
+{
+    max = onmax,
+    current = oncurrent,
+    rate = onrate,
+})
+
+function Oxygen:OnRemoveFromEntity()
+    self.inst:StopUpdatingComponent(self)
+end
 
 function Oxygen:Pause()
     self.burning = false
@@ -19,12 +46,11 @@ function Oxygen:Resume()
 end
 
 function Oxygen:IsDrowning()
-    return (self.current <= 0)
+    return self.current <= 0
 end
 
 function Oxygen:OnSave()
-    return
-    {
+    return {
         oxigenio = self.current,
     }
 end
@@ -49,6 +75,9 @@ function Oxygen:GetDelta()
 end
 
 function Oxygen:GetPercent()
+    if self.max <= 0 then
+        return 0
+    end
     return self.current / self.max
 end
 
@@ -71,77 +100,107 @@ function Oxygen:GetRate()
     return self.rate
 end
 
+--- 遍历已装备物品，汇总 oxygensupplier 供氧与 oxygenapparatus 减耗
+local function GetEquipmentOxygenModifiers(inst)
+    local oxygen_supply = 0
+    local reduction_mult = 1
+
+    local inventory = inst.components.inventory
+    if inventory == nil then
+        return oxygen_supply, reduction_mult
+    end
+
+    for _, item in pairs(inventory.equipslots) do
+        if item ~= nil and item:IsValid() then
+            if item.components.oxygensupplier ~= nil then
+                oxygen_supply = oxygen_supply + item.components.oxygensupplier:GetSupplyRate(inst)
+            end
+            if item.components.oxygenapparatus ~= nil then
+                local pct = item.components.oxygenapparatus:GetReductionPercentage() or 0
+                reduction_mult = reduction_mult * (1 - pct)
+            end
+        end
+    end
+
+    return oxygen_supply, reduction_mult
+end
+
 function Oxygen:DoDelta(delta, overtime)
-    -- No oxygen loss while invincible or teleporting
-    if self.inst.components.health and self.inst.components.health.invincible == true or self.inst.is_teleporting == true then
+    -- 无敌 / 传送中不掉氧
+    if (self.inst.components.health ~= nil and self.inst.components.health:IsInvincible())
+        or self.inst.is_teleporting == true
+    then
         return
     end
 
-    local naagua = self.inst:IsInUnderWaterArea()
-    -- Oxygen loss only occurs while underwater
-    if not naagua then
+    -- 仅在水下消耗氧气；离水立即回满
+    if not self.inst:IsInUnderWaterArea() then
         self.rate = 0
-        self.current = self.max
+        if self.current ~= self.max then
+            local old = self.current
+            self.current = self.max
+            local oldpercent = old / self.max
+            local newpercent = 1
+            self.inst:PushEvent("oxygendelta", {
+                oldpercent = oldpercent,
+                newpercent = newpercent,
+                overtime = true,
+            })
+            if old <= 0 then
+                self.inst:PushEvent("stopdrowning")
+            end
+        end
         return
     end
 
-    -- No oxygen loss if you don't breathe
-    --	if self.inst:HasTag("batteryuser") or self.inst:HasTag("waterbreather") then
-    --		return
-    --	end
-
-    -- Hook for external shenanigans
     if self.redirect then
         self.redirect(self.inst, delta, overtime)
         return
     end
 
-
+    -- 气泡等外部临时回氧标记
     if self.inst:HasTag("respire") then
         delta = 10
         self.inst:RemoveTag("respire")
     end
 
-
-
-    if self.ignore then return end
-
-    -- Update values
-    local old = self.current
-
-    self.current = self.current + delta
-    if self.current < 0 then
-        self.current = 0
-    elseif self.current > self:GetMax() then
-        self.current = self:GetMax()
+    if self.ignore then
+        return
     end
+
+    local old = self.current
+    self.current = math.clamp(self.current + delta, 0, self.max)
 
     local oldpercent = old / self.max
     local newpercent = self.current / self.max
 
-    self.inst:PushEvent("oxygendelta", { oldpercent = oldpercent, newpercent = newpercent, overtime = overtime })
+    self.inst:PushEvent("oxygendelta", {
+        oldpercent = oldpercent,
+        newpercent = newpercent,
+        overtime = overtime,
+    })
 
-    -- Drowning!
     if old > 0 and self.current <= 0 then
         self.inst:PushEvent("startdrowning")
     elseif old <= 0 and self.current > 0 then
         self.inst:PushEvent("stopdrowning")
     end
 
-    -- Running out of oxygen!
-    if (newpercent > TUNING.OXYGEN_THRESH) ~= (oldpercent > TUNING.OXYGEN_THRESH) then
-        if newpercent <= TUNING.OXYGEN_THRESH then
-            self.inst:PushEvent("runningoutofoxygen")
-        end
+    if (newpercent > TUNING.OXYGEN_THRESH) ~= (oldpercent > TUNING.OXYGEN_THRESH)
+        and newpercent <= TUNING.OXYGEN_THRESH
+    then
+        self.inst:PushEvent("runningoutofoxygen")
     end
 end
 
 function Oxygen:OnUpdate(dt)
-    -- Recalculate
     self:Recalc(dt)
 
-    -- Drowning!
-    if self:IsDrowning() and self.inst.components.health and not self.inst.components.health:IsDead() and self.burning then
+    if self:IsDrowning()
+        and self.burning
+        and self.inst.components.health ~= nil
+        and not self.inst.components.health:IsDead()
+    then
         self.inst.components.health:DoDelta(-self.hurtrate * dt, true, "drowning")
     end
 end
@@ -151,57 +210,40 @@ function Oxygen:Recalc(dt)
         return
     end
 
+    -- 不在水下时由 DoDelta 处理回满，这里直接走一遍即可
+    if not self.inst:IsInUnderWaterArea() then
+        self:DoDelta(0, true)
+        return
+    end
+
     local loss_delta = TUNING.OXYGEN_LOSS_RATE
-    local oxygen_supply = self.oxygen_supply or 0
-
-    -- Oxygen suppliers items
-    local equipamento3 = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-    local equipamento4 = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.NECK)
-    local equipamento5 = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-
-    if equipamento3 and equipamento3.prefab == "pearl_amulet" then oxygen_supply = oxygen_supply + 8 end
-    if equipamento4 and equipamento4.prefab == "pearl_amulet" then oxygen_supply = oxygen_supply + 8 end
-    if equipamento5 and equipamento5.prefab == "pearl_amulet" then oxygen_supply = oxygen_supply + 8 end
-
+    local oxygen_supply, reduction_mult = GetEquipmentOxygenModifiers(self.inst)
+    oxygen_supply = oxygen_supply + (self.oxygen_supply or 0)
 
     local supply_delta = oxygen_supply * TUNING.OXYGEN_AIRINESS
 
-    -- Oxygen supplying / removing environmental objects / monsters
+    -- 环境氧气光环
     local aura_delta = 0
     local x, y, z = self.inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, TUNING.OXYGEN_EFFECT_RANGE, { "oxygen_aura" })
-    for k, v in pairs(ents) do
-        if v.components.oxygenaura and v ~= self.inst then
+    for _, v in ipairs(ents) do
+        if v ~= self.inst and v.components.oxygenaura ~= nil then
             local distsq = self.inst:GetDistanceSqToInst(v)
             local aura_val = v.components.oxygenaura:GetAura(self.inst) / math.max(1, distsq)
             aura_delta = aura_delta + aura_val
         end
     end
 
-    -- Final rate of oxygen gain / loss
-    self.rate = (supply_delta + loss_delta + aura_delta)
+    self.rate = supply_delta + loss_delta + aura_delta
 
-    -- Custom rate adjustment
     if self.custom_rate_fn then
         self.rate = self.rate + self.custom_rate_fn(self.inst)
     end
 
-    -- Reduce rate loss if wearing oxygen apparatus
+    -- 佩戴 oxygenapparatus 时降低耗氧（多件乘法叠加）
     if self.rate < 0 then
-        local equipamento = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-        local equipamento2 = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-
-
-        if equipamento and equipamento.prefab == "hat_submarine" then self.rate = self.rate * (1 - 0.95) end
-        if equipamento and equipamento.prefab == "snorkel" then self.rate = self.rate * (1 - 0.5) end
-        if equipamento2 and equipamento2:HasTag("diving_suit") then self.rate = self.rate * (1 - 0.5) end
+        self.rate = self.rate * reduction_mult
     end
-
-    -- No oxygen loss if you don't breathe
-    --	if self.inst:HasTag("batteryuser") or self.inst:HasTag("waterbreather") then
-    --		self.rate = 0
-    --		return
-    --	end
 
     self:DoDelta(self.rate * dt, true)
 end

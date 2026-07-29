@@ -1,7 +1,7 @@
 modimport "modmain/underwater/components/burnable.lua"
 
-
-
+-- 注册 oxygen 主客机分离（component + replica）
+AddReplicableComponent("oxygen")
 
 AddPrefabPostInitAny(function(inst)
     if not TheWorld.ismastersim then return end
@@ -12,29 +12,33 @@ AddPrefabPostInitAny(function(inst)
 end)
 
 AddPlayerPostInit(function(inst)
-    inst:AddComponent("oxygen")
-    if TUNING.PLAYER_OXYGEN[string.upper(inst.prefab)] then
-        inst.components.oxygen.max = TUNING.PLAYER_OXYGEN[string.upper(inst.prefab)]
-    end
-
+    -- HUD 相关事件：主客机都需要监听（客机由 replica dirty 推送）
     inst:ListenForEvent("startdrowning", function(inst, data)
         if inst.HUD then
             inst.HUD.bloodover:UpdateState()
         end
-    end, inst)
+    end)
 
     inst:ListenForEvent("stopdrowning", function(inst, data)
         if inst.HUD then
             inst.HUD.bloodover:UpdateState()
         end
-    end, inst)
+    end)
 
     if not TheWorld.ismastersim then return end
+
+    inst:AddComponent("oxygen")
+    local max_oxygen = TUNING.PLAYER_OXYGEN[string.upper(inst.prefab)]
+    if max_oxygen then
+        inst.components.oxygen:SetMax(max_oxygen)
+    end
 
     inst:AddComponent("und_bubbleblower") ------- Blow bubble underwater to players
 
     inst:ListenForEvent("runningoutofoxygen", function(inst, data)
-        inst.components.talker:Say("Low Oxygen")
+        if inst.components.talker then
+            inst.components.talker:Say("Low Oxygen")
+        end
     end)
 end)
 
