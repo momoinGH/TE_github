@@ -47,17 +47,18 @@ local function StartTravelSound(inst, doer)
 end
 
 local function onclose(inst)
-    local invader = GetClosestInstWithTag("quagmire_portal_activefx", inst, 3)
-    if invader then
-        invader:Remove()
+    if inst.openfx ~= nil then
+        inst.openfx.AnimState:PushAnimation("portal_pst", false)
+        inst.openfx:ListenForEvent("animqueueover", inst.openfx.Remove)
+        inst.openfx = nil
     end
 end
 
 local function onopen(inst)
-    local invader = GetClosestInstWithTag("quagmire_portal_activefx", inst, 3)
-    if not invader then
-        SpawnAt("quagmire_portal_activefx", inst)
-    end
+    onclose(inst)
+    inst.openfx = SpawnAt("quagmire_portal_activefx", inst)
+    inst.openfx:AddTag("NOCLICK")
+    inst.openfx.Transform:SetPosition(inst.Transform:GetWorldPosition())
 end
 
 return {

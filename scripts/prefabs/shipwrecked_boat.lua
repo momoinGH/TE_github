@@ -88,7 +88,7 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
         inst.entity:AddSoundEmitter()
         if data.minimap then
             inst.entity:AddMiniMapEntity()
-            inst.MiniMapEntity:SetIcon("armouredboat.png")
+            inst.MiniMapEntity:SetIcon(data.minimap)
             inst.MiniMapEntity:SetPriority(-1)
         end
         inst.entity:AddNetwork()
@@ -283,7 +283,7 @@ MakeBoat("encrustedboat", {
 ----------------------------------------------------------------------------------------------------
 
 MakeBoat("corkboat", {
-    minimap = "corkboat.png",
+    minimap = "corkboat.png", -- TODO: 缺少minimap icon
     bank = "rowboat",
     build = "coracle_boat_build",
     loots = {
