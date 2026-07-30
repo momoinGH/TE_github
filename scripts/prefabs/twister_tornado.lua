@@ -6,12 +6,6 @@ local assets =
     Asset("ANIM", "anim/twister_seal.zip"),
 }
 
-local function getspawnlocation(inst, target)
-    local x1, y1, z1 = inst.Transform:GetWorldPosition()
-    local x2, y2, z2 = target.Transform:GetWorldPosition()
-    return x1 + .15 * (x2 - x1), 0, z1 + .15 * (z2 - z1)
-end
-
 local function ontornadolifetime(inst)
     inst.task = nil
     inst.Physics:Stop()
@@ -69,10 +63,6 @@ local function tornado_fn()
     end
 
     inst:AddComponent("knownlocations")
-
-    --inst:AddComponent("propagator")
-    --inst.components.propagator.damagerange = 3
-    --inst.components.propagator.damages = true
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = TUNING.TORNADO_WALK_SPEED * 0.2

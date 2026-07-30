@@ -5,11 +5,11 @@ PrefabFiles = {
     "wallyintro", --船只碎片
 
 
-    "twister",               --豹卷风
-    "firetwister_seal",      --小火豹
-    "firetwister",           --火豹卷
-    "twister_tornadodefogo", --"火卷风"
-
+    "twister",                  --豹卷风
+    "firetwister_seal",         --小火豹
+    "firetwister",              --火豹卷
+    "twister_tornado",          --龙卷风投射/技能实体
+    "twister_tornadodefogo",    --"火卷风"
 
     "jellyfish",                --水母
     "jellyfish_spawner",        --水母生成器
@@ -17,7 +17,6 @@ PrefabFiles = {
     "rainbowjellyfish_planted", --彩虹水母
     "rainbowjellyfish_spawner", --彩虹水母生成器
     "jellyfish_planted",
-
 
     "glass",                  --玻璃
     "ligamundosw",            --海洋之椅
