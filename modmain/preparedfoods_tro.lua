@@ -1,3 +1,4 @@
+---[[#1: Preparedfoods injection]]
 local tabName = { "ham", "sw", "creeps", "frost", "windy" }
 local overridebuild = {
     [tabName[1]] = "cook_pot_food_ham",
@@ -763,24 +764,149 @@ local foods_tro = {
 
 }
 
-for tabIdx, foodTab in pairs(foods_tro) do
-    for foodName, foodDef in pairs(foodTab) do
-        foodDef.name = foodName
-        foodDef.basename = foodName
-        foodDef.weight = foodDef.weight or 1
-        foodDef.priority = foodDef.priority or 0
-        foodDef.foodtype = foodDef.foodtype or FOODTYPE.MEAT -- for creep
-        foodDef.overridebuild = overridebuild[tabIdx]
-        foodDef.floater = foodDef.floater or { "small", 0.05, 0.7 }
-        foodDef.mod = true
-        -- foodDef.cookbook_tex = foodName..".tex"
-        -- foodDef.cookbook_atlas = cookbook_atlas[tabIdx] or ("images/inventoryimages/" .. foodName .. ".xml")
-        -- foodDef.atlasname = foodDef.atlasname or inventoryitem_atlas[tabIdx] or "images/inventoryimages/" .. foodName ..
-        --                         ".xml"
-        if foodDef.oneatenfn then
-            foodDef.oneat_desc = STRINGS.UI.COOKBOOK["FOOD_EFFECTS_" .. string.upper(foodName)] --功能描述
+local function merge(dest, orig, force)
+    dest = dest or {}
+    for k, v in pairs(orig) do
+        if type(v) == "table" and type(dest[k]) == "table" then
+            merge(dest[k], v, force)
+        else
+            if force then
+                dest[k] = v
+            else
+                dest[k] = dest[k] or v
+            end
+        end
+    end
+    return dest
+end
+
+require "spicedfoods"
+local function oneaten_garlic(inst, eater)
+    eater:AddDebuff("buff_playerabsorption", "buff_playerabsorption")
+end
+
+local function oneaten_sugar(inst, eater)
+    eater:AddDebuff("buff_workeffectiveness", "buff_workeffectiveness")
+end
+
+local function oneaten_chili(inst, eater)
+    eater:AddDebuff("buff_attack", "buff_attack")
+end
+
+local SPICES =
+{
+    SPICE_GARLIC = { oneatenfn = oneaten_garlic, prefabs = { "buff_playerabsorption" } },
+    SPICE_SUGAR  = { oneatenfn = oneaten_sugar, prefabs = { "buff_workeffectiveness" } },
+    SPICE_CHILI  = { oneatenfn = oneaten_chili, prefabs = { "buff_attack" } },
+    SPICE_SALT   = {},
+}
+local spicefoods = {}
+
+for tpc, list in pairs(foods_tro) do
+    for k, v in pairs(list) do
+        v.name = k
+        v.weight = v.weight or 1
+        v.priority = v.priority or 0
+        v.perishtime = v.perishtime or TUNING.PERISH_PRESERVED
+        v.cooktime = v.cooktime or 1
+        v.potlevel = v.potlevel or "med"
+        v.overridebuild = v.overridebuild or overridebuild[tpc]
+        --table.insert(Assets, Asset("ANIM", "anim/" .. v.overridebuild .. ".zip"))
+        --v.cookbook_atlas = v.cookbook_atlas or ("images/cookbook_" .. k .. ".xml")
+        --table.insert(Assets, Asset("ATLAS", v.cookbook_atlas))
+        --v.cookbook_atlas = softresolvefilepath(v.cookbook_atlas)
+        v.floater = v.floater or { "small", .05, .7 }
+        v.cookbook_category = "mod"
+        if v.masterfood == nil then
+            AddCookerRecipe("cookpot", v)
+            AddCookerRecipe("archive_cookpot", v)
+        end
+        AddCookerRecipe("portablecookpot", v)
+        if v.postfn then
+            AddPrefabPostInit(k, v.postfn)
+            if not v.nospice then
+                for spice in pairs(SPICES) do
+                    AddPrefabPostInit(k .. "_" .. string.lower(spice), v.postfn)
+                end
+            end
+        end
+        if not v.nospice then
+            spicefoods[k] = v
+        end
+        if v.oneatenfn then
+            v.oneat_desc = STRINGS.UI.COOKBOOK["FOOD_EFFECTS_" .. string.upper(k)] --功能描述
         end
     end
 end
 
-return foods_tro
+GenerateSpicedFoods(spicefoods)
+
+local foods = require "preparedfoods"
+for _, list in pairs(foods_tro) do
+    merge(foods, list)
+end
+
+---[[#2: Recipe injection]]
+-- if foods.butterflymuffin then
+--     local posttest = foods.butterflymuffin.test
+--     foods.butterflymuffin.test = function(cooker, names, tags)
+--         return names.butterfly_tropical_wings and not tags.meat and tags.veggie or posttest(cooker, names, tags)
+--     end
+-- end
+if foods.californiaroll then
+    local posttest = foods.californiaroll.test
+    foods.californiaroll.test = function(cooker, names, tags)
+        return ((names.kelp or 0) + (names.kelp_cooked or 0) + (names.kelp_dried or 0) + (names.seaweed or 0)) == 2 and
+            (tags.fish and tags.fish >= 1) or posttest(cooker, names, tags)
+    end
+end
+-- if foods.lobsterbisque then
+--     local posttest = foods.lobsterbisque.test
+--     foods.lobsterbisque.test = function(cooker, names, tags)
+--         return names.lobster_land and tags.frozen or posttest(cooker, names, tags)
+--     end
+-- end
+-- if foods.lobsterdinner then
+--     local posttest = foods.lobsterdinner.test
+--     foods.lobsterdinner.test = function(cooker, names, tags)
+--         return
+--             names.lobster_land and names.butter and (tags.meat and tags.meat <= 1) and (tags.fish and tags.fish <= 1) and
+--                 not tags.frozen or posttest(cooker, names, tags)
+--     end
+-- end
+
+---[[#3 Add ingredients]]
+AddIngredientValues({ "butterfly_tropical_wings", }, { decoration = 2 }, true, false)
+AddIngredientValues({ "crab", "limpets", "mussel", }, { fish = 0.5 }, true, false)
+AddIngredientValues({ "coconut_cooked", "coconut_halved", }, { fruit = 1, fat = 1 }, true, false)
+AddIngredientValues({ "coffeebeans", }, { fruit = .5 }, true, false)
+AddIngredientValues({ "coffeebeans_cooked", }, { fruit = 1 }, true, false)
+AddIngredientValues(
+    { "aloe", "asparagus", "foliage", "gooseberry", "lotus_flower", "quagmire_spotspice_sprig", "radish", "seacucumber",
+        "sweet_potato", "turnip", }, { veggie = 1 }, true, false)
+AddIngredientValues({ "seaweed", }, { veggie = 1 }, true, true)
+AddIngredientValues(
+    { "coi", "dogfish_dead", "fish2", "fish3", "fish4", "fish5", "fish6", "fish7", "oceanfish_small_61_inv",
+        "oceanfish_small_71_inv", "oceanfish_small_81_inv", "roe_cooked", "roe", "salmon", "shark_fin", },
+    { meat = 0.5, fish = 1 }, true, false)
+AddIngredientValues({ "dead_swordfish", }, { fish = 1.5 }, true, false)
+AddIngredientValues({ "quagmire_crabmeat", }, { fish = 0.5, crab = 1 }, true, false)
+AddIngredientValues({ "lobster_land", }, { meat = 1.0, fish = 1.0 }, false, false)
+AddIngredientValues({ "fish_dogfish", }, { fish = 1 }, true, false)
+AddIngredientValues({ "doydoyegg", }, { egg = 1 }, true, false)
+AddIngredientValues({ "dorsalfin", }, { inedible = 1 }, true, false)
+AddIngredientValues({ "jellyfish", "jellyfish_dead", "jellyjerky", }, { fish = 1, jellyfish = 1, monster = 1 }, true,
+    false)
+AddIngredientValues({ "snowitem", }, { meat = 0.5, frozen = 1 }, true, false)
+AddIngredientValues({ "quagmire_sap", }, { sweetener = 1 }, true, false)
+AddIngredientValues({ "seataro", }, { veggie = 1, frozen = 1 }, true, false)
+AddIngredientValues({ "blueberries", }, { fruit = 0.5, frozen = 0.25 }, true, false)
+AddIngredientValues({ "blueberries_cooked", }, { fruit = 0.75 }, true, false)
+AddIngredientValues({ "quagmire_mushrooms", }, { mushroom = 1, veggie = 0.5 }, true, false)
+AddIngredientValues({ "jellybug", "slugbug", }, { bug = 1 }, true, false)
+AddIngredientValues({ "cutnettle", }, { antihistamine = 1 }, true, false)
+AddIngredientValues({ "weevole_carapace", }, { inedible = 1 }, true, false)
+AddIngredientValues({ "piko_orange", }, { filter = 1 }, true, false)
+AddIngredientValues({ "snake_bone", }, { bone = 1 }, true, false)
+AddIngredientValues({ "fennel", "yellow_cap", "yellow_cooked", }, { veggie = 0.5 }, true, false)
+AddIngredientValues({ "quagmire_smallmeat", }, { meat = 0.5, smallmeat = 1 }, true, false) -- "smallmeat" for quagmire, I think

@@ -208,7 +208,6 @@ PrefabFiles = {
     "pog",                --波格狸
     "poisonmistparticle", --云雾特效
     "porklandintro",      --开局破烂的物品
-    "preparedfoods_tro",  --食物
     "coffeebeans",        --咖啡豆
     "coconut",            --椰子
 
