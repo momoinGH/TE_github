@@ -7,6 +7,7 @@ PrefabFiles = {
 
     "twister",                  --豹卷风
     "firetwister_seal",         --小火豹
+    "twister_seal",             --小海豹
     "firetwister",              --火豹卷
     "twister_tornado",          --龙卷风投射/技能实体
     "twister_tornadodefogo",    --"火卷风"

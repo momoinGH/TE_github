@@ -237,7 +237,7 @@ local states =
             --print("data.afflicter",tostring(data.afflicter),type(data.afflicter))
             -- KAJ: I'm not happy with this, I'd rather set this somewhere else
             inst.causeofdeath = data and data.afflicter or nil
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()), data and data.afflicter or nil)
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
     },
