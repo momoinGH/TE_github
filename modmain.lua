@@ -96,6 +96,7 @@ modimport("modmain/actions")                     --action相关
 modimport("modmain/actions_post")                --修改原版action
 modimport("modmain/componentactions")            --componentactions相关
 
+modimport("modmain/preparedfoods_tro")           --注入式生成料理
 
 troimportmodulefile("tuning") --定义的常量
 
