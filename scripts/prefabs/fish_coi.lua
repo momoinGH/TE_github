@@ -83,7 +83,7 @@ local function fn(Sim)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "fish_fillet" })
-    inst.components.lootdropper:AddChanceLoot("salt", 0.2)
+    inst.components.lootdropper:AddChanceLoot("fishmeat", 0.2)
 
     inst:AddComponent("knownlocations")
 

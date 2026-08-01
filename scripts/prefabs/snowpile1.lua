@@ -39,12 +39,11 @@ end
 
 local function ondug(inst, worker)
     inst.SoundEmitter:PlaySound("dontstarve/common/food_rot")
-    local pt = Point(inst.Transform:GetWorldPosition())
-
 
     if worker:HasTag("player") then
         for i = 1, inst.components.pickable.cycles_left do
             local loots = inst.components.lootdropper:GenerateLoot()
+            local pt = inst:GetPosition()
             inst.components.lootdropper:DropLoot(pt, loots)
         end
     else
@@ -93,7 +92,7 @@ local function onpickedfn(inst, picker)
 
     inst.SoundEmitter:PlaySound("dontstarve/common/food_rot")
     local loots = inst.components.lootdropper:GenerateLoot()
-    local pt = Point(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     inst.components.lootdropper:DropLoot(pt, loots)
 
     if inst.components.pickable.cycles_left <= 0 then

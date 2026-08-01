@@ -40,11 +40,11 @@ end
 
 local function ondug(inst, worker)
     inst.SoundEmitter:PlaySound("dontstarve/common/food_rot")
-    local pt = Point(inst.Transform:GetWorldPosition())
 
     if worker:HasTag("player") then
         for i = 1, inst.components.pickable.cycles_left do
             local loots = inst.components.lootdropper:GenerateLoot()
+            local pt = inst:GetPosition()
             inst.components.lootdropper:DropLoot(pt, loots)
         end
     else
@@ -82,7 +82,7 @@ local function PlayStageAnim(inst, anim)
     elseif inst.components.pickable.cycles_left == 1 then
         inst.AnimState:PlayAnimation("dig_med", false)
         inst.AnimState:PushAnimation("idle_low")
-	else
+    else
         inst.AnimState:PlayAnimation("dig_low", false)
         --inst.AnimState:PushAnimation("idle_dead")
     end
@@ -93,7 +93,7 @@ local function onpickedfn(inst, picker)
 
     inst.SoundEmitter:PlaySound("dontstarve/common/food_rot")
     local loots = inst.components.lootdropper:GenerateLoot()
-    local pt = Point(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     inst.components.lootdropper:DropLoot(pt, loots)
 
     if picker and picker.components.sanity then
@@ -205,8 +205,8 @@ end
 
 local function fall(inst)
     inst.AnimState:PlayAnimation("fall")
-    inst:DoTaskInTime(10/30,function() inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/roc/dung_pile") end)
-    inst:DoTaskInTime(15/30,function()  TheCamera:Shake("VERTICAL", 0.3, 0.02, 0.5)  end)
+    inst:DoTaskInTime(10 / 30, function() inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/roc/dung_pile") end)
+    inst:DoTaskInTime(15 / 30, function() TheCamera:Shake("VERTICAL", 0.3, 0.02, 0.5) end)
 end
 
 local function fn(Sim)

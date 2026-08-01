@@ -59,7 +59,7 @@ local function onpickedfn(inst, picker)
     end
     inst.SoundEmitter:PlaySound("dontstarve/common/food_rot")
     local loots = inst.components.lootdropper:GenerateLoot()
-    local pt = Point(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     inst.components.lootdropper:DropLoot(pt, loots)
     update(inst)
 end
@@ -67,7 +67,7 @@ end
 local function onpickedfnfree(inst, picker)
     inst.SoundEmitter:PlaySound("dontstarve/common/food_rot")
     local loots = inst.components.lootdropper:GenerateLoot()
-    local pt = Point(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     inst.components.lootdropper:DropLoot(pt, loots)
     update(inst)
 end
