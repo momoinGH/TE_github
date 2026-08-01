@@ -99,7 +99,7 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
 
         inst:AddTag("shipwrecked_boat")
         inst:AddTag("ignorewalkableplatforms")
-        inst:AddTag("boat")
+        -- inst:AddTag("boat") --这个标签一般和walkableplatform组件绑定，不能加这个标签
         inst:AddTag("companion") --玩家不要攻击！
 
         --TODO 层级有点儿问题，优先级是按照相机距离排序的，船和物品重叠的时候，有一半是物品在前，一半是物品在后，
