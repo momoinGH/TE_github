@@ -1,7 +1,11 @@
 local assets =
 {
-    Asset("ANIM", "anim/pig_house_old.zip"),          -- bank
-    Asset("ANIM", "anim/quagmire_werepig_house.zip"), -- build
+    -- 旧的猪人房动画，给暴食使用，现在的pig_house缺了一些暴食动画，quagmire_houses是从暴食模组拿来的动画文件
+    -- pig_house_old.zip这个文件在苹果电脑上加载游戏会崩溃
+    -- Material file failed to load: ../mods/workshop-1505270912/anim/pig_house_old.zip:pig_house_old's atlas-0.tex
+    Asset("ANIM", "anim/quagmire_houses.zip"),
+    -- Asset("ANIM", "anim/pig_house_old.zip"),
+    -- Asset("ANIM", "anim/quagmire_werepig_house.zip"), -- build
     Asset("SOUND", "sound/pig.fsb"),
 }
 
@@ -15,14 +19,7 @@ local prefabs =
     "rocks",
     "pigskin",
 }
---[[
-local house_loot =
-{
-    "boards",
-    "rocks",
-    "pigskin",
-}
-]]
+
 local unbuilt_loot =
 {
     "boards",
@@ -38,85 +35,7 @@ local rubble_loot =
     "rocks",
     --"pigskin",
 }
---[[
-local function getstatus(inst)
-    return (inst:HasTag("burnt") and "BURNT")
-        or (inst.lightson and
-            inst.components.spawner ~= nil and
-            inst.components.spawner:IsOccupied() and
-            "FULL")
-        or nil
-end
 
-local function onwere(child)
-    if child.parent ~= nil and not child.parent:HasTag("burnt") then
-        child.parent.SoundEmitter:KillSound("pigsound")
-        child.parent.SoundEmitter:PlaySound("dontstarve/pig/werepig_in_hut", "pigsound")
-    end
-end
-
-local function onnormal(child)
-    if child.parent ~= nil and not child.parent:HasTag("burnt") then
-        child.parent.SoundEmitter:KillSound("pigsound")
-        child.parent.SoundEmitter:PlaySound("dontstarve/pig/pig_in_hut", "pigsound")
-    end
-end
-
-local function onoccupieddoortask(inst)
-    inst.doortask = nil
-    if not inst.components.playerprox:IsPlayerClose() then
-        LightsOn(inst)
-    end
-end
-
-local function onoccupied(inst, child)
-    if not inst:HasTag("burnt") then
-        inst.SoundEmitter:PlaySound("dontstarve/pig/pig_in_hut", "pigsound")
-        inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
-
-        if inst.doortask ~= nil then
-            inst.doortask:Cancel()
-        end
-        inst.doortask = inst:DoTaskInTime(1)
-        if child ~= nil then
-            inst:ListenForEvent("transformwere", onwere, child)
-            inst:ListenForEvent("transformnormal", onnormal, child)
-        end
-    end
-end
-
-local function onvacate(inst, child)
-    if not inst:HasTag("burnt") then
-        if inst.doortask ~= nil then
-            inst.doortask:Cancel()
-            inst.doortask = nil
-        end
-        inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
-        inst.SoundEmitter:KillSound("pigsound")
-
-        if child ~= nil then
-            inst:RemoveEventCallback("transformwere", onwere, child)
-            inst:RemoveEventCallback("transformnormal", onnormal, child)
-            if child.components.werebeast ~= nil then
-                child.components.werebeast:ResetTriggers()
-            end
-
-            local child_platform = TheWorld.Map:GetPlatformAtPoint(child.Transform:GetWorldPosition())
-            if (child_platform == nil and not child:IsOnValidGround()) then
-                local fx = SpawnPrefab("splash_sink")
-                fx.Transform:SetPosition(child.Transform:GetWorldPosition())
-
-                child:Remove()
-            else
-                if child.components.health ~= nil then
-                    child.components.health:SetPercent(1)
-                end
-			    child:PushEvent("onvacatehome")
-            end
-        end
-    end
-end
-]]
 local function onhammered(inst, worker)
     if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then
         inst.components.burnable:Extinguish()
@@ -246,8 +165,8 @@ local function fn_house()
 
     inst.MiniMapEntity:SetIcon("quagmire_swampig_house.png")
 
-    inst.AnimState:SetBank("pig_house_old")
-    inst.AnimState:SetBuild("quagmire_werepig_house")
+    inst.AnimState:SetBank("quagmire_houses")
+    inst.AnimState:SetBuild("quagmire_houses")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("structure")
@@ -293,8 +212,6 @@ local function fn_house()
 
     inst:AddComponent("inspectable")
 
-    --inst.components.inspectable.getstatus = getstatus
-
     MakeSnowCovered(inst)
 
     inst:ListenForEvent("onbuilt", onbuilt)
@@ -306,13 +223,6 @@ local function fn_house()
 
     return inst
 end
---[[
-local function queimou(inst)
-    local fx = SpawnPrefab("collapse_big")
-    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    fx:SetMaterial("wood")
-    inst:Remove()
-	end]]
 
 local function fn_unbuilt()
     local inst = CreateEntity()
@@ -327,9 +237,9 @@ local function fn_unbuilt()
 
     inst.MiniMapEntity:SetIcon("quagmire_swampig_house_unbuilt.png")
 
-    inst.AnimState:SetBank("pig_house_old")
-    inst.AnimState:SetBuild("quagmire_werepig_house")
-    inst.AnimState:PlayAnimation("unbuilt")
+    inst.AnimState:SetBank("quagmire_houses")
+    inst.AnimState:SetBuild("quagmire_houses")
+    inst.AnimState:PlayAnimation("rubble")
 
     inst:AddTag("structure")
 
@@ -345,25 +255,17 @@ local function fn_unbuilt()
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(3)
     inst.components.workable:SetOnFinishCallback(onhammered)
-    --inst.components.workable:SetOnWorkCallback(onhit1)
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_SMALL)
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
-    --inst:WatchWorldState("isday", OnIsDay)
-
     MakeMediumBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeLargePropagator(inst)
-    --inst:ListenForEvent("onignite", onignite)
-    --inst:ListenForEvent("burntup", queimou)
 
     inst:AddComponent("inspectable")
 
     MakeSnowCovered(inst)
-
-    --inst.OnSave = onsave
-    --OnLoad = onload
 
     return inst
 end
@@ -381,8 +283,8 @@ local function fn_rubble()
 
     inst.MiniMapEntity:SetIcon("rubble.png")
 
-    inst.AnimState:SetBank("pig_house_old")
-    inst.AnimState:SetBuild("quagmire_werepig_house")
+    inst.AnimState:SetBank("quagmire_houses")
+    inst.AnimState:SetBuild("quagmire_houses")
     inst.AnimState:PlayAnimation("rubble")
 
     inst:AddTag("structure")
@@ -399,25 +301,17 @@ local function fn_rubble()
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(2)
     inst.components.workable:SetOnFinishCallback(onhammered)
-    --inst.components.workable:SetOnWorkCallback(onhit1)
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_SMALL)
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
-    --inst:WatchWorldState("isday", OnIsDay)
-
     MakeMediumBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeLargePropagator(inst)
-    --inst:ListenForEvent("onignite", onignite)
-    --inst:ListenForEvent("burntup", queimou)
 
     inst:AddComponent("inspectable")
 
     MakeSnowCovered(inst)
-
-    --inst.OnSave = onsave
-    --OnLoad = onload
 
     return inst
 end
