@@ -20,18 +20,19 @@ AddComponentPostInit("locomotor", function(self)
 end)
 
 ----------------------------------------------------------------------------------------------------
--- 刷帧刷新倍率
-local function UpdateSpeedMult(inst)
+-- 飓风移速单独高频刷新：服务端计算后由 locomotor 的网络字段同步给客户端。
+local function UpdateHurricaneSpeedMult(inst)
     if inst:HasTag("playerghost") then
         inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_wind")
-        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "ondamarinha")
-        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_flood")
         return
     end
 
-    -- efeito dos ventos风效应
-    if TheWorld.components.tro_hurricane and TheWorld.components.tro_hurricane:IsHurricaneStorm() then
-        local windangle = TheWorld.components.tro_hurricane:GetWindAngle(inst)
+    local hurricane = TheWorld.components.tro_hurricane
+    if hurricane and hurricane:IsEntityInHurricaneRange(inst) then
+        local windangle = hurricane:GetWindAngle(inst)
+        local windfactor = hurricane.GetHurricaneWindFactor
+            and hurricane:GetHurricaneWindFactor()
+            or math.clamp(hurricane:GetHurricaneWindSpeed() or 0, 0, 1)
         local windproofness = 1.0
         local velocidadedovento = 1.5
 
@@ -45,11 +46,29 @@ local function UpdateSpeedMult(inst)
                 windproofness = 0
             end
         end
-        local windfactor = 0.4 * windproofness * velocidadedovento * math.cos(windangle * DEGREES) + 1.0
-        local wind_speed = math.max(0.1, windfactor)
-        inst.components.locomotor:SetExternalSpeedMultiplier(inst, "sw_wind", wind_speed)
+        if windfactor > 0 and windproofness > 0 then
+            -- 玩家朝向与风向同向时顺风加速，反向时逆风减速。
+            local relativeangle = inst.Transform:GetRotation() - windangle
+            local speedfactor = 0.4 * windproofness * velocidadedovento
+                * windfactor * math.cos(relativeangle * DEGREES)
+                + 1.0
+            inst.components.locomotor:SetExternalSpeedMultiplier(
+                inst, "sw_wind", math.max(0.1, speedfactor))
+        else
+            inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_wind")
+        end
     else
         inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_wind")
+    end
+end
+
+----------------------------------------------------------------------------------------------------
+-- 刷帧刷新其他环境倍率
+local function UpdateSpeedMult(inst)
+    if inst:HasTag("playerghost") then
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "ondamarinha")
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_flood")
+        return
     end
 
     ----------------------efeito das correntes marinhas海流的影响----------------------------------
@@ -78,5 +97,8 @@ AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
     inst.components.locomotor:SetFasterOnGroundTile(WORLD_TILES.COBBLEROAD, true) --石板路为加速地皮
 
+    -- 这里用刷帧方式更新玩家移速倍率是为了方便服务端计算移速倍率，然后同步给客户端，防止延迟补偿下主客机速度不一致的情况
+    -- 飓风范围和风向需要尽快更新，避免玩家刚进出范围时仍沿用旧倍率。
     inst:DoPeriodicTask(FRAMES * 4, UpdateSpeedMult)
+    inst:DoPeriodicTask(0, UpdateHurricaneSpeedMult)
 end)

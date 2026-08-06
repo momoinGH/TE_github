@@ -30,6 +30,9 @@ local TUNING_HURRICANE = {
     HURRICANE_PERCENT_WIND_END = 0.8,                     -- 风在飓风进度80%时结束
 }
 
+-- 局部飓风的影响半径，需要和下面吹动物品的搜索半径保持一致
+local HURRICANE_TARGET_RADIUS = 30
+
 
 -- 工具函数
 local function GetRandomMinMax(min, max)
@@ -74,9 +77,40 @@ function Hurricane:GetHurricaneWindSpeed()
     return self.hurricane_gust_speed
 end
 
+-- 当前阵风对移动速度的影响因子。
+-- 阵风等待或渐减到结束时为0，此时不应产生顺逆风减速/加速。
+function Hurricane:GetHurricaneWindFactor()
+    return math.clamp(self.hurricane_gust_speed or 0, 0, 1)
+end
+
 -- 是否处于飓风中
 function Hurricane:IsHurricaneStorm()
     return self.hurricane
+end
+
+-- 判断单位当前是否处于飓风影响范围内。
+-- 飓风季只影响海难区域中的玩家；豹卷风等指定目标产生的临时飓风，
+-- 则影响目标周围一定范围内的单位。
+function Hurricane:IsEntityInHurricaneRange(ent)
+    if not self.hurricane or not ent or not ent:IsValid() then
+        return false
+    end
+
+    if ent:HasTag("player") and ent:IsInShipwreckedArea() then
+        return true
+    end
+
+    local current_time = GetTime()
+    local radius_sq = HURRICANE_TARGET_RADIUS * HURRICANE_TARGET_RADIUS
+    for target_ent, end_time in pairs(self.target_ents) do
+        if end_time >= current_time and target_ent:IsValid()
+            and ent:GetDistanceSqToInst(target_ent) <= radius_sq
+        then
+            return true
+        end
+    end
+
+    return false
 end
 
 -- 获取飓风进度百分比 (0~1)
@@ -281,7 +315,7 @@ function Hurricane:OnUpdate(dt)
 end
 
 -- 风吹物品的速度配置
-local BLOW_SEARCH_RADIUS = 30      -- 搜索半径（围绕每个玩家）
+local BLOW_SEARCH_RADIUS = HURRICANE_TARGET_RADIUS -- 搜索半径（围绕每个玩家或局部飓风目标）
 local BLOW_BASE_SPEED = 2          -- 基础吹动速度（TUNING.WILSON_WALK_SPEED / 4 ≈ 1.5）
 local BLOW_SPEED_VAR = 0.3         -- 速度随机波动幅度（±30%）
 local WINDTRAIL_SPAWN_PERIOD = 1.0 -- windtrail 生成间隔（秒）
