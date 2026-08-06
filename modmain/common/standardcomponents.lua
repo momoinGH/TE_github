@@ -56,13 +56,13 @@ local function OnPlantWorkFinished(inst, data)
         inst.components.shearable:SetWorkLeft(0)
     end
     if inst._tro_mhp_respawn_time and inst.components.timer then
-        inst.components.timer:StopTimer("_tro_mhp_respawn")
-        inst.components.timer:StartTimer("_tro_mhp_respawn", inst._tro_mhp_respawn_time)
+        inst.components.timer:StopTimer("spawndelay")
+        inst.components.timer:StartTimer("spawndelay", inst._tro_mhp_respawn_time)
     end
 end
 
 local function OnPlantRespawnTimerDone(inst, data)
-    if data and data.name == "_tro_mhp_respawn" then
+    if data and (data.name == "_tro_mhp_respawn" or data.name == "spawndelay") then
         if inst.components.hackable and inst._tro_mhp_hack_count then
             inst.components.hackable:SetWorkLeft(inst._tro_mhp_hack_count)
         end

@@ -114,7 +114,7 @@ end
 function Driver:Check()
     return self.boat and self.boat:IsValid()                                    --船还在
         and not self.inst:HasTag("playerghost")                                 --玩家没死
-        and not (self.inst.sg and self.inst.sg:HasStateTag("jumping"))          --玩家不在跳跃
+        and not (self.inst.sg and self.inst.sg:HasStateTag("boathopping"))      --玩家不在跳跃，不能用jumping，机器人旋转状态wx_spin竟然有这个标签
         and TheWorld.Map:IsOceanAtPoint(self.inst.Transform:GetWorldPosition()) --玩家在海上
         or false
 end

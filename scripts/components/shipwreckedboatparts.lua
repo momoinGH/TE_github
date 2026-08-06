@@ -19,6 +19,7 @@ local function OnUnEquipped(inst, data)
     local self = inst.components.shipwreckedboatparts
     inst:RemoveEventCallback("boat_startmoving", self.on_boat_startmoving_fn, data.owner)
     inst:RemoveEventCallback("boat_stopmoving", self.on_boat_stopmoving_fn, data.owner)
+    OnBoatStopMoving(inst)
 end
 
 --- 海难小船零件

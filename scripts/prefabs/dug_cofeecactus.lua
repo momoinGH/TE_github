@@ -11,31 +11,37 @@ local function make_plantable(data)
     end
 
     local function ondeploy(inst, pt, deployer)
-        local tree
+        local plant
         if data.name == "elephantcactus" then
-            tree = SpawnPrefab("elephantcactus_stump")
+            plant = SpawnPrefab("elephantcactus_stump")
         else
-            tree = SpawnPrefab(data.name)
+            plant = SpawnPrefab(data.name)
         end
-        if tree ~= nil then
-            tree.Transform:SetPosition(pt:Get())
-            inst.components.stackable:Get():Remove()
-            if tree.components.pickable ~= nil then
-                tree.components.pickable:OnTransplant()
-            end
-            if deployer ~= nil and deployer.SoundEmitter ~= nil then
-                --V2C: WHY?!! because many of the plantables don't
-                --     have SoundEmitter, and we don't want to add
-                --     one just for this sound!
-                deployer.SoundEmitter:PlaySound("dontstarve/common/plant")
-            end
-            if tree:HasTag("machetecut") then
-                tree.AnimState:PlayAnimation(data.anim)
-                tree:RemoveTag("machetecut")
-                tree.components.workable:SetWorkAction(ACTIONS.DIG)
-                tree.components.workable:SetWorkLeft(1)
-                tree.components.timer:StartTimer("spawndelay", 60 * 8 * 2)
-            end
+
+        if not plant then return end
+
+        plant.Transform:SetPosition(pt:Get())
+        inst.components.stackable:Get():Remove()
+        if deployer ~= nil and deployer.SoundEmitter ~= nil then
+            deployer.SoundEmitter:PlaySound("dontstarve/common/plant")
+        end
+
+        -- 实现这个函数就不走下面通用逻辑了
+        if plant.OnDeploy then
+            plant:OnDeploy()
+            return
+        end
+
+
+        if plant.components.pickable ~= nil then
+            plant.components.pickable:OnTransplant()
+        end
+        if plant:HasTag("machetecut") then
+            plant.AnimState:PlayAnimation(data.anim)
+            plant:RemoveTag("machetecut")
+            plant.components.workable:SetWorkAction(ACTIONS.DIG)
+            plant.components.workable:SetWorkLeft(1)
+            plant.components.timer:StartTimer("spawndelay", 60 * 8 * 2)
         end
     end
 

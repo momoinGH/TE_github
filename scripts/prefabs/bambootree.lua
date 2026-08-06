@@ -79,6 +79,12 @@ local function OnLoad(inst, data)
     end
 end
 
+-- 种下去时
+local function OnDeploy(inst)
+    inst.components.timer:StartTimer("spawndelay", 60 * 8 * 2)
+    OnPicked(inst, true, 0)
+end
+
 local DAMAGE_SCALE = 0.5
 local function OnCollide(inst, data)
     local boat_physics = data.other.components.boatphysics
@@ -156,6 +162,7 @@ local function MakeBamboo(name, data, common_post, master_post)
 
         inst.OnSave = OnSave
         inst.OnLoad = OnLoad
+        inst.OnDeploy = OnDeploy
 
         if master_post then
             master_post(inst)

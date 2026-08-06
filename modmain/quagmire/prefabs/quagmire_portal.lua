@@ -1,3 +1,5 @@
+-- 优化暴食大门交互，因为原版中心区域点不到了
+
 local function CreatePortalBase(portal)
     local inst = CreateEntity()
 
@@ -26,6 +28,9 @@ end
 
 
 AddPrefabPostInit("quagmire_portal", function(inst)
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("gorge_portal.png")
+
     inst.AnimState:SetBank("quagmire_portal_base")
     inst.AnimState:SetBuild("quagmire_portal_base")
     inst.AnimState:SetFinalOffset(0)
