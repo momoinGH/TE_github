@@ -149,16 +149,13 @@ GLOBAL.MakeSnowCovered = function(inst, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
--- 海难飓风
-local function ongustpick(inst)
-    if inst.components.pickable and inst.components.pickable:CanBePicked() then
-        inst.components.pickable:Pick(inst)
+do
+    -- 海难飓风
+    local function ongustpick(inst)
+        if inst.components.pickable and inst.components.pickable:CanBePicked() then
+            inst.components.pickable:Pick(inst)
+        end
     end
-end
-
--- 针对可采集的植物，添加刮风处理，播放刮风动画
-function _G.MakePickableBlowInWindGust(inst, wind_speed, destroy_chance, done_anim)
-    inst.tro_hurricane_done_anim = done_anim or "idle"
 
     local function onblownpstdone(inst)
         if inst.components.pickable and
@@ -205,16 +202,21 @@ function _G.MakePickableBlowInWindGust(inst, wind_speed, destroy_chance, done_an
         end)
     end
 
-    inst:AddComponent("blowinwindgust")
-    inst.components.blowinwindgust:SetWindSpeedThreshold(wind_speed)
-    inst.components.blowinwindgust:SetDestroyChance(destroy_chance)
-    inst.components.blowinwindgust:SetGustStartFn(onguststart)
-    inst.components.blowinwindgust:SetGustEndFn(onblownpstdone)
-    inst.components.blowinwindgust:SetDestroyFn(ongustpick)
-    inst.components.blowinwindgust:Start()
+    -- 针对可采集的植物，添加刮风处理，播放刮风动画
+    function _G.MakePickableBlowInWindGust(inst, wind_speed, destroy_chance, done_anim)
+        inst.tro_hurricane_done_anim = done_anim or "idle"
+
+        inst:AddComponent("blowinwindgust")
+        inst.components.blowinwindgust:SetWindSpeedThreshold(wind_speed)
+        inst.components.blowinwindgust:SetDestroyChance(destroy_chance)
+        inst.components.blowinwindgust:SetGustStartFn(onguststart)
+        inst.components.blowinwindgust:SetGustEndFn(onblownpstdone)
+        inst.components.blowinwindgust:SetDestroyFn(ongustpick)
+        inst.components.blowinwindgust:Start()
+    end
 end
 
-function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
+do
     local function onblownpstdone(inst)
         if inst.components.hackable and
             inst.components.hackable:CanBeWorked() and
@@ -262,16 +264,21 @@ function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
     end
 
     local function ongusthack(inst)
-        if inst.components.lootdropper and inst.components.hackable and inst.components.hackable:CanBeWorked() then
+        if inst.components.lootdropper ~= nil
+            and inst.components.hackable ~= nil
+            and inst.components.hackable:CanBeWorked()
+            and inst.components.hackable.product ~= nil then
             inst.components.lootdropper:SpawnLootPrefab(inst.components.hackable.product)
         end
     end
 
-    inst:AddComponent("blowinwindgust")
-    inst.components.blowinwindgust:SetWindSpeedThreshold(wind_speed)
-    inst.components.blowinwindgust:SetDestroyChance(destroy_chance)
-    inst.components.blowinwindgust:SetGustStartFn(onguststart)
-    inst.components.blowinwindgust:SetGustEndFn(onblownpstdone)
-    inst.components.blowinwindgust:SetDestroyFn(ongusthack)
-    inst.components.blowinwindgust:Start()
+    function _G.MakeHackableBlowInWindGust(inst, wind_speed, destroy_chance)
+        inst:AddComponent("blowinwindgust")
+        inst.components.blowinwindgust:SetWindSpeedThreshold(wind_speed)
+        inst.components.blowinwindgust:SetDestroyChance(destroy_chance)
+        inst.components.blowinwindgust:SetGustStartFn(onguststart)
+        inst.components.blowinwindgust:SetGustEndFn(onblownpstdone)
+        inst.components.blowinwindgust:SetDestroyFn(ongusthack)
+        inst.components.blowinwindgust:Start()
+    end
 end
