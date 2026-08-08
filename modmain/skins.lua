@@ -59,7 +59,7 @@ end
 -- 在挖起时生成对应皮肤预制件，这里扩展一下
 AddComponentPostInit("lootdropper", function(self)
     Hooks.FnDecorator(self, "SpawnLootPrefab", function(self, lootprefab, pt, linked_skinname, ...)
-        if not linked_skinname then
+        if not linked_skinname and lootprefab then
             linked_skinname = GetRelatedSkin(lootprefab, self.inst)
             return nil, false, { self, lootprefab, pt, linked_skinname, ... }
         end
