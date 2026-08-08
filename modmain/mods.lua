@@ -14,6 +14,7 @@ if st and whalehunter ~= nil and whalehunter.OnServerLoad ~= nil then
     whalehunter.OnServerLoad = function() end
 end
 
+require("components/map")
 function Map:IsWater(tile) -- 给几何mod用的，群鸟也用了这个方法
     return TileGroupManager:IsOceanTile(tile)
 end
