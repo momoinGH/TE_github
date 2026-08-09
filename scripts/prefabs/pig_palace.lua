@@ -270,35 +270,43 @@ local rooms = { {
     depth    = TUNING.ROOM_SMALL_DEPTH,
     addprops = {
         { name = "interior_floor_marble_royal" },
-        { name = "interior_wall_rope",                      scale = { 3.6, 3 },                                                 x_offset = -4.4 },
+        { name = "interior_wall_rope",                      scale = { 3.6, 3 },                                                   x_offset = -4.4 },
         { name = "deco_roomglow", },
-        { name = "interior_palace_east_door",               z_offset = 18 / 2,                                                  key = "door1b",                                                                                   target_door = "door1a" },
-        { name = "interior_palace_west_door",               z_offset = -18 / 2,                                                 key = "door2a",                                                                                   target_door = "door2b" },
-        { name = "rug_palace_corners",                      x_offset = -12 / 2,                                                 z_offset = 18 / 2,                                                                                rotation = 90 },
-        { name = "rug_palace_corners",                      x_offset = 12 / 2,                                                  z_offset = 18 / 2,                                                                                rotation = 180 },
-        { name = "rug_palace_corners",                      x_offset = 12 / 2,                                                  z_offset = -18 / 2,                                                                               rotation = 270 },
-        { name = "rug_palace_corners",                      x_offset = -12 / 2,                                                 z_offset = -18 / 2 },
-        { name = "window_round_light_backwall",             x_offset = -12 / 2,                                                 z_offset = -18 / 3,                                                                               rotation = -90 },
-        { name = "window_palace",                           x_offset = -12 / 2,                                                 z_offset = -18 / 3, },
-        { name = "window_round_light_backwall",             x_offset = -12 / 2,                                                 z_offset = 26 / 3,                                                                                rotation = -90 },
-        { name = "window_palace",                           x_offset = -12 / 2,                                                 z_offset = 18 / 3, },
-        { name = "deco_palace_beam_room_tall_corner",       x_offset = -12 / 2,                                                 z_offset = -18 / 2,                                                                               scale = { -1, 1 } },
-        { name = "deco_palace_beam_room_tall_corner",       x_offset = -12 / 2,                                                 z_offset = 18 / 2, },
-        { name = "deco_palace_beam_room_tall_corner_front", x_offset = 12 / 2,                                                  z_offset = -18 / 2,                                                                               scale = { -1, 1 } },
-        { name = "deco_palace_beam_room_tall_corner_front", x_offset = 12 / 2,                                                  z_offset = 18 / 2, },
-        { name = "deco_palace_beam_room_tall",              x_offset = -12 / 6,                                                 z_offset = -18 / 6,                                                                               scale = { -1, 1 } },
-        { name = "deco_palace_beam_room_tall",              x_offset = -12 / 6,                                                 z_offset = 18 / 6, },
-        { name = "deco_palace_beam_room_tall",              x_offset = 12 / 6,                                                  z_offset = -18 / 6,                                                                               scale = { -1, 1 } },
-        { name = "deco_palace_beam_room_tall",              x_offset = 12 / 6,                                                  z_offset = 18 / 6, },
-        { name = "shelves_queen_display_1",                 x_offset = -12 / 4,                                                 z_offset = -18 / 3,                                                                               init = function(inst) AddPedestalItem(inst, "key_to_city") end },
+        { name = "interior_palace_east_door",               z_offset = 18 / 2,                                                    key = "door1b",     target_door = "door1a" },
+        { name = "interior_palace_west_door",               z_offset = -18 / 2,                                                   key = "door2a",     target_door = "door2b" },
+        { name = "rug_palace_corners",                      x_offset = -12 / 2,                                                   z_offset = 18 / 2,  rotation = 90 },
+        { name = "rug_palace_corners",                      x_offset = 12 / 2,                                                    z_offset = 18 / 2,  rotation = 180 },
+        { name = "rug_palace_corners",                      x_offset = 12 / 2,                                                    z_offset = -18 / 2, rotation = 270 },
+        { name = "rug_palace_corners",                      x_offset = -12 / 2,                                                   z_offset = -18 / 2 },
+        { name = "window_round_light_backwall",             x_offset = -12 / 2,                                                   z_offset = -18 / 3, rotation = -90 },
+        { name = "window_palace",                           x_offset = -12 / 2,                                                   z_offset = -18 / 3, },
+        { name = "window_round_light_backwall",             x_offset = -12 / 2,                                                   z_offset = 26 / 3,  rotation = -90 },
+        { name = "window_palace",                           x_offset = -12 / 2,                                                   z_offset = 18 / 3, },
+        { name = "deco_palace_beam_room_tall_corner",       x_offset = -12 / 2,                                                   z_offset = -18 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_corner",       x_offset = -12 / 2,                                                   z_offset = 18 / 2, },
+        { name = "deco_palace_beam_room_tall_corner_front", x_offset = 12 / 2,                                                    z_offset = -18 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_corner_front", x_offset = 12 / 2,                                                    z_offset = 18 / 2, },
+        { name = "deco_palace_beam_room_tall",              x_offset = -12 / 6,                                                   z_offset = -18 / 6, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall",              x_offset = -12 / 6,                                                   z_offset = 18 / 6, },
+        { name = "deco_palace_beam_room_tall",              x_offset = 12 / 6,                                                    z_offset = -18 / 6, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall",              x_offset = 12 / 6,                                                    z_offset = 18 / 6, },
+        { name = "shelves_queen_display_1",                 x_offset = -12 / 4,                                                   z_offset = -18 / 3, init = function(inst) AddPedestalItem(inst, "key_to_city") end },
         { name = "shelves_queen_display_2",                 init = function(inst) AddPedestalItem(inst, "trinket_giftshop_4") end },
-        { name = "shelves_queen_display_3",                 x_offset = -12 / 4,                                                 z_offset = 18 / 3,                                                                                scale = { -1, 1 },                                           init = function(
-            inst) AddPedestalItem(inst, "city_hammer") end },
-        { name = "deco_palace_banner_small_sidewall",       x_offset = -12 / 14 * 3,                                            z_offset = -18 / 2,                                                                               scale = { -1, 1 } },
-        { name = "deco_palace_banner_small_sidewall",       x_offset = -12 / 14 * 3,                                            z_offset = 18 / 2, },
-        { name = "deco_palace_banner_small_sidewall",       x_offset = 12 / 14 * 3,                                             z_offset = -18 / 2,                                                                               scale = { -1, 1 } },
-        { name = "deco_palace_banner_small_sidewall",       x_offset = 12 / 14 * 3,                                             z_offset = 18 / 2, },
-        { name = "shelves_marble",                          x_offset = -12 / 2,                                                 shelfitems = { { 5, "trinket_20" }, { 6, "trinket_14" }, { 3, "trinket_4" }, { 4, "trinket_2" } } },
+        {
+            name = "shelves_queen_display_3",
+            x_offset = -12 / 4,
+            z_offset = 18 / 3,
+            scale = { -1, 1 },
+            init = function(
+                inst)
+                AddPedestalItem(inst, "city_hammer")
+            end
+        },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -12 / 14 * 3, z_offset = -18 / 2,                                                                               scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -12 / 14 * 3, z_offset = 18 / 2, },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 12 / 14 * 3,  z_offset = -18 / 2,                                                                               scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 12 / 14 * 3,  z_offset = 18 / 2, },
+        { name = "shelves_marble",                    x_offset = -12 / 2,      shelfitems = { { 5, "trinket_20" }, { 6, "trinket_14" }, { 3, "trinket_4" }, { 4, "trinket_2" } } },
     }
 }, {
     width    = TUNING.ROOM_TINY_WIDTH,
@@ -330,7 +338,8 @@ local rooms = { {
 } }
 
 local function creatInterior(inst)
-    if inst.components.teleporter:GetTarget() then return end
+    if inst._tro_interior_created then return end
+    inst._tro_interior_created = true
 
     local doors = RoomUtils.CreateRooms(rooms)
     inst.components.teleporter:Target(doors.exit)

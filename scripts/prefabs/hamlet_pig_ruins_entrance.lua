@@ -98,9 +98,10 @@ local function inspect(inst)
 end
 
 local function InitMaze(inst, get_maze_fn)
-    if inst.components.teleporter:GetTarget() then
+    if inst._tro_interior_created then
         return --已经生成过迷宫了
     end
+    inst._tro_interior_created = true
 
     local rooms_data = get_maze_fn(inst) --迷宫数据
     local doors = RoomUtils.CreateRooms(rooms_data)

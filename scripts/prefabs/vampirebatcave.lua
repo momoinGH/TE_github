@@ -23,7 +23,8 @@ local function getlocationoutofcenter(dist, hole, random, invert)
 end
 
 local function creatInterior(inst)
-    if inst.components.teleporter:GetTarget() then return end
+    if inst._tro_interior_created then return end
+    inst._tro_interior_created = true
 
     local depth = TUNING.ROOM_LARGE_DEPTH
     local width = TUNING.ROOM_LARGE_WIDTH
