@@ -39,6 +39,12 @@ local function GetRandomMinMax(min, max)
     return min + math.random() * (max - min)
 end
 
+-- 房屋内部不受室外飓风影响。室内和室外可能仍处于同一个世界分片，
+-- 因此不能只依赖区域或距离判断。
+local function IsIndoors(ent)
+    return ent.TroGetRoomCenter ~= nil and ent:TroGetRoomCenter() ~= nil
+end
+
 -- 海难季节管理，飓风季大风生成
 -- 从单机版 seasonmanager_sw.lua 中提取的飓风大风核心逻辑，适配联机版
 local Hurricane = Class(function(self, inst)
@@ -93,6 +99,10 @@ end
 -- 则影响目标周围一定范围内的单位。
 function Hurricane:IsEntityInHurricaneRange(ent)
     if not self.hurricane or not ent or not ent:IsValid() then
+        return false
+    end
+
+    if IsIndoors(ent) then
         return false
     end
 
@@ -185,20 +195,22 @@ local function TrySpawnWindSwirl(self, dt)
 
     local spawn_pos = {}
     for _, v in ipairs(AllPlayers) do
-        local px, py, pz = v.Transform:GetWorldPosition()
-        local can_spawn = true
-        for _, pos in ipairs(spawn_pos) do
-            if distsq(pos.x, pos.z, px, pz) < 256 then
-                can_spawn = false --玩家挤在一起的时候只生成一个
-                break
+        if self:IsEntityInHurricaneRange(v) then
+            local px, py, pz = v.Transform:GetWorldPosition()
+            local can_spawn = true
+            for _, pos in ipairs(spawn_pos) do
+                if distsq(pos.x, pos.z, px, pz) < 256 then
+                    can_spawn = false --玩家挤在一起的时候只生成一个
+                    break
+                end
             end
-        end
-        if can_spawn then
-            local dx, dz = 16 * UnitRand(), 16 * UnitRand()
-            local x, y, z = px + dx, py, pz + dz
-            local angle = self:GetWindAngle(v)
-            self:SpawnWindSwirl(x, y, z, self.hurricane_gust_speed, angle)
-            table.insert(spawn_pos, { x = x, y = y, z = z })
+            if can_spawn then
+                local dx, dz = 16 * UnitRand(), 16 * UnitRand()
+                local x, y, z = px + dx, py, pz + dz
+                local angle = self:GetWindAngle(v)
+                self:SpawnWindSwirl(x, y, z, self.hurricane_gust_speed, angle)
+                table.insert(spawn_pos, { x = x, y = y, z = z })
+            end
         end
     end
 
@@ -322,6 +334,10 @@ local WINDTRAIL_SPAWN_PERIOD = 1.0 -- windtrail 生成间隔（秒）
 local WINDTRAIL_SPAWN_CHANCE = 0.7 -- windtrail 生成概率
 
 local function SpawnTrailForEnt(self, ent, dt, windspeed)
+    if IsIndoors(ent) then
+        return
+    end
+
     local angle = self:GetWindAngle(ent)
     if not ent.Physics then
         return
@@ -387,7 +403,7 @@ function Hurricane:UpdateBlowEntities(dt, windspeed)
 
     -- 遍历所有玩家（联机版支持多人）
     for _, player in ipairs(AllPlayers) do
-        if player:IsInShipwreckedArea() then --只在海难区域影响
+        if self:IsEntityInHurricaneRange(player) then
             local px, py, pz = player.Transform:GetWorldPosition()
             for _, ent in ipairs(TheSim:FindEntities(px, py, pz, BLOW_SEARCH_RADIUS, nil, { "INLIMBO" }, { "smallcreature", "_inventoryitem" })) do
                 SpawnTrailForEnt(self, ent, dt, windspeed)
