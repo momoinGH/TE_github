@@ -708,8 +708,8 @@ local rooms = {
 }
 
 local function creatInterior(inst)
-    if inst.components.teleporter:GetTarget() then return end
-
+    if inst._tro_interior_created then return end
+    inst._tro_interior_created = true
     local room = rooms[inst.prefab]
 
     -- 摊位需要知道自己所处的商店

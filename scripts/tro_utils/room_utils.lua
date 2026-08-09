@@ -423,10 +423,12 @@ end
 
 --- 生成临近的新房间，用于房屋扩展许可证
 function FN.SpawnNearHouseInterior(door, room, dir)
-    if door.components.teleporter:GetTarget() then
+    if door._tro_interior_created then
         print("生成新房间失败，该门已经有传送目标了", door)
         return false
     end
+
+    door._tro_interior_created = true
     local _, _, center = FN.CreateRoom(room)
     SpawnNearDoor(door, center)
     center:AddTag("room_explored")
@@ -445,7 +447,8 @@ function FN.OnDoorBuiltCheckNearRoom(door)
 end
 
 function FN.CreateSimpleInterior(inst, room)
-    if inst.components.teleporter:GetTarget() then return end
+    if inst._tro_interior_created then return end
+    inst._tro_interior_created = true
 
     local doors = FN.CreateRoom(room)
     if doors.exit then

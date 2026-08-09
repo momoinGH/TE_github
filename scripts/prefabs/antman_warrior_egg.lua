@@ -24,10 +24,14 @@ local function dohatch(inst, hatch_time)
 		inst.updatetask = inst:DoTaskInTime(11 * FRAMES, function()
 			if inst.inlimbo then return end
 
+			local home = inst.components.homeseeker and inst.components.homeseeker:GetHome()
 			ChangeToInventoryPhysics(inst)
 			local warrior = SpawnPrefab("antman_warrior")
 			warrior.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			warrior.sg:GoToState("hatch")
+			if home then
+				home.components.childspawner:ReplaceChild(inst, warrior)
+			end
 
 			if inst.queen then
 				warrior.queen = inst.queen
