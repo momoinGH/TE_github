@@ -33,6 +33,15 @@ AddComponentPostInit("playervision", function(self)
     self.inst:ListenForEvent("tro_curroomcenter", OnRoomChange)
 
     Hooks.FnDecorator(self, "UpdateCCTable", function(self)
+        -- Night vision (including WX-78's forced night vision) must keep the
+        -- priority used by the vanilla PlayerVision component.  The Hamlet
+        -- room override is only a fallback for players without night vision;
+        -- otherwise it replaces NIGHTVISION_COLOURCUBES and makes caves/
+        -- ruins appear dark again.
+        if self:HasNightVision() then
+            return
+        end
+
         if not self.inst:TroGetPlayerClassifiedNetVar("tro_curroomcenter") then
             return
         end

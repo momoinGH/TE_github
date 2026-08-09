@@ -69,7 +69,12 @@ AddComponentPostInit("ambientlighting", function(self)
         -- 遗迹看不见，这里只是本地的修改，不是晚上还不会被查理攻击
         if ThePlayer then
             local room = ThePlayer:TroGetRoomCenter()
-            if room and room:HasTag("night_room") then
+            -- Keep the ruins' normal darkness for regular players, but do
+            -- not overwrite the ambient colour set selected by night vision
+            -- (e.g. WX-78's nightvision module).
+            local hasnightvision = ThePlayer.components.playervision
+                and ThePlayer.components.playervision:HasNightVision()
+            if room and room:HasTag("night_room") and not hasnightvision then
                 targetsettings.currentcolourset = COLOURS.NIGHT_ROOM
                 _ComputeTargetColour(targetsettings, timeoverride, ...)
                 targetsettings.currentcolourset = temp
