@@ -69,7 +69,7 @@ local function OnDoorRemove(inst)
 
     for room, _ in pairs(del_rooms) do
         room.destroyed = true
-        RoomUtils.OnRoomDestroy(room, inst, inst)
+        RoomUtils.OnRoomDestroy(room, inst,inst)
     end
 end
 
@@ -103,7 +103,6 @@ local function OnSave(inst, data)
     data.door_orientation = inst.door_orientation
     -- data.interior_houseexit = inst:HasTag("interior_houseexit") --这个不需要，加载的时候设置目标就会恢复
     data.interior_toexitdoor = inst:HasTag("interior_toexitdoor")
-    data._tro_interior_created = inst._tro_interior_created --是否已经创建过虚空房间
     return refs
 end
 
@@ -120,7 +119,6 @@ local function OnLoad(inst, data)
     if data and data.door_orientation and inst.SetDoorOrientation then
         inst:SetDoorOrientation(data.door_orientation)
     end
-    inst._tro_interior_created = data._tro_interior_created or inst._tro_interior_created
 end
 
 local function OnLoadPostPass(inst, newents, data)

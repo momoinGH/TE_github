@@ -68,13 +68,10 @@ local function onbuilt(inst)
     inst.AnimState:PushAnimation("idle")
     inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
 
-    if not inst._tro_interior_created then
-        inst._tro_interior_created = true
-        local doors, _, center = RoomUtils.CreateRoom(room)
-        inst.components.teleporter:Target(doors.exit)
-        doors.exit.components.teleporter:Target(inst)
-        center:AddTag("room_explored")
-    end
+    local doors, _, center = RoomUtils.CreateRoom(room)
+    inst.components.teleporter:Target(doors.exit)
+    doors.exit.components.teleporter:Target(inst)
+    center:AddTag("room_explored")
 end
 
 local function OnSave(inst, data)

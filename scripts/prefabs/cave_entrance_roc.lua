@@ -22,8 +22,7 @@ local function GetStatus(inst)
 end
 
 local function initmaze(inst)
-    if inst._tro_interior_created then return end
-    inst._tro_interior_created = true
+    if inst.components.teleporter:GetTarget() then return end
 
     local CreateMaze = require("prefabs/cave_entrance_roc_defs")
     local rooms = CreateMaze()

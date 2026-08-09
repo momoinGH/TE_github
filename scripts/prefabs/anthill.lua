@@ -40,8 +40,7 @@ end
 
 local NUM_ENTRANCES = 3
 local function CreateMaze(inst)
-    if inst._tro_interior_created then return end
-    inst._tro_interior_created = true
+    if inst.components.teleporter:GetTarget() then return end
 
     local MazeDefs = require("prefabs/anthill_defs")
     local rooms = MazeDefs.CreateMaze(NUM_ENTRANCES)
