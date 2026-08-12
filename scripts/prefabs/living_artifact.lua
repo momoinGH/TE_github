@@ -64,7 +64,7 @@ local function ToggleLight(inst, on)
     if on then
         inst.nightlight = SpawnPrefab("living_artifact_light")
         inst:AddChild(inst.nightlight)
-    else
+    elseif inst.nightlight then
         inst:RemoveChild(inst.nightlight)
         inst.nightlight:Remove()
     end
