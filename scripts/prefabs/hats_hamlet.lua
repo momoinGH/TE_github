@@ -45,27 +45,6 @@ local function MakeHat(name)
             owner.AnimState:Hide("HEAD")
             owner.AnimState:Show("HEAD_HAT")
         end
-
-        if inst:HasTag("antmask") then
-            owner:AddTag("has_antmask")
-        end
-
-        if inst:HasTag("gasmask") then
-            owner:AddTag("has_gasmask")
-        end
-
-        if inst:HasTag("venting") then
-            owner:AddTag("venting")
-        end
-
-        if inst:HasTag("sneaky") then
-            if not owner:HasTag("monster") then
-                owner:AddTag("monster")
-            else
-                owner:AddTag("originaly_monster")
-            end
-            owner:AddTag("sneaky")
-        end
         if not owner:HasTag("equipmentmodel") then
             if inst.components.fueled ~= nil then
                 inst.components.fueled:StartConsuming()
@@ -92,26 +71,6 @@ local function MakeHat(name)
 
         if inst.components.fueled ~= nil then
             inst.components.fueled:StopConsuming()
-        end
-
-        if inst:HasTag("antmask") then
-            owner:RemoveTag("has_antmask")
-        end
-        if inst:HasTag("gasmask") then
-            owner:RemoveTag("has_gasmask")
-        end
-
-        if inst:HasTag("venting") then
-            owner:RemoveTag("venting")
-        end
-
-        if inst:HasTag("sneaky") then
-            if not owner:HasTag("originaly_monster") then
-                owner:RemoveTag("monster")
-            else
-                owner:RemoveTag("originaly_monster")
-            end
-            owner:RemoveTag("sneaky")
         end
     end
 
@@ -253,6 +212,7 @@ local function MakeHat(name)
 
     local function peagawkfeather()
         local inst = simple()
+        inst:AddTag("gasmask")
 
         if not TheWorld.ismastersim then
             return inst
@@ -336,8 +296,6 @@ local function MakeHat(name)
         owner.AnimState:Show("HAIR_HAT")
         owner.AnimState:Hide("HAIR_NOHAT")
         owner.AnimState:Hide("HAIR")
-        owner:AddTag("has_antmask")
-
         if owner:HasTag("player") then
             owner.AnimState:Hide("HEAD")
             owner.AnimState:Show("HEAD_HAT")
@@ -355,8 +313,6 @@ local function MakeHat(name)
         owner.AnimState:Hide("HAIR_HAT")
         owner.AnimState:Show("HAIR_NOHAT")
         owner.AnimState:Show("HAIR")
-        owner:RemoveTag("has_antmask")
-
         if owner:HasTag("player") then
             owner.AnimState:Show("HEAD")
             owner.AnimState:Hide("HEAD_HAT")

@@ -51,7 +51,7 @@ function Hayfever:CanSneeze()
     if not self.inst:IsInHamletArea() then
         return false
     end
-    if self.inst:HasTag("has_gasmask") then
+    if self.inst.replica.inventory ~= nil and self.inst.replica.inventory:EquipHasTag("gasmask") then
         return false
     end
 
@@ -113,8 +113,8 @@ function Hayfever:OnLoad(data, newents)
 end
 
 function Hayfever:Enable()
-    if self.inst:HasTag("plantkin") then
-        return --植物人免疫
+    if self.inst:HasTag("plantkin") or self.inst:HasTag("beaver") then
+        return --植物人、海狸伍迪免疫
     end
 
     if self.enabled then

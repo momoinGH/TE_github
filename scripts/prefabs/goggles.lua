@@ -41,10 +41,6 @@ local function MakeGoggle(name)
             owner.AnimState:Show("HEAD_HAIR")
         end
 
-        if inst:HasTag("venting") then
-            owner:AddTag("venting")
-        end
-
         if inst.components.fueled then
             inst.components.fueled:StartConsuming()
         end
@@ -56,10 +52,6 @@ local function MakeGoggle(name)
         if owner:HasTag("player") then
             owner.AnimState:Show("HEAD")
             owner.AnimState:Hide("HEAD_HAIR")
-        end
-
-        if inst:HasTag("venting") then
-            owner:RemoveTag("venting")
         end
 
         if inst.components.fueled then

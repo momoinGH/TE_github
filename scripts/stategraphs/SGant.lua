@@ -79,7 +79,7 @@ local states =
             inst:DoTaskInTime(2.5, function() inst.SoundEmitter:KillSound("alert") end)
 
             local player = GetClosestInstWithTag("player", inst, 15)
-            if player and player:HasTag("has_antmask") and player:HasTag("has_antsuit") then
+            if player and player.replica.inventory ~= nil and player.replica.inventory:EquipHasTag("antmask") and player.replica.inventory:EquipHasTag("antsuit") then
                 inst.AnimState:PlayAnimation("alert", true)
             else
                 inst.AnimState:PlayAnimation("idle_angry", true)

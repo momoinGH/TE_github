@@ -38,7 +38,7 @@ local GIANT_GRUB_ATTACK_RANGE = 3
 local GIANT_GRUB_TARGET_DIST = 25
 
 local function IsCompleteDisguise(target)
-	return target:HasTag("has_antmask") and target:HasTag("has_antsuit")
+	return target.replica.inventory ~= nil and target.replica.inventory:EquipHasTag("antmask") and target.replica.inventory:EquipHasTag("antsuit")
 end
 
 local function IsPreferedTarget(target)

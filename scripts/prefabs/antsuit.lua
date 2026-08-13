@@ -6,13 +6,11 @@ local assets =
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "antsuit", "swap_body")
     inst.components.fueled:StartConsuming()
-    owner:AddTag("has_antsuit")
 end
 
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
     inst.components.fueled:StopConsuming()
-    owner:RemoveTag("has_antsuit")
 end
 
 local function fn()
@@ -29,6 +27,7 @@ local function fn()
     MakeInventoryFloatable(inst)
 
     inst:AddTag("needssewing")
+    inst:AddTag("antsuit")
 
     inst.entity:SetPristine()
 

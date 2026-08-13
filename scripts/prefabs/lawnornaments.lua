@@ -8,7 +8,7 @@ local function onhammered(inst, worker)
     local pt = inst:GetPosition()
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
     if tiletype == WORLD_TILES.SUBURB or tiletype == WORLD_TILES.FOUNDATION or tiletype == WORLD_TILES.COBBLEROAD or tiletype == WORLD_TILES.FIELDS or tiletype == WORLD_TILES.LAWN then
-        if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
+        if worker and worker:HasTag("player") and not (worker.replica.inventory ~= nil and worker.replica.inventory:EquipHasTag("sneaky")) then
             local x, y, z = inst.Transform:GetWorldPosition()
             local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
             for k, guardas in pairs(eles) do

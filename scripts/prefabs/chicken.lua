@@ -45,7 +45,7 @@ local function CanShareTarget(dude)
 end
 
 local function OnAttacked(inst, data)
-	if data and data.attacker and data.attacker:HasTag("player") and not data.attacker:HasTag("sneaky") then
+	if data and data.attacker and data.attacker:HasTag("player") and not (data.attacker.replica.inventory ~= nil and data.attacker.replica.inventory:EquipHasTag("sneaky")) then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
 		for k, guardas in pairs(eles) do

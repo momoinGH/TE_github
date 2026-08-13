@@ -50,7 +50,9 @@ end)
 -- venting标签需要在equipable的回调里添加，也就是在事件推送之前
 
 local function OnVentingEquipped(inst, data)
-    if data and data.owner and data.owner:HasTag("venting") and data.owner.components.grogginess then
+    if data and data.owner and data.owner.replica.inventory
+        and data.owner.replica.inventory:EquipHasTag("venting")
+        and data.owner.components.grogginess then
         data.owner.components.grogginess:AddImmunitySource(inst)
     end
 end

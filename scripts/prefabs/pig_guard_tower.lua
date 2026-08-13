@@ -126,7 +126,7 @@ local function onvacate(inst, child)
 end
 
 local function onhammered(inst, worker)
-    if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
+    if worker and worker:HasTag("player") and not (worker.replica.inventory ~= nil and worker.replica.inventory:EquipHasTag("sneaky")) then
         local x, y, z = inst.Transform:GetWorldPosition()
         for _, guard in ipairs(TheSim:FindEntities(x, y, z, 40, { "guard", "_combat" })) do
             guard.components.combat:SuggestTarget(worker)

@@ -9,7 +9,7 @@ local CANT_PICK_TILES = {
 -- 当玩家采集哈姆雷特的草时，附近守卫攻击玩家
 local GUARD_MUST_TAGS = { "_combat", "_health", "guard" }
 local function OnPlayerPick(inst, worker)
-    if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
+    if worker and worker:HasTag("player") and not (worker.replica.inventory ~= nil and worker.replica.inventory:EquipHasTag("sneaky")) then
         local x, y, z = inst.Transform:GetWorldPosition()
         local tile = TheWorld.Map:GetTileAtPoint(x, y, z)
         if CANT_PICK_TILES[tile] then

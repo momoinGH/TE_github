@@ -1,9 +1,9 @@
 local function FindNearbyGuard(inst, threat)
     if not inst:HasTag("city1") and not inst:HasTag("city2") then return end --不是猪镇长的
-    if not threat or threat:HasTag("sneaky") then return end
+    if not threat or (threat.replica.inventory ~= nil and threat.replica.inventory:EquipHasTag("sneaky")) then return end
 
     local range = 20
-    if threat:HasTag("sneaky") then
+    if (threat.replica.inventory ~= nil and threat.replica.inventory:EquipHasTag("sneaky")) then
         range = 8
     end
 
@@ -19,7 +19,7 @@ local function FindNearbyGuard(inst, threat)
     end
 
     local tower_range = 30
-    if threat:HasTag("sneaky") then
+    if (threat.replica.inventory ~= nil and threat.replica.inventory:EquipHasTag("sneaky")) then
         tower_range = 8
     end
 
