@@ -10,5 +10,7 @@ Assets =
     Asset("ANIM", "anim/player_actions_shear.zip"),          --剪刀剪，有动画cut_pre、cut_loop、cut_pst
     Asset("ANIM", "anim/player_actions_cropdust.zip"),       --杀毒喷雾，有动画cropdust_pre、cropdust_loop、cropdust_pst
 
-    Asset("IMAGE", "images/colour_cubes/pigshop_interior_cc.tex")
+    Asset("IMAGE", "images/colour_cubes/pigshop_interior_cc.tex"),
+
+    Asset("ANIM", "anim/cook_pot_food_ham.zip"),
 }

@@ -510,6 +510,7 @@ local foods_tro = {
             sanity = 50,
             perishtime = TUNING.PERISH_SUPERFAST,
             cooktime = .5,
+            potlevel = "high",
             tags = { "honeyed" },
             card_def = {
                 ingredients = { { "sponge_piece", 2 }, { "goatmilk", 1 }, { "honey", 1 } },
@@ -810,8 +811,7 @@ for tpc, list in pairs(foods_tro) do
         v.perishtime = v.perishtime or TUNING.PERISH_PRESERVED
         v.cooktime = v.cooktime or 1
         v.potlevel = v.potlevel or "med"
-        v.overridebuild = v.overridebuild or overridebuild[tpc]
-        --table.insert(Assets, Asset("ANIM", "anim/" .. v.overridebuild .. ".zip"))
+        v.overridebuild = v.overridebuild or overridebuild[tpc] or k
         --v.cookbook_atlas = v.cookbook_atlas or ("images/cookbook_" .. k .. ".xml")
         --table.insert(Assets, Asset("ATLAS", v.cookbook_atlas))
         --v.cookbook_atlas = softresolvefilepath(v.cookbook_atlas)
