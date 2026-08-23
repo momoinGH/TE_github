@@ -1031,19 +1031,23 @@ tro_tiledefs = {
         },
         ground_tile_def = {
             name = "cave",
-            noise_texture = "lavaarena/ground_lavaarena_floor",
+            noise_texture = "noise_underwater_sandy",
             runsound = "dontstarve/movement/run_dirt",
             walksound = "dontstarve/movement/walk_dirt",
-            snowsound = "run_ice",
-            cannotbedug = true
+            snowsound = "dontstarve/movement/run_ice",
+            mudsound = "dontstarve/movement/run_mud",
+            flashpoint_modifier = 0,
+            cannotbedug = true,
+            colors = {
+                primary_color = { 0, 0, 0, 25 },
+                secondary_color = { 0, 20, 33, 0 },
+                secondary_color_dusk = { 0, 20, 33, 80 },
+                minimap_color = { 23, 51, 62, 102 },
+            },
         },
         minimap_tile_def = {
             name = "map_edge",
-            noise_texture = "lavaarena/mini_ground_lavaarena_floor"
-        },
-        turf_def = {
-            name = "lavaland",
-            bank_build = "turf",
+            noise_texture = "mini_noise_underwater_sandy",
         },
     },
 
@@ -1054,20 +1058,24 @@ tro_tiledefs = {
             old_static_id = 33,
         },
         ground_tile_def = {
-            name = "cave",
-            noise_texture = "lavaarena/ground_lavaarena_floor",
+            name = "marsh",
+            noise_texture = "noise_underwater_rocky",
             runsound = "dontstarve/movement/run_dirt",
             walksound = "dontstarve/movement/walk_dirt",
-            snowsound = "run_ice",
-            cannotbedug = true
+            snowsound = "dontstarve/movement/run_ice",
+            mudsound = "dontstarve/movement/run_mud",
+            flashpoint_modifier = 0,
+            cannotbedug = true,
+            colors = {
+                primary_color = { 0, 0, 0, 25 },
+                secondary_color = { 0, 20, 33, 0 },
+                secondary_color_dusk = { 0, 20, 33, 80 },
+                minimap_color = { 23, 51, 62, 102 },
+            },
         },
         minimap_tile_def = {
             name = "map_edge",
-            noise_texture = "lavaarena/mini_ground_lavaarena_floor"
-        },
-        turf_def = {
-            name = "lavaland",
-            bank_build = "turf",
+            noise_texture = "mini_noise_underwater_rocky",
         },
     },
 

@@ -1,11 +1,9 @@
 -- 为虚空小房子服务
 
-local FN     = {}
+local FN    = {}
 
-FN.RADIUS    = 16   --小房子最大半径，包括width和depth
-FN.BASE_OFF  = 1400 --小房子的初始z坐标
-FN.ROOM_GAP  = 60
-FN.ROW_COUNT = (FN.BASE_OFF + 100) / FN.ROOM_GAP * 2
+FN.RADIUS   = 16  --小房子最大半径，包括width和depth
+FN.ROOM_GAP = 60
 
 --[[
 房间坐标轴朝向

@@ -1,36 +1,6 @@
 local RoomUtils = require("tro_utils/room_utils")
 
-local BASE_OFF = RoomUtils.BASE_OFF + 100
 local ROOM_GAP = RoomUtils.ROOM_GAP
-local ROW_COUNT = RoomUtils.ROW_COUNT
-
-local function OnRoomDoorCreate(inst, door)
-    local room_center = door:TroGetRoomCenter()
-    if not room_center then
-        return
-    end
-
-    local self = inst.components.tro_roomspawner
-    self:UpdateRoom(room_center)
-end
-
-local function OnRoomDoorRemove(inst, door)
-    local self = inst.components.tro_roomspawner
-    local room_center = door:TroGetRoomCenter()
-    if room_center then
-        self:UpdateRoom(room_center)
-    end
-end
-
-local function OnRoomCreate(inst, room_center)
-    local self = inst.components.tro_roomspawner
-    self:UpdateRoom(room_center)
-end
-
-local function OnRoomRemove(inst, room_center)
-    local self = inst.components.tro_roomspawner
-    self:UpdateRoom(room_center)
-end
 
 -- 虚空小房子计数器，计数会一直递增，即便前面生成的房子已经销毁
 -- 这是一个主客机都有的组件，主机只需要保存count保证count递增，主客机都会构建rooms结构
@@ -86,8 +56,13 @@ function RoomSpawner:UpdateRoom(room)
 end
 
 function RoomSpawner:GetPos()
-    local x = (self.count % ROW_COUNT) * ROOM_GAP - BASE_OFF
-    local z = BASE_OFF + math.ceil(self.count / ROW_COUNT) * ROOM_GAP
+    local width, height = TheWorld.Map:GetWorldSize()
+    local max_radius = math.max(width, height) / 2 * 4
+    local base_off = max_radius + 100 --根据世界大小算小房子的初始z坐标
+    local row_count = 50              --每行几个房子
+    --这个x和z不能太大，不然角色都会不渲染了，看不见角色
+    local x = (self.count % row_count) * ROOM_GAP + base_off
+    local z = base_off + math.ceil(self.count / row_count) * ROOM_GAP
     self.count = self.count + 1
     return Vector3(x, 0, z)
 end

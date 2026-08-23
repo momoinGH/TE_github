@@ -16,12 +16,12 @@ end
 
 
 ----------------------------------------------------------------------------------------------------
-local RoomUtils = require("tro_utils/room_utils")
-
 local function UpdateTextureBefore(self)
     if not ThePlayer then return end
     local x, y, z = ThePlayer.Transform:GetWorldPosition()
-    if z < RoomUtils.BASE_OFF then return end --TODO
+    if not TheWorld.Map:TroIsWorldOut(x, y, z) then
+        return --玩家在地图里，不是小房子
+    end
 
     self._tro_pos = self._tro_pos or Vector3(x, y, z)
 

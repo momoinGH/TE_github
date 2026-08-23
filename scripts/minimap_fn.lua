@@ -29,6 +29,7 @@ local function AddPassage(room_root, rotate, cell_width, cell_depth)
     return passage
 end
 
+
 --- 绘制房间
 --- 以相对坐标决定绘制的坐标，需要注意的是x差值和z差值对应的是image的y和x，而且使用RoomUtils.DIR时别忘了房子的坐标轴和image坐标轴的转换
 local function AppendRoomTexture(self, start_room, room_offset_x, room_offset_y)
@@ -37,7 +38,7 @@ local function AppendRoomTexture(self, start_room, room_offset_x, room_offset_y)
     local width_radio = width / TUNING.ROOM_TINY_WIDTH --里面的固定数字都是按照小房子改的，房间变大时也变大
     local depth_ratio = depth / TUNING.ROOM_TINY_DEPTH
     local ratio = width / depth                        --长宽比，小房子会更长点
-    local room_gap = 60                                --房间边界处的间隔，为0时房间挨着房间
+    local room_gap = RoomUtils.ROOM_GAP                --房间边界处的间隔，为0时房间挨着房间
     local player_image = {}
     local passage_image = {}
     local room_grid, start_x, start_y = RoomUtils.GetCurrentRoomsGrid(start_room)
