@@ -29,6 +29,9 @@ local function dohatch(inst, hatch_time)
 			local warrior = SpawnPrefab("antman_warrior")
 			warrior.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			warrior.sg:GoToState("hatch")
+			if inst:HasTag("aporkalypse_cleanup") then
+				warrior:TroAddSaveTag("aporkalypse_cleanup")
+			end
 			if home then
 				home.components.childspawner:ReplaceChild(inst, warrior)
 			end

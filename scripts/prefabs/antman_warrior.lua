@@ -73,8 +73,17 @@ local function NormalKeepTargetFn(inst, target)
 end
 
 local function TransformToNormal(inst)
+    local home = inst.components.homeseeker and inst.components.homeseeker:GetHome()
     local normal = SpawnPrefab("antman")
     normal.Transform:SetPosition(inst.Transform:GetWorldPosition())
+
+    -- Keep the original anthill's childspawner slot when the warrior is
+    -- converted back. Otherwise removing the warrior is interpreted as a
+    -- death and the anthill starts an extra regeneration cycle.
+    if home and home.components.childspawner then
+        home.components.childspawner:ReplaceChild(inst, normal)
+    end
+
     inst:Remove()
 end
 
