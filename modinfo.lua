@@ -157,12 +157,6 @@ configuration_options =
             { description = "xHuger, 2×",    data = 2 },
         },
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.common,
-            world = { "forest" },
-            image = "world_size.tex"
-        }
     },
     {
         name = "ocean_style",
@@ -201,11 +195,6 @@ configuration_options =
             { description = "300%", data = 3.00, hover = en_zh_zht("bosses with 300% health", "巨兽生命值为300%", "巨獸生命值爲300%") },
         },
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.common,
-            world = { "forest" },
-        }
     },
     {
         name = "startlocation",
@@ -229,11 +218,6 @@ configuration_options =
         label = en_zh_zht("hamlet", "哈姆雷特", "哈姆雷特"),
         options = options_enable(),
         default = 1, --默认值
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.hamlet,
-            world = { "forest" },
-        }
     },
     {
         name = "hayfever",
@@ -241,13 +225,6 @@ configuration_options =
         hover = en_zh_zht("Enables the Hay Fever on Summer", "在夏季启用花粉症", "在夏季啓用花粉症"),
         options = options_enable(),
         default = 1, --默认值
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.hamlet,
-            world = { "forest" },
-            atlas = hamlet_atlas,
-            image = "hayfever.tex",
-        }
     },
     {
         name = "fog",
@@ -255,26 +232,12 @@ configuration_options =
         hover = en_zh_zht("Enables the fog on Winter", "在冬季启用迷雾", "在冬季啟用迷霧"),
         options = options_enable(),
         default = 1, --默认值
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.hamlet,
-            world = { "forest" },
-            atlas = hamlet_atlas,
-            image = "fog.tex",
-        }
     },
     {
         name = "vampirebatcave",
         label = en_zh_zht("Vampire bat cave", "洞穴裂缝"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.hamlet,
-            world = { "forest" },
-            atlas = hamlet_atlas,
-            image = "vampire_bat_caves.tex",
-        },
     },
     {
         name = "aporkalypse",
@@ -285,13 +248,6 @@ configuration_options =
             "大災變每60天出現一次\n如果不在遺蹟內重置災變日曆，每次將持續20天"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.hamlet,
-            world = { "forest" },
-            atlas = hamlet_atlas,
-            image = "aporkalypse.tex",
-        },
     },
 
     title(en_zh_zht("<shipwrecked>", "<海难>", "<海难>"), tro_modules.shipwrecked),
@@ -300,11 +256,6 @@ configuration_options =
         label = en_zh_zht("shipwrecked", "海难", "船難"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.shipwrecked,
-            world = { "forest" },
-        }
     },
     {
         name = "volcaniceruption",
@@ -315,13 +266,6 @@ configuration_options =
             "將在夏季時的海難區域定時發生火山噴發"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.shipwrecked,
-            world = { "forest" },
-            atlas = shipwrecked_atlas,
-            image = "volcano.tex",
-        },
     },
     {
         name = "twister",
@@ -332,13 +276,6 @@ configuration_options =
             "將在春季時的船難生態羣系生成船難巨獸：“豹捲風”"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.shipwrecked,
-            world = { "forest" },
-            atlas = shipwrecked_atlas,
-            image = "twister.tex",
-        },
     },
     {
         name = "hurricane",
@@ -349,11 +286,6 @@ configuration_options =
             "颶風颳起時會影響玩家移動速度\n並將樹木和植物吹倒\n在海面形成更大的海浪"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.shipwrecked,
-            world = { "forest" },
-        },
     },
     {
         name = "springflood",
@@ -364,13 +296,6 @@ configuration_options =
             "春季下雨時會生成水坑\n並在其中生成具有攻擊性的毒蚊子"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.shipwrecked,
-            world = { "forest" },
-            atlas = shipwrecked_atlas,
-            image = "floods.tex",
-        },
     },
     {
         name = "waves",
@@ -381,13 +306,6 @@ configuration_options =
             "海面將生成海浪 *吹風時會有更大的浪*"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.SETTINGS },
-            group = tro_modules.shipwrecked,
-            world = { "forest" },
-            atlas = shipwrecked_atlas,
-            image = "waves.tex",
-        },
     },
     title(en_zh_zht("<shipwrecked_plus>", "<海难Plus>", "<海难Plus>"), tro_modules.shipwrecked_plus),
     {
@@ -399,11 +317,6 @@ configuration_options =
             "生成來自船難PLUS(Shipwrecked PLUS)模組內容的額外島嶼"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.shipwrecked_plus,
-            world = { "forest" },
-        }
     },
 
     title(en_zh_zht("<frostisland>", "<冰霜岛屿>", "<冰霜岛屿>"), tro_modules.frostisland),
@@ -416,11 +329,6 @@ configuration_options =
             "創建永遠是冬天的冰霜岛屿、冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.frostisland,
-            world = { "forest" },
-        }
     },
 
     title(en_zh_zht("<quagmire>", "<暴食>", "<暴食>"), tro_modules.quagmire),
@@ -433,11 +341,6 @@ configuration_options =
             "生成一個暴食生態羣系島嶼\n靈感來自官方的暴食(Re-Gorge-itated)模組"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.quagmire,
-            world = { "forest" },
-        }
     },
 
     title(en_zh_zht("<underwater>", "<海底世界>", "<海底世界>"), tro_modules.underwater),
@@ -450,11 +353,6 @@ configuration_options =
             "將在地面伺服器生成海底入口\n（僅影響自定義世界、哈姆雷特世界和船難世界）"),
         options = options_enable(),
         default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.underwater,
-            world = { "forest" },
-        }
     },
 
     -- title(en_zh_zht("<greenworld>", "<绿色世界>", "<绿色世界>"), tro_modules.greenworld),
@@ -467,11 +365,6 @@ configuration_options =
     --         "將生成來自綠色世界(Green World)模組的生態羣系"),
     --     options = options_enable(),
     --     default = 1,
-    --     world_gen = {
-    --         category = { LEVELCATEGORY.WORLDGEN },
-    --         group = tro_modules.greenworld,
-    --         world = { "forest" },
-    --     }
     -- },
 
     -- title(en_zh_zht("<windy>", "<大风平原>", "<大风平原>"), tro_modules.windy),
@@ -484,11 +377,6 @@ configuration_options =
     --         "將生成來自大風平原(Windy Plains)模組的生態羣系"),
     --     options = options_enable(),
     --     default = 1,
-    --     world_gen = {
-    --         category = { LEVELCATEGORY.WORLDGEN },
-    --         group = tro_modules.windy,
-    --         world = { "forest" },
-    --     }
     -- },
 
     -- title(en_zh_zht("<lavaarena>", "<熔炉竞技场>", "<熔炉竞技场>"), tro_modules.lavaarena),
@@ -497,11 +385,6 @@ configuration_options =
     --     label = "熔炉竞技场",
     --     options = options_enable(),
     --     default = 1,
-    --     world_gen = {
-    --         category = { LEVELCATEGORY.WORLDGEN },
-    --         group = tro_modules.lavaarena,
-    --         world = { "forest" },
-    --     }
     -- },
 
     -- title(en_zh_zht("<Sea World>", "<仅海洋世界>", "<仅海洋世界>"), tro_modules.sea),
@@ -514,10 +397,5 @@ configuration_options =
     --         "將生成陸地稀少的海洋世界，在茫茫大海中探索生存吧（会覆盖其他模块）"),
     --     options = options_enable(),
     --     default = 0,
-    --     world_gen = {
-    --         category = { LEVELCATEGORY.WORLDGEN },
-    --         group = tro_modules.sea,
-    --         world = { "forest" },
-    --     }
     -- },
 }
