@@ -65558,5 +65558,2405 @@
                 </key>
             </timeline>
         </animation>
+        <animation id="31" name="death_side" length="900" interval="25">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="15" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="0" z_index="2"/>
+                    <object_ref id="3" timeline="7" key="0" z_index="3"/>
+                    <object_ref id="4" timeline="19" key="0" z_index="4"/>
+                    <object_ref id="5" timeline="11" key="0" z_index="5"/>
+                    <object_ref id="6" timeline="10" key="0" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="0" z_index="7"/>
+                    <object_ref id="8" timeline="12" key="0" z_index="8"/>
+                    <object_ref id="9" timeline="14" key="0" z_index="9"/>
+                    <object_ref id="10" timeline="17" key="0" z_index="10"/>
+                    <object_ref id="11" timeline="21" key="0" z_index="11"/>
+                    <object_ref id="12" timeline="6" key="0" z_index="12"/>
+                    <object_ref id="13" timeline="20" key="0" z_index="13"/>
+                    <object_ref id="14" timeline="5" key="0" z_index="14"/>
+                    <object_ref id="15" timeline="18" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="0" z_index="16"/>
+                    <object_ref id="17" timeline="3" key="0" z_index="17"/>
+                    <object_ref id="18" timeline="13" key="0" z_index="18"/>
+                    <object_ref id="19" timeline="16" key="0" z_index="19"/>
+                    <object_ref id="20" timeline="0" key="0" z_index="20"/>
+                    <object_ref id="21" timeline="22" key="0" z_index="21"/>
+                    <object_ref id="22" timeline="1" key="0" z_index="22"/>
+                </key>
+                <key id="1" time="225">
+                    <object_ref id="0" timeline="15" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="1" z_index="2"/>
+                    <object_ref id="3" timeline="7" key="1" z_index="3"/>
+                    <object_ref id="4" timeline="19" key="1" z_index="4"/>
+                    <object_ref id="5" timeline="11" key="1" z_index="5"/>
+                    <object_ref id="6" timeline="10" key="1" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="1" z_index="7"/>
+                    <object_ref id="8" timeline="12" key="1" z_index="8"/>
+                    <object_ref id="9" timeline="14" key="1" z_index="9"/>
+                    <object_ref id="10" timeline="17" key="1" z_index="10"/>
+                    <object_ref id="11" timeline="21" key="1" z_index="11"/>
+                    <object_ref id="12" timeline="6" key="1" z_index="12"/>
+                    <object_ref id="13" timeline="20" key="1" z_index="13"/>
+                    <object_ref id="14" timeline="5" key="1" z_index="14"/>
+                    <object_ref id="15" timeline="18" key="1" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="1" z_index="16"/>
+                    <object_ref id="17" timeline="3" key="1" z_index="17"/>
+                    <object_ref id="18" timeline="13" key="1" z_index="18"/>
+                    <object_ref id="19" timeline="16" key="1" z_index="19"/>
+                    <object_ref id="20" timeline="0" key="1" z_index="20"/>
+                    <object_ref id="21" timeline="22" key="1" z_index="21"/>
+                    <object_ref id="22" timeline="1" key="1" z_index="22"/>
+                </key>
+                <key id="2" time="450">
+                    <object_ref id="0" timeline="15" key="2" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="2" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="2" z_index="2"/>
+                    <object_ref id="3" timeline="7" key="2" z_index="3"/>
+                    <object_ref id="4" timeline="19" key="2" z_index="4"/>
+                    <object_ref id="5" timeline="11" key="2" z_index="5"/>
+                    <object_ref id="6" timeline="10" key="2" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="2" z_index="7"/>
+                    <object_ref id="8" timeline="12" key="2" z_index="8"/>
+                    <object_ref id="9" timeline="14" key="2" z_index="9"/>
+                    <object_ref id="10" timeline="17" key="2" z_index="10"/>
+                    <object_ref id="11" timeline="21" key="2" z_index="11"/>
+                    <object_ref id="12" timeline="6" key="2" z_index="12"/>
+                    <object_ref id="13" timeline="20" key="2" z_index="13"/>
+                    <object_ref id="14" timeline="5" key="2" z_index="14"/>
+                    <object_ref id="15" timeline="18" key="2" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="2" z_index="16"/>
+                    <object_ref id="17" timeline="3" key="2" z_index="17"/>
+                    <object_ref id="18" timeline="13" key="2" z_index="18"/>
+                    <object_ref id="19" timeline="16" key="2" z_index="19"/>
+                    <object_ref id="20" timeline="0" key="2" z_index="20"/>
+                    <object_ref id="21" timeline="22" key="2" z_index="21"/>
+                    <object_ref id="22" timeline="1" key="2" z_index="22"/>
+                </key>
+                <key id="3" time="675">
+                    <object_ref id="0" timeline="15" key="3" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="3" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="3" z_index="2"/>
+                    <object_ref id="3" timeline="7" key="3" z_index="3"/>
+                    <object_ref id="4" timeline="19" key="3" z_index="4"/>
+                    <object_ref id="5" timeline="11" key="3" z_index="5"/>
+                    <object_ref id="6" timeline="10" key="3" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="3" z_index="7"/>
+                    <object_ref id="8" timeline="12" key="3" z_index="8"/>
+                    <object_ref id="9" timeline="14" key="3" z_index="9"/>
+                    <object_ref id="10" timeline="17" key="3" z_index="10"/>
+                    <object_ref id="11" timeline="21" key="3" z_index="11"/>
+                    <object_ref id="12" timeline="6" key="3" z_index="12"/>
+                    <object_ref id="13" timeline="20" key="3" z_index="13"/>
+                    <object_ref id="14" timeline="5" key="3" z_index="14"/>
+                    <object_ref id="15" timeline="18" key="3" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="3" z_index="16"/>
+                    <object_ref id="17" timeline="3" key="3" z_index="17"/>
+                    <object_ref id="18" timeline="13" key="3" z_index="18"/>
+                    <object_ref id="19" timeline="16" key="3" z_index="19"/>
+                    <object_ref id="20" timeline="0" key="3" z_index="20"/>
+                    <object_ref id="21" timeline="22" key="3" z_index="21"/>
+                    <object_ref id="22" timeline="1" key="3" z_index="22"/>
+                </key>
+                <key id="4" time="800">
+                    <object_ref id="0" timeline="15" key="4" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="4" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="4" z_index="2"/>
+                    <object_ref id="3" timeline="7" key="4" z_index="3"/>
+                    <object_ref id="4" timeline="19" key="4" z_index="4"/>
+                    <object_ref id="5" timeline="11" key="4" z_index="5"/>
+                    <object_ref id="6" timeline="10" key="4" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="4" z_index="7"/>
+                    <object_ref id="8" timeline="12" key="4" z_index="8"/>
+                    <object_ref id="9" timeline="14" key="4" z_index="9"/>
+                    <object_ref id="10" timeline="17" key="4" z_index="10"/>
+                    <object_ref id="11" timeline="21" key="4" z_index="11"/>
+                    <object_ref id="12" timeline="6" key="4" z_index="12"/>
+                    <object_ref id="13" timeline="20" key="4" z_index="13"/>
+                    <object_ref id="14" timeline="5" key="4" z_index="14"/>
+                    <object_ref id="15" timeline="18" key="4" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="4" z_index="16"/>
+                    <object_ref id="17" timeline="3" key="4" z_index="17"/>
+                    <object_ref id="18" timeline="13" key="4" z_index="18"/>
+                    <object_ref id="19" timeline="16" key="4" z_index="19"/>
+                    <object_ref id="20" timeline="0" key="4" z_index="20"/>
+                    <object_ref id="21" timeline="22" key="4" z_index="21"/>
+                    <object_ref id="22" timeline="1" key="4" z_index="22"/>
+                </key>
+                <key id="5" time="875">
+                    <object_ref id="0" timeline="15" key="5" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="5" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="5" z_index="2"/>
+                    <object_ref id="3" timeline="7" key="5" z_index="3"/>
+                    <object_ref id="4" timeline="19" key="5" z_index="4"/>
+                    <object_ref id="5" timeline="11" key="5" z_index="5"/>
+                    <object_ref id="6" timeline="10" key="5" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="5" z_index="7"/>
+                    <object_ref id="8" timeline="12" key="5" z_index="8"/>
+                    <object_ref id="9" timeline="14" key="5" z_index="9"/>
+                    <object_ref id="10" timeline="17" key="5" z_index="10"/>
+                    <object_ref id="11" timeline="21" key="5" z_index="11"/>
+                    <object_ref id="12" timeline="6" key="5" z_index="12"/>
+                    <object_ref id="13" timeline="20" key="5" z_index="13"/>
+                    <object_ref id="14" timeline="5" key="5" z_index="14"/>
+                    <object_ref id="15" timeline="18" key="5" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="5" z_index="16"/>
+                    <object_ref id="17" timeline="3" key="5" z_index="17"/>
+                    <object_ref id="18" timeline="13" key="5" z_index="18"/>
+                    <object_ref id="19" timeline="16" key="5" z_index="19"/>
+                    <object_ref id="20" timeline="0" key="5" z_index="20"/>
+                    <object_ref id="21" timeline="22" key="5" z_index="21"/>
+                    <object_ref id="22" timeline="1" key="5" z_index="22"/>
+                </key>
+                <key id="6" time="900">
+                    <object_ref id="0" timeline="15" key="6" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="6" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="6" z_index="2"/>
+                    <object_ref id="3" timeline="7" key="6" z_index="3"/>
+                    <object_ref id="4" timeline="19" key="6" z_index="4"/>
+                    <object_ref id="5" timeline="11" key="6" z_index="5"/>
+                    <object_ref id="6" timeline="10" key="6" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="6" z_index="7"/>
+                    <object_ref id="8" timeline="12" key="6" z_index="8"/>
+                    <object_ref id="9" timeline="14" key="6" z_index="9"/>
+                    <object_ref id="10" timeline="17" key="6" z_index="10"/>
+                    <object_ref id="11" timeline="21" key="6" z_index="11"/>
+                    <object_ref id="12" timeline="6" key="6" z_index="12"/>
+                    <object_ref id="13" timeline="20" key="6" z_index="13"/>
+                    <object_ref id="14" timeline="5" key="6" z_index="14"/>
+                    <object_ref id="15" timeline="18" key="6" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="6" z_index="16"/>
+                    <object_ref id="17" timeline="3" key="6" z_index="17"/>
+                    <object_ref id="18" timeline="13" key="6" z_index="18"/>
+                    <object_ref id="19" timeline="16" key="6" z_index="19"/>
+                    <object_ref id="20" timeline="0" key="6" z_index="20"/>
+                    <object_ref id="21" timeline="22" key="6" z_index="21"/>
+                    <object_ref id="22" timeline="1" key="6" z_index="22"/>
+                </key>
+                <key id="7" time="900">
+                    <object_ref id="0" timeline="15" key="6" z_index="0"/>
+                    <object_ref id="1" timeline="4" key="6" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="6" z_index="2"/>
+                    <object_ref id="3" timeline="7" key="6" z_index="3"/>
+                    <object_ref id="4" timeline="19" key="6" z_index="4"/>
+                    <object_ref id="5" timeline="11" key="6" z_index="5"/>
+                    <object_ref id="6" timeline="10" key="6" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="6" z_index="7"/>
+                    <object_ref id="8" timeline="12" key="6" z_index="8"/>
+                    <object_ref id="9" timeline="14" key="6" z_index="9"/>
+                    <object_ref id="10" timeline="17" key="6" z_index="10"/>
+                    <object_ref id="11" timeline="21" key="6" z_index="11"/>
+                    <object_ref id="12" timeline="6" key="6" z_index="12"/>
+                    <object_ref id="13" timeline="20" key="6" z_index="13"/>
+                    <object_ref id="14" timeline="5" key="6" z_index="14"/>
+                    <object_ref id="15" timeline="18" key="6" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="6" z_index="16"/>
+                    <object_ref id="17" timeline="3" key="6" z_index="17"/>
+                    <object_ref id="18" timeline="13" key="6" z_index="18"/>
+                    <object_ref id="19" timeline="16" key="6" z_index="19"/>
+                    <object_ref id="20" timeline="0" key="6" z_index="20"/>
+                    <object_ref id="21" timeline="22" key="6" z_index="21"/>
+                    <object_ref id="22" timeline="1" key="6" z_index="22"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="mowlth_anten_2">
+                <key id="0">
+                    <object folder="1" file="1" x="452.5" y="714.3" angle="276.903046" scale_x="1.04361" scale_y="0.686515"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="1" file="1" x="454.7912" y="706.39557" angle="277.73377" scale_x="1.038273" scale_y="0.687879"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="1" x="461.1303" y="683.503" angle="277.99451" scale_x="1.025331" scale_y="0.694228"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="1" file="1" x="614.061538" y="463.5" angle="244.51102" scale_x="1.01359" scale_y="0.704814"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="1" file="1" x="613.60883" y="463.095137" angle="243.464096" scale_x="1.019591" scale_y="0.709301"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="1" file="1" x="613.60883" y="463.095137" angle="243.464096" scale_x="1.019591" scale_y="0.709301"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="1" x="613.60883" y="463.095137" angle="243.464096" scale_x="1.019591" scale_y="0.709301"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="mowlth_anten_1">
+                <key id="0">
+                    <object folder="1" file="1" x="225.4" y="709.3" angle="321.827" scale_x="0.999981" scale_y="0.999981"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="1" file="1" x="226.33382" y="700.225" angle="323.169502" scale_x="0.993811" scale_y="0.989312"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="1" x="230.25304" y="674.2591" angle="324.23794" scale_x="0.982281" scale_y="0.967064"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="1" file="1" x="404.111538" y="525.596154" angle="291.51001" scale_x="0.973091" scale_y="0.951584"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="1" file="1" x="400.014821" y="531.532732" angle="289.916" scale_x="0.969271" scale_y="0.962701"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="1" file="1" x="400.014821" y="531.532732" angle="289.916" scale_x="0.969271" scale_y="0.962701"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="1" x="400.014821" y="531.532732" angle="289.916" scale_x="0.969271" scale_y="0.962701"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="mowlth_wingparts">
+                <key id="0">
+                    <object folder="2" file="1" x="25.9" y="732.05" angle="220.23729" scale_x="1.03906" scale_y="-0.832476"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="2" file="1" x="26.733822" y="727.9912" angle="220.43457" scale_x="1.037962" scale_y="-0.829042"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="28.745455" y="716.7833" angle="220.8508" scale_x="1.040574" scale_y="-0.82387"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="2" file="1" x="61.2" y="581.85" angle="188.85039" scale_x="1.01619" scale_y="-0.816484"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="2" file="1" x="61.289707" y="581.8485" angle="188.42593" scale_x="1.013897" scale_y="-0.816475"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="2" file="1" x="61.289707" y="581.8485" angle="188.42593" scale_x="1.013897" scale_y="-0.816475"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="61.289707" y="581.8485" angle="188.42593" scale_x="1.013897" scale_y="-0.816475"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="mowlth_wingparts_1">
+                <key id="0" spin="-1">
+                    <object folder="2" file="1" x="3.75" y="778.25" angle="344.437032" scale_x="0.949662" scale_y="0.904136"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="2" file="1" x="4.633823" y="774.0044" angle="344.106563" scale_x="0.952729" scale_y="0.899543"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="6.943939" y="762.5333" angle="342.919083" scale_x="0.964518" scale_y="0.888755"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="2" file="1" x="38.25" y="626.95" angle="318.196998" scale_x="0.952837" scale_y="0.87183"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="2" file="1" x="38.116177" y="626.6353" angle="318.940881" scale_x="0.950117" scale_y="0.871956"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="2" file="1" x="38.116177" y="626.6353" angle="318.940881" scale_x="0.950117" scale_y="0.871956"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="38.116177" y="626.6353" angle="318.940881" scale_x="0.950117" scale_y="0.871956"/>
+                </key>
+            </timeline>
+            <timeline id="4" name="mowlth_wingparts_2">
+                <key id="0" spin="-1">
+                    <object folder="2" file="1" x="-78.15" y="758.6" angle="29.788893" scale_x="0.945818" scale_y="0.626066"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="2" file="1" x="-77.55294" y="754.4176" angle="28.802368" scale_x="0.946454" scale_y="0.623959"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="-75.80606" y="743.0318" angle="26.243742" scale_x="0.951058" scale_y="0.621562"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="2" file="1" x="-44.3" y="609.2" angle="2.982517" scale_x="0.926072" scale_y="0.618422"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="2" file="1" x="-44.17352" y="609.0485" angle="3.801647" scale_x="0.920813" scale_y="0.618386"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="2" file="1" x="-44.17352" y="609.0485" angle="3.801647" scale_x="0.920813" scale_y="0.618386"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="-44.17352" y="609.0485" angle="3.801647" scale_x="0.920813" scale_y="0.618386"/>
+                </key>
+            </timeline>
+            <timeline id="5" name="mowlth_ey">
+                <key id="0" spin="-1">
+                    <object folder="8" file="0" x="129.15" y="360.65" angle="0"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="8" file="0" x="130.40735" y="355.48383" angle="359.969135" scale_x="1.004141" scale_y="0.99141"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="8" file="0" x="133.24394" y="341.9818" angle="359.407363" scale_x="1.013969" scale_y="0.971377"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="8" file="0" x="162.6" y="219.85" angle="330.980993" scale_x="1.01879" scale_y="0.961632"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="8" file="0" x="161.3294" y="226.92352" angle="331.545437" scale_x="1.014202" scale_y="0.970789"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="8" file="0" x="161.3294" y="226.92352" angle="331.545437" scale_x="1.014202" scale_y="0.970789"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="8" file="0" x="161.3294" y="226.92352" angle="331.545437" scale_x="1.014202" scale_y="0.970789"/>
+                </key>
+            </timeline>
+            <timeline id="6" name="mowlth_leg_1">
+                <key id="0">
+                    <object folder="7" file="1" x="-56.15" y="176.15" angle="9.439491" scale_x="0.999982" scale_y="1.00389"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="1" x="-55.179413" y="173.325" angle="9.977255" scale_x="1.002514" scale_y="0.994736"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="1" x="-52.706062" y="166.5394" angle="11.535926" scale_x="1.010657" scale_y="0.975064"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="1" x="-51.35" y="163.2" angle="12.29421" scale_x="1.01489" scale_y="0.965802"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="7" file="1" x="-52.433823" y="166.26471" angle="11.567642" scale_x="1.010817" scale_y="0.974375"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="7" file="1" x="-52.433823" y="166.26471" angle="11.567642" scale_x="1.010817" scale_y="0.974375"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="1" x="-52.433823" y="166.26471" angle="11.567642" scale_x="1.010817" scale_y="0.974375"/>
+                </key>
+            </timeline>
+            <timeline id="7" name="mowlth_ab">
+                <key id="0" spin="-1">
+                    <object folder="3" file="0" x="-192.25" y="565.45" angle="338.342024" scale_x="0.999994" scale_y="0.999994"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="3" file="0" x="-191.60295" y="560.45734" angle="337.521374" scale_x="1.000317" scale_y="0.996894"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="3" file="0" x="-189.5803" y="546.84094" angle="336.549738" scale_x="1.004987" scale_y="0.992245"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="3" file="0" x="-159.7" y="418.85" angle="310.57803" scale_x="1.010889" scale_y="0.989322"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="3" file="0" x="-158.61618" y="422.1691" angle="310.912771" scale_x="1.008933" scale_y="0.990298"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="3" file="0" x="-158.61618" y="422.1691" angle="310.912771" scale_x="1.008933" scale_y="0.990298"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="3" file="0" x="-158.61618" y="422.1691" angle="310.912771" scale_x="1.008933" scale_y="0.990298"/>
+                </key>
+            </timeline>
+            <timeline id="8" name="mowlth_leg_4">
+                <key id="0" spin="-1">
+                    <object folder="7" file="0" x="-219" y="277.85" angle="345.015005" scale_x="1.00399" scale_y="1.15851"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="0" x="-220.03383" y="274.65146" angle="344.743696" scale_x="1.006126" scale_y="1.148"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="0" x="-222.2697" y="266.94092" angle="343.778988" scale_x="1.014136" scale_y="1.126889"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="0" x="-223.1" y="263.2" angle="343.317997" scale_x="1.01843" scale_y="1.11714"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="7" file="0" x="-222.06618" y="266.625" angle="343.797653" scale_x="1.014226" scale_y="1.126107"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="7" file="0" x="-222.06618" y="266.625" angle="343.797653" scale_x="1.014226" scale_y="1.126107"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="0" x="-222.06618" y="266.625" angle="343.797653" scale_x="1.014226" scale_y="1.126107"/>
+                </key>
+            </timeline>
+            <timeline id="9" name="mowlth_mouth">
+                <key id="0" spin="-1">
+                    <object folder="5" file="1" x="274.15" y="262.2" angle="0"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="5" file="1" x="275.08383" y="254.50587" angle="358.497317" scale_x="1.006387"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="5" file="1" x="277.1197" y="236.61365" angle="354.979123" scale_x="1.021259"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="5" file="1" x="306.15" y="112.9" angle="325.226027" scale_x="1.028479"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="5" file="1" x="305.20294" y="121.07059" angle="326.873151" scale_x="1.02171"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="5" file="1" x="305.20294" y="121.07059" angle="326.873151" scale_x="1.02171"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="5" file="1" x="305.20294" y="121.07059" angle="326.873151" scale_x="1.02171"/>
+                </key>
+            </timeline>
+            <timeline id="10" name="mowlth_leg_5">
+                <key id="0">
+                    <object folder="7" file="2" x="-265.8" y="140.45" angle="333.532995" scale_x="1.01182" scale_y="1.04699"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="2" x="-269.85883" y="139.7897" angle="334.040855" scale_x="1.009753" scale_y="1.033417"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="2" x="-279.08032" y="138.12878" angle="335.24898" scale_x="1.009757" scale_y="1.006435"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="2" x="-283.4" y="137.2" angle="335.815002" scale_x="1.01042" scale_y="0.993919"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="7" file="2" x="-279.17795" y="137.94705" angle="335.244106" scale_x="1.009576" scale_y="1.005489"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="7" file="2" x="-279.17795" y="137.94705" angle="335.244106" scale_x="1.009576" scale_y="1.005489"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="2" x="-279.17795" y="137.94705" angle="335.244106" scale_x="1.009576" scale_y="1.005489"/>
+                </key>
+            </timeline>
+            <timeline id="11" name="mowlth_leg_6">
+                <key id="0" spin="-1">
+                    <object folder="7" file="0" x="-84.1" y="280.85" angle="10.474119" scale_x="1.03873" scale_y="0.924328"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="0" x="-85.270584" y="276.7044" angle="9.472573" scale_x="1.040861" scale_y="0.92007"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="0" x="-87.76969" y="266.97122" angle="7.403162" scale_x="1.048692" scale_y="0.911304"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="0" x="-88.85" y="262.15" angle="6.404954" scale_x="1.05289" scale_y="0.90715"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="7" file="0" x="-87.81618" y="266.62207" angle="7.339937" scale_x="1.048835" scale_y="0.91105"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="7" file="0" x="-87.81618" y="266.62207" angle="7.339937" scale_x="1.048835" scale_y="0.91105"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="0" x="-87.81618" y="266.62207" angle="7.339937" scale_x="1.048835" scale_y="0.91105"/>
+                </key>
+            </timeline>
+            <timeline id="12" name="mowlth_bod">
+                <key id="0" spin="-1">
+                    <object folder="6" file="1" x="147.6" y="459.1" angle="356.046033"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="6" file="1" x="149.13089" y="453.07352" angle="356.010735" scale_x="1.003811" scale_y="0.991084"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="6" file="1" x="152.59244" y="438.85455" angle="355.715588" scale_x="1.013434" scale_y="0.971161"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="6" file="1" x="182.3" y="316.85" angle="327.565006" scale_x="1.01823" scale_y="0.961635"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="6" file="1" x="180.65588" y="323.37646" angle="327.684944" scale_x="1.013673" scale_y="0.97053"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="6" file="1" x="180.65588" y="323.37646" angle="327.684944" scale_x="1.013673" scale_y="0.97053"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="6" file="1" x="180.65588" y="323.37646" angle="327.684944" scale_x="1.013673" scale_y="0.97053"/>
+                </key>
+            </timeline>
+            <timeline id="13" name="mowlth_bod_1">
+                <key id="0" spin="-1">
+                    <object folder="6" file="2" x="-10.25" y="780.35" angle="19.517723" scale_x="0.999981" scale_y="0.999981"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="6" file="2" x="-9.129412" y="774.5" angle="19.325447" scale_x="1.000391" scale_y="0.99371"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="6" file="2" x="-6.233333" y="758.497" angle="18.935188" scale_x="1.004914" scale_y="0.980058"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="6" file="2" x="24.6" y="628.15" angle="350.805473" scale_x="1.01041" scale_y="0.968277"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="6" file="2" x="23.816176" y="632.81323" angle="350.81909" scale_x="1.008539" scale_y="0.971934"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="6" file="2" x="23.816176" y="632.81323" angle="350.81909" scale_x="1.008539" scale_y="0.971934"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="6" file="2" x="23.816176" y="632.81323" angle="350.81909" scale_x="1.008539" scale_y="0.971934"/>
+                </key>
+            </timeline>
+            <timeline id="14" name="mowlth_leg_3">
+                <key id="0" spin="-1">
+                    <object folder="7" file="3" x="246.15" y="84.65" angle="9.329587" scale_x="0.604725" scale_y="0.85912"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="3" x="249.41176" y="84.176476" angle="8.550466" scale_x="0.604155" scale_y="0.853494"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="3" x="256.93488" y="82.85303" angle="6.892677" scale_x="0.604157" scale_y="0.841581"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="3" x="260.55" y="82.25" angle="6.039323" scale_x="0.604336" scale_y="0.835913"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="7" file="3" x="257.14853" y="82.77353" angle="6.820169" scale_x="0.604107" scale_y="0.841216"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="7" file="3" x="257.14853" y="82.77353" angle="6.820169" scale_x="0.604107" scale_y="0.841216"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="3" x="257.14853" y="82.77353" angle="6.820169" scale_x="0.604107" scale_y="0.841216"/>
+                </key>
+            </timeline>
+            <timeline id="15" name="mowlth_wingparts_3">
+                <key id="0" spin="-1">
+                    <object folder="2" file="1" x="-43.3" y="733.85" angle="178.90799" scale_x="0.802021" scale_y="-0.472072"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="2" file="1" x="-42.416176" y="729.8412" angle="178.77684" scale_x="0.806683" scale_y="-0.469722"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="-39.883335" y="718.7818" angle="178.34941" scale_x="0.819775" scale_y="-0.463889"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="2" file="1" x="-8" y="584.4" angle="144.98102" scale_x="0.817055" scale_y="-0.454689"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="2" file="1" x="-7.760292" y="584.2618" angle="144.21805" scale_x="0.81564" scale_y="-0.454742"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="2" file="1" x="-7.760292" y="584.2618" angle="144.21805" scale_x="0.81564" scale_y="-0.454742"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="-7.760292" y="584.2618" angle="144.21805" scale_x="0.81564" scale_y="-0.454742"/>
+                </key>
+            </timeline>
+            <timeline id="16" name="mowlth_anten_3">
+                <key id="0" spin="-1">
+                    <object folder="1" file="0" x="335.3" y="431.95" angle="331.766" scale_x="0.948106" scale_y="1.05483"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="1" file="0" x="336.91763" y="426.54706" angle="331.456472" scale_x="0.951316" scale_y="1.044148"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="0" x="341.2121" y="411.81818" angle="330.378206" scale_x="0.964399" scale_y="1.019731"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="1" file="0" x="373.3" y="282.75" angle="301.41601" scale_x="0.978479" scale_y="0.998186"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="1" file="0" x="371.9191" y="285.62207" angle="301.296612" scale_x="0.980707" scale_y="0.997981"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="1" file="0" x="371.9191" y="285.62207" angle="301.296612" scale_x="0.980707" scale_y="0.997981"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="0" x="371.9191" y="285.62207" angle="301.296612" scale_x="0.980707" scale_y="0.997981"/>
+                </key>
+            </timeline>
+            <timeline id="17" name="mowlth_leg_2">
+                <key id="0">
+                    <object folder="7" file="1" x="188.9" y="181.65" angle="15.374804" scale_x="0.999982" scale_y="1.00707"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="1" x="190.95442" y="178.06471" angle="15.897801" scale_x="1.002497" scale_y="1.004105"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="1" x="195.64091" y="169.56818" angle="17.439028" scale_x="1.010642" scale_y="1.000959"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="1" x="197.85" y="165.2" angle="18.301018" scale_x="1.01489" scale_y="0.999996"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="7" file="1" x="195.71912" y="169.09853" angle="17.57714" scale_x="1.01084" scale_y="1.00069"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="7" file="1" x="195.71912" y="169.09853" angle="17.57714" scale_x="1.01084" scale_y="1.00069"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="1" x="195.71912" y="169.09853" angle="17.57714" scale_x="1.01084" scale_y="1.00069"/>
+                </key>
+            </timeline>
+            <timeline id="18" name="mowlth_eye2">
+                <key id="0" spin="-1">
+                    <object folder="4" file="0" x="390.2" y="375.65" angle="352.519007" scale_x="0.999998" scale_y="0.999998"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="4" file="0" x="392.5647" y="369.65" angle="352.47885" scale_x="1.00341" scale_y="0.990881"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="4" file="0" x="398.0621" y="351.9697" angle="351.960972" scale_x="1.013905" scale_y="0.970112"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="4" file="0" x="433.265385" y="196.080769" angle="323.573018" scale_x="1.01968" scale_y="0.95981"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="4" file="0" x="435.326369" y="205.104078" angle="324.017599" scale_x="1.013816" scale_y="0.969759"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="4" file="0" x="435.326369" y="205.104078" angle="324.017599" scale_x="1.013816" scale_y="0.969759"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="4" file="0" x="435.326369" y="205.104078" angle="324.017599" scale_x="1.013816" scale_y="0.969759"/>
+                </key>
+            </timeline>
+            <timeline id="19" name="mowlth_leg_7">
+                <key id="0">
+                    <object folder="7" file="2" x="-94.85" y="149.15" angle="352.541976" scale_x="0.687427" scale_y="0.876706"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="2" x="-97.78823" y="144.64412" angle="353.06464" scale_x="0.687062" scale_y="0.850235"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="2" x="-104.63485" y="134.12273" angle="354.046058" scale_x="0.687076" scale_y="0.79011"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="2" x="-107.8" y="128.9" angle="354.495001" scale_x="0.687193" scale_y="0.761104"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="7" file="2" x="-104.69853" y="133.73236" angle="354.100416" scale_x="0.687043" scale_y="0.788275"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="7" file="2" x="-104.69853" y="133.73236" angle="354.100416" scale_x="0.687043" scale_y="0.788275"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="2" x="-104.69853" y="133.73236" angle="354.100416" scale_x="0.687043" scale_y="0.788275"/>
+                </key>
+            </timeline>
+            <timeline id="20" name="mowlth_head">
+                <key id="0" spin="-1">
+                    <object folder="0" file="1" x="160.05" y="330.05" angle="0"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="0" file="1" x="161.37059" y="325.10736" angle="359.969135" scale_x="1.004141" scale_y="0.99141"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="0" file="1" x="164.46819" y="313.35" angle="359.651134" scale_x="1.013825" scale_y="0.971452"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="0" file="1" x="193.8" y="192.6" angle="331.463006" scale_x="1.01853" scale_y="0.9618"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="0" file="1" x="192.44266" y="197.9294" angle="331.680438" scale_x="1.014128" scale_y="0.970857"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="0" file="1" x="192.44266" y="197.9294" angle="331.680438" scale_x="1.014128" scale_y="0.970857"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="0" file="1" x="192.44266" y="197.9294" angle="331.680438" scale_x="1.014128" scale_y="0.970857"/>
+                </key>
+            </timeline>
+            <timeline id="21" name="mowlth_leg">
+                <key id="0" spin="-1">
+                    <object folder="7" file="3" x="-19.3" y="80.35" angle="12.316701" scale_x="0.687405" scale_y="0.87668"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="3" x="-16.411766" y="76.541176" angle="11.689035" scale_x="0.686564" scale_y="0.84857"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="3" x="-9.515152" y="67.84393" angle="10.403927" scale_x="0.686568" scale_y="0.784937"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="3" x="-6.15" y="63.6" angle="9.775983" scale_x="0.686828" scale_y="0.754221"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="7" file="3" x="-9.251471" y="67.598526" angle="10.363797" scale_x="0.686502" scale_y="0.782978"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="7" file="3" x="-9.251471" y="67.598526" angle="10.363797" scale_x="0.686502" scale_y="0.782978"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="3" x="-9.251471" y="67.598526" angle="10.363797" scale_x="0.686502" scale_y="0.782978"/>
+                </key>
+            </timeline>
+            <timeline id="22" name="mowlth_anten">
+                <key id="0" spin="-1">
+                    <object folder="1" file="0" x="259.35" y="428.3" angle="0"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="1" file="0" x="260.70734" y="423.12057" angle="359.97762" scale_x="1.002925" scale_y="0.983685"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="0" x="264.4394" y="408.91666" angle="359.725178" scale_x="1.010902" scale_y="0.939257"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="1" file="0" x="296" y="280.4" angle="331.465018" scale_x="1.01852" scale_y="0.896964"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="1" file="0" x="295.76324" y="284.5662" angle="331.140422" scale_x="1.015997" scale_y="0.910759"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="1" file="0" x="295.76324" y="284.5662" angle="331.140422" scale_x="1.015997" scale_y="0.910759"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="0" x="295.76324" y="284.5662" angle="331.140422" scale_x="1.015997" scale_y="0.910759"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="32" name="death_down" length="900" interval="25">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="19" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="0" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="0" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="0" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="0" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="0" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="0" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="0" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="0" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="0" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="0" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="0" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="0" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="0" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="0" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="0" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="0" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="0" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="0" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="0" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="0" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="0" z_index="23"/>
+                </key>
+                <key id="1" time="225">
+                    <object_ref id="0" timeline="19" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="1" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="1" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="1" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="1" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="1" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="1" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="1" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="1" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="1" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="1" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="1" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="1" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="1" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="1" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="1" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="1" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="1" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="1" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="1" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="1" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="1" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="1" z_index="23"/>
+                </key>
+                <key id="2" time="450">
+                    <object_ref id="0" timeline="19" key="2" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="2" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="2" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="2" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="2" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="2" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="2" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="2" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="2" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="2" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="2" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="2" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="2" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="2" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="2" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="2" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="2" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="2" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="2" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="2" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="2" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="2" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="2" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="2" z_index="23"/>
+                </key>
+                <key id="3" time="675">
+                    <object_ref id="0" timeline="19" key="3" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="3" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="3" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="3" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="3" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="3" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="3" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="3" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="3" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="3" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="3" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="3" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="3" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="3" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="3" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="3" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="3" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="3" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="3" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="3" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="3" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="3" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="3" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="3" z_index="23"/>
+                </key>
+                <key id="4" time="800">
+                    <object_ref id="0" timeline="19" key="4" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="4" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="4" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="4" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="4" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="4" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="4" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="4" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="4" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="4" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="4" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="4" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="4" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="4" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="4" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="4" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="4" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="4" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="4" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="4" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="4" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="4" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="4" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="4" z_index="23"/>
+                </key>
+                <key id="5" time="875">
+                    <object_ref id="0" timeline="19" key="5" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="5" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="5" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="5" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="5" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="5" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="5" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="5" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="5" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="5" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="5" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="5" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="5" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="5" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="5" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="5" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="5" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="5" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="5" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="5" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="5" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="5" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="5" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="5" z_index="23"/>
+                </key>
+                <key id="6" time="900">
+                    <object_ref id="0" timeline="19" key="6" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="6" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="6" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="6" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="6" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="6" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="6" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="6" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="6" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="6" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="6" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="6" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="6" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="6" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="6" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="6" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="6" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="6" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="6" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="6" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="6" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="6" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="6" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="6" z_index="23"/>
+                </key>
+                <key id="7" time="900">
+                    <object_ref id="0" timeline="19" key="6" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="6" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="6" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="6" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="6" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="6" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="6" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="6" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="6" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="6" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="6" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="6" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="6" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="6" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="6" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="6" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="6" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="6" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="6" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="6" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="6" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="6" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="6" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="6" z_index="23"/>
+                </key>
+                <key id="8" time="525">
+                    <object_ref id="0" timeline="19" key="2" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="2" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="2" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="2" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="2" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="2" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="2" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="2" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="2" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="2" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="2" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="2" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="2" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="2" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="2" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="2" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="2" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="2" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="2" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="2" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="2" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="2" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="2" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="2" z_index="23"/>
+                </key>
+                <key id="9" time="600">
+                    <object_ref id="0" timeline="19" key="2" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="2" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="2" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="2" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="2" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="2" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="2" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="2" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="2" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="2" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="2" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="2" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="2" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="2" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="2" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="2" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="2" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="2" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="2" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="2" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="2" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="2" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="2" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="2" z_index="23"/>
+                </key>
+                <key id="10" time="750">
+                    <object_ref id="0" timeline="19" key="3" z_index="0"/>
+                    <object_ref id="1" timeline="11" key="3" z_index="1"/>
+                    <object_ref id="2" timeline="6" key="3" z_index="2"/>
+                    <object_ref id="3" timeline="18" key="3" z_index="3"/>
+                    <object_ref id="4" timeline="7" key="3" z_index="4"/>
+                    <object_ref id="5" timeline="13" key="3" z_index="5"/>
+                    <object_ref id="6" timeline="20" key="3" z_index="6"/>
+                    <object_ref id="7" timeline="8" key="3" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="3" z_index="8"/>
+                    <object_ref id="9" timeline="2" key="3" z_index="9"/>
+                    <object_ref id="10" timeline="9" key="3" z_index="10"/>
+                    <object_ref id="11" timeline="22" key="3" z_index="11"/>
+                    <object_ref id="12" timeline="5" key="3" z_index="12"/>
+                    <object_ref id="13" timeline="0" key="3" z_index="13"/>
+                    <object_ref id="14" timeline="21" key="3" z_index="14"/>
+                    <object_ref id="15" timeline="14" key="3" z_index="15"/>
+                    <object_ref id="16" timeline="15" key="3" z_index="16"/>
+                    <object_ref id="17" timeline="16" key="3" z_index="17"/>
+                    <object_ref id="18" timeline="1" key="3" z_index="18"/>
+                    <object_ref id="19" timeline="23" key="3" z_index="19"/>
+                    <object_ref id="20" timeline="17" key="3" z_index="20"/>
+                    <object_ref id="21" timeline="10" key="3" z_index="21"/>
+                    <object_ref id="22" timeline="12" key="3" z_index="22"/>
+                    <object_ref id="23" timeline="3" key="3" z_index="23"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="mowlth_ey">
+                <key id="0" spin="-1">
+                    <object folder="8" file="0" x="-139.9" y="288.05" angle="0"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="8" file="0" x="-140.86387" y="262.29291" angle="359.969135" scale_x="1.016488" scale_y="0.983678"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="8" file="0" x="-139.35606" y="235.5818" angle="359.407363" scale_x="1.02701" scale_y="0.973251"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="8" file="0" x="-107.86618" y="133.0809" angle="330.980993" scale_x="1.011253" scale_y="0.988821"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="8" file="0" x="-108.0115" y="150.86898" angle="331.545437" scale_x="1.002696" scale_y="0.997291"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="8" file="0" x="-107.73424" y="153.64622" angle="331.545437" scale_x="1.000462" scale_y="0.999512"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="8" file="0" x="-107.7206" y="154.32352" angle="331.545437"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="8" file="0" x="-167.321366" y="270.084256" angle="359.407363" scale_x="1.02701" scale_y="0.973251"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="8" file="0" x="-221.254456" y="336.624706" angle="359.407363" scale_x="1.02701" scale_y="0.973251"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="8" file="0" x="-177.857632" y="230.843999" angle="330.980993" scale_x="1.011253" scale_y="0.988821"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="mowlth_bod">
+                <key id="0" spin="-1">
+                    <object folder="6" file="2" x="-102.55" y="755.6" angle="30.46551" scale_x="0.999969" scale_y="0.999969"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="6" file="2" x="-102.21608" y="730.61442" angle="30.361947" scale_x="1.003729" scale_y="0.991298"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="6" file="2" x="-100.05756" y="695.10455" angle="30.119857" scale_x="1.011931" scale_y="0.985799"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="6" file="2" x="-69.35294" y="590.4897" angle="1.894453" scale_x="1.004921" scale_y="0.990172"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="6" file="2" x="-69.798666" y="614.17646" angle="2.057938" scale_x="0.999938" scale_y="0.996327"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="6" file="2" x="-69.45775" y="618.84006" angle="2.016349" scale_x="0.998747" scale_y="0.998156"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="6" file="2" x="-69.49412" y="619.87646" angle="2.104421" scale_x="0.999969" scale_y="0.999969"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="6" file="2" x="-118.037952" y="848.194472" angle="30.119857" scale_x="1.011931" scale_y="0.985799"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="6" file="2" x="-152.714422" y="1143.439322" angle="30.119857" scale_x="1.011931" scale_y="0.985799"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="6" file="2" x="-114.582476" y="988.476046" angle="1.894453" scale_x="1.004921" scale_y="0.990172"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="mowlth_leg_2">
+                <key id="0">
+                    <object folder="7" file="1" x="106.95" y="145.65" angle="17.671185" scale_x="0.98264" scale_y="1.07458"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="1" x="110.72564" y="146.07425" angle="18.8584" scale_x="0.981621" scale_y="1.082956"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="1" x="116.39091" y="146.3" angle="19.683805" scale_x="0.981902" scale_y="1.09006"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="1" x="116.95294" y="145.9" angle="18.450026" scale_x="0.981473" scale_y="1.079446"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="7" file="1" x="113.96003" y="145.61363" angle="17.797598" scale_x="0.981779" scale_y="1.074707"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="7" file="1" x="113.732755" y="145.55" angle="17.595842" scale_x="0.981907" scale_y="1.07355"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="1" x="113.76912" y="145.65" angle="17.671185" scale_x="0.98264" scale_y="1.07458"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="7" file="1" x="146.712043" y="184.125926" angle="19.683805" scale_x="0.981902" scale_y="1.09006"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="7" file="1" x="205.188513" y="257.075926" angle="19.683805" scale_x="0.981902" scale_y="1.09006"/>
+                </key>
+                <key id="9" time="750" spin="-1">
+                    <object folder="7" file="1" x="190.799039" y="240.257632" angle="18.450026" scale_x="0.981473" scale_y="1.079446"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="mowlth_anten_1">
+                <key id="0" spin="-1">
+                    <object folder="1" file="1" x="-47.65" y="593" angle="226.28758" scale_x="0.894612" scale_y="-1.070121"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="1" file="1" x="-50.29668" y="563.09407" angle="223.968544" scale_x="0.889963" scale_y="-1.043116"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="1" x="-51.5697" y="513.203" angle="234.366944" scale_x="0.889002" scale_y="-1.016029"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="1" file="1" x="148.406916" y="408.9588" angle="200.551234" scale_x="0.890751" scale_y="-1.008416"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="1" file="1" x="148.40692" y="408.9588" angle="194.88022" scale_x="0.892535" scale_y="-1.04984"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="1" file="1" x="148.40692" y="408.9588" angle="193.17134" scale_x="0.893023" scale_y="-1.065263"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="1" x="148.40692" y="408.9588" angle="192.84863" scale_x="0.894612" scale_y="-1.070121"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="1" file="1" x="-13.093833" y="619.229356" angle="234.366944" scale_x="0.889002" scale_y="-1.016029"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="1" file="1" x="61.109625" y="823.708756" angle="234.366944" scale_x="0.889002" scale_y="-1.016029"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="1" file="1" x="239.028706" y="667.4193" angle="200.551234" scale_x="0.890751" scale_y="-1.008416"/>
+                </key>
+            </timeline>
+            <timeline id="4" name="mowlth_leg_3">
+                <key id="0" spin="-1">
+                    <object folder="7" file="3" x="173.35" y="44.75" angle="12.020293" scale_x="0.594935" scale_y="0.906664"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="3" x="183.4754" y="33.095455" angle="10.852427" scale_x="0.59438" scale_y="0.821697"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="3" x="195.28488" y="25.6" angle="10.181789" scale_x="0.594511" scale_y="0.768103"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="3" x="192.38529" y="36.769115" angle="11.167875" scale_x="0.594282" scale_y="0.848126"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="3" x="185.39399" y="42.75909" angle="11.75345" scale_x="0.59445" scale_y="0.891996"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="7" file="3" x="184.45307" y="44.404545" angle="11.911597" scale_x="0.594518" scale_y="0.903553"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="3" x="184.34853" y="44.75" angle="12.020293" scale_x="0.594935" scale_y="0.906664"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="7" file="3" x="245.162548" y="35.132734" angle="10.181789" scale_x="0.594511" scale_y="0.768103"/>
+                </key>
+                <key id="8" time="600">
+                    <object folder="7" file="3" x="341.355193" y="53.517292" angle="10.181789" scale_x="0.594511" scale_y="0.768103"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="7" file="3" x="312.520596" y="64.477005" angle="11.167875" scale_x="0.594282" scale_y="0.848126"/>
+                </key>
+            </timeline>
+            <timeline id="5" name="mowlth_head">
+                <key id="0" spin="-1">
+                    <object folder="0" file="0" x="-2.2" y="274" angle="0"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="0" file="0" x="-0.803652" y="252.31038" angle="359.969135" scale_x="1.016488" scale_y="0.983678"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="0" file="0" x="2.41819" y="229.75" angle="359.651134" scale_x="1.02701" scale_y="0.973251"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="0" file="0" x="31.6" y="124.98677" angle="331.463006" scale_x="1.011253" scale_y="0.988821"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="0" file="0" x="30.19266" y="138.99305" angle="331.680438" scale_x="1.002696" scale_y="0.997291"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="0" file="0" x="30.19266" y="141.25666" angle="331.680438" scale_x="1.000462" scale_y="0.999512"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="0" file="0" x="30.19266" y="141.8794" angle="331.680438"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="0" file="0" x="10.610783" y="262.153977" angle="359.651134" scale_x="1.02701" scale_y="0.973251"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="0" file="0" x="26.410783" y="324.647362" angle="359.651134" scale_x="1.02701" scale_y="0.973251"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="0" file="0" x="51.164844" y="215.054266" angle="331.463006" scale_x="1.011253" scale_y="0.988821"/>
+                </key>
+            </timeline>
+            <timeline id="6" name="mowlth_ab">
+                <key id="0" spin="-1">
+                    <object folder="3" file="0" x="-117.15" y="591.35" angle="338.29601" scale_x="0.999983" scale_y="1.00356"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="3" file="0" x="-120.46962" y="569.29524" angle="337.247507" scale_x="1.006364" scale_y="0.998387"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="3" file="0" x="-113.9803" y="532.84094" angle="337.515741" scale_x="1.01699" scale_y="0.999369"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="3" file="0" x="-84.163234" y="421.9162" angle="311.210119" scale_x="1.008056" scale_y="0.999964"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="3" file="0" x="-83.36618" y="442.26915" angle="311.126833" scale_x="1.000907" scale_y="1.001816"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="3" file="0" x="-83.42982" y="446.88274" angle="310.932304" scale_x="0.999104" scale_y="1.0024"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="3" file="0" x="-83.51618" y="448.0691" angle="310.866757" scale_x="0.999983" scale_y="1.00356"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="3" file="0" x="-135.800398" y="642.226621" angle="337.515741" scale_x="1.01699" scale_y="0.999369"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="3" file="0" x="-177.882015" y="853.184721" angle="337.515741" scale_x="1.01699" scale_y="0.999369"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="3" file="0" x="-138.184519" y="708.506609" angle="311.210119" scale_x="1.008056" scale_y="0.999964"/>
+                </key>
+            </timeline>
+            <timeline id="7" name="mowlth_leg_6">
+                <key id="0">
+                    <object folder="7" file="0" x="144" y="272.25" angle="22.869802" scale_x="0.931084" scale_y="0.986562"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="0" x="145.324866" y="255.55304" angle="22.933239" scale_x="0.942618" scale_y="0.976045"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="0" x="144.38031" y="244.75" angle="23.055115" scale_x="0.951129" scale_y="0.971173"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="0" x="140.95294" y="260.7368" angle="22.811752" scale_x="0.938392" scale_y="0.978441"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="0" x="140.62473" y="269.45" angle="22.808136" scale_x="0.932102" scale_y="0.983455"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="7" file="0" x="140.24746" y="271.71365" angle="22.808807" scale_x="0.930515" scale_y="0.984878"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="0" x="140.28382" y="272.25" angle="22.869802" scale_x="0.931084" scale_y="0.986562"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="7" file="0" x="180.923665" y="312.34843" angle="23.055115" scale_x="0.951129" scale_y="0.971173"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="7" file="0" x="251.400135" y="442.71683" angle="23.055115" scale_x="0.951129" scale_y="0.971173"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="7" file="0" x="232.077765" y="435.3404" angle="22.811752" scale_x="0.938392" scale_y="0.978441"/>
+                </key>
+            </timeline>
+            <timeline id="8" name="mowlth_bod_2">
+                <key id="0" spin="-1">
+                    <object folder="6" file="0" x="9.9" y="426.3" angle="1.021087" scale_x="0.999991" scale_y="1.02505"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="6" file="0" x="11.706647" y="402.2917" angle="0.865694" scale_x="1.018075" scale_y="1.005183"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="6" file="0" x="15.04244" y="390.30455" angle="0.580788" scale_x="1.04942" scale_y="0.958022"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="6" file="0" x="44.85" y="270.87057" angle="332.414162" scale_x="1.011114" scale_y="1.013483"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="6" file="0" x="42.95588" y="287.34918" angle="332.54502" scale_x="1.002611" scale_y="1.022186"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="6" file="0" x="42.869517" y="289.92646" angle="332.643311" scale_x="1.000372" scale_y="1.02448"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="6" file="0" x="42.95588" y="290.57646" angle="332.659998" scale_x="0.999991" scale_y="1.02505"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="6" file="0" x="26.670218" y="460.530253" angle="0.580788" scale_x="1.04942" scale_y="0.958022"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="6" file="0" x="49.095218" y="595.965538" angle="0.580788" scale_x="1.04942" scale_y="0.958022"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="6" file="0" x="72.68541" y="457.072839" angle="332.414162" scale_x="1.011114" scale_y="1.013483"/>
+                </key>
+            </timeline>
+            <timeline id="9" name="mowlth_leg">
+                <key id="0">
+                    <object folder="7" file="3" x="-176.35" y="43.7" angle="166.95403" scale_x="0.683364" scale_y="-0.880891"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="3" x="-179.751156" y="31.595455" angle="168.02086" scale_x="0.682584" scale_y="-0.793602"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="3" x="-176.765152" y="23.85" angle="168.58304" scale_x="0.682805" scale_y="-0.738468"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="3" x="-167.37206" y="35.419117" angle="167.71075" scale_x="0.682466" scale_y="-0.820782"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="7" file="3" x="-167.160561" y="41.695457" angle="167.20763" scale_x="0.682687" scale_y="-0.8659"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="3" x="-166.306021" y="43.29091" angle="167.07918" scale_x="0.682785" scale_y="-0.877765"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="3" x="-166.301471" y="43.7" angle="166.95403" scale_x="0.683364" scale_y="-0.880891"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="7" file="3" x="-220.157908" y="33.032734" angle="168.58304" scale_x="0.682805" scale_y="-0.738468"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="7" file="3" x="-303.843938" y="50.742293" angle="168.58304" scale_x="0.682805" scale_y="-0.738468"/>
+                </key>
+                <key id="9" time="750" spin="-1">
+                    <object folder="7" file="3" x="-275.692104" y="62.437773" angle="167.71075" scale_x="0.682466" scale_y="-0.820782"/>
+                </key>
+            </timeline>
+            <timeline id="10" name="mowlth_anten_2">
+                <key id="0">
+                    <object folder="1" file="1" x="100.4" y="643.221429" angle="287.81605" scale_x="0.859006" scale_y="0.772161"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="1" file="1" x="106.413066" y="617.319641" angle="292.377414" scale_x="0.84922" scale_y="0.776577"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="1" x="130.937443" y="575.710143" angle="283.510474" scale_x="0.841173" scale_y="0.806522"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="1" file="1" x="303.582118" y="380.815993" angle="248.939578" scale_x="0.854045" scale_y="0.805967"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="1" file="1" x="303.58212" y="380.81599" angle="252.31726" scale_x="0.857708" scale_y="0.781745"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="1" file="1" x="303.58212" y="380.81599" angle="253.93068" scale_x="0.857993" scale_y="0.77322"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="1" x="303.58212" y="380.81599" angle="254.3771" scale_x="0.859006" scale_y="0.772161"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="1" file="1" x="209.643918" y="674.440215" angle="283.510474" scale_x="0.841173" scale_y="0.806522"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="1" file="1" x="361.434977" y="864.848212" angle="283.510474" scale_x="0.841173" scale_y="0.806522"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="1" file="1" x="486.012882" y="630.222995" angle="248.939578" scale_x="0.854045" scale_y="0.805967"/>
+                </key>
+            </timeline>
+            <timeline id="11" name="mowlth_wingparts_2">
+                <key id="0" spin="-1">
+                    <object folder="2" file="1" x="-92.8" y="754.25" angle="20.149294" scale_x="0.915274" scale_y="0.626064"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="2" file="1" x="-92.488908" y="734.9018" angle="13.073148" scale_x="0.912081" scale_y="0.62169"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="-91.654545" y="699.8833" angle="21.902622" scale_x="0.908025" scale_y="0.617245"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="2" file="1" x="-58.30294" y="573.672" angle="352.98662" scale_x="0.892938" scale_y="0.618746"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="2" file="1" x="-57.323923" y="594.6394" angle="350.644695" scale_x="0.899143" scale_y="0.623002"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="2" file="1" x="-57.246663" y="602.3712" angle="348.609975" scale_x="0.912269" scale_y="0.624829"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="-57.410293" y="604.0485" angle="348.337934" scale_x="0.915274" scale_y="0.626064"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="2" file="1" x="-106.770122" y="848.613078" angle="21.902622" scale_x="0.908025" scale_y="0.617245"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="2" file="1" x="-135.921592" y="1135.449078" angle="21.902622" scale_x="0.908025" scale_y="0.617245"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="2" file="1" x="-95.448842" y="958.998331" angle="352.98662" scale_x="0.892938" scale_y="0.618746"/>
+                </key>
+            </timeline>
+            <timeline id="12" name="mowlth_anten">
+                <key id="0">
+                    <object folder="1" file="0" x="-12.85" y="329.25" angle="192.24928" scale_x="0.913321" scale_y="-0.924894"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="1" file="0" x="-10.234558" y="304.95617" angle="193.699244" scale_x="0.923142" scale_y="-0.913172"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="0" x="-3.5197" y="263.653" angle="195.012164" scale_x="0.935673" scale_y="-0.902191"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="1" file="0" x="39.138008" y="146.530683" angle="161.870994" scale_x="0.931194" scale_y="-0.878599"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="1" file="0" x="39.13801" y="155.471751" angle="159.34184" scale_x="0.917961" scale_y="-0.908945"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="1" file="0" x="39.13801" y="155.47175" angle="158.87275" scale_x="0.913619" scale_y="-0.921641"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="0" x="39.13801" y="155.47175" angle="158.81033" scale_x="0.913321" scale_y="-0.924894"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="1" file="0" x="6.627191" y="301.642436" angle="195.012164" scale_x="0.935673" scale_y="-0.902191"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="1" file="0" x="26.196195" y="374.907778" angle="195.012164" scale_x="0.935673" scale_y="-0.902191"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="1" file="0" x="55.704338" y="247.276378" angle="161.870994" scale_x="0.931194" scale_y="-0.878599"/>
+                </key>
+            </timeline>
+            <timeline id="13" name="mowlth_leg_5">
+                <key id="0">
+                    <object folder="7" file="2" x="-207.15" y="161.85" angle="173.02702" scale_x="1.0081" scale_y="-0.890941"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="2" x="-220.11944" y="162.42424" angle="174.65909" scale_x="1.007803" scale_y="-0.886471"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="2" x="-234.88032" y="162.7" angle="175.59499" scale_x="1.0079" scale_y="-0.884222"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="2" x="-230.78823" y="162.16322" angle="174.1396" scale_x="1.007723" scale_y="-0.887537"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="7" file="2" x="-221.97794" y="161.95" angle="173.37547" scale_x="1.007842" scale_y="-0.889676"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="2" x="-220.79613" y="161.81364" angle="173.13391" scale_x="1.007894" scale_y="-0.890236"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="2" x="-220.52795" y="161.85" angle="173.02702" scale_x="1.0081" scale_y="-0.890941"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="7" file="2" x="-294.714306" y="204.742316" angle="175.59499" scale_x="1.0079" scale_y="-0.884222"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="7" file="2" x="-410.108421" y="285.823926" angle="175.59499" scale_x="1.0079" scale_y="-0.884222"/>
+                </key>
+                <key id="9" time="750" spin="-1">
+                    <object folder="7" file="2" x="-374.629935" y="267.10682" angle="174.1396" scale_x="1.007723" scale_y="-0.887537"/>
+                </key>
+            </timeline>
+            <timeline id="14" name="mowlth_mouth">
+                <key id="0">
+                    <object folder="5" file="0" x="15.15" y="165.25" angle="0"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="5" file="0" x="16.508073" y="141.48466" angle="0.601312" scale_x="1.020033" scale_y="0.983677"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="5" file="0" x="18.7197" y="102.11365" angle="353.72414" scale_x="1.02786" scale_y="0.973251"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="5" file="0" x="47.4" y="0.15148" angle="324.797876" scale_x="1.011562" scale_y="0.988821"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="5" file="0" x="46.216576" y="20.17514" angle="326.81855" scale_x="1.00277" scale_y="0.99729"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="5" file="0" x="46.116577" y="23.26605" angle="326.867507" scale_x="1.000465" scale_y="0.999512"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="5" file="0" x="46.20294" y="24.12059" angle="326.873151"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="5" file="0" x="31.008589" y="102.152923" angle="353.72414" scale_x="1.02786" scale_y="0.973251"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="5" file="0" x="54.708589" y="102.228663" angle="353.72414" scale_x="1.02786" scale_y="0.973251"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="5" file="0" x="77.348341" y="13.224971" angle="324.797876" scale_x="1.011562" scale_y="0.988821"/>
+                </key>
+            </timeline>
+            <timeline id="15" name="mowlth_wingparts">
+                <key id="0">
+                    <object folder="2" file="1" x="81.6" y="757.3" angle="198.82999" scale_x="0.949638" scale_y="-0.904116"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="2" file="1" x="83.182312" y="739.0246" angle="200.19809" scale_x="0.965815" scale_y="-0.895014"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="86.845455" y="702.6833" angle="196.6642" scale_x="0.9587" scale_y="-0.8829"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="2" file="1" x="118.989705" y="576.4956" angle="162.9684" scale_x="0.9498" scale_y="-0.887631"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="2" file="1" x="117.585157" y="597.65305" angle="164.58564" scale_x="0.946655" scale_y="-0.898597"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="2" file="1" x="117.016977" y="605.5076" angle="166.59554" scale_x="0.948175" scale_y="-0.902674"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="116.989707" y="607.0985" angle="167.01863" scale_x="0.949638" scale_y="-0.904116"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="2" file="1" x="117.694638" y="852.145122" angle="196.6642" scale_x="0.9587" scale_y="-0.8829"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="2" file="1" x="177.189491" y="1140.392922" angle="196.6642" scale_x="0.9587" scale_y="-0.8829"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="2" file="1" x="195.184887" y="963.774776" angle="162.9684" scale_x="0.9498" scale_y="-0.887631"/>
+                </key>
+            </timeline>
+            <timeline id="16" name="mowlth_wingparts_1">
+                <key id="0" spin="-1">
+                    <object folder="2" file="1" x="-88.25" y="756.6" angle="342.642006" scale_x="0.956835" scale_y="0.904126"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="2" file="1" x="-88.264668" y="738.1488" angle="341.949283" scale_x="0.973473" scale_y="0.894856"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="-87.704545" y="701.4833" angle="347.315509" scale_x="0.960565" scale_y="0.882191"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="2" file="1" x="-54.889705" y="575.3456" angle="316.695688" scale_x="0.951673" scale_y="0.88718"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="2" file="1" x="-53.428477" y="596.7894" angle="313.535832" scale_x="0.951842" scale_y="0.898584"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="2" file="1" x="-52.901203" y="604.7349" angle="311.286258" scale_x="0.955039" scale_y="0.902742"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="-52.860293" y="606.3985" angle="310.830646" scale_x="0.956835" scale_y="0.904126"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="2" file="1" x="-101.935209" y="850.646974" angle="347.315509" scale_x="0.960565" scale_y="0.882191"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="2" file="1" x="-129.380062" y="1138.319774" angle="347.315509" scale_x="0.960565" scale_y="0.882191"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="2" file="1" x="-89.511358" y="962.065131" angle="316.695688" scale_x="0.951673" scale_y="0.88718"/>
+                </key>
+            </timeline>
+            <timeline id="17" name="mowlth_anten_3">
+                <key id="0" spin="-1">
+                    <object folder="1" file="0" x="37.05" y="328.9" angle="347.891013" scale_x="0.929763" scale_y="1.039181"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="1" file="0" x="40.26393" y="304.33193" angle="347.300416" scale_x="0.941093" scale_y="1.027204"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="0" x="47.7303" y="262.853" angle="345.927481" scale_x="0.954376" scale_y="1.01733"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="1" file="0" x="89.801246" y="150.387174" angle="313.157613" scale_x="0.9452" scale_y="1.017057"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="1" file="0" x="89.80125" y="150.38717" angle="313.83178" scale_x="0.933624" scale_y="1.031744"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="1" file="0" x="89.80125" y="150.38717" angle="314.442051" scale_x="0.930239" scale_y="1.036993"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="0" x="89.80125" y="150.38717" angle="314.452063" scale_x="0.929763" scale_y="1.039181"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="1" file="0" x="71.012105" y="301.842267" angle="345.927481" scale_x="0.954376" scale_y="1.01733"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="1" file="0" x="115.912728" y="377.035854" angle="345.927481" scale_x="0.954376" scale_y="1.01733"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="1" file="0" x="134.147841" y="249.740937" angle="313.157613" scale_x="0.9452" scale_y="1.017057"/>
+                </key>
+            </timeline>
+            <timeline id="18" name="mowlth_leg_7">
+                <key id="0" spin="-1">
+                    <object folder="7" file="2" x="186.35" y="147.35" angle="5.303084" scale_x="0.705105" scale_y="0.849369"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="2" x="188.62844" y="146.97575" angle="4.438559" scale_x="0.704896" scale_y="0.840665"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="2" x="185.11515" y="146.75" angle="3.866052" scale_x="0.704937" scale_y="0.835891"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="2" x="176.94558" y="147.12352" angle="4.715212" scale_x="0.70484" scale_y="0.842984"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="2" x="177.29693" y="147.26364" angle="5.206128" scale_x="0.704912" scale_y="0.847274"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="2" x="176.51965" y="147.3" angle="5.330097" scale_x="0.704937" scale_y="0.848442"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="2" x="176.50147" y="147.35" angle="5.303084" scale_x="0.705105" scale_y="0.849369"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="7" file="2" x="230.98993" y="184.893135" angle="3.866052" scale_x="0.704937" scale_y="0.835891"/>
+                </key>
+                <key id="8" time="600">
+                    <object folder="7" file="2" x="319.46272" y="258.454895" angle="3.866052" scale_x="0.704937" scale_y="0.835891"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="7" file="2" x="291.833991" y="242.550359" angle="4.715212" scale_x="0.70484" scale_y="0.842984"/>
+                </key>
+            </timeline>
+            <timeline id="19" name="mowlth_wingparts_3">
+                <key id="0">
+                    <object folder="2" file="1" x="131.4" y="758.05" angle="161.70306" scale_x="0.860735" scale_y="-0.472066"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="2" file="1" x="133.679282" y="739.30033" angle="168.13682" scale_x="0.872939" scale_y="-0.46827"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="137.495455" y="703.6833" angle="161.31357" scale_x="0.864984" scale_y="-0.464048"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="2" file="1" x="168.65588" y="577.4588" angle="126.0271" scale_x="0.849946" scale_y="-0.465563"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="2" file="1" x="167.007887" y="598.3894" angle="127.36859" scale_x="0.850667" scale_y="-0.469538"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="2" file="1" x="166.739707" y="606.2349" angle="129.53929" scale_x="0.858695" scale_y="-0.47114"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="166.789707" y="607.8485" angle="129.8917" scale_x="0.860735" scale_y="-0.472066"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="2" file="1" x="181.221054" y="853.394841" angle="161.31357" scale_x="0.864984" scale_y="-0.464048"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="2" file="1" x="265.548994" y="1142.124241" angle="161.31357" scale_x="0.864984" scale_y="-0.464048"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="2" file="1" x="276.876991" y="965.215131" angle="126.0271" scale_x="0.849946" scale_y="-0.465563"/>
+                </key>
+            </timeline>
+            <timeline id="20" name="mowlth_leg_4">
+                <key id="0" spin="-1">
+                    <object folder="7" file="0" x="-168.65" y="280.95" angle="161.61902" scale_x="0.981359" scale_y="-1.01107"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="0" x="-172.37929" y="264.17728" angle="161.51971" scale_x="0.994711" scale_y="-0.998049"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="0" x="-176.2197" y="253.25" angle="161.548" scale_x="1.00424" scale_y="-0.991324"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="0" x="-174.56617" y="269.33676" angle="161.65793" scale_x="0.989973" scale_y="-1.001358"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="0" x="-172.15709" y="278.06363" angle="161.69473" scale_x="0.982817" scale_y="-1.00771"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="0" x="-171.79344" y="280.37726" angle="161.69604" scale_x="0.981" scale_y="-1.009465"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="0" x="-171.71618" y="280.95" angle="161.61902" scale_x="0.981359" scale_y="-1.01107"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="7" file="0" x="-221.477596" y="323.078049" angle="161.548" scale_x="1.00424" scale_y="-0.991324"/>
+                </key>
+                <key id="8" time="600">
+                    <object folder="7" file="0" x="-308.760681" y="457.746429" angle="161.548" scale_x="1.00424" scale_y="-0.991324"/>
+                </key>
+                <key id="9" time="750" spin="-1">
+                    <object folder="7" file="0" x="-286.123964" y="449.521992" angle="161.65793" scale_x="0.989973" scale_y="-1.001358"/>
+                </key>
+            </timeline>
+            <timeline id="21" name="mowlth_ey_1">
+                <key id="0" spin="-1">
+                    <object folder="8" file="0" x="163.5" y="304.05" angle="180" scale_y="-1"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="8" file="0" x="167.57856" y="278.01867" angle="179.969135" scale_x="1.016488" scale_y="-0.983678"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="8" file="0" x="172.19394" y="251.1318" angle="179.407363" scale_x="1.02701" scale_y="-0.973251"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="8" file="0" x="228.82941" y="73.203364" angle="150.980993" scale_x="1.011253" scale_y="-0.988821"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="8" file="0" x="228.941103" y="88.247531" angle="151.545437" scale_x="1.002696" scale_y="-0.997291"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="8" file="0" x="231.420956" y="89.63259" angle="151.545437" scale_x="1.000462" scale_y="-0.999512"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="8" file="0" x="228.536543" y="84.609234" angle="151.545437" scale_y="-1"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="8" file="0" x="231.520083" y="270.11045" angle="179.407363" scale_x="1.02701" scale_y="-0.973251"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="8" file="0" x="345.934788" y="306.712132" angle="179.407363" scale_x="1.02701" scale_y="-0.973251"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="8" file="0" x="377.183245" y="130.387764" angle="150.980993" scale_x="1.011253" scale_y="-0.988821"/>
+                </key>
+            </timeline>
+            <timeline id="22" name="mowlth_leg_1">
+                <key id="0" spin="-1">
+                    <object folder="7" file="1" x="-137.1" y="139.5" angle="169.82802" scale_x="0.994908" scale_y="-1.00719"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="1" x="-137.726393" y="139.92424" angle="168.5459" scale_x="0.993957" scale_y="-1.005016"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="1" x="-136.206062" y="140.05" angle="167.71902" scale_x="0.994204" scale_y="-1.00439"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="1" x="-133.42647" y="139.66322" angle="168.9533" scale_x="0.993784" scale_y="-1.005368"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="1" x="-133.624733" y="139.5" angle="169.68391" scale_x="0.994067" scale_y="-1.006338"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="1" x="-133.397453" y="139.38637" angle="169.84727" scale_x="0.994209" scale_y="-1.006623"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="1" x="-133.383823" y="139.5" angle="169.82802" scale_x="0.994908" scale_y="-1.00719"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="7" file="1" x="-170.79811" y="176.258983" angle="167.71902" scale_x="0.994204" scale_y="-1.00439"/>
+                </key>
+                <key id="8" time="600">
+                    <object folder="7" file="1" x="-237.511345" y="246.090593" angle="167.71902" scale_x="0.994204" scale_y="-1.00439"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="7" file="1" x="-220.015297" y="230.05922" angle="168.9533" scale_x="0.993784" scale_y="-1.005368"/>
+                </key>
+            </timeline>
+            <timeline id="23" name="mowlth_bod_1">
+                <key id="0">
+                    <object folder="6" file="2" x="87.65" y="762.65" angle="149.53404" scale_x="0.999969" scale_y="-0.999969"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="6" file="2" x="90.42937" y="737.46595" angle="149.567772" scale_x="1.003729" scale_y="-0.991298"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="6" file="2" x="95.14244" y="701.90455" angle="149.219525" scale_x="1.01193" scale_y="-0.985799"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="6" file="2" x="123.866176" y="597.5162" angle="121.143833" scale_x="1.004921" scale_y="-0.990172"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="6" file="2" x="121.010424" y="621.24916" angle="121.219581" scale_x="0.999938" scale_y="-0.996327"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="6" file="2" x="120.719515" y="625.89011" angle="121.261581" scale_x="0.998747" scale_y="-0.998156"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="6" file="2" x="120.70588" y="626.92646" angle="121.172951" scale_x="0.999969" scale_y="-0.999969"/>
+                </key>
+                <key id="7" time="525" spin="0">
+                    <object folder="6" file="2" x="127.255893" y="856.816157" angle="149.219525" scale_x="1.01193" scale_y="-0.985799"/>
+                </key>
+                <key id="8" time="600" spin="-1">
+                    <object folder="6" file="2" x="189.188981" y="1155.574257" angle="149.219525" scale_x="1.01193" scale_y="-0.985799"/>
+                </key>
+                <key id="9" time="750">
+                    <object folder="6" file="2" x="202.280931" y="1000.085656" angle="121.143833" scale_x="1.004921" scale_y="-0.990172"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="33" name="death_up" length="900" interval="25">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="3" key="0" z_index="0"/>
+                    <object_ref id="1" timeline="12" key="0" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="0" z_index="2"/>
+                    <object_ref id="3" timeline="17" key="0" z_index="3"/>
+                    <object_ref id="4" timeline="16" key="0" z_index="4"/>
+                    <object_ref id="5" timeline="0" key="0" z_index="5"/>
+                    <object_ref id="6" timeline="7" key="0" z_index="6"/>
+                    <object_ref id="7" timeline="13" key="0" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="0" z_index="8"/>
+                    <object_ref id="9" timeline="5" key="0" z_index="9"/>
+                    <object_ref id="10" timeline="18" key="0" z_index="10"/>
+                    <object_ref id="11" timeline="8" key="0" z_index="11"/>
+                    <object_ref id="12" timeline="15" key="0" z_index="12"/>
+                    <object_ref id="13" timeline="1" key="0" z_index="13"/>
+                    <object_ref id="14" timeline="6" key="0" z_index="14"/>
+                    <object_ref id="15" timeline="10" key="0" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="0" z_index="16"/>
+                    <object_ref id="17" timeline="14" key="0" z_index="17"/>
+                    <object_ref id="18" timeline="11" key="0" z_index="18"/>
+                </key>
+                <key id="1" time="225">
+                    <object_ref id="0" timeline="3" key="1" z_index="0"/>
+                    <object_ref id="1" timeline="12" key="1" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="1" z_index="2"/>
+                    <object_ref id="3" timeline="17" key="1" z_index="3"/>
+                    <object_ref id="4" timeline="16" key="1" z_index="4"/>
+                    <object_ref id="5" timeline="0" key="1" z_index="5"/>
+                    <object_ref id="6" timeline="7" key="1" z_index="6"/>
+                    <object_ref id="7" timeline="13" key="1" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="1" z_index="8"/>
+                    <object_ref id="9" timeline="5" key="1" z_index="9"/>
+                    <object_ref id="10" timeline="18" key="1" z_index="10"/>
+                    <object_ref id="11" timeline="8" key="1" z_index="11"/>
+                    <object_ref id="12" timeline="15" key="1" z_index="12"/>
+                    <object_ref id="13" timeline="1" key="1" z_index="13"/>
+                    <object_ref id="14" timeline="6" key="1" z_index="14"/>
+                    <object_ref id="15" timeline="10" key="1" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="1" z_index="16"/>
+                    <object_ref id="17" timeline="14" key="1" z_index="17"/>
+                    <object_ref id="18" timeline="11" key="1" z_index="18"/>
+                </key>
+                <key id="2" time="450">
+                    <object_ref id="0" timeline="3" key="2" z_index="0"/>
+                    <object_ref id="1" timeline="12" key="2" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="2" z_index="2"/>
+                    <object_ref id="3" timeline="17" key="2" z_index="3"/>
+                    <object_ref id="4" timeline="16" key="2" z_index="4"/>
+                    <object_ref id="5" timeline="0" key="2" z_index="5"/>
+                    <object_ref id="6" timeline="7" key="2" z_index="6"/>
+                    <object_ref id="7" timeline="13" key="2" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="2" z_index="8"/>
+                    <object_ref id="9" timeline="5" key="2" z_index="9"/>
+                    <object_ref id="10" timeline="18" key="2" z_index="10"/>
+                    <object_ref id="11" timeline="8" key="2" z_index="11"/>
+                    <object_ref id="12" timeline="15" key="2" z_index="12"/>
+                    <object_ref id="13" timeline="1" key="2" z_index="13"/>
+                    <object_ref id="14" timeline="6" key="2" z_index="14"/>
+                    <object_ref id="15" timeline="10" key="2" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="2" z_index="16"/>
+                    <object_ref id="17" timeline="14" key="2" z_index="17"/>
+                    <object_ref id="18" timeline="11" key="2" z_index="18"/>
+                </key>
+                <key id="3" time="675">
+                    <object_ref id="0" timeline="3" key="3" z_index="0"/>
+                    <object_ref id="1" timeline="12" key="3" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="3" z_index="2"/>
+                    <object_ref id="3" timeline="17" key="3" z_index="3"/>
+                    <object_ref id="4" timeline="16" key="3" z_index="4"/>
+                    <object_ref id="5" timeline="0" key="3" z_index="5"/>
+                    <object_ref id="6" timeline="7" key="3" z_index="6"/>
+                    <object_ref id="7" timeline="13" key="3" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="3" z_index="8"/>
+                    <object_ref id="9" timeline="5" key="3" z_index="9"/>
+                    <object_ref id="10" timeline="18" key="3" z_index="10"/>
+                    <object_ref id="11" timeline="8" key="3" z_index="11"/>
+                    <object_ref id="12" timeline="15" key="3" z_index="12"/>
+                    <object_ref id="13" timeline="1" key="3" z_index="13"/>
+                    <object_ref id="14" timeline="6" key="3" z_index="14"/>
+                    <object_ref id="15" timeline="10" key="3" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="3" z_index="16"/>
+                    <object_ref id="17" timeline="14" key="3" z_index="17"/>
+                    <object_ref id="18" timeline="11" key="3" z_index="18"/>
+                </key>
+                <key id="4" time="800">
+                    <object_ref id="0" timeline="3" key="4" z_index="0"/>
+                    <object_ref id="1" timeline="12" key="4" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="4" z_index="2"/>
+                    <object_ref id="3" timeline="17" key="4" z_index="3"/>
+                    <object_ref id="4" timeline="16" key="4" z_index="4"/>
+                    <object_ref id="5" timeline="0" key="4" z_index="5"/>
+                    <object_ref id="6" timeline="7" key="4" z_index="6"/>
+                    <object_ref id="7" timeline="13" key="4" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="4" z_index="8"/>
+                    <object_ref id="9" timeline="5" key="4" z_index="9"/>
+                    <object_ref id="10" timeline="18" key="4" z_index="10"/>
+                    <object_ref id="11" timeline="8" key="4" z_index="11"/>
+                    <object_ref id="12" timeline="15" key="4" z_index="12"/>
+                    <object_ref id="13" timeline="1" key="4" z_index="13"/>
+                    <object_ref id="14" timeline="6" key="4" z_index="14"/>
+                    <object_ref id="15" timeline="10" key="4" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="4" z_index="16"/>
+                    <object_ref id="17" timeline="14" key="4" z_index="17"/>
+                    <object_ref id="18" timeline="11" key="4" z_index="18"/>
+                </key>
+                <key id="5" time="875">
+                    <object_ref id="0" timeline="3" key="5" z_index="0"/>
+                    <object_ref id="1" timeline="12" key="5" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="5" z_index="2"/>
+                    <object_ref id="3" timeline="17" key="5" z_index="3"/>
+                    <object_ref id="4" timeline="16" key="5" z_index="4"/>
+                    <object_ref id="5" timeline="0" key="5" z_index="5"/>
+                    <object_ref id="6" timeline="7" key="5" z_index="6"/>
+                    <object_ref id="7" timeline="13" key="5" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="5" z_index="8"/>
+                    <object_ref id="9" timeline="5" key="5" z_index="9"/>
+                    <object_ref id="10" timeline="18" key="5" z_index="10"/>
+                    <object_ref id="11" timeline="8" key="5" z_index="11"/>
+                    <object_ref id="12" timeline="15" key="5" z_index="12"/>
+                    <object_ref id="13" timeline="1" key="5" z_index="13"/>
+                    <object_ref id="14" timeline="6" key="5" z_index="14"/>
+                    <object_ref id="15" timeline="10" key="5" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="5" z_index="16"/>
+                    <object_ref id="17" timeline="14" key="5" z_index="17"/>
+                    <object_ref id="18" timeline="11" key="5" z_index="18"/>
+                </key>
+                <key id="6" time="900">
+                    <object_ref id="0" timeline="3" key="6" z_index="0"/>
+                    <object_ref id="1" timeline="12" key="6" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="6" z_index="2"/>
+                    <object_ref id="3" timeline="17" key="6" z_index="3"/>
+                    <object_ref id="4" timeline="16" key="6" z_index="4"/>
+                    <object_ref id="5" timeline="0" key="6" z_index="5"/>
+                    <object_ref id="6" timeline="7" key="6" z_index="6"/>
+                    <object_ref id="7" timeline="13" key="6" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="6" z_index="8"/>
+                    <object_ref id="9" timeline="5" key="6" z_index="9"/>
+                    <object_ref id="10" timeline="18" key="6" z_index="10"/>
+                    <object_ref id="11" timeline="8" key="6" z_index="11"/>
+                    <object_ref id="12" timeline="15" key="6" z_index="12"/>
+                    <object_ref id="13" timeline="1" key="6" z_index="13"/>
+                    <object_ref id="14" timeline="6" key="6" z_index="14"/>
+                    <object_ref id="15" timeline="10" key="6" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="6" z_index="16"/>
+                    <object_ref id="17" timeline="14" key="6" z_index="17"/>
+                    <object_ref id="18" timeline="11" key="6" z_index="18"/>
+                </key>
+                <key id="7" time="900">
+                    <object_ref id="0" timeline="3" key="6" z_index="0"/>
+                    <object_ref id="1" timeline="12" key="6" z_index="1"/>
+                    <object_ref id="2" timeline="2" key="6" z_index="2"/>
+                    <object_ref id="3" timeline="17" key="6" z_index="3"/>
+                    <object_ref id="4" timeline="16" key="6" z_index="4"/>
+                    <object_ref id="5" timeline="0" key="6" z_index="5"/>
+                    <object_ref id="6" timeline="7" key="6" z_index="6"/>
+                    <object_ref id="7" timeline="13" key="6" z_index="7"/>
+                    <object_ref id="8" timeline="4" key="6" z_index="8"/>
+                    <object_ref id="9" timeline="5" key="6" z_index="9"/>
+                    <object_ref id="10" timeline="18" key="6" z_index="10"/>
+                    <object_ref id="11" timeline="8" key="6" z_index="11"/>
+                    <object_ref id="12" timeline="15" key="6" z_index="12"/>
+                    <object_ref id="13" timeline="1" key="6" z_index="13"/>
+                    <object_ref id="14" timeline="6" key="6" z_index="14"/>
+                    <object_ref id="15" timeline="10" key="6" z_index="15"/>
+                    <object_ref id="16" timeline="9" key="6" z_index="16"/>
+                    <object_ref id="17" timeline="14" key="6" z_index="17"/>
+                    <object_ref id="18" timeline="11" key="6" z_index="18"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="mowlth_leg_7">
+                <key id="0" spin="-1">
+                    <object folder="7" file="3" x="208.55" y="79.25" angle="12.293224" scale_x="0.610422" scale_y="0.849349"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="3" x="214.07237" y="74.931816" angle="10.544458" scale_x="0.611196" scale_y="0.802843"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="3" x="212.71515" y="71.9" angle="9.533674" scale_x="0.611855" scale_y="0.774216"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="3" x="202.025" y="75.78088" angle="10.883852" scale_x="0.610923" scale_y="0.81383"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="3" x="200.55147" y="78.218185" angle="11.757218" scale_x="0.61038" scale_y="0.837527"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="7" file="3" x="199.19693" y="78.85909" angle="11.943689" scale_x="0.610213" scale_y="0.844712"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="3" x="198.85147" y="79" angle="12.170113" scale_x="0.610299" scale_y="0.847492"/>
+                </key>
+            </timeline>
+            <timeline id="1" name="mowlth_leg_1">
+                <key id="0">
+                    <object folder="7" file="0" x="-151.4" y="203.35" angle="160.06499" scale_x="0.994876" scale_y="-1.02703"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="0" x="-157.368803" y="186.55302" angle="161.17746" scale_x="0.991749" scale_y="-0.972482"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="0" x="-159.256062" y="175.55" angle="161.7" scale_x="0.991444" scale_y="-0.938469"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="0" x="-151.82206" y="190.58676" angle="160.93813" scale_x="0.991661" scale_y="-0.985514"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="7" file="0" x="-149.220193" y="199.45" angle="160.3593" scale_x="0.991903" scale_y="-1.013722"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="0" x="-148.102003" y="202.15909" angle="160.22336" scale_x="0.992097" scale_y="-1.022226"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="0" x="-147.783823" y="202.8" angle="160.09103" scale_x="0.99347" scale_y="-1.0252"/>
+                </key>
+            </timeline>
+            <timeline id="2" name="mowlth_head">
+                <key id="0" spin="-1">
+                    <object folder="0" file="0" x="-6.65" y="305.05" angle="0"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="0" file="0" x="-5.22941" y="288.67556" angle="359.969135" scale_x="1.014671" scale_y="0.971955"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="0" file="0" x="-2.03181" y="269.45" angle="359.651134" scale_x="1.02406" scale_y="0.953979"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="0" file="0" x="27.15" y="158.93235" angle="331.463006" scale_x="1.01098" scale_y="0.978916"/>
+                </key>
+                <key id="4" time="800" spin="0">
+                    <object folder="0" file="0" x="25.74266" y="170.3976" angle="331.680438" scale_x="1.003161" scale_y="0.99381"/>
+                </key>
+                <key id="5" time="875" spin="0">
+                    <object folder="0" file="0" x="25.74266" y="172.20667" angle="331.680438" scale_x="1.000828" scale_y="0.998273"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="0" file="0" x="25.74266" y="172.6294" angle="331.680438" scale_x="1.00024" scale_y="0.999435"/>
+                </key>
+            </timeline>
+            <timeline id="3" name="mowlth_anten">
+                <key id="0">
+                    <object folder="1" file="1" x="129.75" y="714.55" angle="305.887997" scale_x="0.858985" scale_y="1.10117"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="1" file="1" x="131.4927" y="685.61681" angle="308.988672" scale_x="0.845802" scale_y="1.078211"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="1" x="139.3303" y="636.103" angle="296.890474" scale_x="0.834994" scale_y="1.05671"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="1" file="1" x="291.824768" y="431.6559" angle="262.494288" scale_x="0.843122" scale_y="1.034085"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="1" file="1" x="290.6861" y="453.022367" angle="268.424038" scale_x="0.852233" scale_y="1.073022"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="1" file="1" x="290.62247" y="460.376937" angle="271.247234" scale_x="0.855166" scale_y="1.091015"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="1" x="290.50883" y="462.095137" angle="272.045066" scale_x="0.857253" scale_y="1.0973"/>
+                </key>
+            </timeline>
+            <timeline id="4" name="mowlth_leg_4">
+                <key id="0" spin="-1">
+                    <object folder="7" file="1" x="-141.9" y="209.15" angle="163.36104" scale_x="0.979846" scale_y="-1.21599"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="1" x="-152.16867" y="194.64848" angle="162.44724" scale_x="0.982081" scale_y="-1.148222"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="1" x="-160.1697" y="185.3" angle="161.80602" scale_x="0.98444" scale_y="-1.1066"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="1" x="-152.80146" y="198.15294" angle="162.74962" scale_x="0.981007" scale_y="-1.164222"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="1" x="-146.90709" y="205.79091" angle="163.2972" scale_x="0.979056" scale_y="-1.1989"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="1" x="-145.46164" y="208.05" angle="163.45903" scale_x="0.978511" scale_y="-1.209397"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="1" x="-145.06618" y="208.7" angle="163.44504" scale_x="0.979133" scale_y="-1.21338"/>
+                </key>
+            </timeline>
+            <timeline id="5" name="mowlth_bod_2">
+                <key id="0" spin="-1">
+                    <object folder="6" file="0" x="9.9" y="426.3" angle="1.021087" scale_x="0.999991" scale_y="1.02505"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="6" file="0" x="11.655133" y="411.83714" angle="0.86609" scale_x="1.046433" scale_y="0.980132"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="6" file="0" x="15.19244" y="392.05455" angle="0.58238" scale_x="1.07625" scale_y="0.951477"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="6" file="0" x="44.686765" y="277.6118" angle="332.413398" scale_x="1.034796" scale_y="0.991274"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="6" file="0" x="43.00588" y="288.64916" angle="332.541363" scale_x="1.010013" scale_y="1.015052"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="6" file="0" x="43.00588" y="289.99463" angle="332.545379" scale_x="1.002628" scale_y="1.022189"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="6" file="0" x="42.90588" y="290.27646" angle="332.64322" scale_x="1.00081" scale_y="1.02411"/>
+                </key>
+            </timeline>
+            <timeline id="6" name="mowlth_wingparts">
+                <key id="0">
+                    <object folder="2" file="1" x="78.55" y="732.35" angle="145.27603" scale_x="1.019989" scale_y="-0.895606"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="2" file="1" x="80.033822" y="714.473" angle="151.73129" scale_x="1.001839" scale_y="-0.887814"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="83.045455" y="680.0833" angle="145.77454" scale_x="1.010199" scale_y="-0.880082"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="2" file="1" x="114.879414" y="553.02504" angle="112.05034" scale_x="1.010238" scale_y="-0.882566"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="2" file="1" x="114.116977" y="571.61216" angle="112.49939" scale_x="1.012169" scale_y="-0.888841"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="2" file="1" x="113.903337" y="579.2303" angle="113.28274" scale_x="1.015737" scale_y="-0.891629"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="113.839707" y="581.0985" angle="113.45663" scale_x="1.0181" scale_y="-0.893798"/>
+                </key>
+            </timeline>
+            <timeline id="7" name="mowlth_leg_6">
+                <key id="0">
+                    <object folder="7" file="1" x="150.8" y="187.9" angle="11.920896" scale_x="0.931074" scale_y="0.986553"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="1" x="157.815776" y="179.18939" angle="12.42222" scale_x="0.933136" scale_y="0.951357"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="1" x="160.48031" y="173.5" angle="12.910714" scale_x="0.934868" scale_y="0.930117"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="1" x="152.175" y="181.21176" angle="12.204948" scale_x="0.932381" scale_y="0.959486"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="7" file="1" x="148.88381" y="185.92273" angle="11.806253" scale_x="0.930937" scale_y="0.977194"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="7" file="1" x="147.51563" y="187.35454" angle="11.780847" scale_x="0.930515" scale_y="0.982589"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="1" x="147.18382" y="187.6" angle="11.804802" scale_x="0.930756" scale_y="0.984923"/>
+                </key>
+            </timeline>
+            <timeline id="8" name="mowlth_leg_2">
+                <key id="0" spin="-1">
+                    <object folder="7" file="0" x="144.15" y="205.25" angle="17.086891" scale_x="0.982615" scale_y="1.06805"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="0" x="152.21958" y="192.81969" angle="16.247122" scale_x="0.982463" scale_y="1.025399"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="0" x="160.69091" y="184.7" angle="15.915004" scale_x="0.983704" scale_y="0.999116"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="0" x="157.59558" y="195.84265" angle="16.422401" scale_x="0.981772" scale_y="1.035489"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="0" x="152.31457" y="202.43181" angle="16.68883" scale_x="0.980734" scale_y="1.057307"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="7" file="0" x="151.42367" y="204.41364" angle="16.901384" scale_x="0.980496" scale_y="1.063905"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="0" x="151.06912" y="204.85" angle="16.940214" scale_x="0.981526" scale_y="1.06639"/>
+                </key>
+            </timeline>
+            <timeline id="9" name="mowlth_bod">
+                <key id="0">
+                    <object folder="6" file="2" x="-71.55" y="731.85" angle="67.67669" scale_x="1.00857" scale_y="0.999941"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="6" file="2" x="-70.89335" y="702.43722" angle="67.836622" scale_x="0.983325" scale_y="1.004746"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="6" file="2" x="-67.90756" y="673.15455" angle="67.506645" scale_x="0.968497" scale_y="1.00951"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="6" file="2" x="-37.513234" y="571.9147" angle="39.345233" scale_x="0.988933" scale_y="1.002677"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="6" file="2" x="-38.65775" y="590.96286" angle="39.450587" scale_x="1.001292" scale_y="0.998761"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="6" file="2" x="-38.54412" y="594.681" angle="39.377201" scale_x="1.005063" scale_y="0.997689"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="6" file="2" x="-38.44412" y="595.57646" angle="39.343921" scale_x="1.00705" scale_y="0.998724"/>
+                </key>
+            </timeline>
+            <timeline id="10" name="mowlth_wingparts_1">
+                <key id="0" spin="-1">
+                    <object folder="2" file="1" x="-74.35" y="732" angle="26.204994" scale_x="1.0332" scale_y="0.903998"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="2" file="1" x="-74.114668" y="713.7245" angle="22.647481" scale_x="1.038231" scale_y="0.894325"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="-71.854545" y="678.8833" angle="29.547605" scale_x="1.013261" scale_y="0.883444"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="2" file="1" x="-39.126476" y="551.9514" angle="358.741728" scale_x="1.00504" scale_y="0.887045"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="2" file="1" x="-38.846663" y="571.0849" angle="356.385208" scale_x="1.016076" scale_y="0.895955"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="2" file="1" x="-38.946658" y="578.9667" angle="354.853954" scale_x="1.027237" scale_y="0.899765"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="-38.960293" y="580.8985" angle="354.506061" scale_x="1.031011" scale_y="0.902117"/>
+                </key>
+            </timeline>
+            <timeline id="11" name="mowlth_ab">
+                <key id="0" spin="-1">
+                    <object folder="3" file="1" x="-20.1" y="446.9" angle="0.936692" scale_x="1.12323" scale_y="1.05629"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="3" file="1" x="-19.70295" y="429.06038" angle="358.87647" scale_x="1.10495" scale_y="1.039676"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="3" file="1" x="-14.1303" y="392.49094" angle="359.707424" scale_x="1.08487" scale_y="1.0781"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="3" file="1" x="13.295588" y="278.44852" angle="334.500832" scale_x="1.100098" scale_y="1.069373"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="3" file="1" x="13.78382" y="296.96" angle="333.998678" scale_x="1.116165" scale_y="1.059961"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="3" file="1" x="13.761094" y="301.79182" angle="333.482849" scale_x="1.121284" scale_y="1.057062"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="3" file="1" x="13.88382" y="302.8691" angle="333.474971" scale_x="1.1226" scale_y="1.056471"/>
+                </key>
+            </timeline>
+            <timeline id="12" name="mowlth_anten_1">
+                <key id="0">
+                    <object folder="1" file="1" x="-131.05" y="654.55" angle="11.648413" scale_x="0.907116" scale_y="0.911115"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="1" file="1" x="-130.25426" y="627.51372" angle="17.060441" scale_x="0.922542" scale_y="0.786598"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="1" file="1" x="-124.8697" y="577.553" angle="10.638074" scale_x="0.912914" scale_y="0.649342"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="1" file="1" x="31.365948" y="372.15886" angle="332.084842" scale_x="0.891606" scale_y="0.763628"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="1" file="1" x="30.6861" y="393.172397" angle="335.109927" scale_x="0.898689" scale_y="0.867672"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="1" file="1" x="30.33609" y="400.440587" angle="337.22068" scale_x="0.903563" scale_y="0.899045"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="1" file="1" x="30.35883" y="402.245137" angle="337.858871" scale_x="0.905656" scale_y="0.907249"/>
+                </key>
+            </timeline>
+            <timeline id="13" name="mowlth_leg_5">
+                <key id="0">
+                    <object folder="7" file="3" x="-197.95" y="95" angle="160.35402" scale_x="0.560059" scale_y="-0.893106"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="3" x="-213.56489" y="89.083336" angle="162.99486" scale_x="0.561159" scale_y="-0.831422"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="3" x="-230.03032" y="85" angle="164.56" scale_x="0.562503" scale_y="-0.793164"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="3" x="-224.0309" y="90.36471" angle="162.35313" scale_x="0.560542" scale_y="-0.846104"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="7" file="3" x="-213.78249" y="93.590904" angle="160.9941" scale_x="0.559438" scale_y="-0.877729"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="3" x="-211.96431" y="94.545456" angle="160.6125" scale_x="0.559156" scale_y="-0.887273"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="3" x="-211.47795" y="94.8" angle="160.455" scale_x="0.559585" scale_y="-0.890826"/>
+                </key>
+            </timeline>
+            <timeline id="14" name="mowlth_bod_1">
+                <key id="0" spin="-1">
+                    <object folder="6" file="2" x="79.5" y="738.8" angle="114.098" scale_x="0.991458" scale_y="-1.029739"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="6" file="2" x="82.40362" y="709.23722" angle="113.739072" scale_x="0.966512" scale_y="-1.032141"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="6" file="2" x="86.64244" y="679.70455" angle="113.477575" scale_x="0.951842" scale_y="-1.03556"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="6" file="2" x="115.05294" y="578.75146" angle="85.378447" scale_x="0.972064" scale_y="-1.030516"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="6" file="2" x="112.76951" y="597.81286" angle="85.585101" scale_x="0.984268" scale_y="-1.027697"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="6" file="2" x="112.56951" y="601.56736" angle="85.684341" scale_x="0.988001" scale_y="-1.026985"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="6" file="2" x="112.50588" y="602.47646" angle="85.695941" scale_x="0.989977" scale_y="-1.02829"/>
+                </key>
+            </timeline>
+            <timeline id="15" name="mowlth_leg">
+                <key id="0">
+                    <object folder="7" file="2" x="-176.35" y="43.7" angle="166.95403" scale_x="0.683364" scale_y="-0.880891"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="7" file="2" x="-177.129956" y="34.765152" angle="167.76697" scale_x="0.684006" scale_y="-0.834142"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="7" file="2" x="-172.565152" y="29" angle="168.10205" scale_x="0.685121" scale_y="-0.804921"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="7" file="2" x="-165.86912" y="36.825" angle="167.6979" scale_x="0.683473" scale_y="-0.845414"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="7" file="2" x="-167.033291" y="41.486366" angle="167.32953" scale_x="0.68255" scale_y="-0.86961"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="7" file="2" x="-166.492381" y="42.904545" angle="167.13754" scale_x="0.68232" scale_y="-0.8769"/>
+                </key>
+                <key id="6" time="900" spin="-1">
+                    <object folder="7" file="2" x="-166.351471" y="43.25" angle="167.07803" scale_x="0.68282" scale_y="-0.879387"/>
+                </key>
+            </timeline>
+            <timeline id="16" name="mowlth_wingparts_2">
+                <key id="0">
+                    <object folder="2" file="1" x="-43.65" y="703.5" angle="287.88501" scale_x="1.0774" scale_y="-0.931833"/>
+                </key>
+                <key id="1" time="225">
+                    <object folder="2" file="1" x="-42.816178" y="686.34727" angle="290.194755" scale_x="1.090206" scale_y="-0.939266"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="-41.504545" y="653.0333" angle="297.0615" scale_x="1.05407" scale_y="-0.95204"/>
+                </key>
+                <key id="3" time="675" spin="-1">
+                    <object folder="2" file="1" x="-8.763236" y="525.80146" angle="265.927652" scale_x="1.053498" scale_y="-0.947211"/>
+                </key>
+                <key id="4" time="800" spin="-1">
+                    <object folder="2" file="1" x="-8.237567" y="543.63035" angle="260.82672" scale_x="1.066533" scale_y="-0.936627"/>
+                </key>
+                <key id="5" time="875" spin="-1">
+                    <object folder="2" file="1" x="-8.060293" y="550.7076" angle="257.229274" scale_x="1.072098" scale_y="-0.932651"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="-8.010293" y="552.4985" angle="256.37463" scale_x="1.07512" scale_y="-0.931941"/>
+                </key>
+            </timeline>
+            <timeline id="17" name="mowlth_wingparts_3">
+                <key id="0" spin="-1">
+                    <object folder="2" file="1" x="88.7" y="730.45" angle="237.235" scale_x="1.08596" scale_y="0.738679"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="2" file="1" x="89.932312" y="712.9972" angle="236.41432" scale_x="1.089284" scale_y="0.739336"/>
+                </key>
+                <key id="2" time="450" spin="-1">
+                    <object folder="2" file="1" x="93.595455" y="678.7833" angle="230.24553" scale_x="1.06695" scale_y="0.743626"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="2" file="1" x="125.80294" y="551.7883" angle="197.61975" scale_x="1.067488" scale_y="0.741792"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="2" file="1" x="124.644257" y="570.1894" angle="201.37036" scale_x="1.076798" scale_y="0.738165"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="2" file="1" x="124.130613" y="577.594" angle="204.39471" scale_x="1.080892" scale_y="0.736983"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="2" file="1" x="123.989707" y="579.3985" angle="205.11064" scale_x="1.08367" scale_y="0.737725"/>
+                </key>
+            </timeline>
+            <timeline id="18" name="mowlth_leg_3">
+                <key id="0" spin="-1">
+                    <object folder="7" file="2" x="162.55" y="42.5" angle="13.867193" scale_x="0.594935" scale_y="0.909265"/>
+                </key>
+                <key id="1" time="225" spin="-1">
+                    <object folder="7" file="2" x="168.88145" y="36.13485" angle="13.292431" scale_x="0.5956" scale_y="0.872921"/>
+                </key>
+                <key id="2" time="450">
+                    <object folder="7" file="2" x="178.38488" y="31.85" angle="13.051196" scale_x="0.596515" scale_y="0.850615"/>
+                </key>
+                <key id="3" time="675">
+                    <object folder="7" file="2" x="179.31618" y="37.614704" angle="13.411757" scale_x="0.595151" scale_y="0.881438"/>
+                </key>
+                <key id="4" time="800">
+                    <object folder="7" file="2" x="174.28944" y="41.063637" angle="13.55997" scale_x="0.594388" scale_y="0.899907"/>
+                </key>
+                <key id="5" time="875">
+                    <object folder="7" file="2" x="173.81217" y="42.118183" angle="13.740208" scale_x="0.594193" scale_y="0.905509"/>
+                </key>
+                <key id="6" time="900">
+                    <object folder="7" file="2" x="173.59853" y="42.3" angle="13.787569" scale_x="0.594539" scale_y="0.907751"/>
+                </key>
+            </timeline>
+        </animation>
     </entity>
 </spriter_data>
