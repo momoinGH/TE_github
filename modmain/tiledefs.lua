@@ -228,7 +228,6 @@ tro_tiledefs = {
             runsound = "dontstarve/movement/run_sand",
             walksound = "dontstarve/movement/walk_sand",
             flashpoint_modifier = 0,
-            -- cannotbedug = true,
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -397,7 +396,6 @@ tro_tiledefs = {
             mudsound = "dontstarve/movement/run_mud",
             flashpoint_modifier = 0,
             hard = true,
-            cannotbedug = true, ----不能挖
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -425,8 +423,6 @@ tro_tiledefs = {
             mudsound = "dontstarve/movement/run_mud",
             flashpoint_modifier = 0,
             hard = true, ----不可种植
-            cannotbedug = true,
-
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -571,7 +567,6 @@ tro_tiledefs = {
             runsound = "dontstarve/movement/run_woods",
             walksound = "dontstarve/movement/walk_woods",
             flashpoint_modifier = 0,
-            --cannotbedug = true,
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -595,7 +590,6 @@ tro_tiledefs = {
             runsound = "dontstarve/movement/run_woods",
             walksound = "dontstarve/movement/walk_woods",
             flashpoint_modifier = 0,
-            --cannotbedug = true,
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -740,7 +734,6 @@ tro_tiledefs = {
             noise_texture = "ham/ground_gasrainforest",
             runsound = "dontstarve/movement/run_moss",
             walksound = "dontstarve/movement/walk_moss",
-            --cannotbedug = true,
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -811,7 +804,6 @@ tro_tiledefs = {
             runsound = "dontstarve/movement/run_dirt",
             walksound = "dontstarve/movement/walk_dirt",
             snowsound = "run_ice",
-            --cannotbedug = true
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -882,7 +874,6 @@ tro_tiledefs = {
             runsound = "dontstarve/movement/run_dirt",
             walksound = "dontstarve/movement/walk_dirt",
             snowsound = "run_ice",
-            --cannotbedug = true
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -1037,7 +1028,7 @@ tro_tiledefs = {
             snowsound = "dontstarve/movement/run_ice",
             mudsound = "dontstarve/movement/run_mud",
             flashpoint_modifier = 0,
-            cannotbedug = true,
+            cannotbedug = true, --不能挖
             colors = {
                 primary_color = { 0, 0, 0, 25 },
                 secondary_color = { 0, 20, 33, 0 },

@@ -79,9 +79,7 @@ function Map:SetTile(x, y, tile, ...)
         if self:IsVolcanoAreaAtPoint(x, 0, y) then
             print("is in volcano")
         end
-        newtile =
-        -- (self:IsVolcanoAreaAtPoint(x, 0, y) and WORLD_TILES.VOLCANO_ROCK) or
-            (self:IsShipwreckedAreaAtPoint(x, 0, y) and WORLD_TILES.BEACH) or nil
+        newtile = (self:IsShipwreckedAreaAtPoint(x, 0, y) and WORLD_TILES.BEACH) or nil
 
         print(newtile)
     end
@@ -89,7 +87,6 @@ function Map:SetTile(x, y, tile, ...)
 end
 
 local BASE_TILES = {
-    -- [WORLD_TILES.VOLCANO_ROCK] = true,
     [WORLD_TILES.BEACH] = true,
 }
 
