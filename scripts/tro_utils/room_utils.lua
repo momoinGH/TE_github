@@ -3,7 +3,8 @@
 local FN    = {}
 
 FN.RADIUS   = 16  --小房子最大半径，包括width和depth
-FN.ROOM_GAP = 60
+FN.ROOM_GAP  = 60
+FN.MAX_COORD = 2000
 
 --[[
 房间坐标轴朝向

@@ -8,6 +8,21 @@ modimport "modmain/room/roomcamera.lua"  --玩家室内摄像机
 modimport "modmain/room/components/map"
 modimport "modmain/room/prefabs/player.lua"
 
+local RoomUtils = require("tro_utils/room_utils")
+-- UpdateRenderExtents 用来解决虚空房子坐标太大不渲染的问题，参数是世界边长，只要房子坐标在这个正方形范围内就不会出现玩家和房子内东西看不见的问题
+-- The base game only expands render culling extents for maps wider than 1024
+-- tiles. The world-size multiplier can stay below that threshold while rooms
+-- still live far outside the map, so cover the bounded room-coordinate range.
+AddSimPostInit(function()
+    if TheSim and TheSim.UpdateRenderExtents and TheWorld and TheWorld.Map then
+        local width, height = TheWorld.Map:GetWorldSize()
+        local map_extent = math.max(width, height) * TILE_SCALE
+        local size = math.max(map_extent, RoomUtils.MAX_COORD * 2)
+        print("更新渲染限制，确保裁剪分区覆盖室内区域", size)
+        TheSim:UpdateRenderExtents(size)
+    end
+end)
+
 
 ----------------------------------------------------------------------------------------------------
 --室内避雨？
@@ -63,5 +78,3 @@ end)
 
 
 ----------------------------------------------------------------------------------------------------
-
-

@@ -1,6 +1,10 @@
 local RoomUtils = require("tro_utils/room_utils")
 
 local ROOM_GAP = RoomUtils.ROOM_GAP
+-- The engine's default render-culling extents become unreliable for off-map
+-- entities at large coordinates and different camera angles. Keep rooms inside
+-- a conservative range instead of relying on a single observed cutoff.
+local MAX_ROOM_COORD = RoomUtils.MAX_COORD
 
 -- 虚空小房子计数器，计数会一直递增，即便前面生成的房子已经销毁
 -- 这是一个主客机都有的组件，主机只需要保存count保证count递增，主客机都会构建rooms结构
@@ -55,14 +59,46 @@ function RoomSpawner:UpdateRoom(room)
     end
 end
 
+-- Allocate rooms on a bounded perimeter outside the generated world.  The old
+-- layout only moved toward +x/+z, so enough rooms eventually crossed the renderer
+-- coordinate range (especially with the world-size multiplier enabled).
 function RoomSpawner:GetPos()
     local width, height = TheWorld.Map:GetWorldSize()
-    local max_radius = math.max(width, height) / 2 * 4
-    local base_off = max_radius + 100 --根据世界大小算小房子的初始z坐标
-    local row_count = 50              --每行几个房子
-    --这个x和z不能太大，不然角色都会不渲染了，看不见角色
-    local x = (self.count % row_count) * ROOM_GAP + base_off
-    local z = base_off + math.ceil(self.count / row_count) * ROOM_GAP
+    local world_radius = math.max(width, height) / 2 * 4
+    local base_off = world_radius + 100
+    local max_coord = MAX_ROOM_COORD - ROOM_GAP / 2
+    if base_off > max_coord then
+        print(string.format("[tro_roomspawner] world edge %.1f exceeds safe coordinate range %.1f", base_off, max_coord))
+        base_off = max_coord
+    end
+
+    local ring_extent = base_off
+    -- Each side excludes its ending corner; the following side owns that corner.
+    local side_count = math.floor((ring_extent * 2) / ROOM_GAP)
+    local perimeter_count = side_count * 4
+    local x, z
+    for attempt = 0, perimeter_count - 1 do
+        local candidate = (self.count + attempt) % perimeter_count
+        local side = math.floor(candidate / side_count) % 4
+        local offset = candidate % side_count
+        local p = -ring_extent + offset * ROOM_GAP
+        if side == 0 then
+            x, z = ring_extent, p
+        elseif side == 1 then
+            x, z = ring_extent - offset * ROOM_GAP, ring_extent
+        elseif side == 2 then
+            x, z = -ring_extent, ring_extent - offset * ROOM_GAP
+        else
+            x, z = -ring_extent + offset * ROOM_GAP, -ring_extent
+        end
+
+        if #TheSim:FindEntities(x, 0, z, ROOM_GAP * 0.45, { "interior_center" }) <= 0 then
+            self.count = self.count + attempt + 1
+            return Vector3(x, 0, z)
+        end
+    end
+
+    print("[tro_roomspawner] no free room position inside the safe coordinate range")
     self.count = self.count + 1
     return Vector3(x, 0, z)
 end
