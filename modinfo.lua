@@ -41,7 +41,7 @@ bug可在QQ群反馈：585659455
 ]])
 
 author = "Vagner da Rocha Santos."
-version = "1.8.8"
+version = "1.8.9"
 forumthread = ""
 api_version = 10
 priority = -20
